@@ -6,3 +6,5 @@ script
 test
 tmp
 vendor
+db/*.sqlite3
+coverage

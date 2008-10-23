@@ -1,9 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module QuestionSheetSpecHelper
-  
-end
-
 
 describe QuestionSheet, 'validation' do
   include QuestionnaireFixture
@@ -21,7 +17,7 @@ describe QuestionSheet, 'validation' do
   end
   
   it "should be invalid when label is over 60 characters long" do
-    @sheet.attributes = valid_question_sheet.with(:label => "a" * 61)
+    @sheet.attributes = valid_question_sheet.merge(:label => "a" * 61)
     @sheet.should_not be_valid
     @sheet.should have(1).error_on(:label)
     @sheet.errors.size.should == 1  # no other errors
@@ -64,8 +60,8 @@ describe QuestionSheet, ".untitled_labels" do
   include QuestionnaireFixture
   
   it "should only return labels that begin with 'Untitled form'" do
-    QuestionSheet.create(valid_question_sheet.with(:label => "The sheet I named"))
-    QuestionSheet.create(valid_question_sheet.with(:label => "Untitled form 1"))
+    QuestionSheet.create(valid_question_sheet.merge(:label => "The sheet I named"))
+    QuestionSheet.create(valid_question_sheet.merge(:label => "Untitled form 1"))
     
     labels = QuestionSheet.untitled_labels
     labels.should have(1).members

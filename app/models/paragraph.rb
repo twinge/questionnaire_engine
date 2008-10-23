@@ -6,5 +6,5 @@
 
 class Paragraph < Element
   validates_presence_of :content, :on => :update
- 
+
 end

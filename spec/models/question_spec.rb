@@ -34,7 +34,7 @@ describe Question, "with answers" do
     # create a questionnaire
     @qs = QuestionSheet.create(valid_question_sheet)
     @page = Page.create(valid_page(@qs)) 
-    @question = TextField.create(valid_question(@qs, @page).with(:required => true))
+    @question = TextField.create(valid_question(@qs, @page).merge(:required => true))
 
     # answer sheet
     @as = @qs.answer_sheets.create()

@@ -7,7 +7,6 @@ end
 
 # ChoiceField
 # - a question that allows the selection of one or more choices
-
 class ChoiceField < Question
   # Returns choices stored one per line in content field
 	def choices
@@ -33,11 +32,11 @@ class ChoiceField < Question
     end
     return retVal
   end
-	
+
 	def has_answer?(choice, app=nil)
     # HACK: Crazy hack to support legacy field types where choices may be int or tinyint 
     # logger.info(@answers.inspect)
-    
+  
     r = self.response(app) 
 	  if @answers.nil? || @answers.empty?   # external data source?
       return true if r == is_true(choice) || r == is_false(choice) || r == choice.to_s || r == choice.to_i
@@ -50,7 +49,7 @@ class ChoiceField < Question
     end
     false
 	end
-	
+
 	# which view to render this element?
   def template
     if self.style == 'checkbox'
@@ -67,7 +66,7 @@ class ChoiceField < Question
       'acceptance'
     end
 	end
-	
+
 	# element view provides the element label?
   def default_label?
     if self.style == 'acceptance'
@@ -76,7 +75,7 @@ class ChoiceField < Question
       true
     end
   end
-	
+
 	# css class names for javascript-based validation
   def validation_class
     if self.required?
@@ -93,7 +92,7 @@ class ChoiceField < Question
       ''
     end
   end
-  
+
   def display_response(app=nil)
     r = get_response(app)
 
