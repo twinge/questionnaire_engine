@@ -9,6 +9,7 @@ elements_path = "#{directory}/app/models"
 transient_path = "#{directory}/app/models"
 presenters_path = "#{directory}/app/presenters"
 
-$LOAD_PATH << elements_path << transient_path << presenters_path
-Dependencies.load_paths << elements_path << transient_path << presenters_path
+# $LOAD_PATH << elements_path << transient_path << presenters_path
+# Dependencies.load_paths << elements_path << transient_path << presenters_path
+Rails.plugin[:questionnaire_engine].code_paths <<  presenters_path
 
