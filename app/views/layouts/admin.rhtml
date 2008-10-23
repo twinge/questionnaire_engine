@@ -3,16 +3,18 @@
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>BOAT</title>
+  <title>Dynamic Applications</title>
   <%= javascript_include_tag :defaults %>
   <%= questionnaire_engine_includes %>
   <%= calendar_date_select_includes %>
 
 	<script language="javascript" type="text/javascript">
+	window.onload = function() {
 		Ajax.Responders.register({
 		  onComplete: function() { $('status').hide(); },
 		  onLoading: function() { $('status').show(); }
-		})
+		});
+	}
 	</script>
 </head>
 <body>

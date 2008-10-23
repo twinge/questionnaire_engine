@@ -163,7 +163,7 @@ blockquote {
 
 #list-pages a, .list-elements a, #list-info-pages a {
   display: block;
-  background: #eee url(../images/icons/page_white.png) 2px 4px no-repeat;
+  background: #eee url(/images/questionnaire_engine/icons/page_white.png) 2px 4px no-repeat;
   padding: 3px 3px 3px 21px;
   border: solid 1px #ccc;
   text-decoration: none;
@@ -181,12 +181,12 @@ blockquote {
 }
 
 #list-pages .incomplete a {
-  background: #ffe5df url(../images/icons/page_white_error.png) 4px 4px no-repeat;
+  background: #ffe5df url(/images/questionnaire_engine/icons/page_white_error.png) 4px 4px no-repeat;
   border-color: #efbeb3;
 }
 
 #list-pages .valid a {
-  background: #e5ffdf url(../images/icons/page_valid.png) 4px 4px no-repeat;
+  background: #e5ffdf url(/images/questionnaire_engine/icons/page_valid.png) 4px 4px no-repeat;
   border-color: #0c0;
 }
 
@@ -194,7 +194,7 @@ blockquote {
   display: block;
   height: 18px;
   padding: 0 0 0 24px;
-  background: transparent url(../images/icons/page_white_add.png) 4px 0 no-repeat;
+  background: transparent url(/images/questionnaire_engine/icons/page_white_add.png) 4px 0 no-repeat;
   color: #4c7b31;
 }
 
@@ -281,7 +281,7 @@ label .optional {
 
 #preview .ctl:hover {
   border: dotted 1px #fcc !important;
-  background: transparent url(../images/icons/pencil.png) 490px 5px no-repeat;
+  background: transparent url(/images/questionnaire_engine/icons/pencil.png) 490px 5px no-repeat;
 }
 
 .page .ctl, .questions li .ctl {
@@ -326,50 +326,50 @@ label.horiz {
   display: inline;
   margin-left: 0;
 }
-.list-elements #qg a { background-image: url(../images/icons/table.png); }
+.list-elements #qg a { background-image: url(/images/questionnaire_engine/icons/table.png); }
 
 .list-elements #sl a {
-  background-image: url(../images/icons/textfield.png);
+  background-image: url(/images/questionnaire_engine/icons/textfield.png);
 }
 
 .list-elements #ml a {
-  background-image: url(../images/icons/textfield.png);
+  background-image: url(/images/questionnaire_engine/icons/textfield.png);
 }
 
 .list-elements #co a {
-  background-image: url(../images/icons/radio.png);
+  background-image: url(/images/questionnaire_engine/icons/radio.png);
 }
 
 .list-elements #cm a {
-  background-image: url(../images/icons/checkbox.png);
+  background-image: url(/images/questionnaire_engine/icons/checkbox.png);
 }
 
 .list-elements #dt a {
-  background-image: url(../images/icons/calendar_view_day.png);
+  background-image: url(/images/questionnaire_engine/icons/calendar_view_day.png);
 }
 
 .list-elements #fu a {
-  background-image: url(../images/icons/disk.png);
+  background-image: url(/images/questionnaire_engine/icons/disk.png);
 }
 
 .list-elements #pa a {
-  background-image: url(../images/icons/text_align_left.png);
+  background-image: url(/images/questionnaire_engine/icons/text_align_left.png);
 }
 
 .list-elements #sp a {
-  background-image: url(../images/icons/text_horizontalrule.png);
+  background-image: url(/images/questionnaire_engine/icons/text_horizontalrule.png);
 }
 
 .list-elements #sk a {
-  background-image: url(../images/icons/book_open.png);
+  background-image: url(/images/questionnaire_engine/icons/book_open.png);
 }
 
 .list-elements #pp a {
-  background-image: url(../images/icons/asterisk_yellow.png);
+  background-image: url(/images/questionnaire_engine/icons/asterisk_yellow.png);
 }
 
 .list-elements #sc a {
-  background-image: url(../images/icons/map_magnify.png);
+  background-image: url(/images/questionnaire_engine/icons/map_magnify.png);
 }
 
 .answer-page .page {
@@ -419,7 +419,7 @@ table.list tr.alt td {
   display: block;
   height: 18px;
   padding-left: 24px;
-  background: transparent url(../images/icons/application_form_add.png) 4px 0 no-repeat;
+  background: transparent url(/images/questionnaire_engine/icons/application_form_add.png) 4px 0 no-repeat;
   color: #4c7b31;
 }
 
@@ -435,7 +435,7 @@ a.questionnaire {
   display: block;
   height: 18px;
   padding-left: 27px;
-  background: url(../images/icons/application_form.png) 4px 0 no-repeat;
+  background: url(/images/questionnaire_engine/icons/application_form.png) 4px 0 no-repeat;
 }
 
 .answer {
@@ -621,7 +621,7 @@ span.answer {
 .edit {
   display: block;
   text-indent: -9000px;
-  background: url(../images/icons/pencil.png) 0 0 no-repeat;
+  background: url(/images/questionnaire_engine/icons/pencil.png) 0 0 no-repeat;
 }
 
 .handle {
@@ -629,7 +629,7 @@ span.answer {
   height: 11px;
   overflow: hidden;
   text-indent: -9000px;
-  background: url(../images/icons/move.png) 0 0 no-repeat;
+  background: url(/images/questionnaire_engine/icons/move.png) 0 0 no-repeat;
   display: block;
 }
 
@@ -638,7 +638,7 @@ span.answer {
   height: 11px;
   overflow: hidden;
   text-indent: -9000px;
-  background: url(../images/icons/arrow_out.png) 0 0 no-repeat;
+  background: url(/images/questionnaire_engine/icons/arrow_out.png) 0 0 no-repeat;
   display: block;
 }
 

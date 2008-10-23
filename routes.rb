@@ -15,3 +15,5 @@ resources :answer_sheets do |sheets|
                    :controller => :answer_pages,
                    :name_prefix => 'answer_'           # answer_pages_path()
 end                 
+
+resources :elements

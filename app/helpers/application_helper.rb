@@ -32,8 +32,8 @@ module ApplicationHelper
   
   def questionnaire_engine_stylesheets(options = {})
     output = []
+    output << "questionnaire_engine/reset"
     output << "questionnaire_engine/lightbox"
-    output << "calendar_date_select/reset"
     output << "questionnaire_engine/screen"
     output << "questionnaire_engine/validation"
     return output

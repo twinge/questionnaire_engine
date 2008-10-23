@@ -1,5 +1,5 @@
 <%= drop_receiving_element("element_#{question_grid.id}", 
-      :url => drop_question_sheet_page_element_path(question_grid.question_sheet_id, question_grid.page_id, question_grid.id),
+      :url => drop_question_page_element_path(question_grid.question_sheet_id, question_grid.page_id, question_grid.id),
       :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
 
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
