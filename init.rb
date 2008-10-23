@@ -5,8 +5,8 @@
 
 #models_path = File.join(directory, 'app', 'models', 'elements')
 
-elements_path = "#{directory}/app/models/elements"
-transient_path = "#{directory}/app/models/transient"
+elements_path = "#{directory}/app/models"
+transient_path = "#{directory}/app/models"
 presenters_path = "#{directory}/app/presenters"
 
 $LOAD_PATH << elements_path << transient_path << presenters_path

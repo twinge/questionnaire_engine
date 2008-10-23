@@ -7,7 +7,7 @@ class QeInitial < ActiveRecord::Migration
     create_table Page.table_name do |t|
       t.column :question_sheet_id, :integer, :null => false
       t.column :label, :string, :limit => 60, :null => false    # page title
-      t.column :number, :integer, :null => false                # page number (order)
+      t.column :number, :integer                                # page number (order)
       
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet.table_name, :id

@@ -1,10 +1,14 @@
 config
 doc
 log
-public
 script
 test
 tmp
 vendor
 db/*.sqlite3
 coverage
+public/javascripts/*.js
+public/javascripts/calendar_date_select
+public/images/calendar_date_select
+public/stylesheets/calendar_date_select
+db/schema.rb

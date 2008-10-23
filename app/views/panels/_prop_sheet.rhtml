@@ -2,7 +2,7 @@
     <p>Update the settings for this form.</p>
     
     <div id="errors">
-       <%= render :partial => 'errors', :locals => { :question_sheet => question_sheet }%>
+       <%= render :partial => 'errors', :locals => { :question_sheet => @question_sheet }%>
     </div>
 
 <% remote_form_for :question_sheet, :url => question_sheet_path(@question_sheet), :method => :put do |f| %>
