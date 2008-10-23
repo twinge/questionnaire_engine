@@ -1,0 +1,17 @@
+<div id="<%= dom_id(checkbox_field) %>">
+<% css_class = 'checkbox ' -%>
+<% checkbox_field.choices.each_with_index do |choice, num| -%>
+  <% dom_id = dom_id(checkbox_field) + "_" + pretty_tag(choice[1]) 
+     last_choice = (num == checkbox_field.choices.length - 1)
+     css_class += checkbox_field.validation_class if last_choice
+  -%>
+  <%= check_box_tag "answers[#{checkbox_field.id}][#{num}]", choice[1],
+        checkbox_field.has_answer?(choice[1]), 
+        :id => dom_id, 
+        :class => css_class,
+        :disabled => @application.frozen?&&!@presenter.reference?,
+        :readonly => @application.frozen?&&!@presenter.reference? %>
+  <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
+<% end -%>
+</div>
+<%= hidden_field_tag "answers[#{checkbox_field.id}][0]", '', :id => '' %>

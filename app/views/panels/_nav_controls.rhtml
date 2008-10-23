@@ -1,0 +1,5 @@
+<% route = { :question_sheet_id => @question_sheet.id, :id => @page.id } -%>
+
+<li id="tab-pages_list" class="active"><%= link_to_remote "Pages", :url => show_panel_question_page_path( route.merge(:panel_name => 'pages_list')), :method => :get %></li>
+<li id="tab-insert"><%= link_to_remote "Elements", :url => show_panel_question_page_path(route.merge(:panel_name => 'insert')), :method => :get %></li>
+<li id="tab-properties"><%= link_to_remote "Properties", :url => show_panel_question_page_path(route.merge(:panel_name => 'properties')), :method => :get %></li>

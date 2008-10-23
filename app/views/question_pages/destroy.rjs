@@ -1,0 +1,3 @@
+page.replace_html 'panel', :partial => 'panels/pages_list'
+page.replace_html 'page-preview', :partial => 'question_pages/question_page'
+page.call "switchTab", "pages_list"

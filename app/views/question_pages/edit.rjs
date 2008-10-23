@@ -1,0 +1,4 @@
+page.replace_html 'panel', { :partial => 'panels/prop_page', :locals => { :page => @page } }
+page.call "switchTab", "properties"
+
+page.call "selectPage"

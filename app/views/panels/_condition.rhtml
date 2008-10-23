@@ -1,0 +1,6 @@
+<% fields_for "element[conditions_attributes][]", condition do |fields| -%>
+  <p>and
+  	<%= fields.collection_select :trigger_id, @questions_before_this, :id, :label %> is
+  	<%= fields.text_field :expression %>
+  </p>
+<% end -%>

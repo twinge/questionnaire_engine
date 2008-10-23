@@ -1,0 +1,10 @@
+<div id="panel-pages" class="panel" style="display:block;">
+  <%= image_tag 'ajax-loader.gif', :plugin => 'questionnaire',
+    :id => 'page_ajax_spinner', :style => "display:none; float: right;" %>
+  <p class="instruction">Please complete the following pages:</p>
+    
+  <ul id="list-pages">
+    <%= render :partial => 'answer_sheets/page_link', :collection => @presenter.page_links %>
+  </ul>
+  
+</div>

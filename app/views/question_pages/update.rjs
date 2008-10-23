@@ -1,0 +1,3 @@
+page.replace_html "page-name", @page.label
+page.replace_html 'panel', { :partial => 'panels/prop_page', :locals => { :page => @page } }
+#page.visual_effect "highlight", "link-page-name"

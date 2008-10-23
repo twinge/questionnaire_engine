@@ -1,0 +1,3 @@
+page.replace_html 'panel', { :partial => 'panels/prop_element', :locals => { :element => @element } }
+page.call "selectElement", "element_#{@element.id}"
+

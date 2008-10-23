@@ -1,0 +1,4 @@
+page.replace_html 'errors', :partial => 'errors', :locals => {:element => @question_sheet}
+@question_sheet.errors.each do |attr_name, message| 
+  page.call "addError", "question_sheet_" + attr_name
+end

@@ -1,0 +1,33 @@
+<%- options = [ OptionGroup.new('Short Answer', [
+                    Option.new('short', 'Simple'),
+                    Option.new('number', 'Number'),
+                    Option.new('currency-dollar', 'Currency'),
+                    Option.new('email', 'E-mail address'),
+                    Option.new('url', 'Web address'),
+                    Option.new('phone', 'Telephone number')
+                  ]),
+                OptionGroup.new('Long Answer', [
+                    Option.new('essay', 'Essay')
+                  ])
+              ]
+%>
+
+<p>
+  <label for="element_label" class="desc">Label <span class="required">required</span></label>
+  <%= f.text_field :label, :onblur => %{updateSlug('element_label', 'element_slug')} %>
+</p>
+<p>
+  <label for="element_slug" class="desc">Variable</label>
+  <%= f.text_field :slug %>
+<p>        
+<p>
+  <label for="element_style" class="desc">Style</label>
+  <%= select_tag 'element[style]', 
+        option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style) %>
+</p>
+<p>
+  <%= f.check_box :required %>
+  <label for="element_required">This field is required</label>
+</p>
+
+    <p><%= f.check_box :is_confidential %> <label for="element_is_confidential">This field is confidential</label></p>

@@ -1,0 +1,23 @@
+<%- if element.question_grid_id.to_i == 0 || in_grid -%>
+<li class="" id="element_<%= element.id %>">
+<div class="controls">
+	<ul>
+		<li><%= link_to_remote "edit", {:url => edit_question_sheet_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :get}, :class => "edit", :title => "Edit this element" %></li>
+<% if in_grid -%>		
+		<li><%= link_to_remote("remove", {:url => remove_from_grid_question_sheet_page_element_path(element.question_sheet_id, element.page_id, element.id)}, :class => "remove", :title => "remove" )%></li>
+<% end -%>
+		<li><a href="#" class="handle" title="Reorder this element">drag</a></li>
+	</ul>
+</div>
+<div class="q">
+    <% if element.question? && element.default_label?-%>
+      <label for="<%= dom_id(element) %>" class="desc">
+        <%= element.label %>
+        <% if element.required? -%><span class="required">required</span><% end -%>
+      </label>
+    <% end -%>
+    
+    <%= render :partial => 'questions/' + element.template, :object => element %>
+</div>
+</li>
+<%- end -%>

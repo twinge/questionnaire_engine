@@ -1,0 +1,11 @@
+page.replace "element_#{@element.id}", { :partial => 'question_pages/element', :locals => { :element => @element, :in_grid => (!@element.question_grid_id.nil? && @element.question_grid_id > 0)} }
+
+@element.page.question_grids.each do |grid|
+  page.sortable "questions_list_#{grid.id}", :url => reorder_question_sheet_page_elements_path(@element.question_sheet_id, @element.page_id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window'
+end
+page.sortable 'questions_list', :url => reorder_question_sheet_page_elements_path(@element.question_sheet_id, @element.page_id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window'
+
+# back to insert element panel
+page.replace_html 'panel', :partial => 'panels/insert'
+page.call "switchTab", "insert"
+page.call "clearCurrentElement"

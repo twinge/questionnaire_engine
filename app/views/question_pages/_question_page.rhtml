@@ -1,0 +1,16 @@
+<div class="page">
+  <%= link_to_remote "<h3 id='page-name'>#{@page.label}</h3>", { :url => edit_question_page_path(@page.question_sheet_id, @page.id), :method => :get }, { :class => "ctl", :id => "link-page-name" } -%>
+    <% if @page.elements.length > 0 %>
+      <ul class="questions" id="questions_list">
+        <%= render :partial => 'question_pages/element', :collection => @page.elements, :locals => {:in_grid => false} %>
+      </ul>
+ <!-- Create a sortable list for each grid on the page -->
+      <% @page.question_grids.each do |grid| -%>
+        <%= sortable_element "questions_list_#{grid.id}", :url => reorder_question_sheet_page_elements_path(@page.question_sheet_id, @page.id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window' %>
+      <% end -%>
+<!-- Create a sortable list for the main question_list -->
+      <%= sortable_element 'questions_list', :url => reorder_question_sheet_page_elements_path(@page.question_sheet_id, @page.id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window' %>
+    <% else %>
+      <div style="background: #ffc;"><p>You don't have any questions on this page yet.</p></div>
+    <% end %>
+</div>

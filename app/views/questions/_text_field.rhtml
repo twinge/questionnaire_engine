@@ -1,0 +1,7 @@
+<%= text_field_tag "answers[#{text_field.id}]", text_field.response(@application), 
+      :class => 'text ' + text_field.validation_class,
+      :id => dom_id(text_field),
+      :disabled => @application.frozen?&&!@presenter.reference?,
+      :readonly => @application.frozen?&&!@presenter.reference?,
+      :maxlength => 255 %>
+

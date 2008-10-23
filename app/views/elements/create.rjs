@@ -1,0 +1,4 @@
+page.replace_html 'page-preview', :partial => 'question_pages/question_page'
+page.replace_html 'panel', { :partial => 'panels/prop_element', :locals => { :element => @element } }
+page.call "selectElement", "element_#{@element.id}"
+page.call "scrollToElement", "element_#{@element.id}"

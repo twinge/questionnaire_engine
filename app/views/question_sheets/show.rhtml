@@ -1,0 +1,26 @@
+<script language="javascript">
+var activeElement = "";
+</script>
+
+
+<div id="controls">
+  <ul id="nav-controls">
+    <%= render :partial => 'panels/nav_controls' %>
+  </ul>
+      
+  <div id="panel">
+    <%= render :partial => 'panels/pages_list' %>
+  </div>
+</div>
+
+
+<div id="preview">
+  <%= link_to_remote "<h2 id='sheet-name'>#{@question_sheet.label}</h2>", { :url => edit_question_sheet_path(@question_sheet), :method => :get }, { :class => "ctl" } -%>
+
+  <div id="page-preview">
+    <%= render :partial => 'question_pages/question_page' %>
+  </div>
+</div>
+
+<div style="clear:both;">&nbsp;</div>
+

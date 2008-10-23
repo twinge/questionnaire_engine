@@ -1,0 +1,47 @@
+<% route = { :question_sheet_id => @page.question_sheet_id, :page_id => @page.id } %>
+
+<div id="panel-elements" class="panel">
+<div style="float: right;"><a href="/plugin_assets/questionnaire/help/builder.html" class="lbOn help" id="link-builder-help" >?</a></div>
+<% if controller.action_name == "show_panel" -%>
+<script language="javascript" type="text/javascript">
+	var valid = new lightbox($('link-builder-help'));
+</script>
+<% end -%>
+
+  <p class="instruction">Click an element to add it to the end of 
+  your page (you can drag and drop fields to reorder them later).</p>
+     
+  <ul id="list-elements" class="list-elements">
+    <li id="sp"><%= link_to_remote "Heading", 
+                      :url => elements_path(route.merge(:element_type => "Section")), 
+                      :method => :post %></li>
+    <li id="pa"><%= link_to_remote "Paragraph", 
+                      :url => elements_path(route.merge(:element_type => "Paragraph")), 
+                      :method => :post %></li>
+    <li id="sl"><%= link_to_remote "Short Answer", 
+                      :url => elements_path(route.merge(:element_type => "TextField")), 
+                      :method => :post,
+                      :with => %{"element[style]=short"} %></li>
+    <li id="ml"><%= link_to_remote "Long Answer", 
+                      :url => elements_path(route.merge(:element_type => "TextField")), 
+                      :method => :post,
+                      :with => %{"element[style]=essay"} %></li>
+    <li id="co"><%= link_to_remote "Choose One", 
+                      :url => elements_path(route.merge(:element_type => "ChoiceField")),
+                      :method => :post,
+                      :with => %{"element[style]=radio"} %></li>
+    <li id="cm"><%= link_to_remote "Choose Many", 
+                      :url => elements_path(route.merge(:element_type => "ChoiceField")), 
+                      :method => :post,
+                      :with => %{"element[style]=checkbox"} %></li>
+    <li id="dt"><%= link_to_remote "Date", 
+                      :url => elements_path(route.merge(:element_type => "DateField")), 
+                      :method => :post %></li>
+    <!-- <li id="qg"><%= link_to_remote "Grid", 
+                      :url => elements_path(route.merge(:element_type => "QuestionGrid")), 
+                      :method => :post %></li> -->
+  </ul>
+  
+  <p style="clear: both;">&nbsp;</p>
+</div>
+

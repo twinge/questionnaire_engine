@@ -1,0 +1,17 @@
+<div id="panel-properties-sheet" class="panel" style="display:block;">
+    <p>Update the settings for this form.</p>
+    
+    <div id="errors">
+       <%= render :partial => 'errors', :locals => { :question_sheet => question_sheet }%>
+    </div>
+
+<% remote_form_for :question_sheet, :url => question_sheet_path(@question_sheet), :method => :put do |f| %>
+
+    <p><label for="" class="desc">Label <span class="required">required</span></label>
+        <%= f.text_field :label %></p>
+
+    <p class="buttons">
+        <%= submit_tag"Update &raquo;" %></p>
+
+<% end %>
+</div>

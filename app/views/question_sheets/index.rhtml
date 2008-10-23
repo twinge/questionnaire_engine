@@ -1,0 +1,26 @@
+<div id="content">
+    <h1>Questionnaires</h1>
+    
+	<% if flash[:error] -%>
+		<div style="background: #ffe5df; border: solid 1px #efbeb3; padding: 9px; margin: 0 0 18px;"><%= flash[:error] %></div>
+	<% end -%>
+	
+    <% unless @question_sheets.empty? -%>
+      <table cellspacing="0" class="list"> 
+          <tr>
+              <th>Questionnaire Name</th>
+              <th>&nbsp;</th>
+          </tr>
+      <% for question_sheet in @question_sheets %>
+        <tr class="<%= cycle("","alt") %>">
+          <td><%= link_to question_sheet.label, question_sheet_path(question_sheet), :class => "questionnaire" %></td>
+          <td class="actions"><%= link_to 'Destroy', question_sheet_path(question_sheet), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
+        </tr>
+      <% end %>
+      </table>
+    
+      <br />
+    <% end -%>
+    
+    <%= link_to 'New Questionnaire', question_sheets_path(), :method => :POST, :class => "add-link" %>
+</div>

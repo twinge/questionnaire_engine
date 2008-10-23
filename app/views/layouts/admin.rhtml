@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>BOAT</title>
+  <%= stylesheet_link_tag "reset", :media => 'all', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "screen", :media => 'all', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "lightbox", :media => 'all', :plugin => 'questionnaire' %>
+  <%= javascript_include_tag "prototype", "effects", "dragdrop", "lightbox" %>
+  <%= javascript_include_tag "admin", :plugin => 'questionnaire' %>
+  <%= calendar_date_select_includes %>
+
+	<script language="javascript" type="text/javascript">
+		Ajax.Responders.register({
+		  onComplete: function() { $('status').hide(); },
+		  onLoading: function() { $('status').show(); }
+		})
+	</script>
+</head>
+<body>
+
+<div id="status" style="display: none;"><img id="status-img" src="/plugin_assets/questionnaire/images/status.gif" /> <span id="status-msg">Please Wait...</span></div>
+
+<div id="wrapper">
+   <div id="header">
+      <ul id="nav-main">
+         <li class="active"><%= link_to 'Forms', question_sheets_path %></li>
+      </ul>
+   </div>
+   
+   <div id="main">
+   <%= yield %>
+   </div>
+</div>
+
+</body>
+</html>

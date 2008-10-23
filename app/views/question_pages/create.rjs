@@ -1,0 +1,4 @@
+page.replace_html 'page-preview', :partial => 'question_pages/question_page'
+page.replace_html 'panel', { :partial => 'panels/prop_page', :locals => { :page => @page } }
+page.call "switchTab", "properties"
+

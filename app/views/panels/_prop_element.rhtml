@@ -1,0 +1,30 @@
+<div id="panel-properties-element" class="panel" style="display:block;">
+    <p>Update the settings for this element.</p>
+    
+    <div id="errors">
+       <%= render :partial => 'errors', :locals => { :element => element }%>
+    </div>
+
+<% remote_form_for :element, :url => element_path(element.question_sheet_id, element.page_id, element.id), :method => :put do |f| -%>
+
+  <%= render :partial => 'panels/prop_' + element.class.to_s.underscore, :locals => { :f => f } %>
+  
+  <% if element.question? -%>
+    <!-- h3>Dependency</h3>
+    <p><strong>Ask this question if:</strong></p -->
+    <%#= render :partial => 'panels/condition', :collection => element.conditions %>
+    
+    <%#= render :partial => 'panels/advanced_options', :locals => { :f => f } %>
+  <% end-%>
+
+  <p class="buttons"><%= submit_tag"Update &raquo;" %></p>
+
+<% end -%>
+
+
+
+<% remote_form_for :element, :url => element_path(element.question_sheet_id, element.page_id, element.id), :method => :delete do |f| -%>
+    <p class="buttons"><%= submit_tag "Delete" %></p>
+<% end -%>
+
+</div>

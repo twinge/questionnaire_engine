@@ -1,0 +1,4 @@
+page.remove "element_#{@element.id}"
+page.replace_html 'panel', :partial => 'panels/insert'
+page.assign "activeElement", ""
+page.call "switchTab", "insert"
