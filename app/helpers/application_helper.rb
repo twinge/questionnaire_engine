@@ -29,4 +29,31 @@ module ApplicationHelper
     end
     name
   end
+  
+  def questionnaire_engine_stylesheets(options = {})
+    output = []
+    output << "questionnaire_engine/lightbox"
+    output << "calendar_date_select/reset"
+    output << "questionnaire_engine/screen"
+    output << "questionnaire_engine/validation"
+    return output
+  end
+
+  def questionnaire_engine_javascripts(options = {})
+    output = []
+    output << "questionnaire_engine/admin"
+    output << "questionnaire_engine/lightbox"
+    output << "questionnaire_engine/public"
+    output << "questionnaire_engine/validation"
+    return output
+  end
+
+  def questionnaire_engine_includes(*args)
+    return "" if @qe_already_included
+    @qe_already_included=true
+    
+    js = javascript_include_tag(*questionnaire_engine_javascripts)
+    css = stylesheet_link_tag(*questionnaire_engine_stylesheets)
+    "#{js}\n#{css}\n"
+  end
 end

@@ -4,12 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>BOAT</title>
-  <%= stylesheet_link_tag "reset", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "screen", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "lightbox", :media => 'all', :plugin => 'questionnaire' %>
-  <%= javascript_include_tag "prototype", "effects", "dragdrop", "lightbox" %>
-  <%= javascript_include_tag "admin", :plugin => 'questionnaire' %>
+  <%= javascript_include_tag :defaults %>
+  <%= questionnaire_engine_includes %>
   <%= calendar_date_select_includes %>
 
 	<script language="javascript" type="text/javascript">

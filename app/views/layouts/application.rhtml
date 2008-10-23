@@ -4,12 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>BOAT</title>
-  <%= stylesheet_link_tag "reset", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "screen", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
   <%= javascript_include_tag "prototype", "effects" %>
-  <%= javascript_include_tag "validation", "public", :plugin => 'questionnaire' %>
   <%= calendar_date_select_includes %>
+  <%= questionnaire_engine_includes %>
 </head>
 <body>
 
