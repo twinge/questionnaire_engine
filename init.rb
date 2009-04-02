@@ -5,11 +5,20 @@
 
 #models_path = File.join(directory, 'app', 'models', 'elements')
 
-elements_path = "#{directory}/app/models"
-transient_path = "#{directory}/app/models"
+# elements_path = "#{directory}/app/models"
+# transient_path = "#{directory}/app/models"
 presenters_path = "#{directory}/app/presenters"
 
-$LOAD_PATH << elements_path << transient_path << presenters_path
-Dependencies.load_paths << elements_path << transient_path << presenters_path
-# Rails.plugin[:questionnaire_engine].code_paths <<  presenters_path
+$LOAD_PATH << presenters_path
+Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'helpers', '**')).each do |file|
+  require_dependency file
+end
 
+unless File.exists?(RAILS_ROOT + '/public/javascripts/questionnaire_engine/admin.js')
+  ['/public', '/public/javascripts/questionnaire_engine', '/public/stylesheets/questionnaire_engine', '/public/images/questionnaire_engine', '/public/images/questionnaire_engine'].each do |dir|
+    source = File.dirname(__FILE__) + "#{dir}"
+    dest = RAILS_ROOT + dir
+    FileUtils.mkdir_p(dest)
+    FileUtils.cp(Dir.glob(source+'/*.*'), dest)
+  end
+end
