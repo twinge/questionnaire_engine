@@ -167,8 +167,8 @@ blockquote {
   padding: 3px 3px 3px 21px;
   border: solid 1px #ccc;
   text-decoration: none;
-  height: 18px;
-  line-height: 18px;
+  height: 30px;
+  line-height: 16px;
 }
 
 #list-pages a:hover, #list-info-pages a:hover {
