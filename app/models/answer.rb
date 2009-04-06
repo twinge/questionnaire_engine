@@ -12,14 +12,14 @@ class Answer < ActiveRecord::Base
   belongs_to :answer_sheet
   belongs_to :question, :class_name => "Element", :foreign_key => "question_id"
   
-  validates_presence_of :value
+#  validates_presence_of :value
   validates_length_of :short_value, :maximum => 255, :allow_nil => true  
   
   
   include ActionView::Helpers::TextHelper   # bleh
   def set(value, short_value = value)
     self.value = value
-    self.short_value = truncate(short_value, 255) # adds ... if truncated (but not if not)
+    self.short_value = truncate(short_value, 225) # adds ... if truncated (but not if not)
   end
   
   def to_s

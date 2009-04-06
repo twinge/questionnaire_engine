@@ -2,7 +2,7 @@
 # - a question that prompts for one or more lines of text
 
 class TextField < Question
-
+  
   # which view to render this element?
   def template
     if self.style == 'essay'
@@ -11,7 +11,7 @@ class TextField < Question
       'text_field'
     end
   end
-
+  
   # css class names for javascript-based validation
   def validation_class
     validation = ''
@@ -23,5 +23,5 @@ class TextField < Question
     end
     validation
   end
-
+  
 end

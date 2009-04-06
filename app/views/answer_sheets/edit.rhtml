@@ -1,5 +1,5 @@
 <% if controller.controller_name == "references" -%>
-  <%= hidden_field_tag "submit_to", submit_application_reference_path(@application, @reference) %>  <!-- url for final submission (reference). not the ideal spot -->
+  <%= hidden_field_tag "submit_to", submit_reference_path(@application, @reference) %>  <!-- url for final submission (reference). not the ideal spot -->
 <% end -%>
 
 <div id="controls">

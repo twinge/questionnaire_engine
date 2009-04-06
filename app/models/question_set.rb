@@ -71,7 +71,7 @@ class QuestionSet
     end
   
     # Hash may contain empty string to force post for no checkboxes
-    values = values.reject {|r| r == ''}
+#    values = values.reject {|r| r == ''}
   end
   
 end

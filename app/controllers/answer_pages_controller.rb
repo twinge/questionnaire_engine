@@ -24,7 +24,7 @@ class AnswerPagesController < ApplicationController
     
     respond_to do |format|
       format.js { head :ok }
-      format.html
+      #format.html
     end
   end
 

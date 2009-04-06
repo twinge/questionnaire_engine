@@ -1,4 +1,5 @@
 class QuestionPagesController < ApplicationController
+  before_filter :check_valid_user
   layout 'admin'
   
   before_filter :get_sheet

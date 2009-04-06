@@ -26,7 +26,8 @@ class QeInitial < ActiveRecord::Migration
       
       t.column :required, :boolean                        # question is required?
       t.column :slug, :string, :limit => 36               # variable reference
-      t.column :position, :integer, :null => false
+      t.column :position, :integer
+      t.string :object_name, :attribute_name
       
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet.table_name, :id

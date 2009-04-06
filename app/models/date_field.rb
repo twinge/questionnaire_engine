@@ -1,7 +1,8 @@
 # DateField
 # - a question that provides a calendar/date picker
-class DateField < Question
 
+class DateField < Question
+  
   def response(app=nil)
     retVal = ''
     if @answers.nil?
@@ -20,7 +21,7 @@ class DateField < Question
       date = ''
     end
   end
-
+  
   def validation_class
     if self.style == 'mmyy'
       'validate-selection' + super
@@ -28,22 +29,22 @@ class DateField < Question
       'validate-date ' + super
     end
   end
-
+  
   def response(app=nil)
     #return format_date_response(app)
     r = get_response(app).to_s
     return Time.parse(r) unless r.blank?    
   end
-
+  
   def display_response(app=nil)
     return format_date_response(app)
   end
-
+  
   def format_date_response(app=nil)
     r = get_response(app).to_s
     return Time.parse(r).strftime("%m/%d/%Y") unless r.blank?    
   end
-
+  
   # which view to render this element?
   def template
     if self.style == 'mmyy'
@@ -52,5 +53,6 @@ class DateField < Question
       'date_field'
     end
   end
-
+  
 end
+

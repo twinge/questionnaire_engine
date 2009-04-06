@@ -2,6 +2,7 @@
 #  which can than be instantiated as an AnswerSheet for data capture on the front-end
 
 class QuestionSheetsController < ApplicationController
+  before_filter :check_valid_user
   layout 'admin'
  
   # list of all questionnaires/forms to edit
