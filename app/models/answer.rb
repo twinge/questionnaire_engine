@@ -19,7 +19,7 @@ class Answer < ActiveRecord::Base
   include ActionView::Helpers::TextHelper   # bleh
   def set(value, short_value = value)
     self.value = value
-    self.short_value = truncate(short_value, 225) # adds ... if truncated (but not if not)
+    self.short_value = truncate(short_value, :length => 225) # adds ... if truncated (but not if not)
   end
   
   def to_s

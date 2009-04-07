@@ -130,22 +130,26 @@ PageHandler.prototype = {
   },
   
   validatePage : function(page) {
-    valid = this.page_validation[page].validate();
+		try {
+	    valid = this.page_validation[page].validate();
 
-    if(!valid)
-    {  
-	  el = $(page + '-link');
-	  el.removeClassName('valid');
-      el.addClassName('incomplete');
-    }
-    else
-    {
-	  el = $(page + '-link');
-      el.removeClassName('incomplete');
-	  el.addClassName('valid');
-    }
+	    if(!valid)  {  
+			  el = $(page + '-link');
+			  el.removeClassName('valid');
+	      el.addClassName('incomplete');
+	    }
+	    else  {
+			  el = $(page + '-link');
+		      el.removeClassName('incomplete');
+			  el.addClassName('valid');
+	    }
     
-    return valid;
+	    return valid;
+		}
+		catch(err) {
+			// If the user clicks too quickly, sometimes the page element isn't properly defined yet.
+			// If we don't catch the error, js stops execution. If we catch it, the user just has to click again.
+		}
   },
   
   // load all pages in the background
