@@ -6,7 +6,7 @@
 # We always need data to render the current page for editing. 
 # On the initial load, we need data for the page list (sidebar).
 # On later page loads, we need to determine the "next page" which basically requires the page list again.
-
+require_dependency 'presenter'
 class AnswerPagesPresenter < Presenter
   
   #attr_reader :answer_sheet, :question_sheet
@@ -72,7 +72,7 @@ class AnswerPagesPresenter < Presenter
   end
 
   def new_page_link(answer_sheet, page)
-    PageLink.new(page.label, answer_edit_page_path(answer_sheet, page), dom_page(answer_sheet, page))
+    PageLink.new(page.label, edit_answer_page_path(answer_sheet, page), dom_page(answer_sheet, page))
   end
   
   # page is identified by answer sheet, so can have multiple sheets loaded at once

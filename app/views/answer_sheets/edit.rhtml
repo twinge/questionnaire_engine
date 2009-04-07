@@ -1,13 +1,8 @@
-<% if controller.controller_name == "references" -%>
-  <%= hidden_field_tag "submit_to", submit_reference_path(@application, @reference) %>  <!-- url for final submission (reference). not the ideal spot -->
-<% end -%>
-
 <div id="controls">
   <div id="panel">
      <%= render :partial => 'answer_sheets/pages_list' %>
    </div>
 </div>
-
 
 <div id="preview">
     <%= render :partial => 'answer_sheets/title' %>
@@ -17,36 +12,36 @@
 <script type="text/javascript">
   Event.observe(window, 'load', function() { 
     page_handler = new PageHandler('<%= @presenter.active_page.dom_id %>');
-    Event.observe(window, 'unload', function() { page_handler.savePage() });
-    
+    Event.observe(window, 'unload', page_handler.savePage);
+        
     Validation.add('validate-phone', 'Please enter a valid phone number +1-800-555-1234 x102', {
       pattern: /((\(\d{3}\)?)|(\d{3}))((\s|-|\.|\/)?)(\d{3})((\s|-|\.|\/)?)(\d{4})\s*([xX]|[eE][xX][tT])?\.?\s*\d*$/
     });
-  	Validation.add('validate-rating', 'Please select one of the above options.', function(v,elm) {
-  		var p = elm.parentNode.parentNode;
-  		var options = p.getElementsByTagName('INPUT');
-  		return $A(options).any(function(elm) {
-  			return $F(elm);
-  		});
-  	})
-
-    // global responders for all Ajax requests
-    Ajax.Responders.register({ 
-      // show/hide page loading/saving spinner
-      onCreate: function() { 
-        Ajax.activeRequestCount++;
-        $('page_ajax_spinner').show();
-		    $('status').show();
-      }, 
-      onComplete: function() { 
-        Ajax.activeRequestCount--;
-        if( Ajax.activeRequestCount == 0)
-        {
-          page_handler.completeAll();
-  		    $('page_ajax_spinner').hide();
-  		    $('status').hide();
-        }
-      } 
-    });
+    Validation.add('validate-rating', 'Please select one of the above options.', function(v,elm) {
+     var p = elm.parentNode.parentNode;
+     var options = p.getElementsByTagName('INPUT');
+     return $A(options).any(function(elm) {
+       return $F(elm);
+     });
+    })
+    
+        // global responders for all Ajax requests
+        Ajax.Responders.register({ 
+          // show/hide page loading/saving spinner
+          onCreate: function() { 
+            Ajax.activeRequestCount++;
+            $('page_ajax_spinner').show();
+               $('status').show();
+          }, 
+          onComplete: function() { 
+            Ajax.activeRequestCount--;
+            if( Ajax.activeRequestCount == 0)
+            {
+              page_handler.completeAll();
+                 $('page_ajax_spinner').hide();
+                 $('status').hide();
+            }
+          } 
+        });
   });
 </script>

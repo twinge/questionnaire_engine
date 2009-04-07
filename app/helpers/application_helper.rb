@@ -41,10 +41,10 @@ module ApplicationHelper
 
   def questionnaire_engine_javascripts(options = {})
     output = []
+    output << "questionnaire_engine/validation"
     output << "questionnaire_engine/admin"
     output << "questionnaire_engine/lightbox"
     output << "questionnaire_engine/public"
-    output << "questionnaire_engine/validation"
     return output
   end
 

@@ -1,3 +1,4 @@
+require_dependency 'answer_pages_presenter'
 class AnswerPagesController < ApplicationController
 
   def edit
