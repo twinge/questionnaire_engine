@@ -11,8 +11,10 @@
   
   <% if element.question? -%>
     <!-- <h3>Dependency</h3>
-    <p><strong>Ask this question if:</strong></p> -->
-    <%#= render :partial => 'panels/condition', :collection => element.conditions %>
+    <p><strong>Ask this question if:</strong></p> 
+    <% element.conditions.each_with_index do |condition, i| %>
+      <%#= render :partial => 'panels/condition', :object => condition, :locals => {:i => i} %>
+    <% end %> -->
     
     <%= render :partial => 'panels/advanced_options', :locals => { :f => f } %>
   <% end-%>

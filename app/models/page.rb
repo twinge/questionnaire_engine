@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   
   belongs_to :question_sheet
   has_many :elements, :dependent => :destroy, :order => :position
+  has_many :questions, :class_name => "Question", :foreign_key => "page_id"
   has_many :question_grids, :class_name => "QuestionGrid", :foreign_key => "page_id"
   has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
           :conditions => 'toggle_id is NULL', :dependent => :nullify

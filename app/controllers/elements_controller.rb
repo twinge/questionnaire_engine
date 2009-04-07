@@ -19,7 +19,7 @@ class ElementsController < ApplicationController
     
     # for dependencies
     if @element.question?
-      3.times { @element.conditions.build }
+      (3 - @element.conditions.length).times { @element.conditions.build }
       @questions_before_this = @page.questions_before_position(@element.position) 
     end
     
@@ -31,10 +31,9 @@ class ElementsController < ApplicationController
   # POST /elements
   def create
     @element = params[:element_type].constantize.new(params[:element])
-      @element.question_sheet_id = @page.question_sheet_id
-      @element.page_id = @page.id
-      @element.required = true if @element.question?
- 
+    @element.question_sheet_id = @page.question_sheet_id
+    @element.page_id = @page.id
+    @element.required = true if @element.question?
     respond_to do |format|
       if @element.save!
         format.js

@@ -9,6 +9,7 @@
 # :content      - choices (one per line) for choice field
 
 class Question < Element
+  include ActionView::Helpers::RecordIdentificationHelper # dom_id
   has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_id", :dependent => :nullify
   has_many :dependents, :class_name => "Condition", :foreign_key => "trigger_id", :dependent => :nullify
   
@@ -38,6 +39,21 @@ class Question < Element
   def active?
     # find first condition that doesn't pass (nil if all pass)
     self.conditions.find(:all).find { |c| !c.evaluate? }.nil?  # true if all pass
+  end
+  
+  def conditions_attributes=(new_conditions)
+    conditions.collect(&:destroy)
+    conditions.reload
+    (0..(new_conditions.length - 1)).each do |i|
+      i = i.to_s
+      expression = new_conditions[i]["expression"]
+      trigger_id = new_conditions[i]["trigger_id"].to_i
+      unless expression.blank? || !page.questions.collect(&:id).include?(trigger_id) || conditions.collect(&:trigger_id).include?(trigger_id)
+        conditions.create(:question_sheet_id => question_sheet_id, :trigger_id => trigger_id, 
+                          :expression => expression, :toggle_page_id => page_id,
+                          :toggle_id => self.id) 
+      end
+    end
   end
   
   # element view provides the element label with required indicator

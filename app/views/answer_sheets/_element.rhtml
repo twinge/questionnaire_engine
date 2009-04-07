@@ -14,10 +14,10 @@
 			element.elements.each do |grid_element| -%>
 		<td id="element_<%= element.id %>">
 			<% if %w(Paragraph).include?(grid_element.kind) -%>
-			<%= grid_element.content %>
+  			<%= grid_element.content %>
 			<% else -%>
-			<% el = elements.find {|el| el.id == grid_element.id } -%>
-			<%= el.display_response(@application) %>
+  			<% el = elements.find {|el| el.id == grid_element.id } -%>
+  			<%= el.display_response(@application) %>
 			<% end -%>
 		</td>
 		<%- 	col_count += 1
