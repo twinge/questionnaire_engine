@@ -1,4 +1,5 @@
 class QuestionPagesController < ApplicationController
+  unloadable
   before_filter :check_valid_user
   layout 'admin'
   

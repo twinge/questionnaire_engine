@@ -1,4 +1,5 @@
 class AnswerSheetsController < ApplicationController
+  unloadable
   layout 'application'
   helper :answer_pages
   

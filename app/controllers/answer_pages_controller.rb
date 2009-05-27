@@ -1,6 +1,6 @@
 require_dependency 'answer_pages_presenter'
 class AnswerPagesController < ApplicationController
-
+  unloadable
   def edit
     @answer_sheet = AnswerSheet.find(params[:answer_sheet_id])
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
