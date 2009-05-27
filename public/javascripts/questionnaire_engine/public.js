@@ -52,6 +52,8 @@ PageHandler.prototype = {
       new Insertion.Bottom('preview', response);
       if(this.background_load) $(page).hide(); else this.showPage(page);  // show after load, unless loading in background
       this.enableValidation(page);
+			this.validatePage(page);
+			$('page_ajax_spinner').hide();
     }
   },
   
