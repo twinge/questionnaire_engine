@@ -51,7 +51,11 @@ class AnswerPagesPresenter < Presenter
   end
   
   def reference?
-    @active_answer_sheet.apply_sheet.sleeve_sheet.assign_to == 'reference'
+    if @active_answer_sheet.respond_to?(:apply_sheet)
+      @active_answer_sheet.apply_sheet.sleeve_sheet.assign_to == 'reference'
+    else
+      false
+    end
   end
   
   protected
