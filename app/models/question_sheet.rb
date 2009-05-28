@@ -4,6 +4,7 @@ class QuestionSheet < ActiveRecord::Base
   
   has_many :pages, :dependent => :destroy, :order => 'number'
   has_many :elements
+  has_many :questions
   has_many :answer_sheets
   
   validates_presence_of :label

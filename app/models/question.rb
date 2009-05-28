@@ -91,7 +91,15 @@ class Question < Element
       true
     end
   end
-
+  
+  # just in case something slips through client-side validation?
+  def valid_response_for_answer_sheet?(answers)
+    return true if !self.required? 
+    answer  = answers.detect {|a| a.question_id == self.id}
+    return answer && answer.value.present?
+    # raise answer.inspect 
+  end
+  
   # shortcut to return first answer
   def response(app=nil)
     get_response(app)

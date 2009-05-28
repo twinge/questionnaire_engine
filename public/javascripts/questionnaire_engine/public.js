@@ -53,8 +53,8 @@ PageHandler.prototype = {
       if(this.background_load) $(page).hide(); else this.showPage(page);  // show after load, unless loading in background
       this.enableValidation(page);
 			this.validatePage(page);
-			$('page_ajax_spinner').hide();
     }
+		$('page_ajax_spinner').hide();
   },
   
   loadPage : function(page, url) {
@@ -73,13 +73,14 @@ PageHandler.prototype = {
 	    if( $(page) && page.match('no_cache') == null )   // if already loaded (element exists) excluding pages that need reloading
 	    {
 	      this.showPage(page);
+				$('page_ajax_spinner').hide();
 	    }
 	    else
 	    {
 	      new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 
 	          onSuccess:this.pageLoaded.bind(this)});
 	    }
-	}
+		}
   },
   
   // save form if any changes were made
@@ -149,9 +150,11 @@ PageHandler.prototype = {
 	    return valid;
 		}
 		catch(err) {
+			
 			// If the user clicks too quickly, sometimes the page element isn't properly defined yet.
 			// If we don't catch the error, js stops execution. If we catch it, the user just has to click again.
 		}
+		$('page_ajax_spinner').hide();
   },
   
   // load all pages in the background

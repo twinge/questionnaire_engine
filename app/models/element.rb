@@ -34,6 +34,7 @@ class Element < ActiveRecord::Base
     self.kind_of?(Question)
   end
   
+  
   # by default the partial for an element matches the class name (override as necessary)
   def template
     self.class.to_s.underscore
