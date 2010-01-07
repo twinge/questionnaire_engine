@@ -86,14 +86,13 @@ PageHandler.prototype = {
   // save form if any changes were made
   savePage : function() {
     form_data = this.captureForm();
-    
     if( form_data )
     {
-      if( this.page_form_data == null || this.page_form_data['data'] !== form_data['data'])   // if any changes
+      if( this.page_form_data == null || this.page_form_data.get('data') !== form_data.get('data'))   // if any changes
       {
         this.page_form_data = form_data;
         
-        new Ajax.Request(form_data['url'], {asynchronous:true, evalScripts:false, method:'put', parameters:form_data['data'],
+        new Ajax.Request(form_data.get('url'), {asynchronous:true, evalScripts:false, method:'put', parameters:form_data.get('data'),
           onFailure:function() {
             this.page_form_data = null;    // on error, force save for next call to save
               // WARNING: race conditions with load & show?
@@ -121,7 +120,6 @@ PageHandler.prototype = {
   captureForm : function() {        
     form_el = $(this.current_page + '-form');
     if( form_el == null ) return null;
-        
     // serialize with old-school query params (false), since it's easier to compare than a hash
     return $H({url: form_el.readAttribute('action'), data: Form.serialize(form_el)});
   },
@@ -129,12 +127,13 @@ PageHandler.prototype = {
   
   // enable form validation (when form is loaded)
   enableValidation : function(page) {
-    this.page_validation[page] = new Validation(page + '-form', {onSubmit:false, immediate:true, focusOnError:false});  // Set these both to false because it was breaking navigation.  since we call them manually, we don't need the validator to do it automatically
+		// Set these both to false because it was breaking navigation.  since we call them manually, we don't need the validator to do it automatically
+    this.page_validation.set(page, new Validation(page + '-form', {onSubmit:false, immediate:true, focusOnError:false}));  
   },
   
   validatePage : function(page) {
 		try {
-	    valid = this.page_validation[page].validate();
+	    valid = this.page_validation.get(page).validate();
 
 	    if(!valid)  {  
 			  el = $(page + '-link');
@@ -176,13 +175,13 @@ PageHandler.prototype = {
     links.invoke('scan', /loadPage\('(.*)','(.*)'\)/, function(match) { pages.push( $H({page: match[1], url: match[2]}) ) });
     
     // skip over pages that are already loaded (check if element by that name exists)
-    pages = pages.reject( function(page) { return($(page['page']) !== null); });
+    pages = pages.reject( function(page) { return($(page.get('page')) !== null); });
     
     if(pages.size() == 0) { this.completeAll(); return; } // already loaded
 
     page_loader = this;
     pages.each(function(page) {
-      new Ajax.Request(page['url'], {asynchronous:true, evalScripts:false, method:'get', 
+      new Ajax.Request(page.get('url'), {asynchronous:true, evalScripts:false, method:'get', 
           onSuccess:page_loader.pageLoaded.bind(page_loader)});
     });
         
