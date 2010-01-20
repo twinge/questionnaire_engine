@@ -65,7 +65,7 @@ class AnswerPagesPresenter < Presenter
     page_list = []
     
     answer_sheets.each do |answer_sheet|
-      pages = answer_sheet.question_sheet.pages.find(:all)
+      pages = answer_sheet.question_sheet.pages.visible.find(:all)
       pages.each do |page|
         page_list << new_page_link(answer_sheet, page)
       end

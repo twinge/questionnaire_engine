@@ -10,12 +10,14 @@ class Page < ActiveRecord::Base
   
   acts_as_list :column => :number, :scope => :question_sheet_id
   
+  named_scope :visible, :conditions => {:hidden => false}
+  
   # callbacks
   before_validation_on_create :set_default_label    # Page x
   
   # validation
   validates_presence_of :label, :number
-  validates_length_of :label, :maximum => 60, :allow_nil => true
+  validates_length_of :label, :maximum => 100, :allow_nil => true
   
   validates_uniqueness_of :number, :scope => :question_sheet_id
      
