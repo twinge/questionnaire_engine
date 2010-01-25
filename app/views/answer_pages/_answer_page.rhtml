@@ -11,8 +11,7 @@
       <h3 id='page-name'><%= @presenter.active_page.label %></h3>
       
       <% if @elements.length > 0 -%>
-      
-        <% form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;" do -%>
+        <% form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;", :multipart => true do -%>
           <ul class="questions" id="questions_list">
             <%= render :partial => 'answer_pages/element', :collection => @elements, :locals => {:in_grid => false} %>
           </ul>     

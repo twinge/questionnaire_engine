@@ -4,3 +4,5 @@ Questionnaire
 Plugin Dependencies:
 git://github.com/rsanheim/acts_as_list.git
 git://github.com/timcharper/calendar_date_select.git
+git://github.com/technoweenie/attachment_fu.git
+git://github.com/markcatley/responds_to_parent.git

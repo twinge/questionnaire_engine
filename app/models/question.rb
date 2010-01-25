@@ -159,6 +159,12 @@ class Question < Element
     end
   end
   
+  def save_file(answer_sheet, file)
+    @answers.collect(&:destroy) if @answers
+    answer = Answer.create!(:question_id => self.id, :answer_sheet_id => answer_sheet.id, :uploaded_data => file)
+    @answers = [answer]
+  end
+  
   # save this question's @answers to database
   def save_response(answer_sheet)
     unless @answers.nil?

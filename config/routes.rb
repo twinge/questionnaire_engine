@@ -14,7 +14,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :answer_sheets do |sheets|
     sheets.resources :pages,                              # pages/
                      :controller => :answer_pages,
-                     :name_prefix => 'answer_'           # answer_pages_path()
+                     :name_prefix => 'answer_',           # answer_pages_path(),
+                     :member => {:save_file => :post}
   end                 
 
   map.resources :elements

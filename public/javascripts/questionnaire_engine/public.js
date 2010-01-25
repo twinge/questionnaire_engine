@@ -264,3 +264,14 @@ PageHandler.prototype = {
 }
 
 
+function submitToFrame(dom_id, url)
+{
+  var form_dom = dom_id + '-form';
+  var old_action = $(form_dom).action;
+  var old_target = $(form_dom).target;
+  $(form_dom).action = url;
+  $(form_dom).target = dom_id + '-iframe';
+  $(form_dom).submit();
+  $(form_dom).action = old_action;
+  $(form_dom).target = old_target;
+}

@@ -11,7 +11,7 @@ class AnswerPagesPresenter < Presenter
   
   #attr_reader :answer_sheet, :question_sheet
 
-  attr_accessor :active_answer_sheet, :page_links
+  attr_accessor :active_answer_sheet, :page_links, :active_page
   
   def initialize(controller, answer_sheets, custom_pages = nil)
     super(controller)

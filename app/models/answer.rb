@@ -9,11 +9,15 @@
 class Answer < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
+  has_attachment :storage => :file_system, :path_prefix => 'public/attachments' if defined?(Technoweenie::AttachmentFu)
+  
   belongs_to :answer_sheet
   belongs_to :question, :class_name => "Element", :foreign_key => "question_id"
   
 #  validates_presence_of :value
   validates_length_of :short_value, :maximum => 255, :allow_nil => true  
+  
+  before_save :set_value_from_filename
   
   
   include ActionView::Helpers::TextHelper   # bleh
@@ -24,6 +28,10 @@ class Answer < ActiveRecord::Base
   
   def to_s
     self.value
+  end
+  
+  def set_value_from_filename
+    self.value = self.short_value = self.filename if self.filename.present?
   end
   
   
