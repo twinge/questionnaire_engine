@@ -44,6 +44,7 @@ class AnswerPagesController < ApplicationController
       
       responds_to_parent do
         render :update do |page|
+          page[@presenter.active_page.dom_id + '-spinner'].hide
           page[@presenter.active_page.dom_id + '-attachment'].replace_html "Current File: " + link_to(answer.filename, answer.public_filename)
           page[@presenter.active_page.dom_id + '-attachment'].highlight
         end

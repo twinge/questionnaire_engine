@@ -266,6 +266,7 @@ PageHandler.prototype = {
 
 function submitToFrame(dom_id, url)
 {
+	$(dom_id + "-spinner").show();
   var form_dom = dom_id + '-form';
   var old_action = $(form_dom).action;
   var old_target = $(form_dom).target;

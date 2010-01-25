@@ -5,7 +5,8 @@
       :disabled => @application.frozen?&&!@presenter.reference?,
       :readonly => @application.frozen?&&!@presenter.reference?,
       :maxlength => 255 %>
-
+<%= image_tag 'questionnaire_engine/ajax-loader.gif',
+    :id => "#{dom_id}-spinner", :style => "display:none;" %>
 <%= button_to_function("Attach File", "submitToFrame('#{dom_id}', '#{save_file_answer_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id)}')") %><br/>
 <div id="<%= dom_id %>-attachment">
 <% answers = attachment_field.response(@application)
