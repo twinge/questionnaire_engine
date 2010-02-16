@@ -181,6 +181,8 @@ class Question < Element
       end
       @mark_for_destroy.clear
     end
+  rescue TypeError
+    raise answer.inspect
   end
   
   # has any sort of non-empty response?

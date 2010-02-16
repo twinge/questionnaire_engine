@@ -23,6 +23,7 @@ class QuestionSet
     questions_indexed = @questions.index_by {|q| q.id}
     
     # loop over form values
+    params ||= {}
     params.each do |question_id, response|
       # update each question with the posted response
       questions_indexed[question_id.to_i].response = posted_values(response)
