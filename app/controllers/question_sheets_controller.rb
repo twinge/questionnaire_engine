@@ -79,21 +79,11 @@ class QuestionSheetsController < ApplicationController
   # DELETE /question_sheets/1
   def destroy
     @question_sheet = QuestionSheet.find(params[:id])
+    @question_sheet.destroy
     
-    # Ensure that no applications are currently using this questionnaire
-    #   before destroying it
-
     respond_to do |format|
-      unless SleeveSheet.find_all_by_question_sheet_id(@question_sheet.id).length > 0
-        @question_sheet.destroy
-
-        format.html { redirect_to question_sheets_path }
-        format.xml  { head :ok }
-      else
-        flash.now[:error] = "<b>#{@question_sheet.label}</b> is still being used in at least one application.  It cannot be deleted."
-        @question_sheets = QuestionSheet.find(:all)
-        format.html { render :action => :index }     
-      end
+      format.html { redirect_to question_sheets_path }
+      format.xml  { head :ok }
     end
   end
 end
