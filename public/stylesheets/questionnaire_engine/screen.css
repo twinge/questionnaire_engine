@@ -561,6 +561,10 @@ span.answer {
   color: #339;
 }
 
+span.answerwarn {
+  color: #f00;
+}
+
 .readonly {
   list-style: none;
   margin-left: 0;
