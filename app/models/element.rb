@@ -11,7 +11,7 @@ class Element < ActiveRecord::Base
   acts_as_list :scope => :page_id
 
   validates_presence_of :kind
-  validates_presence_of :label, :style, :on => :update
+  # validates_presence_of :label, :style, :on => :update
   
   validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
   validates_length_of :label, :maximum => 255, :allow_nil => true
