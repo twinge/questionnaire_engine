@@ -1,0 +1,64 @@
+<%= drop_receiving_element("element_#{question_grid_with_total.id}", 
+      :url => drop_question_page_element_path(question_grid_with_total.question_sheet_id, question_grid_with_total.page_id, question_grid_with_total.id),
+      :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
+
+<%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
+  <label class="desc"><%= question_grid_with_total.label %></label>
+  <div style="border: solid 1px #dadada; padding: 9px;">
+  	<ul class="questions" id="questions_list_<%= question_grid_with_total.id %>">
+  	<%- if question_grid_with_total.elements.length > 0 -%>
+      <%= render :partial => 'question_pages/element', :collection => question_grid_with_total.elements, :locals => {:in_grid => true} %>
+  	<%- else -%>
+  		Grid
+  	<%- end -%>
+     </ul>
+  </div>
+  <%- else -%>
+  <label class="desc"><%= question_grid_with_total.label %></label>
+  	<table class="grid">
+  	<%- if question_grid_with_total.cols -%>
+  	<tr>
+  	<%- question_grid_with_total.cols.split(';').each do |header| -%>
+  		<th><%= header || '&nbsp;' %></th>
+  	<%- end -%>
+  	</tr>
+  	<%- end -%>
+  	<tr >
+  		<%- col_count = 0
+  			question_grid_with_total.elements.each do |element| -%>
+  			<td id="element_<%= element.id %>">
+  				<% grid_el = @elements.to_a.find {|el| el.id == element.id} %>
+  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} %>
+  			</td>
+  			<%- 	col_count += 1
+  					if col_count % question_grid_with_total.num_cols == 0 then col_count = 0 -%></tr><tr><%- end -%>
+  		<%-	end -%>
+  		<%- while col_count < question_grid_with_total.num_cols do 
+  				col_count += 1-%>
+  				<td>&nbsp;</td>
+  		<%- end unless col_count == 0-%>
+  	</tr>
+  	<%- if question_grid_with_total.total_cols.present? -%>
+    	<tr>
+    		<td>Total</td>
+    	<%- question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
+    	  <td>
+    	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{col - 1}", '', :class => 'text validate-number', :readonly => true %>
+    	    <script type="text/javascript" charset="utf-8">
+            document.observe("dom:loaded", function() {
+              updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
+              $$(".col_<%= "#{question_grid_with_total.id}_#{col - 1}" %>").each(function(e) {
+                Event.observe(e, 'blur', function(event) {
+                  updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
+                });
+              });
+            });
+          </script>
+    	  </td>
+    	  
+    	<%- end -%>
+    	</tr>
+    	<%- end -%>
+  	</table>
+<%- end -%>
+

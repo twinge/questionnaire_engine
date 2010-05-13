@@ -6,6 +6,7 @@
 <% if in_grid -%>		
 		<li><%= link_to_remote("remove", {:url => remove_from_grid_question_page_element_path(element.question_sheet_id, element.page_id, element.id)}, :class => "remove", :title => "remove" )%></li>
 <% end -%>
+    <li><%#= link_to_remote "duplicate", {:url => duplicate_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :get}, :class => "duplicate", :title => "Edit this element" %></li>
 		<li><a href="#" class="handle" title="Reorder this element">drag</a></li>
 	</ul>
 </div>
@@ -18,7 +19,7 @@
       </label>
     <% end -%>
     
-    <%= render :partial => 'questions/' + element.template, :object => element %>
+    <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil} %>
 </div>
 </li>
 <%- end -%>
