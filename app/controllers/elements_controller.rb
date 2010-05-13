@@ -106,6 +106,14 @@ class ElementsController < ApplicationController
     render :action => :drop
   end
   
+  def duplicate
+    element = Element.find(params[:id])
+    @element = element.duplicate
+    respond_to do |format|
+      format.js {render :action => :create}
+    end
+  end
+  
   private
   def get_page
     @page = Page.find(params[:page_id])

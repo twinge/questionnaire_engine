@@ -40,6 +40,20 @@ class Element < ActiveRecord::Base
     self.class.to_s.underscore
   end
   
+  # copy an item and all it's children
+  def duplicate(grid_id = nil)
+    new_element = self.class.new(self.attributes)
+    new_element.question_grid_id = grid_id if grid_id
+    new_element.save!
+    
+    # duplicate children
+    if respond_to?(:elements) && elements.present?
+      elements.each {|e| e.duplicate(new_element.id)}
+    end
+    
+    new_element
+  end
+  
   protected
   def set_defaults
     self.label = "Untitled" if label.nil?

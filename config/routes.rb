@@ -2,11 +2,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :question_sheets do |sheets|
     sheets.resources :pages,                               # pages/
                      :controller => :question_pages,
-                     :name_prefix => 'question_',          # question_pages_path()
-                     :member => { :reorder => :put, :show_panel => :get } do |pages|
+                     :name_prefix => 'question_',          # question_pages_path(),
+                     :collection => { :reorder => :put },
+                     :member => { :show_panel => :get } do |pages|
       pages.resources :elements,
                       :collection => { :reorder => :put },
-                      :member => { :remove_from_grid => :post, :drop => :post }
+                      :member => { :remove_from_grid => :post, :drop => :post, :duplicate => :post }
     end
   end
 

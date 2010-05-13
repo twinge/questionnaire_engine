@@ -16,13 +16,14 @@
   <%- else -%>
   <label class="desc"><%= question_grid.label %></label>
   	<table class="grid">
-  	<%- if question_grid.cols -%>
-  	<tr>
-  	<%- question_grid.cols.split(';').each do |header| -%>
-  		<th><%= header || '&nbsp;' %></th>
-  	<%- end -%>
-  	</tr>
-  	<%- end -%>
+	  <% headers = question_grid.cols.to_s.split(';') %>
+	  <% if headers.detect {|h| h.strip.present?} %>
+    	<tr>
+    	<%- headers.each do |header| -%>
+    		<th><%= header || '&nbsp;' %></th>
+    	<%- end -%>
+    	</tr>
+    <% end %>
   	<tr >
   		<%- col_count = 0
   			question_grid.elements.each do |element| -%>
