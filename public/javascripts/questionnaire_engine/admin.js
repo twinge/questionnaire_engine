@@ -75,11 +75,3 @@ function updateSlug(source, dest) {
   }
 }
 
-function updateTotal(id) {
-	total = 0;
-	$$(".col_" + id ).each(function(e) {
-	  total += Number(e.value);
-	});
-	$('total_' + id).value = total;
-}
-
