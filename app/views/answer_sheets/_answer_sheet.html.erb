@@ -2,7 +2,7 @@
 
 <% if elements.length > 0 -%>
   
-  <% elements.sort.each do |page_id, page_elements| -%>
+  <% elements.each do |page_id, page_elements| -%>
   
     <div class="page">
       <h3><%= page_elements[0].page.label %></h3>

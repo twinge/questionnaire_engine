@@ -15,7 +15,7 @@
   </div>
   <%- else -%>
   <label class="desc"><%= question_grid.label %></label>
-  	<table class="grid">
+  	<table class="grid <%= question_grid.css_class %>" id="<%= question_grid.css_id %>">
 	  <% headers = question_grid.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
     	<tr>
