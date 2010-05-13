@@ -55,6 +55,7 @@ PageHandler.prototype = {
 			this.validatePage(page);
     }
 		$('page_ajax_spinner').hide();
+		updateTotals();
   },
   
   loadPage : function(page, url) {
@@ -275,4 +276,14 @@ function submitToFrame(dom_id, url)
   $(form_dom).submit();
   $(form_dom).action = old_action;
   $(form_dom).target = old_target;
+}
+
+function updateTotal(id) {
+	try {
+		total = 0;
+		$$(".col_" + id ).each(function(e) {
+		  total += Number(e.value);
+		});
+		$('total_' + id).value = total;
+	} catch(e) {}
 }

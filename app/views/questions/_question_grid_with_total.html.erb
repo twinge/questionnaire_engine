@@ -41,22 +41,11 @@
   	<%- if question_grid_with_total.total_cols.present? -%>
     	<tr>
     		<td>Total</td>
-    	<%- question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
-    	  <td>
-    	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{col - 1}", '', :class => 'text validate-number', :readonly => true %>
-    	    <script type="text/javascript" charset="utf-8">
-            document.observe("dom:loaded", function() {
-              updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
-              $$(".col_<%= "#{question_grid_with_total.id}_#{col - 1}" %>").each(function(e) {
-                Event.observe(e, 'blur', function(event) {
-                  updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
-                });
-              });
-            });
-          </script>
-    	  </td>
-    	  
-    	<%- end -%>
+      	<%- question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
+      	  <td>
+      	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{col - 1}", '', :class => 'text validate-number', :readonly => true %>
+      	  </td>
+      	<%- end -%>
     	</tr>
     	<%- end -%>
   	</table>
