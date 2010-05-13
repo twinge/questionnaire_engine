@@ -42,10 +42,15 @@
   	<%- if question_grid_with_total.total_cols.present? -%>
     	<tr>
     		<td>Total</td>
-      	<%- question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
-      	  <td>
-      	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{col - 1}", '', :class => 'text validate-number', :readonly => true %>
-      	  </td>
+      	<%- total_cols = question_grid_with_total.total_cols.split(',').collect(&:to_i) 
+      	    (question_grid_with_total.num_cols - 1).times do |i| 
+      	      if total_cols.include?(i + 2) -%>
+            	  <td>
+            	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{i + 1}", '', :class => 'text validate-number', :readonly => true %>
+            	  </td>
+            <% else %>
+              <td>&nbsp;</td>
+            <% end %>
       	<%- end -%>
     	</tr>
     	<%- end -%>
