@@ -327,6 +327,7 @@ label.horiz {
   margin-left: 0;
 }
 .list-elements #qg a { background-image: url(/images/questionnaire_engine/icons/table.png); }
+.list-elements #qgt a { background-image: url(/images/questionnaire_engine/icons/table.png); }
 
 .list-elements #sl a {
   background-image: url(/images/questionnaire_engine/icons/textfield.png);
@@ -627,6 +628,12 @@ span.answerwarn {
   display: block;
   text-indent: -9000px;
   background: url(/images/questionnaire_engine/icons/pencil.png) 0 0 no-repeat;
+}
+
+.duplicate {
+  display: block;
+  text-indent: -9000px;
+  background: url(/images/questionnaire_engine/icons/copy_past.gif) 0 0 no-repeat;
 }
 
 .handle {

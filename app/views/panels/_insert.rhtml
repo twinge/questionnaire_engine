@@ -43,6 +43,9 @@
     <li id="at"><%= link_to_remote "Attachment", 
                       :url => elements_path(route.merge(:element_type => "AttachmentField")), 
                       :method => :post %></li>
+    <li id="qgt"><%= link_to_remote "Grid w/Total", 
+                      :url => elements_path(route.merge(:element_type => "QuestionGridWithTotal")), 
+                      :method => :post %></li>
   </ul>
   
   <p style="clear: both;">&nbsp;</p>
