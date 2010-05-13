@@ -32,7 +32,7 @@
   				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} if grid_el %>
   			</td>
   			<%- 	col_count += 1
-  					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 -%></tr><tr><%- end -%>
+  					if col_count % question_grid_with_total.num_cols == 0  && element != question_grid_with_total.elements.last then col_count = 0 -%></tr><tr><%- end -%>
   		<%-	end -%>
   		<%- while col_count < question_grid_with_total.num_cols do 
   				col_count += 1-%>
