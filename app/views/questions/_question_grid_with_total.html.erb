@@ -1,7 +1,3 @@
-<%= drop_receiving_element("element_#{question_grid_with_total.id}", 
-      :url => drop_question_page_element_path(question_grid_with_total.question_sheet_id, question_grid_with_total.page_id, question_grid_with_total.id),
-      :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
-
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
   <label class="desc"><%= question_grid_with_total.label %></label>
   <div style="border: solid 1px #dadada; padding: 9px;">
@@ -13,25 +9,30 @@
   	<%- end -%>
      </ul>
   </div>
-  <%- else -%>
+  <%= drop_receiving_element("element_#{question_grid_with_total.id}", 
+      :url => drop_question_page_element_path(question_grid_with_total.question_sheet_id, question_grid_with_total.page_id, question_grid_with_total.id),
+      :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
+      
+<%- else -%>
   <label class="desc"><%= question_grid_with_total.label %></label>
   	<table class="grid">
-  	<%- if question_grid_with_total.cols -%>
-  	<tr>
-  	<%- question_grid_with_total.cols.split(';').each do |header| -%>
-  		<th><%= header || '&nbsp;' %></th>
-  	<%- end -%>
-  	</tr>
-  	<%- end -%>
+	  <% headers = question_grid_with_total.cols.to_s.split(';') %>
+	  <% if headers.detect {|h| h.strip.present?} %>
+    	<tr>
+    	<%- headers.each do |header| -%>
+    		<th><%= header || '&nbsp;' %></th>
+    	<%- end -%>
+    	</tr>
+    <% end %>
   	<tr >
   		<%- col_count = 0
   			question_grid_with_total.elements.each do |element| -%>
   			<td id="element_<%= element.id %>">
   				<% grid_el = @elements.to_a.find {|el| el.id == element.id} %>
-  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} %>
+  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} if grid_el %>
   			</td>
   			<%- 	col_count += 1
-  					if col_count % question_grid_with_total.num_cols == 0 then col_count = 0 -%></tr><tr><%- end -%>
+  					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 -%></tr><tr><%- end -%>
   		<%-	end -%>
   		<%- while col_count < question_grid_with_total.num_cols do 
   				col_count += 1-%>

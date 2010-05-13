@@ -16,6 +16,7 @@ class QuestionSet
       @questions.each do |question|
         question.answers = answers[question.id]
       end    
+      @questions
   end
   
   # update with responses from form
