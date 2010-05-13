@@ -9,6 +9,8 @@ class QuestionGrid < Element
  has_many :elements, :class_name => "Element", :foreign_key => "question_grid_id", :dependent => :nullify, :order => :position
  
   def num_cols
-    cols.split(';').length
+    num = cols.to_s.split(';').length
+    num = 1 if num == 0
+    num
   end
 end

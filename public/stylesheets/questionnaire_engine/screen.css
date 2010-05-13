@@ -633,7 +633,7 @@ span.answerwarn {
 .duplicate {
   display: block;
   text-indent: -9000px;
-  background: url(/images/questionnaire_engine/icons/copy_past.gif) 0 0 no-repeat;
+  background: url(/images/questionnaire_engine/icons/copy_paste.gif) 0 0 no-repeat;
 }
 
 .handle {

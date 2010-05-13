@@ -80,6 +80,17 @@ class QuestionPagesController < ApplicationController
     end
   end
   
+  def reorder 
+    @question_sheet.pages.each do |page|
+      if params['list-pages'].index(page.id.to_s)
+        page.number = params['list-pages'].index(page.id.to_s) + 1 
+        page.save!
+        @page = page
+      end
+    end
+    render :nothing => true
+  end
+  
   private
   def get_sheet
     @question_sheet = QuestionSheet.find(params[:question_sheet_id])

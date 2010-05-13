@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :label, :number
   validates_length_of :label, :maximum => 100, :allow_nil => true
   
-  validates_uniqueness_of :number, :scope => :question_sheet_id
+  # validates_uniqueness_of :number, :scope => :question_sheet_id
      
   validates_numericality_of :number, :only_integer => true
     
