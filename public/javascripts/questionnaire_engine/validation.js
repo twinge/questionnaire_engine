@@ -144,7 +144,7 @@ Object.extend(Validation, {
 		if(Validation.isVisible(elm) && !elm.disabled && !v.test($F(elm), elm)) {
 			if(!elm[prop]) {
 				var advice = Validation.getAdvice(name, elm);
-				if(advice == null) {
+				if(advice == null && name != 'required') {
 					var errorMsg = useTitle ? ((elm && elm.title) ? elm.title : v.error) : v.error;
 					advice = '<div class="validation-advice" id="advice-' + name + '-' + Validation.getElmID(elm) +'" style="display:none">' + errorMsg + '</div>'
 					switch (elm.type.toLowerCase()) {
@@ -163,7 +163,9 @@ Object.extend(Validation, {
 					advice = Validation.getAdvice(name, elm);
 				}
 				//if(typeof Effect == 'undefined') {
+				if(name != 'required') {
 					advice.style.display = 'block';
+				}
 				//} else {
 				//	new Effect.Appear(advice, {duration : 1 });
 				//}
