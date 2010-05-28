@@ -1,4 +1,4 @@
-<% dom_id = @presenter.active_page.dom_id %>
+<% dom_id = @presenter.active_page.dom_id if @presenter %>
 <%= file_field_tag "answers[#{attachment_field.id}]", 
       :class => 'text ' + attachment_field.validation_class,
       :id => dom_id(attachment_field),
@@ -7,7 +7,7 @@
       :maxlength => 255 %>
 <%= image_tag 'questionnaire_engine/ajax-loader.gif',
     :id => "#{dom_id}-spinner", :style => "display:none;" %>
-<%= button_to_function("Attach File", "submitToFrame('#{dom_id}', '#{save_file_answer_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id)}')") %><br/>
+<%= button_to_function("Attach File", "submitToFrame('#{dom_id}', '#{save_file_answer_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id)}')") if @presenter %><br/>
 <div id="<%= dom_id %>-attachment">
 <% answers = attachment_field.response(@application)
   if answers.present?
@@ -15,4 +15,4 @@
     Current File: <%= link_to(answer.filename, answer.public_filename) %>
 <% end %>
 </div>
-<iframe id="<%= dom_id %>-iframe" name="<%= @presenter.active_page.dom_id %>-iframe" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+<iframe id="<%= dom_id %>-iframe" name="<%= @presenter.active_page.dom_id if @presenter %>-iframe" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
