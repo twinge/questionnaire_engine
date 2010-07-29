@@ -11,3 +11,4 @@ public/javascripts/calendar_date_select
 public/images/calendar_date_select
 public/stylesheets/calendar_date_select
 db/schema.rb
+.DS_Store

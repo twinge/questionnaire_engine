@@ -1,4 +1,6 @@
-page.remove "element_#{@element.id}"
-page.replace_html 'panel', :partial => 'panels/insert'
-page.assign "activeElement", ""
-page.call "switchTab", "insert"
+page << <<-END
+  $('#element_#{@element.id}').remove()
+  $('#panel').html('#{escape_javascript(render('panels/insert'))}')
+  activeElement = ''
+  switchTab('insert')
+END

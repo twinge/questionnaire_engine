@@ -1,4 +1,4 @@
-ActionController::Routing::Routes.draw do |map|
+Rails.application.routes.draw do |map|
   map.resources :question_sheets do |sheets|
     sheets.resources :pages,                               # pages/
                      :controller => :question_pages,

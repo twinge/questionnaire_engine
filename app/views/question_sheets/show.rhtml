@@ -15,8 +15,9 @@ var activeElement = "";
 
 
 <div id="preview">
-  <%= link_to_remote "<h2 id='sheet-name'>#{@question_sheet.label}</h2>", { :url => edit_question_sheet_path(@question_sheet), :method => :get }, { :class => "ctl" } -%>
-
+  <h2 id='sheet-name'>
+    <%= link_to @question_sheet.label, edit_question_sheet_path(@question_sheet), :remote => true, :method => :get , :class => "ctl"  -%>
+  </h2>
   <div id="page-preview">
     <%= render :partial => 'question_pages/question_page' %>
   </div>

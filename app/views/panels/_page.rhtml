@@ -1,1 +1,3 @@
-<li id="link-<%= dom_id(page) %>" <% if page == current_page -%> class="active"<% end -%>><%= link_to_remote page.label, :url => question_page_path(page.question_sheet_id, page.id), :method => :get %></li>
+<li id="link-<%= dom_id(page) %>" <% if page == current_page -%> class="active"<% end -%>>
+  <%= link_to page.label, question_page_path(page.question_sheet_id, page.id), :remote => true, :method => :get %>
+</li>

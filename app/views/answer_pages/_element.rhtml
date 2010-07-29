@@ -7,10 +7,10 @@
     </label>
   <% end -%>
   
-  <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil} %>
+  <%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => nil} %>
 </li>
 <%- else -%>
 	<%- if in_grid -%>
-		<%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => col} %>
+		<%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => col} %>
 	<%- end -%>
 <%- end -%>

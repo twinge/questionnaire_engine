@@ -1,3 +1,5 @@
-page.replace_html 'panel', { :partial => 'panels/' + @panel_name }
-page.call "switchTab", @tab_name
-page.call "clearCurrentElement"
+page << <<-END
+  $('#panel').html('#{escape_javascript(render('panels/' + @panel_name))}')
+  switchTab('#{@tab_name}')
+  clearCurrentElement()
+END

@@ -41,11 +41,14 @@ module ApplicationHelper
 
   def questionnaire_engine_javascripts(options = {})
     output = []
-    output << "questionnaire_engine/validation"
-    output << "questionnaire_engine/admin"
-    output << "questionnaire_engine/lightbox"
-    output << "questionnaire_engine/public"
-    return output
+    output << "questionnaire_engine/jquery.validate.pack"
+    output << "questionnaire_engine/jquery.metadata"
+    output << "questionnaire_engine/qe.admin"
+    # output << "questionnaire_engine/lightbox"
+    output << "questionnaire_engine/jquery.scrollTo-min"
+    output << "questionnaire_engine/qe.public"
+    output << {:cache => true}
+    return output 
   end
 
   def questionnaire_engine_includes(*args)
@@ -54,6 +57,11 @@ module ApplicationHelper
     
     js = javascript_include_tag(*questionnaire_engine_javascripts)
     css = stylesheet_link_tag(*questionnaire_engine_stylesheets)
-    "#{js}\n#{css}\n"
+    "#{js}\n#{css}\n".html_safe
+  end
+  
+  def calendar_date_select_tag(name, value = nil, options = {})
+    options.merge!({'data-calendar' => true})
+    text_field_tag(name, value, options )
   end
 end

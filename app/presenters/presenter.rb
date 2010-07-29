@@ -2,8 +2,8 @@
 class Presenter
   include ActionView::Helpers::TagHelper # link_to
   include ActionView::Helpers::UrlHelper # url_for
-  include ActionController::UrlWriter # named routes
-  include ActionView::Helpers::RecordIdentificationHelper # dom_id
+  # include ActionController::UrlWriter # named routes
+  include ActionController::RecordIdentifier # dom_id
   attr_accessor :controller # so we can be lazy
 
   def initialize(controller)

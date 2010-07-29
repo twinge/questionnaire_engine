@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>Dynamic Forms</title>
-  <%= javascript_include_tag :defaults %>
-  <%= calendar_date_select_includes %>
   <%= questionnaire_engine_includes %>
+  <%= javascript_include_tag 'rails', 'rails.extra' %>
+  <%= csrf_meta_tag %>
 </head>
 <body>
 

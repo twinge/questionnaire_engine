@@ -10,7 +10,7 @@ class Element < ActiveRecord::Base
   
   acts_as_list :scope => :page_id
 
-  validates_presence_of :kind
+  validates_presence_of :kind, :style
   # validates_presence_of :label, :style, :on => :update
   
   validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
@@ -19,7 +19,7 @@ class Element < ActiveRecord::Base
   # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
   validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField}  # leaf classes
   
-  before_create :set_defaults
+  before_validation :set_defaults, :on => :create
   
   HUMANIZED_ATTRIBUTES = {
     :slug => "Variable"
@@ -36,7 +36,7 @@ class Element < ActiveRecord::Base
   
   
   # by default the partial for an element matches the class name (override as necessary)
-  def template
+  def ptemplate
     self.class.to_s.underscore
   end
   
@@ -59,22 +59,23 @@ class Element < ActiveRecord::Base
     self.label = "Untitled" if label.nil?
     if self.content.nil?
       case self.class.to_s
-        when "ChoiceField" then self.content = "Choice One\nChoice Two\nChoice Three"
-        when "Paragraph" then self.content ="Lorem ipsum..." 
+        when "ChoiceField" then self.content ||= "Choice One\nChoice Two\nChoice Three"
+        when "Paragraph" then self.content ||="Lorem ipsum..." 
       end 
     end
 
     if self.style.nil?
       case self.class.to_s
-        when "DateField" then self.style = "date"
-        when "FileField" then self.style = "file"
-        when "Paragraph" then self.style = "paragraph"
-        when "Section" then self.style = "section"
+        when "DateField" then self.style ||= "date"
+        when "FileField" then self.style ||= "file"
+        when "Paragraph" then self.style ||= "paragraph"
+        when "Section" then self.style ||= "section"
+        # when "ChoiceField" then self.style = "checkbox"
         # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
-        when "QuestionGrid" then self.style = "grid"
-        when "SchoolPicker" then self.style = "school_picker"
-        when "ProjectPreference" then self.style = "project_preference"
-        when "StateChooser" then self.style = "state_chooser"
+        when "QuestionGrid" then self.style ||= "grid"
+        when "SchoolPicker" then self.style ||= "school_picker"
+        when "ProjectPreference" then self.style ||= "project_preference"
+        when "StateChooser" then self.style ||= "state_chooser"
       end 
     end
   end

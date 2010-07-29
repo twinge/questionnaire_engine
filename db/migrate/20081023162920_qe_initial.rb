@@ -35,7 +35,7 @@ class QeInitial < ActiveRecord::Migration
     end
   
     add_index Element.table_name, :slug
-    add_index Element.table_name, [:question_sheet_id, :position, :page_id]
+    add_index Element.table_name, [:question_sheet_id, :position, :page_id], :unique => false
     
     create_table AnswerSheet.table_name do |t|
       t.column :question_sheet_id, :integer, :null => false

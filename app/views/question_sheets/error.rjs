@@ -1,4 +1,7 @@
-page.replace_html 'errors', :partial => 'errors', :locals => {:element => @question_sheet}
+page << <<-END
+  $('#errors').html('#{escape_javascript(render('errors', :page => @question_sheet))}');
+END
+
 @question_sheet.errors.each do |attr_name, message| 
-  page.call "addError", "question_sheet_" + attr_name
+  page << "addError('question_sheet_#{attr_name}')"
 end

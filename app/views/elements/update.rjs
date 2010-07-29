@@ -1,11 +1,13 @@
-page.replace "element_#{@element.id}", { :partial => 'question_pages/element', :locals => { :element => @element, :in_grid => (!@element.question_grid_id.nil? && @element.question_grid_id > 0)} }
+page << <<-END
+  $('#element_#{@element.id}').replaceWith('#{escape_javascript(render('question_pages/element',:element => @element, :in_grid => (!@element.question_grid_id.nil? && @element.question_grid_id > 0)))}')
+  $('#panel').html('#{escape_javascript(render('panels/insert'))}')
+  switchTab("insert")
+  clearCurrentElement()
+  $('#questions_list').sortable('refresh');
+END
 
 @element.page.question_grids.each do |grid|
-  page.sortable "questions_list_#{grid.id}", :url => reorder_question_page_elements_path(@element.question_sheet_id, @element.page_id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window'
+  page << <<-END
+    $('#questions_list_#{grid.id}').sortable('refresh');
+  END
 end
-page.sortable 'questions_list', :url => reorder_question_page_elements_path(@element.question_sheet_id, @element.page_id), :method => :put, :handle => 'handle', :handle_only => 'true', :scroll => 'window'
-
-# back to insert element panel
-page.replace_html 'panel', :partial => 'panels/insert'
-page.call "switchTab", "insert"
-page.call "clearCurrentElement"

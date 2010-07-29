@@ -7,21 +7,21 @@
 
 # elements_path = "#{directory}/app/models"
 # transient_path = "#{directory}/app/models"
-presenters_path = "#{directory}/app/presenters"
+# presenters_path = "#{directory}/app/presenters"
 
-$LOAD_PATH << presenters_path
+# $LOAD_PATH << presenters_path
 Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'helpers', '**')).each do |file|
-  require_dependency file
+  require file
 end
 
 Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'presenters', '**')).each do |file|
-  require_dependency file
+  require file
 end
 
-['/public', '/public/javascripts/questionnaire_engine', '/public/stylesheets/questionnaire_engine', '/public/images/questionnaire_engine', 
-  '/public/images/questionnaire_engine', '/public/images/questionnaire_engine/icons', '/public/questionnaire_engine/help'].each do |dir|
-  source = File.dirname(__FILE__) + "#{dir}"
-  dest = RAILS_ROOT + dir
-  FileUtils.mkdir_p(dest)
-  FileUtils.cp(Dir.glob(source+'/*.*'), dest)
-end
+# ['public', 'public/javascripts/questionnaire_engine', 'public/stylesheets/questionnaire_engine', 'public/images/questionnaire_engine', 
+#   'public/images/questionnaire_engine', 'public/images/questionnaire_engine/icons', 'public/questionnaire_engine/help'].each do |dir|
+#   source = File.dirname(__FILE__) + "/#{dir}"
+#   dest = Rails.root + dir
+#   FileUtils.mkdir_p(dest)
+#   FileUtils.cp(Dir.glob(source+'/*.*'), dest)
+# end

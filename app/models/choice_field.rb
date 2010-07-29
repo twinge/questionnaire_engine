@@ -52,7 +52,7 @@ class ChoiceField < Question
 	end
 	
 	# which view to render this element?
-  def template
+  def ptemplate
     if self.style == 'checkbox'
       'checkbox_field'
     elsif self.style == 'drop-down'

@@ -1,3 +1,4 @@
-page.replace_html "sheet-name", @question_sheet.label
-page.replace_html 'panel', { :partial => 'panels/prop_sheet', :locals => { :question_sheet => @question_sheet } }
-#page['sheet-name'].visual_effect  :highlight
+page << <<-END
+  $('#sheet-name').html('#{escape_javascript(@question_sheet.label)}');
+  $('#panel').html('#{escape_javascript(render('panels/prop_sheet', :question_sheet => @question_sheet))}');
+END

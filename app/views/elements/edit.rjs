@@ -1,3 +1,5 @@
-page.replace_html 'panel', { :partial => 'panels/prop_element', :locals => { :element => @element } }
-page.call "selectElement", "element_#{@element.id}"
+page << <<-END
+  $('#panel').html('#{escape_javascript(render('panels/prop_element',:element => @element))}')
+  selectElement("#element_#{@element.id}")
+END
 

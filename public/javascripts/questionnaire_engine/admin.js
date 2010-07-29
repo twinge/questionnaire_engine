@@ -1,20 +1,27 @@
+$(function() {
+	$('#status').ajaxStart(function() {
+		$(this).show();
+	}).ajaxComplete(function() {
+		$(this).hide();
+	})
+});
 // used by form designer
 
 var currentTab = 'pages_list';
 
 function switchTab(toTab) {
-  if(currentTab != null) $('tab-' + currentTab).removeClassName('active');
-  $('tab-' + toTab).addClassName('active');
+  if(currentTab != null) $('#tab-' + currentTab).removeClass('active');
+  $('#tab-' + toTab).addClass('active');
   currentTab = toTab;
 }
 
 function selectPage() {
-    el = $('link-page-name');
+    el = $('#link-page-name');
     clearCurrentElement();
-    el.addClassName('active');
+    el.addClass('active');
     switchTab('properties');
     
-    if( $('page_label')) $('page_label').activate();
+    if($('#page_label').length > 0) $('#page_label').activate();
 }
 
 function selectElement(id) {

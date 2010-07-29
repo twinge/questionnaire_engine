@@ -9,7 +9,7 @@
 # :content      - choices (one per line) for choice field
 
 class Question < Element
-  include ActionView::Helpers::RecordIdentificationHelper # dom_id
+  include ActionController::RecordIdentifier # dom_id
   has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_id", :dependent => :nullify
   has_many :dependents, :class_name => "Condition", :foreign_key => "trigger_id", :dependent => :nullify
   

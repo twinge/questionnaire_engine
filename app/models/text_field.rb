@@ -4,7 +4,7 @@
 class TextField < Question
   
   # which view to render this element?
-  def template
+  def ptemplate
     if self.style == 'essay'
       'text_area_field'
     else

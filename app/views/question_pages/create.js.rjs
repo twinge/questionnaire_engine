@@ -1,0 +1,5 @@
+page << <<-END
+  $('#page-preview').html('#{escape_javascript(render('question_pages/question_page'))}')
+  $('#panel').html('#{escape_javascript(render('panels/prop_page', :page => @page))}')
+  switchTab("properties")
+END

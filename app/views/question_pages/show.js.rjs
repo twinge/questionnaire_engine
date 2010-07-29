@@ -1,6 +1,10 @@
 page << <<-END
-  $('#panel').html('#{escape_javascript(render('panels/pages_list'))}')
   $('#page-preview').html('#{escape_javascript(render('question_pages/question_page'))}')
   $('#nav-controls').html('#{escape_javascript(render('panels/nav_controls'))}')
   switchTab("pages_list")
+  $('#list-pages li').removeClass('active')
+  $('#link-#{dom_id(@page)}').addClass('active')
+  clearCurrentElement()
+  activeElement = ''
 END
+

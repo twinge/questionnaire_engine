@@ -1,4 +1,5 @@
 # Questionnaire
+require 'questionnaire/engine' if defined?(Rails)
 
 module Questionnaire
   # prefix for database tables
@@ -7,4 +8,5 @@ module Questionnaire
   
   mattr_accessor :answer_sheet_has_one
   self.answer_sheet_has_one = nil
+    
 end

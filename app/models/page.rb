@@ -10,10 +10,10 @@ class Page < ActiveRecord::Base
   
   acts_as_list :column => :number, :scope => :question_sheet_id
   
-  named_scope :visible, :conditions => {:hidden => false}
+  scope :visible, :conditions => {:hidden => false}
   
   # callbacks
-  before_validation_on_create :set_default_label    # Page x
+  before_validation :set_default_label, :on => :create    # Page x
   
   # validation
   validates_presence_of :label, :number
@@ -35,7 +35,7 @@ class Page < ActiveRecord::Base
   end
 
   def questions_before_position(position)
-    self.elements.find(:all, :conditions => ["position < ?", position])
+    self.elements.where(["position < ?", position])
   end
   
   
@@ -47,7 +47,7 @@ class Page < ActiveRecord::Base
   end
   
   def self.untitled_labels(sheet)
-    sheet.pages.find(:all, :conditions => %{label like 'Page %'}).map {|p| p.label}
+    sheet.pages.where("label like 'Page %'").map {|p| p.label}
   end
 
 end

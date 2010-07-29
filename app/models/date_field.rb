@@ -46,7 +46,7 @@ class DateField < Question
   end
   
   # which view to render this element?
-  def template
+  def ptemplate
     if self.style == 'mmyy'
       'date_field_mmyy'
     else

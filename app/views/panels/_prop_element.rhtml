@@ -5,7 +5,7 @@
        <%= render :partial => 'errors', :locals => { :element => element }%>
     </div>
 
-<% remote_form_for :element, :url => question_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :put do |f| -%>
+<%= form_for :element, :url => question_page_element_path(element.question_sheet_id, element.page_id, element.id), :remote => true, :html => {:method => :put} do |f| -%>
 
   <%= render :partial => 'panels/prop_' + element.class.to_s.underscore, :locals => { :f => f } %>
   
@@ -19,13 +19,13 @@
     <%= render :partial => 'panels/advanced_options', :locals => { :f => f } %>
   <% end-%>
 
-  <p class="buttons"><%= submit_tag"Update &raquo;" %></p>
+  <p class="buttons"><%= submit_tag "Update &raquo;".html_safe %></p>
 
 <% end -%>
 
 
 
-<% remote_form_for :element, :url => question_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :delete do |f| -%>
+<%= form_for :element, :url => question_page_element_path(element.question_sheet_id, element.page_id, element.id), :remote => true, :html => {:method => :delete} do |f| -%>
     <p class="buttons"><%= submit_tag "Delete" %></p>
 <% end -%>
 

@@ -2,11 +2,11 @@
 <li class="" id="element_<%= element.id %>">
 <div class="controls">
 	<ul>
-		<li><%= link_to_remote "edit", {:url => edit_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :get}, :class => "edit", :title => "Edit this element" %></li>
+		<li><%= link_to "edit", edit_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :remote => true, :method => :get, :class => "edit", :title => "Edit this element" %></li>
 <% if in_grid -%>		
-		<li><%= link_to_remote("remove", {:url => remove_from_grid_question_page_element_path(element.question_sheet_id, element.page_id, element.id)}, :class => "remove", :title => "remove" )%></li>
+		<li><%= link_to("remove", remove_from_grid_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :remote => true, :class => "remove", :title => "remove" )%></li>
 <% end -%>
-    <li><%= link_to_remote "duplicate", {:url => duplicate_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :method => :post}, :class => "duplicate", :title => "Duplicate this element" %></li>
+    <li><%= link_to "duplicate",  duplicate_question_page_element_path(element.question_sheet_id, element.page_id, element.id), :remote => true, :method => :post, :class => "duplicate", :title => "Duplicate this element" %></li>
 		<li><a href="#" class="handle" title="Reorder this element">drag</a></li>
 	</ul>
 </div>
@@ -19,7 +19,7 @@
       </label>
     <% end -%>
     
-    <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil} %>
+    <%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => nil} %>
 </div>
 </li>
 <%- end -%>

@@ -1,5 +1,4 @@
-page.replace_html 'page-preview', { :partial => 'question_pages/question_page', :locals => { :page => @page } }
-page.select('#list-pages li').each do |el|
-  el.className = ''
-end
-# page.assign "activeElement", ""
+page << <<-END
+  $('#page-preview').html('#{escape_javascript(render('question_pages/question_page', :page => @page))}')
+  $('#list-pages li').removeClass('active')
+END
