@@ -27,7 +27,7 @@ class Page < ActiveRecord::Base
   # could set multiple conditions to influence this question, in which case all must be met
   def active?
     # find first condition that doesn't pass (nil if all pass)
-    self.conditions.find { |c| !c.evaluate? }.nil?  # true if all pass
+    self.conditions.detect { |c| !c.evaluate? }.nil?  # true if all pass
   end
     
   def question?
@@ -35,7 +35,7 @@ class Page < ActiveRecord::Base
   end
 
   def questions_before_position(position)
-    self.elements.where(["position < ?", position])
+    self.questions.where(["position < ?", position])
   end
   
   
@@ -47,7 +47,7 @@ class Page < ActiveRecord::Base
   end
   
   def self.untitled_labels(sheet)
-    sheet.pages.where("label like 'Page %'").map {|p| p.label}
+    sheet ? sheet.pages.where("label like 'Page %'").map {|p| p.label} : []
   end
 
 end

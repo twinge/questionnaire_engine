@@ -21,13 +21,13 @@ class Element < ActiveRecord::Base
   
   before_validation :set_defaults, :on => :create
   
-  HUMANIZED_ATTRIBUTES = {
-    :slug => "Variable"
-  }
-    
-  def self.human_attribute_name(attr)
-    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
-  end
+  # HUMANIZED_ATTRIBUTES = {
+  #   :slug => "Variable"
+  # }
+  #   
+  # def self.human_attrib_name(attr)
+  #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  # end
   
   
   def question?
