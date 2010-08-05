@@ -8,13 +8,13 @@
 # On later page loads, we need to determine the "next page" which basically requires the page list again.
 require_dependency 'presenter'
 class AnswerPagesPresenter < Presenter
+  unloadable
   
   #attr_reader :answer_sheet, :question_sheet
 
   attr_accessor :active_answer_sheet, :page_links, :active_page
   
-  def initialize(controller, answer_sheets, custom_pages = nil)
-    super(controller)
+  def initialize(answer_sheets, custom_pages = nil)
     
     if answer_sheets.kind_of?(AnswerSheet) 
       @answer_sheets = [answer_sheets]  # stuff single AnswerSheet into an array

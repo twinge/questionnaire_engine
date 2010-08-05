@@ -71,7 +71,6 @@ class Element < ActiveRecord::Base
         when "Paragraph" then self.style ||= "paragraph"
         when "Section" then self.style ||= "section"
         # when "ChoiceField" then self.style = "checkbox"
-        # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
         when "QuestionGrid" then self.style ||= "grid"
         when "SchoolPicker" then self.style ||= "school_picker"
         when "ProjectPreference" then self.style ||= "project_preference"
