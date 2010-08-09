@@ -2,7 +2,7 @@
 # - drop down of states
 
 class StateChooser < Question
-  def choices
-    @states = State::NAMES
+  def choices(country = 'US')
+    @states = Carmen::states(country)
   end
 end

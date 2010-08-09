@@ -76,7 +76,7 @@ class Question < Element
   # css class names for javascript-based validation
   def validation_class
     if self.required?
-      'required' 
+      ' required ' 
     else
       ''
     end
