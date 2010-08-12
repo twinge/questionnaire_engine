@@ -1,4 +1,4 @@
-class ElementsController < ApplicationController
+class Admin::ElementsController < ApplicationController
   unloadable
   before_filter :check_valid_user
   layout 'admin'

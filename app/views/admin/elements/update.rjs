@@ -1,5 +1,5 @@
 page << <<-END
-  $('#element_#{@element.id}').replaceWith('#{escape_javascript(render('question_pages/element',:element => @element, :in_grid => (!@element.question_grid_id.nil? && @element.question_grid_id > 0)))}')
+  $('#element_#{@element.id}').replaceWith('#{escape_javascript(render('admin/question_pages/element',:element => @element, :in_grid => (!@element.question_grid_id.nil? && @element.question_grid_id > 0)))}')
   $('#panel').html('#{escape_javascript(render('panels/insert'))}')
   switchTab("insert")
   clearCurrentElement()

@@ -9,11 +9,9 @@
   <p class="instruction">Select a page to edit.  Click 'Add a page' 
      to add a page to your form.</p>
      
-  <ul id="list-pages" data-sortable="true" data-sortable-url="<%= reorder_question_pages_path(@page.question_sheet_id) %>">
+  <ul id="list-pages" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_pages_path(@page.question_sheet_id) %>">
     <%= render :partial => 'panels/page', :collection => @all_pages, :locals => { :current_page => @page } %>
   </ul>
   
-  <%#= sortable_element 'list-pages', :url => reorder_question_pages_path(@page.question_sheet_id), :method => :put, :scroll => 'window' %>
-  
-  <p><%= link_to "Add a page", question_pages_path(@page.question_sheet_id), :remote => true, :method => :post,  :id => "link-page-add"  %>
+  <p><%= link_to "Add a page", admin_question_sheet_pages_path(@page.question_sheet_id), :remote => true, :method => :post,  :id => "link-page-add"  %>
 </div>

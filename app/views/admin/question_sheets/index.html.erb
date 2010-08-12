@@ -13,8 +13,8 @@
           </tr>
       <% for question_sheet in @question_sheets %>
         <tr class="<%= cycle("","alt") %>">
-          <td><%= link_to question_sheet.label, question_sheet_path(question_sheet), :class => "questionnaire" %></td>
-          <td class="actions"><%= link_to 'Destroy', question_sheet_path(question_sheet), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
+          <td><%= link_to question_sheet.label, admin_question_sheet_path(question_sheet), :class => "questionnaire" %></td>
+          <td class="actions"><%= link_to 'Destroy', admin_question_sheet_path(question_sheet), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
         </tr>
       <% end %>
       </table>
@@ -22,5 +22,5 @@
       <br />
     <% end -%>
     
-    <%= link_to 'New Questionnaire', question_sheets_path(), :method => :post, :class => "add-link" %>
+    <%= link_to 'New Questionnaire', admin_question_sheets_path(), :method => :post, :class => "add-link" %>
 </div>

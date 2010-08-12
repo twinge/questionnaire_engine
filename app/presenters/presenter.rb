@@ -8,7 +8,12 @@ class Presenter
   include Rails.application.routes.url_helpers
   attr_accessor :controller # so we can be lazy
 
-  def initialize(*args)
+  def initialize(controller)
+    @controller = controller
+  end
+  
+  def request
+    @controller.request
   end
 
 end

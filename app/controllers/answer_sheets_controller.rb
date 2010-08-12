@@ -24,6 +24,7 @@ class AnswerSheetsController < ApplicationController
     @answer_sheet = AnswerSheet.find(params[:id])
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
     @elements = @presenter.questions_for_page(:first).elements
+    @page = Page.find_by_number(1)
   end
   
   # display captured answers (read-only)

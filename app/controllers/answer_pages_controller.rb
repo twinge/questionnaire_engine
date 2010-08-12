@@ -1,7 +1,8 @@
 require_dependency 'answer_pages_presenter'
 class AnswerPagesController < ApplicationController
-  before_filter :get_answer_sheets, :only => [:edit, :update, :save_file]
+  before_filter :get_answer_sheets, :only => [:edit, :update, :save_file, :index]
   unloadable
+  
   def edit
     @elements = @presenter.questions_for_page(params[:id]).elements
     @page = Page.find(params[:id]) || Page.find_by_number(1)
@@ -55,7 +56,7 @@ class AnswerPagesController < ApplicationController
   
   def get_answer_sheets
     @answer_sheets = AnswerSheet.find(params[:answer_sheet_id])
-    @presenter = AnswerPagesPresenter.new(@answer_sheets)
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheets)
   end
 
 end

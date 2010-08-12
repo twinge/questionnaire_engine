@@ -43,20 +43,23 @@ module ApplicationHelper
     output = []
     output << "questionnaire_engine/jquery.validate.pack"
     output << "questionnaire_engine/jquery.metadata"
-    output << "questionnaire_engine/qe.admin"
+    if options[:area] == :public
+      output << "questionnaire_engine/qe.public"
+    else
+      output << "questionnaire_engine/qe.admin"
+    end
     # output << "questionnaire_engine/lightbox"
     output << "questionnaire_engine/jquery.scrollTo-min"
-    output << "questionnaire_engine/qe.public"
     output << {:cache => true}
     return output 
   end
 
-  def questionnaire_engine_includes(*args)
+  def questionnaire_engine_includes(options = {})
     return "" if @qe_already_included
     @qe_already_included=true
     
-    js = javascript_include_tag(*questionnaire_engine_javascripts)
-    css = stylesheet_link_tag(*questionnaire_engine_stylesheets)
+    js = javascript_include_tag(*questionnaire_engine_javascripts(options))
+    css = stylesheet_link_tag(*questionnaire_engine_stylesheets(options))
     "#{js}\n#{css}\n".html_safe
   end
   

@@ -1,7 +1,7 @@
 <% page_dom = @presenter.active_page.dom_id
    next_js = load_page_js(@presenter.next_page) -%>
 
-<div id="<%= page_dom %>" class="answer-page" style="<% if :show_first.nil? -%>display: none;<% end -%>">  <!-- this id is parsed by public.js -->
+<div id="<%= page_dom %>" class="answer-page" style="<% if :show_first.nil? -%>display: none;<% end -%>">  <!-- this id is parsed by qe.public.js -->
 
   
 
@@ -18,7 +18,7 @@
         
           <% if next_js.empty? -%>
             <div id="submit_message" class="validation-advice" style="display: none;"></div>
-            <%= button_to_function "Submit", "page_handler.validateAll(); return false", :id => 'submit_button' %>
+            <%= button_to_function "Submit", "page_handler.completeAll(); return false", :id => 'submit_button' %>
           <% else -%>
             <%= submit_tag "Next" %>
           <% end -%>

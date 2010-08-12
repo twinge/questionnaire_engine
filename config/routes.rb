@@ -1,23 +1,37 @@
-Rails.application.routes.draw do |map|
-  map.resources :question_sheets do |sheets|
-    sheets.resources :pages,                               # pages/
-                     :controller => :question_pages,
-                     :name_prefix => 'question_',          # question_pages_path(),
-                     :collection => { :reorder => :put },
-                     :member => { :show_panel => :get } do |pages|
-      pages.resources :elements,
-                      :collection => { :reorder => :put },
-                      :member => { :remove_from_grid => :post, :drop => :post, :duplicate => :post }
+Rails::Application.routes.draw do 
+  
+  namespace :admin do
+    resources :question_sheets do 
+      resources :pages,                               # pages/
+                :controller => :question_pages do         # question_sheet_pages_path(),
+                collection do
+                  put :reorder
+                end
+                member do
+                  get :show_panel
+                end
+        resources :elements do
+                  collection do
+                    put :reorder
+                  end
+                  member do
+                    post :remove_from_grid
+                    post :drop
+                    post :duplicate
+                  end
+                end
+      end
     end
   end
 
   # form capture and review
-  map.resources :answer_sheets do |sheets|
-    sheets.resources :pages,                              # pages/
-                     :controller => :answer_pages,
-                     :name_prefix => 'answer_',           # answer_pages_path(),
-                     :member => {:save_file => :post}
+  resources :answer_sheets do 
+    resources  :page, :controller => :answer_pages do
+                member do
+                  post :save_file
+                end
+    end
   end                 
 
-  map.resources :elements
+  resources :elements
 end

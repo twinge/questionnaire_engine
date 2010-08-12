@@ -1,7 +1,7 @@
 # QuestionSheets is used exclusively on the administration side to design a Questionniare
 #  which can than be instantiated as an AnswerSheet for data capture on the front-end
 
-class QuestionSheetsController < ApplicationController
+class Admin::QuestionSheetsController < ApplicationController
   unloadable
   before_filter :check_valid_user
   layout 'admin'
@@ -37,8 +37,8 @@ class QuestionSheetsController < ApplicationController
     
     respond_to do |format|
       if @question_sheet.save
-        format.html { redirect_to question_sheet_path(@question_sheet) }
-        format.xml  { head :created, :location => question_sheet_path(@question_sheet) }
+        format.html { redirect_to admin_question_sheet_path(@question_sheet) }
+        format.xml  { head :created, :location => admin_question_sheet_path(@question_sheet) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @question_sheet.errors.to_xml }
@@ -64,7 +64,7 @@ class QuestionSheetsController < ApplicationController
 
     respond_to do |format|
       if @question_sheet.update_attributes(params[:question_sheet])
-        format.html { redirect_to question_sheet_path(@question_sheet) }
+        format.html { redirect_to admin_question_sheet_path(@question_sheet) }
         format.js 
         format.xml  { head :ok }
       else
@@ -82,7 +82,7 @@ class QuestionSheetsController < ApplicationController
     @question_sheet.destroy
     
     respond_to do |format|
-      format.html { redirect_to question_sheets_path }
+      format.html { redirect_to admin_question_sheets_path }
       format.xml  { head :ok }
     end
   end

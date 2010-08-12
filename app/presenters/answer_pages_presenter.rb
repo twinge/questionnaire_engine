@@ -14,8 +14,8 @@ class AnswerPagesPresenter < Presenter
 
   attr_accessor :active_answer_sheet, :page_links, :active_page
   
-  def initialize(answer_sheets, custom_pages = nil)
-    
+  def initialize(controller, answer_sheets, custom_pages = nil)
+    super(controller)
     if answer_sheets.kind_of?(AnswerSheet) 
       @answer_sheets = [answer_sheets]  # stuff single AnswerSheet into an array
     else
@@ -39,7 +39,7 @@ class AnswerPagesPresenter < Presenter
   
   def active_page
     link = new_page_link(@active_answer_sheet, @active_page)
-    link.save_path = answer_page_path(@active_answer_sheet, @active_page)
+    link.save_path = answer_sheet_page_path(@active_answer_sheet, @active_page)
     link
   end
   
@@ -76,7 +76,7 @@ class AnswerPagesPresenter < Presenter
   end
 
   def new_page_link(answer_sheet, page)
-    PageLink.new(page.label, edit_answer_page_path(answer_sheet, page), dom_page(answer_sheet, page))
+    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page), dom_page(answer_sheet, page))
   end
   
   # page is identified by answer sheet, so can have multiple sheets loaded at once

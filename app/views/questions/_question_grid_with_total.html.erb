@@ -10,7 +10,7 @@
      </ul>
   </div>
   <%= drop_receiving_element("element_#{question_grid_with_total.id}", 
-      :url => drop_question_page_element_path(question_grid_with_total.question_sheet_id, question_grid_with_total.page_id, question_grid_with_total.id),
+      :url => drop_admin_question_sheet_page_element_path(question_grid_with_total.question_sheet_id, question_grid_with_total.page_id, question_grid_with_total.id),
       :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
       
 <%- else -%>

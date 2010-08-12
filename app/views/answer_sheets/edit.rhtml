@@ -10,39 +10,30 @@
 </div>
 
 <script type="text/javascript">
-  Event.observe(window, 'load', function() { 
-    page_handler = new PageHandler('<%= @presenter.active_page.dom_id %>');
-    Event.observe(window, 'unload', page_handler.savePage);
+  $(function() {
+    page_handler = $.qe.pageHandler;
+    page_handler.initialize('<%= @presenter.active_page.dom_id %>');
+    // Event.observe(window, 'unload', page_handler.savePage);
         
-    Validation.add('validate-phone', 'Please enter a valid phone number +1-800-555-1234 x102', {
-      pattern: /((\(\d{3}\)?)|(\d{3}))((\s|-|\.|\/)?)(\d{3})((\s|-|\.|\/)?)(\d{4})\s*([xX]|[eE][xX][tT])?\.?\s*\d*$/
-    });
-    Validation.add('validate-rating', 'Please select one of the above options.', function(v,elm) {
-     var p = elm.parentNode.parentNode;
-     var options = p.getElementsByTagName('INPUT');
-     return $A(options).any(function(elm) {
-       return $F(elm);
-     });
-    })
+    // Validation.add('validate-phone', 'Please enter a valid phone number +1-800-555-1234 x102', {
+    //   pattern: /((\(\d{3}\)?)|(\d{3}))((\s|-|\.|\/)?)(\d{3})((\s|-|\.|\/)?)(\d{4})\s*([xX]|[eE][xX][tT])?\.?\s*\d*$/
+    // });
+    // Validation.add('validate-rating', 'Please select one of the above options.', function(v,elm) {
+    //  var p = elm.parentNode.parentNode;
+    //  var options = p.getElementsByTagName('INPUT');
+    //  return $A(options).any(function(elm) {
+    //    return $F(elm);
+    //  });
+    // })
     
-        // global responders for all Ajax requests
-        Ajax.Responders.register({ 
-          // show/hide page loading/saving spinner
-          onCreate: function() { 
-            Ajax.activeRequestCount++;
-            $('page_ajax_spinner').show();
-               $('status').show();
-          }, 
-          onComplete: function() { 
-            Ajax.activeRequestCount--;
-            if( Ajax.activeRequestCount == 0)
-            {
-              page_handler.completeAll();
-                 $('page_ajax_spinner').hide();
-                 $('status').hide();
-            }
-          } 
-        });
+    // global responders for all Ajax requests
+    $(function() {
+    	$('#page_ajax_spinner').ajaxStart(function() {
+    		$(this).show();
+    	}).ajaxComplete(function() {
+    		$(this).hide();
+    	})
+    });
   });
   function updateTotals() {
         // Set up js for all question grids with totals
