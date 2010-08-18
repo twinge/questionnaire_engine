@@ -42,7 +42,11 @@ class DateField < Question
   
   def format_date_response(app=nil)
     r = get_response(app).to_s
-    return Time.parse(r).strftime("%m/%d/%Y") unless r.blank?    
+    begin
+      return Date.parse(r).strftime("%m/%d/%Y") unless r.blank?    
+    rescue ArgumentError
+      return ''
+    end
   end
   
   # which view to render this element?
