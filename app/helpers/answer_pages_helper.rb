@@ -12,7 +12,7 @@ module AnswerPagesHelper
   def load_page_js(page_link)
     return '' if page_link.nil?
     
-    %{page_handler.loadPage('#{page_link.dom_id}','#{page_link.load_path}')}
+    %{$.qe.pageHandler.loadPage('#{page_link.dom_id}','#{page_link.load_path}')}
   end
   
 end

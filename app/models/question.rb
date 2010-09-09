@@ -30,8 +30,8 @@ class Question < Element
   
   attr_accessor :answers
   
-  @answers = nil            # one or more answers in response to this question
-  @mark_for_destroy = nil   # when something is unchecked, there are less answers to the question than before
+  # @answers = nil            # one or more answers in response to this question
+  # @mark_for_destroy = nil   # when something is unchecked, there are less answers to the question than before
   
   
   # a question is disabled if there is a condition, and that condition evaluates to false
@@ -115,7 +115,7 @@ class Question < Element
   end
   
   def get_response(app=nil)
-    if @answers.nil? || @answers.empty?
+    if @answers.blank?
       # try to find answer from external object
       if !app.nil? and !object_name.blank? and !attribute_name.blank?
         if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
@@ -124,10 +124,10 @@ class Question < Element
           [eval("app." + object_name + "." + attribute_name)] 
         end
       else
-        ""
+        [""]
       end
     else
-      @answers
+      @answers.collect(&:value)
     end
   end
   

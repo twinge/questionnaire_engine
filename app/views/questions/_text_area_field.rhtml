@@ -1,4 +1,4 @@
-<%= text_area_tag "answers[#{text_area_field.id}]", text_area_field.response(@application), 
+<%= text_area_tag "answers[#{text_area_field.id}]", text_area_field.response(@application).first, 
       :class => 'text ' + text_area_field.validation_class,
       :id => dom_id(text_area_field),
       :rows => 6,

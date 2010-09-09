@@ -12,34 +12,34 @@
   your page (you can drag and drop fields to reorder them later).</p>
      
   <ul id="list-elements" class="list-elements">
-    <li id="sp"><%= link_to "Heading", elements_path(route.merge(:element_type => "Section")), 
+    <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Section")), 
                       :remote => true,
                       :method => :post %></li>
-    <li id="pa"><%= link_to "Paragraph", elements_path(route.merge(:element_type => "Paragraph")), 
+    <li id="pa"><%= link_to "Paragraph", admin_question_sheet_page_elements_path(route.merge(:element_type => "Paragraph")), 
                       :remote => true, 
                       :method => :post %></li>
-    <li id="sl"><%= link_to "Short Answer",  elements_path(route.merge(:element_type => "TextField", 'element[style]' => 'short')), 
+    <li id="sl"><%= link_to "Short Answer",  admin_question_sheet_page_elements_path(route.merge(:element_type => "TextField", 'element[style]' => 'short')), 
                       :remote => true,
                       :method => :post %></li>
-    <li id="ml"><%= link_to "Long Answer", elements_path(route.merge(:element_type => "TextField", 'element[style]' => 'essay')), 
+    <li id="ml"><%= link_to "Long Answer", admin_question_sheet_page_elements_path(route.merge(:element_type => "TextField", 'element[style]' => 'essay')), 
                       :remote => true,
                       :method => :post %></li>
-    <li id="co"><%= link_to "Choose One", elements_path(route.merge(:element_type => "ChoiceField", 'element[style]' => 'radio')),
+    <li id="co"><%= link_to "Choose One", admin_question_sheet_page_elements_path(route.merge(:element_type => "ChoiceField", 'element[style]' => 'radio')),
                       :remote => true,
                       :method => :post %></li>
-    <li id="cm"><%= link_to "Choose Many", elements_path(route.merge(:element_type => "ChoiceField", 'element[style]' => 'checkbox')), 
+    <li id="cm"><%= link_to "Choose Many", admin_question_sheet_page_elements_path(route.merge(:element_type => "ChoiceField", 'element[style]' => 'checkbox')), 
                       :remote => true, 
                       :method => :post %></li>
-    <li id="dt"><%= link_to "Date",  elements_path(route.merge(:element_type => "DateField")), 
+    <li id="dt"><%= link_to "Date",  admin_question_sheet_page_elements_path(route.merge(:element_type => "DateField")), 
                       :remote => true,
                       :method => :post %></li>
-    <li id="qg"><%= link_to "Grid",  elements_path(route.merge(:element_type => "QuestionGrid")), 
+    <li id="qg"><%= link_to "Grid",  admin_question_sheet_page_elements_path(route.merge(:element_type => "QuestionGrid")), 
                       :remote => true,
                       :method => :post %></li>
-    <li id="at"><%= link_to "Attachment", elements_path(route.merge(:element_type => "AttachmentField")), 
+    <li id="at"><%= link_to "Attachment", admin_question_sheet_page_elements_path(route.merge(:element_type => "AttachmentField")), 
                       :remote => true, 
                       :method => :post %></li>
-    <li id="qgt"><%= link_to "Grid w/Total", elements_path(route.merge(:element_type => "QuestionGridWithTotal")), 
+    <li id="qgt"><%= link_to "Grid w/Total", admin_question_sheet_page_elements_path(route.merge(:element_type => "QuestionGridWithTotal")), 
                       :remote => true, 
                       :method => :post %></li>
   </ul>

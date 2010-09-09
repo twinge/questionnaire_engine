@@ -36,14 +36,12 @@ class ChoiceField < Question
 	
 	def has_answer?(choice, app=nil)
     # HACK: Crazy hack to support legacy field types where choices may be int or tinyint 
-    # logger.info(@answers.inspect)
-    
     r = self.response(app) 
 	  if @answers.nil? || @answers.empty?   # external data source?
       return true if r[0] == is_true(choice) || r[0] == is_false(choice) || r[0] == choice.to_s || r[0] == choice.to_i
     else 
   	  r.each do |answer|   # loop through Answers
-        if answer.value.to_s == choice.to_s   # true if this answer matches the choice passed
+        if answer.to_s == choice.to_s   # true if this answer matches the choice passed
           return true
         end
       end

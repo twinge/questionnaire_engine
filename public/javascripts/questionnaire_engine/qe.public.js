@@ -6,14 +6,14 @@
 	  initialize : function(page) {
 	    this.auto_save_frequency = 30;  // seconds
 	    this.timer_id = null;
-		  // this.suspendLoad = false;
+		  this.suspendLoad = false;
     
 	    this.current_page = page;
 			$('#' + page).data('form_data', this.captureForm($('#' + page)));
 	    this.registerAutoSave();
     
 	    this.page_validation = {};  // validation objects for each page
-	    // this.enableValidation(page);
+	    this.enableValidation(page);
     
 	    // this.background_load = false;
 	    // this.final_submission = false;
@@ -27,15 +27,14 @@
   
 			// HACK: Need to clear the main error message when returning to the submit page
 			//       It is very confusing to users to be there when they revisit the page
-			if ((page=='submit_page') && ($('#submit_message'))) $('#submit_message').hide(); 
-			if ((page=='submit_page') && ($('#application_errors'))) $('#application_errors').html('');
+			if ((page=='submit_page') && ($('#submit_message')[0] != null)) $('#submit_message').hide(); 
+			if ((page=='submit_page') && ($('#application_errors')[0] != null)) $('#application_errors').html('');
 
-		    // show the new
+	    // show the new
 			$('#' + page + '-link').removeClass('incomplete');
 			$('#' + page + '-link').removeClass('valid');
 			$('#' + page + '-link').addClass('active');
 	    $('#' + page).show();
-    
 	    this.current_page = page;
 	    this.registerAutoSave(page);
 			this.suspendLoad = false;
@@ -49,9 +48,10 @@
 	    {
 	      var page = match[1];
 	      $('#preview').append(response);
-	      if(this.background_load) $('#' + page).hide(); else this.showPage('#' + page);  // show after load, unless loading in background
-	      this.enableValidation('#' + page);
-				this.validatePage('#' + page);
+	      // if(this.background_load) $('#' + page).hide(); else 
+				$.qe.pageHandler.showPage(page);  // show after load, unless loading in background
+	      $.qe.pageHandler.enableValidation(page);
+				$.qe.pageHandler.validatePage('#' + page);
 	    }
 			$('#page_ajax_spinner').hide();
 			updateTotals();
@@ -70,14 +70,14 @@
 	    
 		    this.savePage();
 	
-		    if( $('#' + page) && page.match('no_cache') == null )   // if already loaded (element exists) excluding pages that need reloading
+		    if( $('#' + page)[0] != null && page.match('no_cache') == null )   // if already loaded (element exists) excluding pages that need reloading
 		    {
-		      this.showPage(page);
+		      $.qe.pageHandler.showPage(page);
 					$('#page_ajax_spinner').hide();
 		    }
 		    else
 		    {
-					$.get(url, this.pageLoaded)
+					$.get(url, $.qe.pageHandler.pageLoaded)
 		      // new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 
 		      //     onSuccess:this.pageLoaded.bind(this)});
 		    }
@@ -128,15 +128,16 @@
   
 	  // enable form validation (when form is loaded)
 	  enableValidation : function(page) {
-	    this.page_validation[page] = $('#' + page + '-form').validate({onsubmit:false, focusInvalid:false});  
+	    $('#' + page + '-form').validate({onsubmit:false, focusInvalid:false});  
 	  },
   
 	  validatePage : function(page) {
 			try {
-		    valid = this.page_validation.get(page).validate();
+			  el = $(page + '-link');
+
+		    valid = el.hasClass('valid');
 
 		    if(!valid)  {  
-				  el = $(page + '-link');
 				  el.removeClass('valid');
 		      el.addClass('incomplete');
 		    }
