@@ -1,7 +1,7 @@
 class Admin::ElementsController < ApplicationController
   unloadable
   before_filter :check_valid_user
-  layout 'admin'
+  layout 'qe.admin'
   
   before_filter :get_page
   
