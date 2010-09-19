@@ -21,7 +21,7 @@ class Admin::ElementsController < ApplicationController
     # for dependencies
     if @element.question?
       (3 - @element.conditions.length).times { @element.conditions.build }
-      @questions_before_this = @page.questions_before_position(@element.position) 
+      @questions_before_this = @page.questions_before_position(@element.position(@page)) 
     end
     
     respond_to do |format|
@@ -32,11 +32,11 @@ class Admin::ElementsController < ApplicationController
   # POST /elements
   def create
     @element = params[:element_type].constantize.new(params[:element])
-    PageElement.create(:element => @element, :page => @page)
     @element.required = true if @element.question?
     @question_sheet = @page.question_sheet
     respond_to do |format|
       if @element.save!
+        PageElement.create(:element => @element, :page => @page)
         format.js
       else
         format.js { render :action => 'error.rjs' }

@@ -6,7 +6,7 @@ page << <<-END
   $('#questions_list').sortable('refresh');
 END
 
-@element.page.question_grids.each do |grid|
+@page.question_grids.each do |grid|
   page << <<-END
     $('#questions_list_#{grid.id}').sortable('refresh');
   END
