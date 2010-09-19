@@ -4,7 +4,7 @@
 class Admin::QuestionSheetsController < ApplicationController
   unloadable
   before_filter :check_valid_user
-  layout 'admin'
+  layout 'qe.admin'
  
   # list of all questionnaires/forms to edit
   # GET /question_sheets
