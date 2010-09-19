@@ -1,5 +1,5 @@
 <%= drop_receiving_element("element_#{question_grid.id}", 
-      :url => drop_admin_question_sheet_page_element_path(question_grid.question_sheet_id, question_grid.page_id, question_grid.id),
+      :url => drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id),
       :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
 
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
@@ -8,7 +8,7 @@
     <!-- Create a sortable list for each grid on the page -->
   	<ul class="questions" id="questions_list_<%= question_grid.id %>" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
   	<%- if question_grid.elements.length > 0 -%>
-      <%= render :partial => 'question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
+      <%= render :partial => 'admin/question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
   	<%- else -%>
   		Grid
   	<%- end -%>
