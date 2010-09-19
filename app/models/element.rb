@@ -5,10 +5,10 @@ class Element < ActiveRecord::Base
   
   self.inheritance_column = :kind
   
-  belongs_to :page
-  belongs_to :question_sheet
+  has_many :page_elements, :dependent => :destroy
+  has_many :pages, :through => :page_elements
   
-  acts_as_list :scope => :page_id
+  # belongs_to :question_sheet
 
   validates_presence_of :kind, :style
   # validates_presence_of :label, :style, :on => :update
@@ -29,6 +29,15 @@ class Element < ActiveRecord::Base
   #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   # end
   
+  def position(page)
+    page_elements.where(:page_id => page.id).first.try(:position)
+  end
+  
+  def set_position(position, page)
+    pe = page_elements.where(:page_id => page.id).first
+    pe.update_attribute(:position => position) if pe
+    position
+  end
   
   def question?
     self.kind_of?(Question)

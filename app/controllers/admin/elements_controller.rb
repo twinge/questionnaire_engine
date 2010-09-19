@@ -32,9 +32,9 @@ class Admin::ElementsController < ApplicationController
   # POST /elements
   def create
     @element = params[:element_type].constantize.new(params[:element])
-    @element.question_sheet_id = @page.question_sheet_id
-    @element.page_id = @page.id
+    PageElement.create(:element => @element, :page => @page)
     @element.required = true if @element.question?
+    @question_sheet = @page.question_sheet
     respond_to do |format|
       if @element.save!
         format.js
@@ -72,11 +72,11 @@ class Admin::ElementsController < ApplicationController
     # since we don't know the name of the list, just find the first param that is an array
     params.each_key do |key| 
       if key.include?('questions_list')
-        @page.elements.each do |element|
-          if params[key].index(element.id.to_s)
-            element.position = params[key].index(element.id.to_s) + 1 
-            element.save
-            @element = element
+        @page.page_elements.each do |page_element|
+          if index = params[key].index(page_element.element_id.to_s)
+            page_element.position = index + 1 
+            page_element.save
+            @element = page_element.element
           end
         end
       end
@@ -100,7 +100,7 @@ class Admin::ElementsController < ApplicationController
   
   def remove_from_grid
     element = Element.find(params[:id])
-    element.position = element.question_grid.position
+    element.set_position(element.question_grid.position, @page) 
     element.question_grid_id = nil
     element.save
     render :action => :drop

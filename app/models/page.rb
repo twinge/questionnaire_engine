@@ -2,9 +2,11 @@ class Page < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
   belongs_to :question_sheet
-  has_many :elements, :dependent => :destroy, :order => :position
-  has_many :questions, :class_name => "Question", :foreign_key => "page_id"
-  has_many :question_grids, :class_name => "QuestionGrid", :foreign_key => "page_id"
+  has_many :page_elements, :dependent => :destroy, :order => :position
+  has_many :elements, :through => :page_elements
+  has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
+  has_many :questions, :through => :page_elements, :conditions => "kind = 'Question'", :source => :element
+  has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
   has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
           :conditions => 'toggle_id is NULL', :dependent => :nullify
   
@@ -35,7 +37,7 @@ class Page < ActiveRecord::Base
   end
 
   def questions_before_position(position)
-    self.questions.where(["position < ?", position])
+    self.elements.where(["#{PageElement.table_name}.position < ?", position])
   end
   
   

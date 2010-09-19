@@ -161,7 +161,7 @@ blockquote {
   background: #eee;
 }
 
-#list-pages a, .list-elements a, #list-info-pages a {
+#list-pages > li > a, .list-elements a, #list-info-pages a {
   display: block;
   background: #eee url(/images/questionnaire_engine/icons/page_white.png) 2px 4px no-repeat;
   padding: 3px 3px 3px 21px;
@@ -624,19 +624,19 @@ span.answerwarn {
   margin-left: 21px;
 }
 
-.edit {
+a.edit {
   display: block;
   text-indent: -9000px;
   background: url(/images/questionnaire_engine/icons/pencil.png) 0 0 no-repeat;
 }
 
-.duplicate {
+a.duplicate {
   display: block;
   text-indent: -9000px;
   background: url(/images/questionnaire_engine/icons/copy_paste.gif) 0 0 no-repeat;
 }
 
-.handle {
+a.handle {
   width: 11px;
   height: 11px;
   overflow: hidden;
@@ -645,7 +645,7 @@ span.answerwarn {
   display: block;
 }
 
-.remove {
+a.remove {
   width: 11px;
   height: 11px;
   overflow: hidden;

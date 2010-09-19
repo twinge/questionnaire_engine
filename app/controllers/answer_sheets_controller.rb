@@ -31,7 +31,7 @@ class AnswerSheetsController < ApplicationController
   def show
     @answer_sheet = AnswerSheet.find(params[:id])
     @question_sheet = @answer_sheet.question_sheet
-    @elements = @question_sheet.elements.find(:all, :include => 'page', :order => 'pages.number,elements.position')
+    @elements = @question_sheet.pages.collect {|p| p.elements.includs(:page).order('pages.number,page_elements.position').all}.flatten
     @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
   end
 end
