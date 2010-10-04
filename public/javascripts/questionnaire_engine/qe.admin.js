@@ -3,6 +3,7 @@ $(function() {
 		$(this).show();
 	}).ajaxComplete(function() {
 		$(this).hide();
+		setUpJsHelpers();
 	});
 	
 	$('.lbOn').live('click', function() {
