@@ -42,6 +42,7 @@ module ApplicationHelper
     output = []
     output << "questionnaire_engine/jquery.validate.pack"
     output << "questionnaire_engine/jquery.metadata"
+    output << "questionnaire_engine/qe.common"
     if options[:area] == :public
       output << "questionnaire_engine/qe.public"
     else
