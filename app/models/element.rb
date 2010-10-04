@@ -81,6 +81,7 @@ class Element < ActiveRecord::Base
         when "Section" then self.style ||= "section"
         # when "ChoiceField" then self.style = "checkbox"
         when "QuestionGrid" then self.style ||= "grid"
+        when "QuestionGridWithTotal" then self.style ||= "grid_with_total"
         when "SchoolPicker" then self.style ||= "school_picker"
         when "ProjectPreference" then self.style ||= "project_preference"
         when "StateChooser" then self.style ||= "state_chooser"

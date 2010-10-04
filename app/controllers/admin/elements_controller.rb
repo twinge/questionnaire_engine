@@ -75,7 +75,7 @@ class Admin::ElementsController < ApplicationController
         @page.page_elements.each do |page_element|
           if index = params[key].index(page_element.element_id.to_s)
             page_element.position = index + 1 
-            page_element.save
+            page_element.save!
             @element = page_element.element
           end
         end

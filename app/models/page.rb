@@ -3,7 +3,7 @@ class Page < ActiveRecord::Base
   
   belongs_to :question_sheet
   has_many :page_elements, :dependent => :destroy, :order => :position
-  has_many :elements, :through => :page_elements
+  has_many :elements, :through => :page_elements, :order => PageElement.table_name + '.position'
   has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
   has_many :questions, :through => :page_elements, :conditions => "kind = 'Question'", :source => :element
   has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
