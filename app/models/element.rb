@@ -17,7 +17,7 @@ class Element < ActiveRecord::Base
   validates_length_of :label, :maximum => 255, :allow_nil => true
 
   # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
-  validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField}  # leaf classes
+  validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField Reference}  # leaf classes
   
   before_validation :set_defaults, :on => :create
   
@@ -84,6 +84,7 @@ class Element < ActiveRecord::Base
         when "SchoolPicker" then self.style ||= "school_picker"
         when "ProjectPreference" then self.style ||= "project_preference"
         when "StateChooser" then self.style ||= "state_chooser"
+        when "Reference" then self.style ||= "peer"
       end 
     end
   end

@@ -12,7 +12,7 @@ class DateField < Question
   end
   
   def response(app=nil)
-    r = get_response(app)
+    r = super
     r = Time.parse(r) unless r.blank?    
     r || ''
   end

@@ -102,11 +102,11 @@ class Question < Element
   
   # shortcut to return first answer
   def response(app=nil)
-    get_response(app)
+    responses(app).first
   end
   
   def display_response(app=nil)
-    r = get_responses(app)
+    r = responses(app)
     if r.blank?
       "No Answer"
     else
@@ -114,7 +114,7 @@ class Question < Element
     end
   end
   
-  def get_responses(app=nil)
+  def responses(app=nil)
     if @answers.blank?
       # try to find answer from external object
       if !app.nil? and !object_name.blank? and !attribute_name.blank?
@@ -129,10 +129,6 @@ class Question < Element
     else
       @answers.collect(&:value)
     end
-  end
-  
-  def get_response(app=nil)
-    get_responses(app).first
   end
   
   # set answers from posted response

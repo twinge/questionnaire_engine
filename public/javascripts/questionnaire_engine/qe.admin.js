@@ -3,7 +3,26 @@ $(function() {
 		$(this).show();
 	}).ajaxComplete(function() {
 		$(this).hide();
-	})
+	});
+	
+	$('.lbOn').live('click', function() {
+		if ($('#dialog-help')[0] == null) {
+			$('body').append('<div id="dialog-help" style="display:none" title="Help!"><p><span id="dialog-help-message"></span></p></div>');
+		}
+		$.get($(this).attr('href'), function(content) {
+			$('#dialog-help-message').html(content);
+			$('#dialog-help').dialog({
+				modal: true,
+				width: 500,
+				buttons: {
+					Close: function() {
+						$(this).dialog('close');
+					}
+				}
+			});
+		});
+		return false;
+	});
 });
 // used by form designer
 
