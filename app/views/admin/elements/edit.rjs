@@ -1,5 +1,7 @@
 page << <<-END
-  $('#panel').html('#{escape_javascript(render('panels/prop_element',:element => @element))}')
+  $('#element_#{dom_id(@element)}').hide()
+  $('#element_form_#{dom_id(@element)}').html('#{escape_javascript(render('panels/prop_element',:element => @element))}')
+  $('#element_form_#{dom_id(@element)}').show();
   selectElement("#element_#{@element.id}")
 END
 

@@ -1,0 +1,9 @@
+<% if element.question? && element.default_label?-%>
+    
+  <label for="<%= dom_id(element) %>" class="desc">
+    <%= element.label %>
+    <% if element.required? -%><span class="required">required</span><% end -%>
+  </label>
+<% end -%>
+    
+<%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => nil} %>
