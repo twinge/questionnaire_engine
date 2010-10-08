@@ -77,7 +77,7 @@ function scrollToElement(id) {
 }
 
 function addError(id) {
-    $(id).addClassName('fieldWithErrors');
+    $('#' + id).addClassName('fieldWithErrors');
 }
 
 // convert label to slug

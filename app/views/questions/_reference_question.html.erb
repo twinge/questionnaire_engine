@@ -1,0 +1,35 @@
+<% reference = reference_question.response(@application) %>
+<div id="<%= dom_id(reference_question) %>">
+  <ul class="questions">
+  <li>
+    <label for="<%= "name_#{reference.id}" %>" class="desc">First Name</label>
+    <%= text_field_tag "reference[#{reference.id}][first_name]", reference.first_name, :class => 'text required', :id => "name_#{reference.id}" %>
+  </li>
+  <li>
+    <label for="<%= "name_#{reference.id}" %>" class="desc">Last Name</label>
+    <%= text_field_tag "reference[#{reference.id}][last_name]", reference.last_name, :class => 'text required', :id => "name_#{reference.id}" %>
+  </li>
+  <li>
+    <label for="<%= "email_#{reference.id}" %>" class="desc">E-mail</label>
+    <% if (!reference.email.blank?) %><div class="warningText">Please be aware that any changes to this email address after your reference_question has started filling out their form will cause their answers to be lost.</div><% end %>
+    <%= text_field_tag "reference[#{reference.id}][email]", reference.email, :class => 'text required validate-email', :id => "email_#{reference.id}" %>
+  </li>
+  <li>
+    <label for="<%= "phone_#{reference.id}" %>" class="desc">Phone</label>
+    <%= text_field_tag "reference[#{reference.id}][phone]", reference.phone, :class => 'text required validate-phone', :id => "phone_#{reference.id}" %>
+  </li>
+  <li><p>An invitation will be sent to this reference_question when you submit your application.  If you would
+  	like to get a headstart, please feel free to click 'Send Email Invitation' below.</p></li>
+
+  <li><%= link_to 'Send Email Invitation', @application ? send_reference_invite_answer_sheet_path(@application, :reference_question_id => reference_question.id) : '#', :with => "$(this).closest('form').serialize()", :remote => true %>
+  	Invitation last sent: <span id="ref_last_sent_<%= reference_question.id %>"><% unless reference.email_sent_at.nil? -%><%= reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %><% end -%></span></li>
+  </ul>
+</div>
+
+<%#= text_field_tag "answers[#{text_field.id}]", text_field.response(@application), 
+      :class => "text #{text_field.question_grid_id.present? ? "col_#{text_field.question_grid_id}_#{col}" : ''}" + text_field.validation_class,
+      :id => dom_id(text_field),
+      :disabled => @application.frozen?&&!@presenter.reference?,
+      :readonly => @application.frozen?&&!@presenter.reference?,
+      :maxlength => 255 %>
+

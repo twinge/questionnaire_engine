@@ -1,11 +1,11 @@
-# Reference
+# ReferenceQuestion
 # - a question that provides a fields to specify a reference
 
 class ReferenceQuestion < Question
   
   def response(app=nil)
     id = super
-    id.present? ? Reference.find(id) : Reference.new
+    id.present? ? ReferenceSheet.find(id) : ReferenceSheet.new
   end
   
   def display_response(app=nil)

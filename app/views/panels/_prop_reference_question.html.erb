@@ -1,9 +1,13 @@
-<% choices = [["Peer", "peer"], ["Spiritual", "spiritual"], ["Parent", "parent"]]%>
-
 <p>
   <label for="element_label" class="desc">Label <span class="required">required</span></label>
   <%= f.text_field :label %>
 </p>
+
+<p>
+  <label for="element_style" class="desc">Related Question Sheet</label>
+  <%= f.select :related_question_sheet_id, (QuestionSheet.order(:label).all - [@page.question_sheet]).collect {|qs| [qs.label, qs.id]} %>
+</p>
+  
 <p>
   <label for="element_slug" class="desc">Variable</label>
   <%= f.text_field :slug %>
@@ -11,7 +15,7 @@
 
 <p>
   <label for="element_style" class="desc">Style</label>
-  <%= f.select :style, choices %>
+  <%= f.select :style, [["Peer", "peer"], ["Spiritual", "spiritual"], ["Parent", "parent"]] %>
 </p>
         
 <p>

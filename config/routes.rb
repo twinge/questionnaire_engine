@@ -26,6 +26,9 @@ Rails::Application.routes.draw do
 
   # form capture and review
   resources :answer_sheets do 
+    member do
+      post :send_reference_invite
+    end
     resources  :page, :controller => :answer_pages do
                 member do
                   post :save_file

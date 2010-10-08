@@ -1,9 +1,9 @@
 class AnswerSheet < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
 
-  belongs_to :question_sheet
+  has_many :answer_sheet_question_sheets
+  has_many :question_sheets, :through => :answer_sheet_question_sheets
   has_many :answers, :dependent => :delete_all
-  has_one Questionnaire.answer_sheet_has_one, :dependent => :destroy unless Questionnaire.answer_sheet_has_one.nil?
 
   def complete?
     !completed_at.nil?
@@ -12,6 +12,11 @@ class AnswerSheet < ActiveRecord::Base
   # answers for this sheet, grouped by question id
   def answers_by_question
     self.answers.find(:all).group_by { |answer| answer.question_id }
+  end
+  
+  # Convenience method if there is only one question sheet in your system
+  def question_sheet
+    question_sheets.first
   end
    
 end
