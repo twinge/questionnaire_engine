@@ -63,18 +63,6 @@ class Question < Element
     true
   end
   
-  # the value of this question triggers the enabled/disabled state of other pages/elements with javascript
-  def condition_handler_js
-    # what is our current value?
-    js = <<-JS
-      response = $F('#{dom_id(self)}')
-    JS
-    
-    # use response to trigger pages and elements that are dependent on this question
-    self.dependents.find(:all) { |d| js = js + d.trigger_js }
-    js
-  end
-  
   # css class names for javascript-based validation
   def validation_class
     if self.required?

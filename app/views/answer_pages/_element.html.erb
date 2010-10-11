@@ -1,4 +1,4 @@
-<%- if element.question_grid_id.to_i == 0  -%>
+<%- if !element.question_grid_id && !element.conditional_id  -%>
 <li class="" id="element_<%= element.id %>">
   <% if element.question? && element.default_label? -%>
     <label for="<%= dom_id(element) %>" class="desc">

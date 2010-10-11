@@ -15,7 +15,7 @@ Rails::Application.routes.draw do
                     put :reorder
                   end
                   member do
-                    post :remove_from_grid
+                    get :remove_from_grid
                     post :drop
                     post :duplicate
                   end

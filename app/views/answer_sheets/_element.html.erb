@@ -30,7 +30,7 @@
 	</tr>
 	</table>
 </li>
-<% elsif element.question_grid_id.nil? -%>
+<% elsif element.question_grid_id.nil? && element.conditional_id.nil? -%>
 <li>
   <% if element.question? -%>
       <label class="desc"><%= element.label %></label>

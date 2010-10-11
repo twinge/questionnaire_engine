@@ -10,6 +10,9 @@
   <%= stylesheet_link_tag 'sp' %>
   <%= questionnaire_engine_includes(:area => :public) %>
   <%= javascript_include_tag 'rails', 'rails.extra' %>
+  <script type="text/javascript" charset="utf-8">
+    var answer_sheet_type = '<%= @answer_sheet.class %>'
+  </script>
   <%= csrf_meta_tag %>
 </head>
 <body>

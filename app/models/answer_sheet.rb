@@ -18,5 +18,9 @@ class AnswerSheet < ActiveRecord::Base
   def question_sheet
     question_sheets.first
   end
+  
+  def pages
+    Page.where(:question_sheet_id => question_sheets.collect(&:id))
+  end
    
 end
