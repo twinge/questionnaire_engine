@@ -17,11 +17,11 @@ end
 Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'presenters', '**')).each do |file|
   require file
 end
-
-['public', 'public/javascripts/questionnaire_engine', 'public/stylesheets/questionnaire_engine', 'public/images/questionnaire_engine', 
-  'public/images/questionnaire_engine', 'public/images/questionnaire_engine/icons', 'public/questionnaire_engine/help'].each do |dir|
-  source = File.dirname(__FILE__) + "/#{dir}"
-  dest = Rails.root + dir
-  FileUtils.mkdir_p(dest)
-  FileUtils.cp(Dir.glob(source+'/*.*'), dest)
-end
+# 
+# ['public', 'public/javascripts/qe', 'public/stylesheets/qe', 'public/images/qe', 
+#   'public/images/qe', 'public/images/qe/icons', 'public/qe/help'].each do |dir|
+#   source = File.dirname(__FILE__) + "/#{dir}"
+#   dest = Rails.root + dir
+#   FileUtils.mkdir_p(dest)
+#   FileUtils.cp(Dir.glob(source+'/*.*'), dest)
+# end
