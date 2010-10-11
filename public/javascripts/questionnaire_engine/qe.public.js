@@ -77,7 +77,7 @@
 		    }
 		    else
 		    {
-					$.get(url, $.qe.pageHandler.pageLoaded)
+					$.get(url, {'answer_sheet_type':answer_sheet_type}, $.qe.pageHandler.pageLoaded)
 		      // new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 
 		      //     onSuccess:this.pageLoaded.bind(this)});
 		    }
@@ -91,7 +91,7 @@
 	    if( form_data ) {
 	      if( page.data('form_data') == null || page.data('form_data').data !== form_data.data) {  // if any changes
 	        page.data('form_data', form_data);
-        
+					console.log(form_data.data);
 					$.ajax({url: form_data.url, type: 'put', data: form_data.data, error: function() {
 																															             page.data('form_data', null);    // on error, force save for next call to save
 																														               // WARNING: race conditions with load & show?
@@ -122,7 +122,7 @@
 	  captureForm : function(page) {      
 	    form_el = $('#' + page.attr('id') + '-form');
 	    if( form_el[0] == null ) return null;
-	    return {url: form_el.attr('action'), data: form_el.serialize()};
+	    return {url: form_el.attr('action'), data: form_el.serialize() + '&answer_sheet_type=' + answer_sheet_type};
 	  },
   
   
