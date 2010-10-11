@@ -27,14 +27,13 @@ class AnswerPagesPresenter < Presenter
   end
     
   def questions_for_page(page_id=:first)
-    @question_sheet = @active_answer_sheet.question_sheet
-    @active_page = @question_sheet.pages.find(page_id)
+    @active_page = @active_answer_sheet.pages.visible.find(page_id)
     QuestionSet.new(@active_page.elements, @active_answer_sheet)
   end
   
   # title
   def sheet_title
-    @question_sheet.label
+    @active_answer_sheet.question_sheet.label
   end
   
   def active_page
@@ -65,8 +64,7 @@ class AnswerPagesPresenter < Presenter
     page_list = []
     
     answer_sheets.each do |answer_sheet|
-      pages = answer_sheet.question_sheet.pages.visible.find(:all)
-      pages.each do |page|
+      answer_sheet.pages.visible.each do |page|
         page_list << new_page_link(answer_sheet, page)
       end
     end

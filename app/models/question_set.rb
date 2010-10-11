@@ -6,17 +6,17 @@ class QuestionSet
   
   # associate answers from database with a set of elements
   def initialize(elements, answer_sheet)
-      @elements = elements
-      @answer_sheet = answer_sheet
-      
-      @questions = elements.select { |e| e.question? }
-      
-      answers = @answer_sheet.answers_by_question
-      
-      @questions.each do |question|
-        question.answers = answers[question.id]
-      end    
-      @questions
+    @elements = elements
+    @answer_sheet = answer_sheet
+  
+    @questions = elements.select { |e| e.question? }
+  
+    answers = @answer_sheet.answers_by_question
+  
+    @questions.each do |question|
+      question.answers = answers[question.id]
+    end    
+    @questions
   end
   
   # update with responses from form

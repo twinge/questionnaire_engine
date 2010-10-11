@@ -1,15 +1,17 @@
-<div id="<%= dom_id(yes_no) %>" style="white-space: nowrap;">
-<% css_class = ' ' -%>
-<% yes_no.choices.each_with_index do |choice, num| -%>
-  <% dom_id = dom_id(yes_no) + "_" + pretty_tag(choice[1]) 
-     last_choice =  (num == yes_no.choices.length - 1)
-     css_class += yes_no.validation_class if last_choice
-     checked = yes_no.has_answer?(choice[1],@application) -%>
-  <%= radio_button_tag "answers[#{yes_no.id}]", choice[1], checked, 
-        :id => dom_id, 
-        :class => css_class,
-        :disabled => @application.frozen?&&!@presenter.reference?,
-        :readonly => @application.frozen?&&!@presenter.reference? %>
-  <label class="choice horiz" for="<%= dom_id %>"><%= choice[0] %></label>
-<% end -%>
-</div>
+<%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
+  <div class="droppable" style="min-height:50px;" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, yes_no.id) %>">
+    <%= render 'questions/yes_no_field', :yes_no => yes_no %>
+  	<ul class="questions" id="questions_list_<%= yes_no.id %>" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
+      <%= render :partial => 'admin/question_pages/element', :collection => yes_no.elements, :locals => {:in_grid => true} %>
+    </ul>
+  </div>
+<% else %>
+  <%= render 'questions/yes_no_field', :yes_no => yes_no %>
+  <ul class="questions" id="questions_list_<%= yes_no.id %>" style="<%= yes_no.has_answer?(1,@application) ? '' : 'style="display:none"' %>">
+    <%= render :partial => 'admin/question_pages/element', :collection => yes_no.elements, :locals => {:in_grid => true} %>
+  </ul>
+  <script type="text/javascript" charset="utf-8">
+    $('#<%= dom_id(yes_no) %>_1').live('click', function() {$('#questions_list_<%= yes_no.id %>').show()});
+    $('#<%= dom_id(yes_no) %>_0').live('click', function() {$('#questions_list_<%= yes_no.id %>').hide()});
+  </script>
+<% end %>

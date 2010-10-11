@@ -89,26 +89,43 @@ class Admin::ElementsController < ApplicationController
   
   def drop
     element = Element.find(params[:draggable_element].split('_')[1])  # element being dropped
-    # abort if the element is already in this box
-    if element.question_grid_id == params[:id].to_i
-      render :nothing => true
-    else
-      element.question_grid_id = params[:id]
-      element.save
+    target = Element.find(params[:id])
+    case target.class.to_s
+    when 'QuestionGrid', 'QuestionGridWithTotal'
+      # abort if the element is already in this box
+      if element.question_grid_id == params[:id].to_i
+        render :nothing => true
+      else
+        element.question_grid_id = params[:id]
+        element.save!
+      end
+    when 'ChoiceField'
+      # abort if the element is already in this box
+      if element.conditional_id == params[:id].to_i
+        render :nothing => true
+      else
+        element.conditional_id = params[:id]
+        element.save!
+      end
     end
   end
   
   def remove_from_grid
     element = Element.find(params[:id])
-    element.set_position(element.question_grid.position, @page) 
-    element.question_grid_id = nil
-    element.save
+    if element.question_grid_id
+      element.set_position(element.question_grid.position(@page), @page) 
+      element.question_grid_id = nil
+    elsif element.conditional_id
+      element.set_position(element.choice_field.position(@page), @page) 
+      element.conditional_id = nil
+    end
+    element.save!
     render :action => :drop
   end
   
   def duplicate
     element = Element.find(params[:id])
-    @element = element.duplicate
+    @element = element.duplicate(@page)
     respond_to do |format|
       format.js {render :action => :create}
     end

@@ -2,6 +2,7 @@
 class Element < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   belongs_to :question_grid, :class_name => "QuestionGrid", :foreign_key => "question_grid_id"
+  belongs_to :choice_field, :class_name => "ChoiceField", :foreign_key => "conditional_id"
   
   self.inheritance_column = :kind
   
@@ -35,7 +36,7 @@ class Element < ActiveRecord::Base
   
   def set_position(position, page)
     pe = page_elements.where(:page_id => page.id).first
-    pe.update_attribute(:position => position) if pe
+    pe.update_attribute(:position, position) if pe
     position
   end
   
@@ -50,14 +51,15 @@ class Element < ActiveRecord::Base
   end
   
   # copy an item and all it's children
-  def duplicate(grid_id = nil)
+  def duplicate(page, grid_id = nil)
     new_element = self.class.new(self.attributes)
     new_element.question_grid_id = grid_id if grid_id
     new_element.save!
+    PageElement.create(:element => new_element, :page => page)
     
     # duplicate children
     if respond_to?(:elements) && elements.present?
-      elements.each {|e| e.duplicate(new_element.id)}
+      elements.each {|e| e.duplicate(page, new_element.id)}
     end
     
     new_element
