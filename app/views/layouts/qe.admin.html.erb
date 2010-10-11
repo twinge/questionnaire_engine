@@ -10,7 +10,6 @@
   <%= questionnaire_engine_includes %>
   <%= javascript_include_tag 'rails', 'rails.extra' %>
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag 'sp' %>
 </head>
 <body>
 
@@ -19,7 +18,8 @@
 <div id="wrapper">
    <div id="header">
       <ul id="nav-main">
-         <li class="active"><%= link_to 'Forms', admin_question_sheets_path %></li>
+        <li class="active"><%= link_to 'Forms', admin_question_sheets_path %></li>
+        <div class="clear"></div>
       </ul>
    </div>
    

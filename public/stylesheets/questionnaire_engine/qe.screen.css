@@ -88,7 +88,7 @@ ul#list-pages {
 }
 
 #link-page-add {
-  background: #f0f0f0 url(/images/icons/document-plus.png) no-repeat 4px 50%;
+  background: #f0f0f0 url(/images/questionnaire_engine/icons/add.png) no-repeat 4px 50%;
   padding: 5px 0 5px 24px;
   display: block;
   margin-right: 8px;
@@ -335,6 +335,85 @@ ul.questions li .controls li {
 .controls .duplicate {background: url(/images/questionnaire_engine/icons/document-copy.png) no-repeat 50% 50%;}
 .controls .handle {background: url(/images/questionnaire_engine/icons/arrow-move.png) no-repeat 50% 50%;}
 
+/* Home Screen */
+
+table, tr, td {
+  text-align: left;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+}
+
+.add-link {
+  background:url("/images/questionnaire_engine/icons/add.png") no-repeat scroll 4px 50% #F0F0F0;
+  display:inline;
+  font-size:11px;
+  font-weight:bold;
+  margin-right:8px;
+  padding:5px 5px 5px 23px;
+  width:127px;
+}
+
+table.list {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+table.list th {
+  border-bottom: 1px dotted silver;
+  padding: 5px;
+  font-size: 14px;
+}
+
+table.list td {
+  border-bottom: 1px dotted silver;
+}
+
+td.title {width: 90%; padding: 5px;}
+td.actions {width: 100px;}
+td.actions a {padding: 2px 10px 2px 20px;}
+.duplicate {background: url(/images/questionnaire_engine/icons/document-copy.png) no-repeat 0% 50%;}
+.archive {background: url(/images/questionnaire_engine/icons/briefcase.png) no-repeat 0% 50%;}
+.delete {background: url(/images/questionnaire_engine/icons/minus-button.png) no-repeat 0% 50%;}
 
 
+/* HEADER */
+#header {
+  background: #0B486B;
+  padding: 0px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  border-top: 4px solid #000;
+  margin-bottom: 20px;
+}
 
+#header li a {
+  color: #fff;
+  padding: 0px;
+}
+
+#header li {
+  float: left;
+}
+
+#header li.active a {
+  background: #2e7ba7;
+  padding: 6px;
+  display: block;
+}
+
+#nav-main {
+  margin-left: 5px;
+}
+
+/* FOOTER */
+
+#footer {
+  width: 1000px;
+  margin: 20px 0;
+  border-top: 4px solid #000;
+  padding-top: 20px;
+  text-align: right;
+}
