@@ -1,9 +1,9 @@
 <% route = { :question_sheet_id => @page.question_sheet_id, :page_id => @page.id } %>
 
 <div id="panel-elements" class="panel">
-<div style="float: right;"><a href="/questionnaire_engine/help/builder.html" class="lbOn help" id="link-builder-help" >?</a></div>
+
   <p class="instruction">Click an element to add it to the end of 
-  your page (you can drag and drop fields to reorder them later).</p>
+  your page (you can drag and drop fields to reorder them later). <a href="/questionnaire_engine/help/builder.html" class="lbOn help" id="link-builder-help" >Help</a></p>
      
   <ul id="list-elements" class="list-elements">
     <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Section")), 

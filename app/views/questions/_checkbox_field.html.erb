@@ -6,6 +6,7 @@
      css_class += checkbox_field.validation_class if last_choice
   -%>
   <%= hidden_field_tag "answers[#{checkbox_field.id}][#{num}]", '', :id => '' %>
+  <div class="field field_check">
   <%= check_box_tag "answers[#{checkbox_field.id}][#{num}]", choice[1],
         checkbox_field.has_answer?(choice[1]), 
         :id => dom_id, 
@@ -13,5 +14,6 @@
         :disabled => @application.frozen?&&!@presenter.reference?,
         :readonly => @application.frozen?&&!@presenter.reference? %>
   <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
+  </div>
 <% end -%>
 </div>
