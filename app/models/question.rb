@@ -22,9 +22,9 @@ class Question < Element
     :message => 'may only contain lowercase letters, digits and underscores; and cannot begin with a digit.' # enforcing lowercase because javascript is case-sensitive
   validates_length_of :slug, :in => 4..36,
     :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? }
-  validates_uniqueness_of :slug, :scope => 'question_sheet_id',
+  validates_uniqueness_of :slug,
     :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? },
-    :message => 'must be unique across this form.'
+    :message => 'must be unique.'
     
   # a question has one response per AnswerSheet (that is, an instance of a user filling out the question)
   # generally the response is a single answer
@@ -43,20 +43,20 @@ class Question < Element
     self.conditions.find(:all).find { |c| !c.evaluate? }.nil?  # true if all pass
   end
   
-  def conditions_attributes=(new_conditions)
-    conditions.collect(&:destroy)
-    conditions.reload
-    (0..(new_conditions.length - 1)).each do |i|
-      i = i.to_s
-      expression = new_conditions[i]["expression"]
-      trigger_id = new_conditions[i]["trigger_id"].to_i
-      unless expression.blank? || !page.questions.collect(&:id).include?(trigger_id) || conditions.collect(&:trigger_id).include?(trigger_id)
-        conditions.create(:question_sheet_id => question_sheet_id, :trigger_id => trigger_id, 
-                          :expression => expression, :toggle_page_id => page_id,
-                          :toggle_id => self.id) 
-      end
-    end
-  end
+  # def conditions_attributes=(new_conditions)
+  #   conditions.collect(&:destroy)
+  #   conditions.reload
+  #   (0..(new_conditions.length - 1)).each do |i|
+  #     i = i.to_s
+  #     expression = new_conditions[i]["expression"]
+  #     trigger_id = new_conditions[i]["trigger_id"].to_i
+  #     unless expression.blank? || !page.questions.collect(&:id).include?(trigger_id) || conditions.collect(&:trigger_id).include?(trigger_id)
+  #       conditions.create(:question_sheet_id => question_sheet_id, :trigger_id => trigger_id, 
+  #                         :expression => expression, :toggle_page_id => page_id,
+  #                         :toggle_id => self.id) 
+  #     end
+  #   end
+  # end
   
   # element view provides the element label with required indicator
   def default_label?
