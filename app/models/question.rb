@@ -177,17 +177,12 @@ class Question < Element
   
   # has any sort of non-empty response?
   def has_response?
-    if @answers.nil? then
-      false
-    else
-      rc = false
-      @answers.each do |answer|   # loop through Answers
-        if !answer.value.blank? then   # any response is good enough
-          rc = true
-          break
-        end
+    answers = Answer.where(:question_id => self.id)
+    return false if answers.count == 0
+    answers.each do |answer|   # loop through Answers
+      if !answer.value.blank? then   # any response is good enough
+        return true
       end
-      rc
     end
   end
 

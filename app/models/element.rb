@@ -67,7 +67,7 @@ class Element < ActiveRecord::Base
     when QuestionGrid, QuestionGridWithTotal
       new_element.question_grid_id = parent.id
     end
-    new_element.save!
+    new_element.save(:validate => false)
     PageElement.create(:element => new_element, :page => page) unless parent
     
     # duplicate children

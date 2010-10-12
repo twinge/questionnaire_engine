@@ -13,4 +13,8 @@ class QuestionGrid < Element
     num = 1 if num == 0
     num
   end
+  
+  def has_response?
+    elements.any?(&:has_response?)
+  end
 end

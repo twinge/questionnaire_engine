@@ -39,7 +39,10 @@ class Admin::ElementsController < ApplicationController
   
   def use_existing
     @element = Element.find(params[:id])
-    PageElement.create(:element => @element, :page => @page)
+    # Don't put the same question on a questionnaire twice
+    unless @page.question_sheet.elements.include?(@element)
+      @page_element = PageElement.create(:element => @element, :page => @page)
+    end
     @question_sheet = @page.question_sheet
     render :create
   end
@@ -51,7 +54,7 @@ class Admin::ElementsController < ApplicationController
     @question_sheet = @page.question_sheet
     respond_to do |format|
       if @element.save!
-        PageElement.create(:element => @element, :page => @page)
+        @page_element = PageElement.create(:element => @element, :page => @page)
         format.js
       else
         format.js { render :action => 'error.rjs' }
@@ -75,8 +78,15 @@ class Admin::ElementsController < ApplicationController
   # DELETE /elements/1
   # DELETE /elements/1.xml
   def destroy
+    # Start by removing the element from the page
+    page_element = PageElement.find(:element_id => params[:id], :page_id => @page.id)
+    page_element.destroy if page_element
+    
+    # If this element is not a question or has no answers, Destroy it
     @element = @page.elements.find(params[:id])
-    @element.destroy
+    unless @element.has_response?
+      @element.destroy
+    end
 
     respond_to do |format|
       format.js 

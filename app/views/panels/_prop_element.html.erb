@@ -21,15 +21,9 @@
 
   <p class="buttons">
       <button type="submit"><span>Update</span></button>
-      <%= link_to('Delete', '') %>
+      <%= link_to('Delete', admin_question_sheet_page_element_path( @page.question_sheet_id,  @page.id, element.id), :remote => true, :method => :delete) %>
   </p>
 
-<% end -%>
-
-
-
-<%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id,  @page.id, element.id), :remote => true, :html => {:method => :delete} do |f| -%>
-    <p class="buttons" style="display: none;"><%= submit_tag "Delete" %></p>
 <% end -%>
 
 </div>

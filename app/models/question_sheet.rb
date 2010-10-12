@@ -26,6 +26,10 @@ class QuestionSheet < ActiveRecord::Base
   def questions
     pages.collect(&:questions).flatten
   end
+ 
+  def elements
+    pages.collect(&:elements).flatten
+  end
   
   # Pages get duplicated
   # Question elements get associated
@@ -33,11 +37,11 @@ class QuestionSheet < ActiveRecord::Base
   def duplicate
     new_sheet = QuestionSheet.new(self.attributes)
     new_sheet.label = self.label + ' - COPY'
-    new_sheet.save!
+    new_sheet.save(:validate => false)
     self.pages.each do |page|
       new_page = Page.new(page.attributes)
       new_page.question_sheet_id = new_sheet.id
-      new_page.save!
+      new_page.save(:validate => false)
       page.elements.each do |element|
         if element.is_a?(Question) || element.is_a?(QuestionGrid) || element.is_a?(QuestionGridWithTotal)
           PageElement.create(:element => element, :page => new_page)

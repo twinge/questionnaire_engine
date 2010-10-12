@@ -17,11 +17,25 @@ end
 Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'presenters', '**')).each do |file|
   require file
 end
-# 
-# ['public', 'public/javascripts/qe', 'public/stylesheets/qe', 'public/images/qe', 
-#   'public/images/qe', 'public/images/qe/icons', 'public/qe/help'].each do |dir|
-#   source = File.dirname(__FILE__) + "/#{dir}"
-#   dest = Rails.root + dir
-#   FileUtils.mkdir_p(dest)
-#   FileUtils.cp(Dir.glob(source+'/*.*'), dest)
-# end
+
+def recursive_copy(source, dest)
+  Dir.glob(source + '/*').each do |file|
+    case File.ftype(file)
+    when 'directory'
+      new_dest = dest.join(File.basename(file))
+      Rails.logger.debug "Creating: #{new_dest}"
+      FileUtils.mkdir_p(new_dest)
+      recursive_copy(file, new_dest)
+    else
+      Rails.logger.debug "Copying: #{file}"
+      FileUtils.cp(file, dest)
+    end
+  end
+end
+
+['public'].each do |dir|
+  source = File.dirname(__FILE__) + "/#{dir}"
+  dest = Rails.root + dir
+  FileUtils.mkdir_p(dest)
+  recursive_copy(source, dest)
+end
