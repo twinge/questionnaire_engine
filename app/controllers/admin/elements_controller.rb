@@ -31,6 +31,17 @@ class Admin::ElementsController < ApplicationController
   
   def new
     @questions = params[:element_type].constantize.order('label')
+    params[:element] ||= {}
+    if params[:element][:style]
+      @questions = @questions.where(:style => params[:element][:style])
+    end
+  end
+  
+  def use_existing
+    @element = Element.find(params[:id])
+    PageElement.create(:element => @element, :page => @page)
+    @question_sheet = @page.question_sheet
+    render :create
   end
 
   # POST /elements
