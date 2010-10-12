@@ -137,6 +137,7 @@ class Admin::ElementsController < ApplicationController
   
   def remove_from_grid
     element = Element.find(params[:id])
+    PageElement.create(:element_id => element.id, :page_id => @page.id) unless PageElement.find(:element_id => element.id, :page_id => @page.id)
     if element.question_grid_id
       element.set_position(element.question_grid.position(@page), @page) 
       element.question_grid_id = nil
