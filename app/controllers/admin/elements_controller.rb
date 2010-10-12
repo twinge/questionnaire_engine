@@ -78,12 +78,12 @@ class Admin::ElementsController < ApplicationController
   # DELETE /elements/1
   # DELETE /elements/1.xml
   def destroy
+    @element = Element.find(params[:id])
     # Start by removing the element from the page
-    page_element = PageElement.find(:element_id => params[:id], :page_id => @page.id)
+    page_element = PageElement.where(:element_id => @element.id, :page_id => @page.id).first
     page_element.destroy if page_element
     
     # If this element is not a question or has no answers, Destroy it
-    @element = @page.elements.find(params[:id])
     unless @element.has_response?
       @element.destroy
     end

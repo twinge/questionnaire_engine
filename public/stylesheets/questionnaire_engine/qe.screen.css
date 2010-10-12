@@ -366,7 +366,7 @@ ul.questions li .controls li {
 #questions_div ul {
   border:1px solid silver;
   font-family:Arial;
-  height:120px;
+  height:220px;
   overflow:auto;
   padding:8px;
 }
