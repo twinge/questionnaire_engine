@@ -1,5 +1,9 @@
 if ($('#question_modal')[0] == null) {
-	$('body').append('<div id="question_modal"><a href="" class="add_type">Add TYPE</a><p>Or you can also use an existing Short Answer element. If you are unsure, just <strong>Add TYPE.</strong></p><div id="questions_div" title="Add TYPE"></div></div>');
+	$('body').append('<div id="question_modal"><%= link_to("Add \"#{params[:human_type]}\"", admin_question_sheet_page_elements_path({ :question_sheet_id => @page.question_sheet_id, :page_id => @page.id, 
+																	:element_type => params[:element_type], "element[style]" => params[:element][:style]}), 
+                      						:remote => true, 
+                      						:method => :post,
+ 																	:class => "add_type") %><p>Or you can also use an existing Short Answer element. If you are unsure, just <strong>Add <%= params[:human_type] %>.</strong></p><div id="questions_div" title=""></div></div>');
 }
 $('#questions_div').html("<%= escape_javascript(render('questions/questions', :questions => @questions)) %>")
 $('#question_modal').dialog({width: 500});
