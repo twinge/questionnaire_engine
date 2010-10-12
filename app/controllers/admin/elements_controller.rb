@@ -16,7 +16,7 @@ class Admin::ElementsController < ApplicationController
 
   # GET /element/1/edit
   def edit
-    @element = @page.elements.find(params[:id])
+    @element = Element.find(params[:id])
     
     # for dependencies
     if @element.question?
