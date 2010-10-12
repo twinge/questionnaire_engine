@@ -6,7 +6,7 @@ function setUpSortables() {
 																		$.ajax({data:$(this).sortable('serialize',{key:sortable.id + '[]'}),
 																						complete: function(request) {$(sortable).effect('highlight')}, 
 																						success:function(request){$('#errors').html(request)}, 
-																						type:'put', 
+																						type:'POST', 
 																						url: $(sortable).attr('data-sortable-url')
 																					 })
 																		}

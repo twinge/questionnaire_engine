@@ -10,14 +10,14 @@ Rails::Application.routes.draw do
       resources :pages,                               # pages/
                 :controller => :question_pages do         # question_sheet_pages_path(),
                 collection do
-                  put :reorder
+                  post :reorder
                 end
                 member do
                   get :show_panel
                 end
         resources :elements do
                   collection do
-                    put :reorder
+                    post :reorder
                   end
                   member do
                     get :remove_from_grid
