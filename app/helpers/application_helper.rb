@@ -48,7 +48,7 @@ module ApplicationHelper
       output << "questionnaire_engine/ckeditor/ckeditor"
     end
     output << "questionnaire_engine/jquery.scrollTo-min"
-    output << {:cache => true}
+    output << {:cache => true} if options[:cache]
     return output 
   end
 
