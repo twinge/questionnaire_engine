@@ -83,8 +83,8 @@ class Admin::ElementsController < ApplicationController
     page_element = PageElement.where(:element_id => @element.id, :page_id => @page.id).first
     page_element.destroy if page_element
     
-    # If this element is not a question or has no answers, Destroy it
-    unless @element.has_response?
+    # If this element is not on any other pages, is not a question or has no answers, Destroy it
+    unless PageElement.find(params[:id]) || @element.has_response?
       @element.destroy
     end
 
