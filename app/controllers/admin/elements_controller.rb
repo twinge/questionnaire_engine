@@ -28,6 +28,10 @@ class Admin::ElementsController < ApplicationController
       format.js
     end
   end
+  
+  def new
+    @questions = params[:element_type].constantize.order('label')
+  end
 
   # POST /elements
   def create
