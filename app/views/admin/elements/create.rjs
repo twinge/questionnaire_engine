@@ -1,6 +1,10 @@
 page << <<-END
+  $('#question_modal').dialog('close')
+  $('#question_modal').dialog('destroy')
   $('#page-preview').html('#{escape_javascript(render('admin/question_pages/question_page'))}')
-  $('#panel').html('#{escape_javascript(render('panels/prop_element',:element => @element))}')
+  $('#element_#{dom_id(@element)}').hide()
+  $('#element_form_#{dom_id(@element)}').html('#{escape_javascript(render('panels/prop_element',:element => @element))}')
+  $('#element_form_#{dom_id(@element)}').show();
   selectElement("#element_#{@element.id}")
   $.scrollTo("#element_#{@element.id}")
 END

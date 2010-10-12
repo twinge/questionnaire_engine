@@ -119,6 +119,12 @@ function setUpSortables() {
 		handle = $(this).attr('data-sortable-handle');
 		$(this).sortable("option", "handle", handle);
 	});
+	
+	$('.droppable').droppable({
+		drop: function( event, ui ) {
+			$.post($(this).attr('data-url'), {draggable_element: ui.draggable.attr('id')}, function() {}, 'script')
+		}
+	});
 }
 
 function setUpCalendars() {
@@ -138,3 +144,7 @@ function setUpJsHelpers() {
 		setUpCalendars();
   	// ==================
 }
+
+$(function() {
+	setUpSortables();
+});

@@ -10,16 +10,16 @@
   <%= questionnaire_engine_includes %>
   <%= javascript_include_tag 'rails', 'rails.extra' %>
   <%= csrf_meta_tag %>
-  
 </head>
 <body>
 
-<div id="status" style="display: none;"><%= image_tag('questionnaire_engine/status.gif', :id => "status-img" ) %> <span id="status-msg">Please Wait...</span></div>
+<div id="status" style="display: none;"><div class="status_content"><%= image_tag('questionnaire_engine/status.gif', :id => "status-img" ) %> <span id="status-msg">Please Wait...</span></div></div>
 
 <div id="wrapper">
    <div id="header">
       <ul id="nav-main">
-         <li class="active"><%= link_to 'Forms', admin_question_sheets_path %></li>
+        <li class="active"><%= link_to 'Forms', admin_question_sheets_path %></li>
+        <div class="clear"></div>
       </ul>
    </div>
    

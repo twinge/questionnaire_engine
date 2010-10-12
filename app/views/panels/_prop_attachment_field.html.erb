@@ -1,16 +1,19 @@
-<p>
+<div class="field">
   <label for="element_label" class="desc">Label <span class="required">required</span></label>
   <%= f.text_field :label %>
   <%= hidden_field_tag 'element[style]', 'file' %>
-</p>
-<p>
+</div>
+<div class="field">
   <label for="element_slug" class="desc">Variable (Slug)</label>
   <%= f.text_field :slug %>
-<p>
+<div>
 
-<p>
+<div class="field field_check">
   <%= f.check_box :required %>
   <label for="element_required">This field is required</label>
-</p>
+</div>
 
-<p><%= f.check_box :is_confidential %> <label for="element_is_confidential">This field is confidential</label></p>
+<div class="field field_check">
+  <%= f.check_box :is_confidential %>
+  <label for="element_is_confidential">This field is confidential</label>
+</div>

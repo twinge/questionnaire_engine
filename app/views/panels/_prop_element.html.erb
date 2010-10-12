@@ -7,7 +7,7 @@
 
 <%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| -%>
 
-  <%= render :partial => 'panels/prop_' + element.class.to_s.underscore, :locals => { :f => f } %>
+  <%= render :partial => 'panels/prop_' + element.class.to_s.underscore, :locals => { :f => f, :element => element } %>
   
   <% if element.question? -%>
     <!-- <h3>Dependency</h3>
@@ -19,14 +19,17 @@
     <%= render :partial => 'panels/advanced_options', :locals => { :f => f } %>
   <% end-%>
 
-  <p class="buttons"><%= submit_tag "Update &raquo;".html_safe %></p>
+  <p class="buttons">
+      <button type="submit"><span>Update</span></button>
+      <%= link_to('Delete', '') %>
+  </p>
 
 <% end -%>
 
 
 
 <%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id,  @page.id, element.id), :remote => true, :html => {:method => :delete} do |f| -%>
-    <p class="buttons"><%= submit_tag "Delete" %></p>
+    <p class="buttons" style="display: none;"><%= submit_tag "Delete" %></p>
 <% end -%>
 
 </div>

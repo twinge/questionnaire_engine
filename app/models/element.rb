@@ -2,6 +2,7 @@
 class Element < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   belongs_to :question_grid, :class_name => "QuestionGrid", :foreign_key => "question_grid_id"
+  belongs_to :choice_field, :class_name => "ChoiceField", :foreign_key => "conditional_id"
   
   self.inheritance_column = :kind
   
@@ -29,13 +30,21 @@ class Element < ActiveRecord::Base
   #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   # end
   
-  def position(page)
-    page_elements.where(:page_id => page.id).first.try(:position)
+  def position(page = nil)
+    if page
+      page_elements.where(:page_id => page.id).first.try(:position)
+    else
+      self[:position]
+    end
   end
   
-  def set_position(position, page)
-    pe = page_elements.where(:page_id => page.id).first
-    pe.update_attribute(:position => position) if pe
+  def set_position(position, page = nil)
+    if page
+      pe = page_elements.where(:page_id => page.id).first
+      pe.update_attribute(:position, position) if pe
+    else
+      self[:position] = position
+    end
     position
   end
   
@@ -50,14 +59,20 @@ class Element < ActiveRecord::Base
   end
   
   # copy an item and all it's children
-  def duplicate(grid_id = nil)
+  def duplicate(page, parent = nil)
     new_element = self.class.new(self.attributes)
-    new_element.question_grid_id = grid_id if grid_id
+    case parent.class.to_s
+    when ChoiceField
+      new_element.conditional_id = parent.id
+    when QuestionGrid, QuestionGridWithTotal
+      new_element.question_grid_id = parent.id
+    end
     new_element.save!
+    PageElement.create(:element => new_element, :page => page) unless parent
     
     # duplicate children
     if respond_to?(:elements) && elements.present?
-      elements.each {|e| e.duplicate(new_element.id)}
+      elements.each {|e| e.duplicate(page, new_element)}
     end
     
     new_element

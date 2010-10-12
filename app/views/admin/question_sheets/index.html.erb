@@ -1,26 +1,42 @@
 <div id="content">
-    <h1>Questionnaires</h1>
+  <h1>Questionnaires</h1>
     
 	<% if flash[:error] -%>
 		<div style="background: #ffe5df; border: solid 1px #efbeb3; padding: 9px; margin: 0 0 18px;"><%= flash[:error] %></div>
 	<% end -%>
+
+  <%= link_to 'New Questionnaire', admin_question_sheets_path(), :method => :post, :class => "add-link" %>
+  <br/>	
+  <table cellspacing="0" class="list"> 
+    <tr>
+      <th>Active Question Sheets</th>
+      <th colspan="3">&nbsp;</th>
+    </tr>
+    <% for question_sheet in @active_question_sheets %>
+      <tr class="<%= cycle("","alt") %>">
+        <td class="title"><%= link_to question_sheet.label, admin_question_sheet_path(question_sheet), :class => "questionnaire" %></td>
+        <td class="actions"><%= link_to 'Duplicate', duplicate_admin_question_sheet_path(question_sheet), :confirm => 'This will take some time depending on the number of questions. Please be patient.', :method => :post, :class => 'duplicate' %></td>
+        <td class="actions"><%= link_to 'Archive', archive_admin_question_sheet_path(question_sheet), :confirm => 'Are you sure you want to archive this Question Sheet?', :method => :post, :class => 'archive' %></td>
+        <td class="actions"><%= link_to 'Destroy', admin_question_sheet_path(question_sheet), :confirm => 'Are you sure you want to delete this Question Sheet?', :method => :delete, :class => "destroy", :class => 'delete' %></td>
+      </tr>
+    <% end %>
+  </table>
+    
 	
-    <% unless @question_sheets.empty? -%>
-      <table cellspacing="0" class="list"> 
-          <tr>
-              <th>Questionnaire Name</th>
-              <th>&nbsp;</th>
-          </tr>
-      <% for question_sheet in @question_sheets %>
-        <tr class="<%= cycle("","alt") %>">
-          <td><%= link_to question_sheet.label, admin_question_sheet_path(question_sheet), :class => "questionnaire" %></td>
-          <td class="actions"><%= link_to 'Destroy', admin_question_sheet_path(question_sheet), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
-        </tr>
-      <% end %>
-      </table>
-    
-      <br />
-    <% end -%>
-    
-    <%= link_to 'New Questionnaire', admin_question_sheets_path(), :method => :post, :class => "add-link" %>
+  <table cellspacing="0" class="list"> 
+    <tr>
+      <th>Archived Question Sheets</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% for question_sheet in @archived_question_sheets %>
+      <tr class="<%= cycle("","alt") %>">
+        <td><%= link_to question_sheet.label, admin_question_sheet_path(question_sheet), :class => "questionnaire" %></td>
+        <td class="actions"><%= link_to 'Un-Archive', unarchive_admin_question_sheet_path(question_sheet), :method => :post %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div id="footer">
+  Questionnaire Engine | Created by <a href="http://www.26am.com">26AM Design Studio</a>
 </div>

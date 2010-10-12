@@ -7,8 +7,12 @@
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
                              'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
   <%= stylesheet_link_tag 'jquery-ui-1.8.2.custom' %>
+  <%= stylesheet_link_tag 'sp' %>
   <%= questionnaire_engine_includes(:area => :public) %>
   <%= javascript_include_tag 'rails', 'rails.extra' %>
+  <script type="text/javascript" charset="utf-8">
+    var answer_sheet_type = '<%= @answer_sheet.class %>'
+  </script>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -20,6 +24,10 @@
    <div id="main">
     <%= yield %>
    </div>
+</div>
+
+<div id="footer">
+  Questionnaire Engine | Created by <a href="http://www.26am.com">26AM Design Studio</a>
 </div>
 
 </body>

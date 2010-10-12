@@ -1,4 +1,3 @@
-<%- if element.question_grid_id.to_i == 0 || in_grid -%>
 <li class="element" id="element_<%= element.id %>">
   <div class="controls">
   	<ul>
@@ -10,16 +9,9 @@
   		<li><a href="#" class="handle" title="Reorder this element">drag</a></li>
   	</ul>
   </div>
-  <div class="q">
-      <% if element.question? && element.default_label?-%>
-    
-        <label for="<%= dom_id(element) %>" class="desc">
-          <%= element.label %>
-          <% if element.required? -%><span class="required">required</span><% end -%>
-        </label>
-      <% end -%>
-    
-      <%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => nil} %>
+  <div class="q" id="element_<%= dom_id(element) %>">
+      <%= render 'admin/question_pages/element_show', :element => element %>
+  </div>
+  <div class="q q_form" id="element_form_<%= dom_id(element) %>">
   </div>
 </li>
-<%- end -%>

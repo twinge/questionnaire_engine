@@ -6,10 +6,14 @@ class QuestionSheet < ActiveRecord::Base
   # has_many :elements
   # has_many :questions
   has_many :answer_sheets
+  scope :active, where(:archived => false)
+  scope :archived, where(:archived => true)
   
   validates_presence_of :label
   validates_length_of :label, :maximum => 60, :allow_nil => true  
   validates_uniqueness_of :label
+  
+  before_destroy :check_for_answers
 
   
   # create a new form with a page already attached
@@ -23,6 +27,29 @@ class QuestionSheet < ActiveRecord::Base
     pages.collect(&:questions).flatten
   end
   
+  # Pages get duplicated
+  # Question elements get associated
+  # non-question elements get cloned
+  def duplicate
+    new_sheet = QuestionSheet.new(self.attributes)
+    new_sheet.label = self.label + ' - COPY'
+    new_sheet.save!
+    self.pages.each do |page|
+      new_page = Page.new(page.attributes)
+      new_page.question_sheet_id = new_sheet.id
+      new_page.save!
+      page.elements.each do |element|
+        if element.is_a?(Question) || element.is_a?(QuestionGrid) || element.is_a?(QuestionGridWithTotal)
+          PageElement.create(:element => element, :page => new_page)
+        else
+          element.duplicate(new_page)
+        end
+      end
+    end
+    new_sheet
+  end
+  
+  
   private
   
   # next unused label with "Untitled form" prefix
@@ -34,6 +61,10 @@ class QuestionSheet < ActiveRecord::Base
   # (having a separate method makes it easy to mock in the spec)
   def self.untitled_labels
     QuestionSheet.find(:all, :conditions => %{label like 'Untitled form%'}).map {|s| s.label}
+  end
+  
+  def check_for_answers
+    
   end
 
 end

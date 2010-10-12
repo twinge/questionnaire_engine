@@ -2,6 +2,11 @@ Rails::Application.routes.draw do
   
   namespace :admin do
     resources :question_sheets do 
+      member do
+        post :archive
+        post :unarchive
+        post :duplicate
+      end
       resources :pages,                               # pages/
                 :controller => :question_pages do         # question_sheet_pages_path(),
                 collection do
@@ -15,7 +20,8 @@ Rails::Application.routes.draw do
                     put :reorder
                   end
                   member do
-                    post :remove_from_grid
+                    get :remove_from_grid
+                    post :use_existing
                     post :drop
                     post :duplicate
                   end

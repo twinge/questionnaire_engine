@@ -9,6 +9,7 @@ end
 # - a question that allows the selection of one or more choices
 
 class ChoiceField < Question
+  has_many :elements, :class_name => "Element", :foreign_key => "conditional_id", :dependent => :nullify, :order => :position
   # Returns choices stored one per line in content field
 	def choices
     retVal = Array.new 

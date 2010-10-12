@@ -1,28 +1,29 @@
 <p><%= link_to "Question Grid Help", "/questionnaire_engine/help/question_grid.html", { :class=>"lbOn", :id => "link-question-grid-help" } %></p>
 
-<p>
+<div class="field">
   <label for="element_label" class="desc">Label</label>
   <%= f.text_field :label %>
-</p>
-<p>
+</div>
+<div class="field">
   <label for="element_slug" class="desc">Variable</label>
   <%= f.text_field :slug %>
-<p>        
-	
-<p>
+</div>
+<div class="field">
   <label for="element_slug" class="desc">Column Headings <span class="required">required</span></label>
   <%= f.text_field :cols %><br/>
   <span class="help">Separate column headings by a semi-colon.  This determines how many columns the grid will contain and what the column headings will be. </span>
-<p>  
-	
-<p>
+</div>
+<div class="field">
   <label for="element_slug" class="desc">Total Columns <span class="required">required</span></label>
   <%= f.text_field :total_cols %><br/>
   <span class="help">Which columns should be totaled? e.g. 2 OR 2,3</span>
-<p>  
-
-<p>  <%= f.check_box :required %>
+</div>
+<div class="field">
+  <%= f.check_box :required %>
   <label for="element_required">The fields in this group are required</label>
-</p>
+</div>
 
-<p><%= f.check_box :is_confidential %> <label for="element_is_confidential">The fields in this group are confidential</label></p>
+<div class="field">
+  <%= f.check_box :is_confidential %>
+  <label for="element_is_confidential">The fields in this group are confidential</label>
+</div>

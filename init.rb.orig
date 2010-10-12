@@ -1,0 +1,33 @@
+# Include hook code here
+
+# You can't use config.load_paths because #set_autoload_paths has already been called in the Rails Initialization process
+# http://weblog.techno-weenie.net/2007/1/24/understanding-the-rails-initialization-process
+
+#models_path = File.join(directory, 'app', 'models', 'elements')
+
+# elements_path = "#{directory}/app/models"
+# transient_path = "#{directory}/app/models"
+# presenters_path = "#{directory}/app/presenters"
+
+# $LOAD_PATH << presenters_path
+Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'helpers', '**')).each do |file|
+  require file
+end
+
+Dir.glob(File.join(File.dirname(__FILE__) , 'app', 'presenters', '**')).each do |file|
+  require file
+end
+<<<<<<< HEAD
+# 
+# ['public', 'public/javascripts/qe', 'public/stylesheets/qe', 'public/images/qe', 
+#   'public/images/qe', 'public/images/qe/icons', 'public/qe/help'].each do |dir|
+=======
+
+# ['public', 'public/javascripts/questionnaire_engine', 'public/stylesheets/questionnaire_engine', 'public/images/questionnaire_engine', 
+#   'public/images/questionnaire_engine', 'public/images/questionnaire_engine/icons', 'public/questionnaire_engine/help'].each do |dir|
+>>>>>>> 26207288cbbd97975c8fb639af37bb2b9384934e
+#   source = File.dirname(__FILE__) + "/#{dir}"
+#   dest = Rails.root + dir
+#   FileUtils.mkdir_p(dest)
+#   FileUtils.cp(Dir.glob(source+'/*.*'), dest)
+# end

@@ -32,9 +32,7 @@ module ApplicationHelper
   
   def questionnaire_engine_stylesheets(options = {})
     output = []
-    output << "questionnaire_engine/reset"
     output << "questionnaire_engine/qe.screen"
-    output << "questionnaire_engine/validation"
     return output
   end
 
@@ -47,6 +45,7 @@ module ApplicationHelper
       output << "questionnaire_engine/qe.public"
     else
       output << "questionnaire_engine/qe.admin"
+      output << "questionnaire_engine/ckeditor/ckeditor"
     end
     output << "questionnaire_engine/jquery.scrollTo-min"
     output << {:cache => true}
