@@ -4,7 +4,7 @@
 class Admin::QuestionSheetsController < ApplicationController
   unloadable
   before_filter :check_valid_user
-  before_filter :get_question_sheet, :only => [:show, :archive, :unarchive, :destroy, :edit, :udpate, :duplicate]
+  before_filter :get_question_sheet, :only => [:show, :archive, :unarchive, :destroy, :edit, :update, :duplicate]
   layout 'qe.admin'
  
   # list of all questionnaires/forms to edit
