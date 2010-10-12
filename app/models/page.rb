@@ -1,3 +1,4 @@
+require 'model_extensions'
 class Page < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
