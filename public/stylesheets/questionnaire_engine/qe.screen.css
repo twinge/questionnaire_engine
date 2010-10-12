@@ -356,7 +356,7 @@ ul.questions li .controls li {
 .controls .edit {background: url(/images/questionnaire_engine/icons/document--pencil.png) no-repeat 50% 50%;}
 .controls .duplicate {background: url(/images/questionnaire_engine/icons/document-copy.png) no-repeat 50% 50%;}
 .controls .handle {background: url(/images/questionnaire_engine/icons/arrow-move.png) no-repeat 50% 50%;}
-.controls .remove {display: none;}
+.controls .remove {background: url(/images/questionnaire_engine/icons/arrow_out.png) no-repeat 50% 50%;}
 
 /* QUESTIONS MODAL */
 #question_modal {
