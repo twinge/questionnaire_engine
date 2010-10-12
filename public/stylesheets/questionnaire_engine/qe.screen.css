@@ -358,6 +358,47 @@ ul.questions li .controls li {
 .controls .handle {background: url(/images/questionnaire_engine/icons/arrow-move.png) no-repeat 50% 50%;}
 .controls .remove {display: none;}
 
+/* QUESTIONS MODAL */
+#question_modal {
+  font-family: Arial;
+}
+
+#questions_div ul {
+  border:1px solid silver;
+  font-family:Arial;
+  height:192px;
+  overflow:auto;
+  padding:8px;
+}
+
+#questions_div ul li {
+  font-size: 12px;
+  line-height: 24px;
+  min-height: 25px;
+}
+
+#questions_div label {
+  display:block;
+  font-size:12px;
+  font-weight:normal;
+  margin-left:60px;
+}
+
+#questions_div ul li a span {
+  -moz-border-radius:4px 4px 4px 4px;
+  -webkit-border-radius:4px 4px 4px 4px;
+  border-radius:4px 4px 4px 4px;    
+  background:none repeat scroll 0 0 #0B486B;
+  color:#FFFFFF;
+  float:left;
+  font-size:10px;
+  font-weight:bold;
+  line-height:1em;
+  margin-right:10px;
+  padding:5px 4px;
+  text-transform:uppercase;
+}
+
 /* Home Screen */
 
 table, tr, td {

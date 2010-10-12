@@ -1,5 +1,5 @@
 if ($('#question_modal')[0] == null) {
-	$('body').append('<div id="question_modal"><div id="questions_div" title=""></div></div>');
+	$('body').append('<div id="question_modal"><a href="" class="add_type">Add TYPE</a><p>Or you can also use an existing Short Answer element. If you are unsure, just <strong>Add TYPE.</strong></p><div id="questions_div" title=""></div></div>');
 }
 $('#questions_div').html("<%= escape_javascript(render('questions/questions', :questions => @questions)) %>")
-$('#question_modal').dialog();
+$('#question_modal').dialog({width: 500});
