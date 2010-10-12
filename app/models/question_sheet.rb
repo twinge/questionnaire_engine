@@ -3,8 +3,8 @@ class QuestionSheet < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
   has_many :pages, :dependent => :destroy, :order => 'number'
-  has_many :elements
-  has_many :questions
+  # has_many :elements
+  # has_many :questions
   has_many :answer_sheets
   
   validates_presence_of :label
@@ -19,7 +19,9 @@ class QuestionSheet < ActiveRecord::Base
     question_sheet
   end
  
-  
+  def questions
+    pages.collect(&:questions).flatten
+  end
   
   private
   

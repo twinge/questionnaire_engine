@@ -1,6 +1,6 @@
 class CreateReferences < ActiveRecord::Migration
   def self.up
-    create_table Reference.table_name do |t|
+    create_table ReferenceSheet.table_name do |t|
       t.integer :question_id, :answer_sheet_id, :response_id
       t.datetime :email_sent_at
       t.string :relationship
