@@ -7,8 +7,6 @@
 # may want special handling for ChoiceFields to store both id/slug and text representations
 
 class Answer < ActiveRecord::Base
-  include ActionView::Helpers::TextHelper 
-  
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
   has_attachment :storage => :file_system, :path_prefix => 'public/attachments' if defined?(Technoweenie::AttachmentFu)
@@ -22,6 +20,7 @@ class Answer < ActiveRecord::Base
   before_save :set_value_from_filename
   
   
+  include ActionView::Helpers::TextHelper   # bleh
   def set(value, short_value = value)
     self.value = value
     self.short_value = truncate(short_value, :length => 225) # adds ... if truncated (but not if not)

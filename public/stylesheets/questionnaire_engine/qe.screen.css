@@ -356,7 +356,7 @@ ul.questions li .controls li {
 .controls .edit {background: url(/images/questionnaire_engine/icons/document--pencil.png) no-repeat 50% 50%;}
 .controls .duplicate {background: url(/images/questionnaire_engine/icons/document-copy.png) no-repeat 50% 50%;}
 .controls .handle {background: url(/images/questionnaire_engine/icons/arrow-move.png) no-repeat 50% 50%;}
-.controls .remove {display: none;}
+.controls .remove {background: url(/images/questionnaire_engine/icons/arrow_out.png) no-repeat 50% 50%;}
 
 /* QUESTIONS MODAL */
 #question_modal {
@@ -366,7 +366,7 @@ ul.questions li .controls li {
 #questions_div ul {
   border:1px solid silver;
   font-family:Arial;
-  height:192px;
+  height:120px;
   overflow:auto;
   padding:8px;
 }
@@ -375,6 +375,14 @@ ul.questions li .controls li {
   font-size: 12px;
   line-height: 24px;
   min-height: 25px;
+}
+
+#questions_div ul li a{
+  cursor: pointer;
+}
+
+#questions_div ul li a label{
+  cursor: pointer;
 }
 
 #questions_div label {
@@ -398,6 +406,21 @@ ul.questions li .controls li {
   padding:5px 4px;
   text-transform:uppercase;
 }
+
+.add_type,
+.ui-widget-content a.add_type {
+  -moz-border-radius:4px 4px 4px 4px;
+  -webkit-border-radius:4px 4px 4px 4px;
+  border-radius:4px 4px 4px 4px;
+  background:url("/images/questionnaire_engine/butgrad.png") repeat-x scroll 100% 50% transparent;
+  color:#0B486B;
+  display:inline-block;
+  font-size:14px;
+  font-weight:bold;
+  margin:5px 0;
+  padding:5px 10px;
+}
+
 
 /* Home Screen */
 

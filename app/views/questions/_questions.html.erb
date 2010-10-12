@@ -1,9 +1,5 @@
 <ul>
 	<% questions.each do |question| %>
-		<li><%= link_to(use_existing_admin_question_sheet_page_element_path(:question_sheet_id => @page.question_sheet_id, :page_id => @page.id, :id => question.id), 
-										:remote => true, :method => :post) do %>
-					<span>select</span><label><%= raw question.label %></label>
-				<% end %>
-		</li>
+		<li><a href=""><span>select</span><label><%= raw question.label %></label></a></li>
 	<% end %>
 </ul>
