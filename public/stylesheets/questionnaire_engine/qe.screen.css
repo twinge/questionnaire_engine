@@ -52,8 +52,30 @@ a {
 }
 
 #status {
-  position: absolute;
-  margin: 0 auto;
+/*  background:url("/images/questionnaire_engine/overlay.png") repeat scroll 0 0 transparent; */
+  height:100%;
+  margin:0 auto;
+  position:absolute;
+  width:100%;
+  z-index:10000;
+}
+
+.status_content {
+  -webkit-box-shadow:0 0 15px #000000;
+  -moz-box-shadow:0 0 15px #000000;
+  box-shadow:0 0 15px #000000;
+  background:none repeat scroll 0 0 #6699CC;
+  border:1px solid #FFFFFF;
+  color:#FFFFFF;
+  margin:92px auto;
+  padding:40px;
+  width:121px;
+  text-align: center;
+}
+
+#status-msg {
+  display: block;
+  margin: 10px 0 0 0;
 }
 
 /* PANEL */
@@ -301,7 +323,7 @@ div.p_content ol li {
 
 .sub_q {
   clear: both;
-  background: url(/images/questionnaire_engine/indent.png) no-repeat 5px 0;
+  background: /* url(/images/questionnaire_engine/indent.png) no-repeat 5px 0 */;
   margin-top: 15px;
 }
 
@@ -334,6 +356,7 @@ ul.questions li .controls li {
 .controls .edit {background: url(/images/questionnaire_engine/icons/document--pencil.png) no-repeat 50% 50%;}
 .controls .duplicate {background: url(/images/questionnaire_engine/icons/document-copy.png) no-repeat 50% 50%;}
 .controls .handle {background: url(/images/questionnaire_engine/icons/arrow-move.png) no-repeat 50% 50%;}
+.controls .remove {display: none;}
 
 /* Home Screen */
 
