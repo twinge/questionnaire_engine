@@ -1,0 +1,5 @@
+page << <<-END
+  $('#page-preview').html('#{escape_javascript(render('admin/question_pages/question_page'))}')
+  selectElement("#element_#{@element.id}")
+  $.scrollTo("#element_#{@element.id}")
+END
