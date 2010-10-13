@@ -154,6 +154,7 @@ class Admin::ElementsController < ApplicationController
   def duplicate
     element = Element.find(params[:id])
     @element = element.duplicate(@page)
+    @page_element = PageElement.where(:page_id => @page.id, :element_id => @element.id).first
     respond_to do |format|
       format.js {render :action => :create}
     end
