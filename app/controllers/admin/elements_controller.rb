@@ -133,11 +133,13 @@ class Admin::ElementsController < ApplicationController
         element.save!
       end
     end
+    # Remove page element for this page since it's now in a grid
+    PageElement.where(:page_id => @page.id, :element_id => element.id).first.try(:destroy)
   end
   
   def remove_from_grid
     element = Element.find(params[:id])
-    PageElement.create(:element_id => element.id, :page_id => @page.id) unless PageElement.find(:element_id => element.id, :page_id => @page.id)
+    PageElement.create(:element_id => element.id, :page_id => @page.id) unless PageElement.where(:element_id => element.id, :page_id => @page.id).first
     if element.question_grid_id
       element.set_position(element.question_grid.position(@page), @page) 
       element.question_grid_id = nil
