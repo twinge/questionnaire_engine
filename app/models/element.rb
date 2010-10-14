@@ -15,7 +15,7 @@ class Element < ActiveRecord::Base
   # validates_presence_of :label, :style, :on => :update
   
   validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
-  validates_length_of :label, :maximum => 255, :allow_nil => true
+  # validates_length_of :label, :maximum => 255, :allow_nil => true
 
   # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
   validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField ReferenceQuestion}  # leaf classes
