@@ -20,6 +20,9 @@ function setUpSortables() {
 	$('.droppable').droppable({
 		drop: function( event, ui ) {
 			$.post($(this).attr('data-url'), {draggable_element: ui.draggable.attr('id')}, function() {}, 'script')
+		},
+		over: function(event, ui) { 
+			$(this).css({'min-height':'500px'});
 		}
 	});
 }

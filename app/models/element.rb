@@ -81,20 +81,20 @@ class Element < ActiveRecord::Base
   protected
   def set_defaults
     self.label = "Untitled" if label.nil?
-    if self.content.nil?
+    if self.content.blank?
       case self.class.to_s
         when "ChoiceField" then self.content ||= "Choice One\nChoice Two\nChoice Three"
         when "Paragraph" then self.content ||="Lorem ipsum..." 
       end 
     end
 
-    if self.style.nil?
+    if self.style.blank?
       case self.class.to_s
         when "DateField" then self.style ||= "date"
         when "FileField" then self.style ||= "file"
         when "Paragraph" then self.style ||= "paragraph"
         when "Section" then self.style ||= "section"
-        # when "ChoiceField" then self.style = "checkbox"
+        when "ChoiceField" then self.style = "checkbox"
         when "QuestionGrid" then self.style ||= "grid"
         when "QuestionGridWithTotal" then self.style ||= "grid_with_total"
         when "SchoolPicker" then self.style ||= "school_picker"

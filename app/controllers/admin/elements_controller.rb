@@ -97,11 +97,22 @@ class Admin::ElementsController < ApplicationController
     # since we don't know the name of the list, just find the first param that is an array
     params.each_key do |key| 
       if key.include?('questions_list')
-        @page.page_elements.each do |page_element|
-          if index = params[key].index(page_element.element_id.to_s)
-            page_element.position = index + 1 
-            page_element.save!
-            @element = page_element.element
+        grid_id = key.sub('questions_list_', '').to_i
+        # See if we're ordering inside of a grid
+        if grid_id > 0
+          Element.find(grid_id).elements.each do |element|
+            if index = params[key].index(element.id.to_s)
+              element.position = index + 1 
+              element.save!
+            end
+          end
+        else
+          @page.page_elements.each do |page_element|
+            if index = params[key].index(page_element.element_id.to_s)
+              page_element.position = index + 1 
+              page_element.save!
+              @element = page_element.element
+            end
           end
         end
       end
