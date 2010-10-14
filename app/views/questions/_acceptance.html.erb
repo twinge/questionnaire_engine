@@ -7,5 +7,7 @@
       :class => css_class,
       :disabled => @application.frozen?&&!@presenter.reference?,
       :readonly => @application.frozen?&&!@presenter.reference? %>
-<label class="choice" for="<%= dom_id(acceptance) %>"><%= acceptance.label %></label>
+<label class="choice" for="<%= dom_id(acceptance) %>">
+  <%= acceptance.label %>
+</label>
 <%= hidden_field_tag "answers[#{acceptance.id}]", '', :id => '' %>

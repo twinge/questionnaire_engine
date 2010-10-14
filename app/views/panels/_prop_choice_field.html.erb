@@ -10,19 +10,11 @@
                   ])
               ]
 %>
-<div class="field"><label for="element_label" class="desc">Label <span class="required">required</span></label>
-        <%= f.text_field :label %></div>
-		
-<div class="field"><label for="element_slug" class="desc">Variable</label>
-	<%= f.text_field :slug %></div>
-
     <div class="field"><label for="element_style" class="desc">Style</label>
         <%= select_tag 'element[style]', option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style),
           :onchange => "if(['acceptance', 'yes-no'].include($F('element[style]'))) $('choices_section').hide(); else $('choices_section').show();" %></div>
 
-    <div class="field"><%= f.check_box :required %> <label for="element_required">This field is required</label></div>
-
-    <div class="field"><%= f.check_box :is_confidential %> <label for="element_is_confidential">This field is confidential</label></div>
+<%= render 'panels/common_fields', :f => f %>
 
 <div id="choices_section" style="display:<%= ['acceptance', 'yes-no'].include?(@element.style) ? 'none' : 'block' %>">
   <h3>Choices<br/>

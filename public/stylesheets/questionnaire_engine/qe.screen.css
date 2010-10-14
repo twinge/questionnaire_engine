@@ -504,3 +504,13 @@ td.actions a {padding: 2px 10px 2px 20px;}
   padding-top: 20px;
   text-align: right;
 }
+
+div.tooltip {
+	background:url(/images/questionnaire_engine/tooltip/black_arrow.png)  repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  display: none;
+  font-size: 12px;
+  height: 70px;
+  padding: 25px;
+  width: 160px;
+}

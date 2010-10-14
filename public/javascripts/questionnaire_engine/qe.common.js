@@ -41,3 +41,7 @@ function setUpJsHelpers() {
 		setUpCalendars();
   	// ==================
 }
+
+$(function() {
+	$("[title]").tooltip();
+});

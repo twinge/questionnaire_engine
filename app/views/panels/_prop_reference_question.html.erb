@@ -1,29 +1,11 @@
 <div class="field">
-  <label for="element_label" class="desc">Label <span class="required">required</span></label>
-  <%= f.text_field :label %>
-</div>
-
-<div class="field">
   <label for="element_style" class="desc">Related Question Sheet</label>
   <%= f.select :related_question_sheet_id, (QuestionSheet.order(:label).all - [@page.question_sheet]).collect {|qs| [qs.label, qs.id]} %>
-</div>
-  
-<div class="field">
-  <label for="element_slug" class="desc">Variable</label>
-  <%= f.text_field :slug %>
 </div>
 
 <div class="field">
   <label for="element_style" class="desc">Style</label>
   <%= f.select :style, [["Peer", "peer"], ["Spiritual", "spiritual"], ["Parent", "parent"]] %>
 </div>
-        
-<div class="field field_check">
-  <%= f.check_box :required %>
-  <label for="element_required">This field is required</label>
-</div>
 
-<div class="field field_check">
-  <%= f.check_box :is_confidential %>
-  <label for="element_is_confidential">This field is confidential</label>
-</div>
+<%= render 'panels/common_fields', :f => f %>

@@ -1,12 +1,13 @@
 <p><%= link_to "Question Grid Help", "/questionnaire_engine/help/question_grid.html", { :class=>"lbOn", :id => "link-question-grid-help" } %></p>
+
+<%= render 'panels/common_fields', :f => f %>
+
 <div class="field">
-  <label for="element_label" class="desc">Label</label>
-  <%= f.text_field :label %>
+  <label for="element_slug" class="desc">Column Headings <span class="required">required</span></label>
+  <%= f.text_field :cols %><br/>
+  <span class="help">Separate column headings by a semi-colon.  This determines how many columns the grid will contain and what the column headings will be. </span>
 </div>
-<div class="field">
-  <label for="element_slug" class="desc">Variable</label>
-  <%= f.text_field :slug %>
-</div>
+
 <div class="field">
   <label for="css_id" class="desc">Css ID</label>
   <%= f.text_field :css_id %>
@@ -14,17 +15,4 @@
 <div class="field">
   <label for="css_class" class="desc">Css Class</label>
   <%= f.text_field :css_class %>
-</div>
-<div class="field">
-  <label for="element_slug" class="desc">Column Headings <span class="required">required</span></label>
-  <%= f.text_field :cols %><br/>
-  <span class="help">Separate column headings by a semi-colon.  This determines how many columns the grid will contain and what the column headings will be. </span>
-</div>
-<div class="field">
-  <%= f.check_box :required %>
-  <label for="element_required">The fields in this group are required</label>
-</div>
-<div class="field">
-  <%= f.check_box :is_confidential %>
-  <label for="element_is_confidential">The fields in this group are confidential</label></p>
 </div>
