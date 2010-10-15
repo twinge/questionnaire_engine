@@ -30,7 +30,7 @@ class Admin::ElementsController < ApplicationController
   end
   
   def new
-    @questions = params[:element_type].constantize.order('label')
+    @questions = params[:element_type].constantize.active.order('label')
     params[:element] ||= {}
     if params[:element][:style]
       @questions = @questions.where(:style => params[:element][:style])
@@ -84,7 +84,7 @@ class Admin::ElementsController < ApplicationController
     page_element.destroy if page_element
     
     # If this element is not on any other pages, is not a question or has no answers, Destroy it
-    unless PageElement.find(params[:id]) || @element.has_response?
+    unless @element.is_a?(Question) && (PageElement.where(:element_id => params[:id]).present? || @element.has_response?)
       @element.destroy
     end
 

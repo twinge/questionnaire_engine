@@ -38,10 +38,10 @@ class Question < Element
   
   # a question is disabled if there is a condition, and that condition evaluates to false
   # could set multiple conditions to influence this question, in which case all must be met
-  def active?
-    # find first condition that doesn't pass (nil if all pass)
-    self.conditions.find(:all).find { |c| !c.evaluate? }.nil?  # true if all pass
-  end
+  # def active?
+  #   # find first condition that doesn't pass (nil if all pass)
+  #   self.conditions.find(:all).find { |c| !c.evaluate? }.nil?  # true if all pass
+  # end
   
   # def conditions_attributes=(new_conditions)
   #   conditions.collect(&:destroy)

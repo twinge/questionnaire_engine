@@ -9,6 +9,8 @@ class Element < ActiveRecord::Base
   has_many :page_elements, :dependent => :destroy
   has_many :pages, :through => :page_elements
   
+  scope :active, where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
+  
   # belongs_to :question_sheet
 
   validates_presence_of :kind, :style
