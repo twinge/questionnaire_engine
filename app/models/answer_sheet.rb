@@ -3,7 +3,7 @@ class AnswerSheet < ActiveRecord::Base
 
   has_many :answer_sheet_question_sheets
   has_many :question_sheets, :through => :answer_sheet_question_sheets
-  has_many :answers, :dependent => :delete_all
+  has_many :answers, :class_name => 'Answer', :foreign_key => 'answer_sheet_id', :dependent => :delete_all
 
   def complete?
     !completed_at.nil?
