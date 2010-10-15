@@ -92,6 +92,7 @@ class Element < ActiveRecord::Base
 
     if self.style.blank?
       case self.class.to_s
+        when 'TextField' then self.style ||= 'essay'
         when "DateField" then self.style ||= "date"
         when "FileField" then self.style ||= "file"
         when "Paragraph" then self.style ||= "paragraph"
