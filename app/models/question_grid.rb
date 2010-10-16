@@ -17,4 +17,5 @@ class QuestionGrid < Element
   def has_response?
     elements.any?(&:has_response?)
   end
+  
 end

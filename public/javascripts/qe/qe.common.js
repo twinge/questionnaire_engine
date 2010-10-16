@@ -40,8 +40,5 @@ function setUpJsHelpers() {
 		// Calendar
 		setUpCalendars();
   	// ==================
+		$("[title]").tooltip();
 }
-
-$(function() {
-	$("[title]").tooltip();
-});

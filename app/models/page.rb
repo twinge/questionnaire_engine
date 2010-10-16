@@ -41,6 +41,11 @@ class Page < ActiveRecord::Base
     self.elements.where(["#{PageElement.table_name}.position < ?", position])
   end
   
+  # Include nested elements
+  def all_elements
+    (elements + elements.collect(&:all_elements)).flatten
+  end
+  
   
   private
   

@@ -11,10 +11,10 @@ class QuestionSet
   
     @questions = elements.select { |e| e.question? }
   
-    answers = @answer_sheet.answers_by_question
+    # answers = @answer_sheet.answers_by_question
   
     @questions.each do |question|
-      question.answers = answers[question.id]
+      question.answers = question.responses(answer_sheet) #answers[question.id]
     end    
     @questions
   end
@@ -26,6 +26,7 @@ class QuestionSet
     # loop over form values
     params ||= {}
     params.each do |question_id, response|
+      raise question_id.inspect if questions_indexed[question_id.to_i].nil?
       # update each question with the posted response
       questions_indexed[question_id.to_i].response = posted_values(response)
     end

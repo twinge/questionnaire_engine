@@ -13,8 +13,9 @@ class DateField < Question
   
   def response(app=nil)
     r = super
-    r = Time.parse(r) unless r.blank?    
-    r || ''
+    return nil if r.blank?
+    return Time.parse(r) if r.is_a?(String)
+    r
   end
   
   def display_response(app=nil)

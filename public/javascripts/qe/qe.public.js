@@ -50,6 +50,7 @@
 	      $('#preview').append(response);
 	      // if(this.background_load) $('#' + page).hide(); else 
 				$.qe.pageHandler.showPage(page);  // show after load, unless loading in background
+				setUpJsHelpers();
 	      $.qe.pageHandler.enableValidation(page);
 				$.qe.pageHandler.validatePage('#' + page);
 	    }
@@ -77,7 +78,16 @@
 		    }
 		    else
 		    {
-					$.get(url, {'answer_sheet_type':answer_sheet_type}, $.qe.pageHandler.pageLoaded)
+					// $.get(url, {'answer_sheet_type':answer_sheet_type}, $.qe.pageHandler.pageLoaded)
+					$.ajax({
+             url: url,
+             data: {'answer_sheet_type':answer_sheet_type},
+             type: 'GET',
+						 success: $.qe.pageHandler.pageLoaded,
+             error: function (xhr, status, error) {
+                 alert("There was a problem loading that page. We've been notified and will fix it as soon as possible. To work on other pages, please refresh the website.");
+             }
+         });
 		      // new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 
 		      //     onSuccess:this.pageLoaded.bind(this)});
 		    }

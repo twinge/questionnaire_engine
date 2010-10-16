@@ -80,6 +80,15 @@ class Element < ActiveRecord::Base
     new_element
   end
   
+  # include nested elements
+  def all_elements
+    if respond_to?(:elements)
+      (elements + elements.collect(&:all_elements)).flatten
+    else
+      []
+    end
+  end
+  
   protected
   def set_defaults
     if self.content.blank?

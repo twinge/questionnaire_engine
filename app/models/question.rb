@@ -117,7 +117,7 @@ class Question < Element
         [""]
       end
     else
-      @answers.collect(&:value)
+      @answers.collect {|a| a.is_a?(Answer) ? a.value : a}
     end
   end
   
