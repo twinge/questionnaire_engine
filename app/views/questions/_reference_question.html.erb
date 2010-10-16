@@ -1,6 +1,6 @@
 <% reference = reference_question.response(@application) %>
 <div id="<%= dom_id(reference_question) %>">
-  <ul class="questions">
+  <ul class="questions level1">
   <li>
     <label for="<%= "name_#{reference.id}" %>" class="desc">First Name</label>
     <%= text_field_tag "reference[#{reference.id}][first_name]", reference.first_name, :class => 'text required', :id => "name_#{reference.id}" %>
