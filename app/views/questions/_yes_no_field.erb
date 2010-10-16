@@ -5,7 +5,7 @@
        last_choice =  (num == yes_no.choices.length - 1)
        css_class += yes_no.validation_class if last_choice
        checked = yes_no.has_answer?(choice[1],@application) -%>
-    <div class="field field_check">
+    <div class="field field_check yesno">
       <%= radio_button_tag "answers[#{yes_no.id}]", choice[1], checked, 
             :id => dom_id, 
             :class => css_class,
@@ -14,4 +14,5 @@
       <label class="choice horiz" for="<%= dom_id %>"><%= choice[0] %></label>
     </div>
   <% end -%>
+  <div class="clear"></div>
 </div>
