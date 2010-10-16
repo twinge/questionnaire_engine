@@ -250,6 +250,10 @@ label {
   display: block;
 }
 
+label.choice {
+  margin-left:25px;
+}
+
 label.desc {
   margin-bottom: 10px;
 }

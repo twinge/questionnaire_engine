@@ -20,7 +20,7 @@
           <div id="submit_message" class="validation-advice" style="display: none;"></div>
           <%= button_to_function "Submit", "page_handler.completeAll(); return false", :id => 'submit_button' %>
         <% else -%>
-          <%= submit_tag "Next" %>
+          <button type="submit" style="font-family: Arial; cursor: pointer;"><span>Next</span></button>
         <% end -%>
          
       <% end -%>
