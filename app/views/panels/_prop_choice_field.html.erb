@@ -27,6 +27,11 @@
           <%= f.text_area :content, :rows => 4, :cols => 25 %></p>
   </div>
 
+  <p>
+    <%= f.check_box :hide_option_labels %>
+    <label for="element_hide_option_labels" class="inline">Hide Option Labels</label>
+  </p>
+  
   <div id="xmlChoices" style="display:<% if showXML -%>block<%else-%>none<%end-%>">
   	<p><label for="element_source" class="desc">XML Feed for Choices</label>
   		<%= f.text_field :source %></p>
