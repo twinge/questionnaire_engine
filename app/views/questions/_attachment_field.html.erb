@@ -1,8 +1,8 @@
 <%= file_field_tag "answers[#{attachment_field.id}]", 
       :class => 'text ' + attachment_field.validation_class,
       :id => dom_id(attachment_field),
-      :disabled => @application.frozen?&&!@presenter.reference?,
-      :readonly => @application.frozen?&&!@presenter.reference?,
+      :disabled => @answer_sheet.frozen?&&!@answer_sheet.reference?,
+      :readonly => @answer_sheet.frozen?&&!@answer_sheet.reference?,
       :maxlength => 255 %>
 <% if @presenter %>
   <% dom_id = @presenter.active_page.dom_id %>
@@ -10,7 +10,7 @@
       :id => "#{dom_id}-spinner", :style => "display:none;" %>
   <%= button_to_function("Attach File", "submitToFrame('#{dom_id}', '#{save_file_answer_sheet_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id)}')") %><br/>
   <div id="<%= dom_id %>-attachment">
-  <% answers = attachment_field.response(@application)
+  <% answers = attachment_field.response(@answer_sheet)
     if answers.present?
       answer = answers[0] %>
       Current File: <%= link_to(answer.filename, answer.public_filename) %>

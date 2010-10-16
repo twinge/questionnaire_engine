@@ -1,7 +1,7 @@
-<%= calendar_date_select_tag "answers[#{date_field.id}]", date_field.format_date_response(@application),
+<%= calendar_date_select_tag "answers[#{date_field.id}]", date_field.format_date_response(@answer_sheet),
       :class => 'text ' + date_field.validation_class,
       :id => dom_id(date_field),
-      :disabled => @application.frozen?&&!@presenter.reference?,
-      :readonly => @application.frozen?&&!@presenter.reference? %>
+      :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
+      :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
 <div id="advice-validate-date-<%= dom_id(date_field) %>" class="validation-advice" style="display: none;">Please enter a valid date (MM/DD/YYYY).</div>
 <div id="advice-required-<%= dom_id(date_field) %>" class="validation-advice" style="display: none;">This is a required field.</div>

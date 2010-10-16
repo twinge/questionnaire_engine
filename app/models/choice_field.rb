@@ -35,7 +35,7 @@ class ChoiceField < Question
     return retVal
   end
 	
-	def has_answer?(choice, app=nil)
+	def has_answer?(choice, app)
     # HACK: Crazy hack to support legacy field types where choices may be int or tinyint 
     r = self.responses(app) 
 	  if @answers.nil? || @answers.empty?   # external data source?

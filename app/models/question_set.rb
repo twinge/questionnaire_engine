@@ -20,7 +20,7 @@ class QuestionSet
   end
   
   # update with responses from form
-  def post(params)
+  def post(params, answer_sheet)
     questions_indexed = @questions.index_by {|q| q.id}
     
     # loop over form values
@@ -28,7 +28,7 @@ class QuestionSet
     params.each do |question_id, response|
       raise question_id.inspect if questions_indexed[question_id.to_i].nil?
       # update each question with the posted response
-      questions_indexed[question_id.to_i].response = posted_values(response)
+      questions_indexed[question_id.to_i].set_response(posted_values(response), answer_sheet)
     end
   end
   

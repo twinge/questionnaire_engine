@@ -1,7 +1,7 @@
-<%= select_month(date_field_mmyy.response(@application), :include_blank => true,
+<%= select_month(date_field_mmyy.response(@answer_sheet), :include_blank => true,
       :prefix => "answers[#{date_field_mmyy.id}]",
       :class => 'select ' + date_field_mmyy.validation_class) %> 
-<%= select_year(date_field_mmyy.response(@application), :include_blank => true,
+<%= select_year(date_field_mmyy.response(@answer_sheet), :include_blank => true,
       :start_year => Time.now.year - 50, :end_year => Time.now.year + 7, 
       :prefix => "answers[#{date_field_mmyy.id}]",
       :class => 'select ' + date_field_mmyy.validation_class) %>

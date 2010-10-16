@@ -4,12 +4,12 @@
   <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
      last_choice =  (num == radio_button_field.choices.length - 1)
      css_class += radio_button_field.validation_class if last_choice
-     checked = radio_button_field.has_answer?(choice[1]) -%>
+     checked = radio_button_field.has_answer?(choice[1], @answer_sheet) -%>
   <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
         :id => dom_id, 
         :class => css_class,
-        :disabled => @application.frozen?&&!@presenter.reference?,
-        :readonly => @application.frozen?&&!@presenter.reference? %>
+        :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
+        :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
   <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
 <% end -%>
 </div>

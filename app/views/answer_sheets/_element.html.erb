@@ -17,7 +17,7 @@
   			<%= grid_element.content %>
 			<% else -%>
   			<% el = elements.find {|el| el.id == grid_element.id } -%>
-  			<%= el.display_response(@application) %>
+  			<%= el.display_response(@answer_sheet) %>
 			<% end -%>
 		</td>
 		<%- 	col_count += 1
@@ -34,7 +34,7 @@
 <li>
   <% if element.question? -%>
       <label class="desc"><%= element.label %></label>
-      <span class="answer"><%= element.display_response(@application) %></span>
+      <span class="answer"><%= element.display_response(@answer_sheet) %></span>
   <% else -%>
     <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
   <% end -%>

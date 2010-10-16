@@ -9,7 +9,11 @@
     <% if @elements.length > 0 -%>
       <%= form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;", :multipart => true do -%>
         <ul class="questions" id="questions_list">
-          <%= render :partial => 'answer_pages/element', :collection => @elements, :locals => {:in_grid => false, :in_conditional => false} %>
+          <% @elements.each do |element| %>
+            <li class="<%= element.class.to_s.downcase %>" id="element_<%= element.id %>">
+              <%= render 'answer_pages/element', :element => element %>
+            </li>
+          <% end %>
         </ul>     
       
         <% if next_js.empty? -%>

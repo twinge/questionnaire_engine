@@ -91,11 +91,11 @@ class Question < Element
   end
   
   # shortcut to return first answer
-  def response(app=nil)
-    responses(app).first
+  def response(app)
+    responses(app).first.to_s
   end
   
-  def display_response(app=nil)
+  def display_response(app)
     r = responses(app)
     if r.blank?
       "No Answer"
@@ -104,48 +104,48 @@ class Question < Element
     end
   end
   
-  def responses(app=nil)
-    if @answers.blank?
-      # try to find answer from external object
-      if !app.nil? and !object_name.blank? and !attribute_name.blank?
-        if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
-          []
-        else
-          [eval("app." + object_name + "." + attribute_name)] 
-        end
+  def responses(app)
+    # try to find answer from external object
+    if !object_name.blank? and !attribute_name.blank?
+      if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
+        []
       else
-        [""]
+        [eval("app." + object_name + "." + attribute_name)] 
       end
     else
-      @answers.collect {|a| a.is_a?(Answer) ? a.value : a}
+      Answer.where(:answer_sheet_id => app.id, :question_id => self.id)
     end
   end
   
   # set answers from posted response
-  def response=(values)
-    @answers ||= []
-    @mark_for_destroy ||= []
-          
-    # go through existing answers (in reverse order, as we delete)
-    (@answers.length - 1).downto(0) do |index|
-      # reject: skip over responses that are unchanged
-      unless values.reject! {|value| value == @answers[index].value}
-        # remove any answers that don't match the posted values
-        @mark_for_destroy << @answers[index]   # destroy from database later 
-        @answers.delete_at(index)
+  def set_response(values, app)
+    values = Array.wrap(values)
+    if !object_name.blank? and !attribute_name.blank?
+      eval("app." + object_name + ".update_attribute(:" + attribute_name + ", '" + values.first + "')") unless responses(app) == values
+    else
+      @answers ||= []
+      @mark_for_destroy ||= []
+      # go through existing answers (in reverse order, as we delete)
+      (@answers.length - 1).downto(0) do |index|
+        # reject: skip over responses that are unchanged
+        unless values.reject! {|value| value == @answers[index]}
+          # remove any answers that don't match the posted values
+          @mark_for_destroy << @answers[index]   # destroy from database later 
+          @answers.delete_at(index)
+        end
       end
-    end
     
-    # insert any new answers
-    for value in values
-      if @mark_for_destroy.empty?
-        answer = Answer.new(:question_id => self.id)
-      else
-        # re-use marked answers (an update vs. a delete+insert)
-        answer = @mark_for_destroy.pop
+      # insert any new answers
+      for value in values
+        if @mark_for_destroy.empty?
+          answer = Answer.new(:question_id => self.id)
+        else
+          # re-use marked answers (an update vs. a delete+insert)
+          answer = @mark_for_destroy.pop
+        end
+        answer.set(value)
+        @answers << answer
       end
-      answer.set(value)
-      @answers << answer
     end
   end
   
@@ -159,8 +159,10 @@ class Question < Element
   def save_response(answer_sheet)
     unless @answers.nil?
       for answer in @answers
-        answer.answer_sheet_id = answer_sheet.id
-        answer.save
+        if answer.is_a?(Answer)
+          answer.answer_sheet_id = answer_sheet.id
+          answer.save!
+        end
       end
     end
     

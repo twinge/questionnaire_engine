@@ -7,7 +7,7 @@
   </div>
 <% else %>
   <%= render 'questions/yes_no_field', :yes_no => yes_no %>
-  <ul class="questions" id="questions_list_<%= yes_no.id %>" style="<%= yes_no.has_answer?(1,@application) ? '' : 'display:none' %>">
+  <ul class="questions" id="questions_list_<%= yes_no.id %>" style="<%= yes_no.has_answer?(1,@answer_sheet) ? '' : 'display:none' %>">
     <%= render :partial => 'answer_pages/element', :collection => yes_no.elements, :locals => {:in_grid => false, :in_conditional => true} %>
   </ul>
   <script type="text/javascript" charset="utf-8">

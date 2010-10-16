@@ -13,8 +13,8 @@ class AnswerPagesController < ApplicationController
   # validate and save captured data for a given page
   # PUT /answer_sheets/1/pages/1
   def update
-    questions = @presenter.questions_for_page(params[:id])
-    questions.post(params[:answers])
+    questions = @presenter.all_questions_for_page(params[:id])
+    questions.post(params[:answers], @answer_sheet)
     
     #if questions.valid? then
     
@@ -55,8 +55,8 @@ class AnswerPagesController < ApplicationController
   protected
   
   def get_answer_sheets
-    @answer_sheets = answer_sheet_type.find(params[:answer_sheet_id])
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheets)
+    @answer_sheet = answer_sheet_type.find(params[:answer_sheet_id])
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
   end
 
   def answer_sheet_type

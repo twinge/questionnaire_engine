@@ -28,6 +28,11 @@ class AnswerPagesPresenter < Presenter
     
   def questions_for_page(page_id=:first)
     @active_page = @active_answer_sheet.pages.visible.find(page_id)
+    QuestionSet.new(@active_page.elements, @active_answer_sheet)
+  end
+    
+  def all_questions_for_page(page_id=:first)
+    @active_page = @active_answer_sheet.pages.visible.find(page_id)
     QuestionSet.new(@active_page.all_elements, @active_answer_sheet)
   end
   

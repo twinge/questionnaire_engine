@@ -101,7 +101,6 @@
 	    if( form_data ) {
 	      if( page.data('form_data') == null || page.data('form_data').data !== form_data.data) {  // if any changes
 	        page.data('form_data', form_data);
-					console.log(form_data.data);
 					$.ajax({url: form_data.url, type: 'put', data: form_data.data, error: function() {
 																															             page.data('form_data', null);    // on error, force save for next call to save
 																														               // WARNING: race conditions with load & show?
