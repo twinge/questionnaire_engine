@@ -40,5 +40,11 @@ function setUpJsHelpers() {
 		// Calendar
 		setUpCalendars();
   	// ==================
-		$("[title]").tooltip();
+		$("[title]").tooltip({
+		   // tweak the position
+       offset: [-5, 20],
+    
+       // use the "slide" effect
+       effect: 'slide'
+		}).dynamic({ bottom: { direction: 'down', bounce: true } });;
 }
