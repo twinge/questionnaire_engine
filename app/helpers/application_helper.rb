@@ -32,23 +32,23 @@ module ApplicationHelper
   
   def questionnaire_engine_stylesheets(options = {})
     output = []
-    output << "questionnaire_engine/qe.screen"
+    output << "qe/qe.screen"
     return output
   end
 
   def questionnaire_engine_javascripts(options = {})
     output = []
-    output << "questionnaire_engine/jquery.validate.pack"
-    output << "questionnaire_engine/jquery.metadata"
-    output << "questionnaire_engine/jquery.tooltips.min"
-    output << "questionnaire_engine/qe.common"
+    output << "qe/jquery.validate.pack"
+    output << "qe/jquery.metadata"
+    output << "qe/jquery.tooltips.min"
+    output << "qe/qe.common"
     if options[:area] == :public
-      output << "questionnaire_engine/qe.public"
+      output << "qe/qe.public"
     else
-      output << "questionnaire_engine/qe.admin"
-      output << "questionnaire_engine/ckeditor/ckeditor"
+      output << "qe/qe.admin"
+      output << "qe/ckeditor/ckeditor"
     end
-    output << "questionnaire_engine/jquery.scrollTo-min"
+    output << "qe/jquery.scrollTo-min"
     output << {:cache => true} if options[:cache]
     return output 
   end

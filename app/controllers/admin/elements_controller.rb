@@ -103,14 +103,14 @@ class Admin::ElementsController < ApplicationController
           Element.find(grid_id).elements.each do |element|
             if index = params[key].index(element.id.to_s)
               element.position = index + 1 
-              element.save!
+              element.save(:validate => false)
             end
           end
         else
           @page.page_elements.each do |page_element|
             if index = params[key].index(page_element.element_id.to_s)
               page_element.position = index + 1 
-              page_element.save!
+              page_element.save(:validate => false)
               @element = page_element.element
             end
           end

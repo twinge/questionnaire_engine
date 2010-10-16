@@ -15,7 +15,7 @@ class Question < Element
 
   belongs_to :related_question_sheet, :class_name => "QuestionSheet", :foreign_key => "related_question_sheet_id"
   
-  validates_inclusion_of :required, :in => [false, true]
+  # validates_inclusion_of :required, :in => [false, true]
   
   validates_format_of :slug, :with => /^[a-z_][a-z0-9_]*$/, 
     :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? },

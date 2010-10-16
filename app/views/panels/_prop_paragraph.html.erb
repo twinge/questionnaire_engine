@@ -5,6 +5,28 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  CKEDITOR.replace( 'element_content_<%= element.id %>', {toolbar : [['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link']]} );
+  if (CKEDITOR.instances['element_content_<%= element.id %>']) {
+    CKEDITOR.instances['element_content_<%= element.id %>'].destroy();
+  }
+  editor = CKEDITOR.replace( 'element_content_<%= element.id %>', {
+        toolbar : [['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link']],
+        on :
+        {
+            instanceReady : function( ev )
+            {
+                // Output paragraphs as <p>Text</p>.
+                this.dataProcessor.writer.setRules( 'p',
+                    {
+                        indent : false,
+                        breakBeforeOpen : true,
+                        breakAfterOpen : false,
+                        breakBeforeClose : false,
+                        breakAfterClose : true
+                    });
+            }
+        }
+
+      } 
+    );
 });
 </script>

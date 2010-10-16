@@ -82,7 +82,6 @@ class Element < ActiveRecord::Base
   
   protected
   def set_defaults
-    self.label = "Untitled" if label.nil?
     if self.content.blank?
       case self.class.to_s
         when "ChoiceField" then self.content ||= "Choice One\nChoice Two\nChoice Three"

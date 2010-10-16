@@ -11,12 +11,10 @@
 </li>
 <%- else -%>
 	<%- if in_grid -%>
-	  <% unless element.label == 'Untitled' %>
-  	  <label for="<%= dom_id(element) %>" class="desc">
-        <%= element.label %>
-        <% if element.required? -%><span class="required">required</span><% end -%>
-      </label>
-    <% end %>
+	  <label for="<%= dom_id(element) %>" class="desc">
+      <%= element.label %>
+      <% if element.required? -%><span class="required">required</span><% end -%>
+    </label>
 		<%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => col} %>
 	<%- end -%>
 <%- end -%>
