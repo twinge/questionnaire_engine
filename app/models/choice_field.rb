@@ -69,7 +69,7 @@ class ChoiceField < Question
 	
 	# element view provides the element label?
   def default_label?
-    if self.style == 'acceptance'
+    if self.style == 'acceptance' || self.hide_option_labels?
       false   # template provides its own label
     else
       true

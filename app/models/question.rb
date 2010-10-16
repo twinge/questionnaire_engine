@@ -12,6 +12,7 @@ class Question < Element
   include ActionController::RecordIdentifier # dom_id
   has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_id", :dependent => :nullify
   has_many :dependents, :class_name => "Condition", :foreign_key => "trigger_id", :dependent => :nullify
+  has_many :sheet_answers, :class_name => "Answer", :foreign_key => "question_id", :dependent => :destroy
 
   belongs_to :related_question_sheet, :class_name => "QuestionSheet", :foreign_key => "related_question_sheet_id"
   
@@ -105,6 +106,7 @@ class Question < Element
   end
   
   def responses(app)
+    return [] unless app
     # try to find answer from external object
     if !object_name.blank? and !attribute_name.blank?
       if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
@@ -180,12 +182,13 @@ class Question < Element
   # has any sort of non-empty response?
   def has_response?
     answers = Answer.where(:question_id => self.id)
-    return false if answers.count == 0
+    return false if answers.length == 0
     answers.each do |answer|   # loop through Answers
-      if !answer.value.blank? then   # any response is good enough
+      if !answer.value.blank?    # any response is good enough
         return true
       end
     end
+    return false
   end
 
 end

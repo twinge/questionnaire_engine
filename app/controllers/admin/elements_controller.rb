@@ -84,12 +84,14 @@ class Admin::ElementsController < ApplicationController
     page_element.destroy if page_element
     
     # If this element is not on any other pages, is not a question or has no answers, Destroy it
-    unless @element.is_a?(Question) && (PageElement.where(:element_id => params[:id]).present? || @element.has_response?)
+    if @element.is_a?(Question) && (PageElement.where(:element_id => params[:id]).present? || @element.has_response?)
+      @element.update_attributes(:question_grid_id => nil, :conditional_id => nil)
+    else
       @element.destroy
     end
 
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
   

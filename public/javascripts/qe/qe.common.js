@@ -30,7 +30,6 @@ function setUpCalendars() {
 }
 
 function setUpJsHelpers() {
-	
 		// ==================
 		// Sortable
 		setUpSortables();
@@ -42,7 +41,7 @@ function setUpJsHelpers() {
   	// ==================
 		$("[title]").tooltip({
 		   // tweak the position
-       offset: [-5, 20],
+       offset: [0, 20],
     
        // use the "slide" effect
        effect: 'slide'

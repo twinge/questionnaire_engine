@@ -69,8 +69,10 @@ class AnswerPagesPresenter < Presenter
     page_list = []
     
     answer_sheets.each do |answer_sheet|
-      answer_sheet.pages.visible.each do |page|
-        page_list << new_page_link(answer_sheet, page)
+      answer_sheet.question_sheets.each do |qs|
+        qs.pages.visible.each do |page|
+          page_list << new_page_link(answer_sheet, page)
+        end
       end
     end
     
