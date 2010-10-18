@@ -33,7 +33,7 @@ class Admin::ElementsController < ApplicationController
     @questions = params[:element_type].constantize.active.order('label')
     params[:element] ||= {}
     if params[:element][:style]
-      @questions = @questions.where(:style => params[:element][:style])
+      @questions = @questions.where(:style => params[:element][:style]).all.uniq
     end
   end
   

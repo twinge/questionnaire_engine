@@ -53,7 +53,7 @@ function selectElement(id) {
     activeElement = id;
     switchTab('properties');
     
-    if( $('#element_label')) $('#element_label').focus();
+    // if( $('#element_label')) $('#element_label').focus();
 }
 
 function clearCurrentElement() {
