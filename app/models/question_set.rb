@@ -26,7 +26,7 @@ class QuestionSet
     # loop over form values
     params ||= {}
     params.each do |question_id, response|
-      raise question_id.inspect if questions_indexed[question_id.to_i].nil?
+      next if questions_indexed[question_id.to_i].nil? # the rare case where a question was removed after the app was opened.
       # update each question with the posted response
       questions_indexed[question_id.to_i].set_response(posted_values(response), answer_sheet)
     end

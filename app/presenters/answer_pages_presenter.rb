@@ -23,16 +23,16 @@ class AnswerPagesPresenter < Presenter
     end
     @active_answer_sheet = @answer_sheets.first
     
-    @page_links = pages(@answer_sheets, custom_pages)
+    @page_links = page_list(@answer_sheets, custom_pages)
   end
     
   def questions_for_page(page_id=:first)
-    @active_page = @active_answer_sheet.pages.visible.find(page_id)
+    @active_page = page_id == :first ? pages.first : pages.detect {|p| p.id == page_id.to_i}
     QuestionSet.new(@active_page.elements, @active_answer_sheet)
   end
     
   def all_questions_for_page(page_id=:first)
-    @active_page = @active_answer_sheet.pages.visible.find(page_id)
+    @active_page = page_id == :first ? pages.first : pages.detect {|p| p.id == page_id.to_i}
     QuestionSet.new(@active_page.all_elements, @active_answer_sheet)
   end
   
@@ -65,19 +65,28 @@ class AnswerPagesPresenter < Presenter
   protected
   
   # for pages_list sidebar
-  def pages(answer_sheets, custom_pages = nil)
+  def page_list(answer_sheets, custom_pages = nil)
     page_list = []
-    
     answer_sheets.each do |answer_sheet|
+      pages(answer_sheet).each do |page|
+        page_list << new_page_link(answer_sheet, page)
+      end
+    end
+    page_list = page_list + custom_pages unless custom_pages.nil?
+    page_list
+  end
+  
+  def pages(answer_sheet = active_answer_sheet)
+    unless @pages && @pages[answer_sheet.id]
+      @pages ||= {}
+      @pages[answer_sheet.id] = []
       answer_sheet.question_sheets.each do |qs|
         qs.pages.visible.each do |page|
-          page_list << new_page_link(answer_sheet, page)
+          @pages[answer_sheet.id] << page
         end
       end
     end
-    
-    page_list = page_list + custom_pages unless custom_pages.nil?
-    page_list
+    @pages[answer_sheet.id]
   end
 
   def new_page_link(answer_sheet, page)
