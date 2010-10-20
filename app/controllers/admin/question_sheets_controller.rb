@@ -10,8 +10,8 @@ class Admin::QuestionSheetsController < ApplicationController
   # list of all questionnaires/forms to edit
   # GET /question_sheets
   def index
-    @active_question_sheets = QuestionSheet.active
-    @archived_question_sheets = QuestionSheet.archived
+    @active_question_sheets = QuestionSheet.active.order('label')
+    @archived_question_sheets = QuestionSheet.archived.order('label')
 
     respond_to do |format|
       format.html # index.rhtml
