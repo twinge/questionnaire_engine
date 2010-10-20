@@ -21,7 +21,7 @@
   <li><p>An invitation will be sent to this reference_question when you submit your application.  If you would
   	like to get a headstart, please feel free to click 'Send Email Invitation' below.</p></li>
 
-  <li><%= link_to 'Send Email Invitation', @answer_sheet ? send_reference_invite_answer_sheet_path(@answer_sheet, :reference_question_id => reference_question.id) : '#', :with => "$(this).closest('form').serialize()", :remote => true %>
-  	Invitation last sent: <span id="ref_last_sent_<%= reference_question.id %>"><% unless reference.email_sent_at.nil? -%><%= reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %><% end -%></span></li>
+  <li><%= link_to('Send Email Invitation', @answer_sheet ? send_reference_invite_answer_sheet_path(@answer_sheet, :reference_id => reference.id) : '#', :class => 'reference_send_invite') %>
+  	Invitation last sent: <span id="ref_last_sent_<%= reference.id %>"><% unless reference.email_sent_at.nil? -%><%= reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %><% end -%></span></li>
   </ul>
 </div>

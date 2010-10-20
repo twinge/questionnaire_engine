@@ -1,6 +1,15 @@
 // used by answer sheets
 // NOTE: must restart server after changes, to copy to plugin_assets
 (function($) {
+	$(function() {
+		$('.reference_send_invite').live('click', function() {
+      var el = this;
+			var data = $(el).closest('form').serializeArray();
+			data.push({name: 'answer_sheet_type', value: answer_sheet_type});
+      $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST'});
+			return false;
+		});
+	});
 	$.qe = {};
 	$.qe.pageHandler = {
 	  initialize : function(page) {

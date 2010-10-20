@@ -22,6 +22,14 @@ class AnswerPagesController < ApplicationController
     
     @elements = questions.elements
     
+    # Save references
+    if params[:reference].present?
+      params[:reference].each do |id, values|
+        ref = @answer_sheet.reference_sheets.find(id)
+        ref.update_attributes(values)
+      end
+    end
+    
     respond_to do |format|
       format.js { head :ok }
       #format.html

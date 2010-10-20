@@ -4,15 +4,17 @@
 class ReferenceQuestion < Question
   
   def response(app=nil)
-    id = super
-    id.present? ? ReferenceSheet.find(id) : ReferenceSheet.new
+    return unless app
+    ReferenceSheet.find_by_question_id_and_applicant_answer_sheet_id(id, app.id) || ReferenceSheet.create(:applicant_answer_sheet_id => app.id, :question_id => id) 
   end
   
   def display_response(app=nil)
+    return unless app
     return format_date_response(app)
   end
   
   def format_date_response(app=nil)
+    return unless app
     r = response(app)
     r = r.strftime("%m/%d/%Y") unless r.blank?
     r
