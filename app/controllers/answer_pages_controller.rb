@@ -64,10 +64,10 @@ class AnswerPagesController < ApplicationController
   
   def get_answer_sheets
     @answer_sheet = answer_sheet_type.find(params[:answer_sheet_id])
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
   end
 
   def answer_sheet_type
-    (Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
+    (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
   end
 end

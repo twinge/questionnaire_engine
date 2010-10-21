@@ -22,9 +22,9 @@ class AnswerSheetsController < ApplicationController
   # display answer sheet for data capture (page 1)
   # GET /answer_sheets/1;edit
   def edit
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
     @elements = @presenter.questions_for_page(:first).elements
-    @page = Page.find_by_number(1)
+    @page = @presenter.pages.first
   end
   
   # display captured answers (read-only)
@@ -55,7 +55,7 @@ class AnswerSheetsController < ApplicationController
   
   protected 
     def answer_sheet_type
-      (Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
+      (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
     end
     
     def get_answer_sheet

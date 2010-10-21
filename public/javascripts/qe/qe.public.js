@@ -5,6 +5,7 @@
 		$('.reference_send_invite').live('click', function() {
       var el = this;
 			var data = $(el).closest('form').serializeArray();
+			data.push({name: 'answer_sheet_type', value: answer_sheet_type});
       $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST'});
 			return false;
 		});
@@ -89,6 +90,7 @@
 					$.ajax({
              url: url,
              type: 'GET',
+						 data: {'answer_sheet_type':answer_sheet_type},
 						 success: $.qe.pageHandler.pageLoaded,
              error: function (xhr, status, error) {
                  alert("There was a problem loading that page. We've been notified and will fix it as soon as possible. To work on other pages, please refresh the website.");
@@ -137,7 +139,7 @@
 	  captureForm : function(page) {      
 	    form_el = $('#' + page.attr('id') + '-form');
 	    if( form_el[0] == null ) return null;
-	    return {url: form_el.attr('action'), data: form_el.serialize()};
+			return {url: form_el.attr('action'), data: form_el.serialize() + '&answer_sheet_type=' + answer_sheet_type};
 	  },
   
   

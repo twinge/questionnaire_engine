@@ -10,11 +10,9 @@ require_dependency 'presenter'
 class AnswerPagesPresenter < Presenter
   unloadable
   
-  #attr_reader :answer_sheet, :question_sheet
-
   attr_accessor :active_answer_sheet, :page_links, :active_page
   
-  def initialize(controller, answer_sheets, custom_pages = nil)
+  def initialize(controller, answer_sheets, a = nil, custom_pages = nil)
     super(controller)
     if answer_sheets.kind_of?(AnswerSheet) 
       @answer_sheets = [answer_sheets]  # stuff single AnswerSheet into an array
@@ -23,7 +21,7 @@ class AnswerPagesPresenter < Presenter
     end
     @active_answer_sheet = @answer_sheets.first
     
-    @page_links = page_list(@answer_sheets, custom_pages)
+    @page_links = page_list(@answer_sheets, a, custom_pages)
   end
     
   def questions_for_page(page_id=:first)
@@ -64,20 +62,6 @@ class AnswerPagesPresenter < Presenter
     end
   end
   
-  protected
-  
-  # for pages_list sidebar
-  def page_list(answer_sheets, custom_pages = nil)
-    page_list = []
-    answer_sheets.each do |answer_sheet|
-      pages(answer_sheet).each do |page|
-        page_list << new_page_link(answer_sheet, page)
-      end
-    end
-    page_list = page_list + custom_pages unless custom_pages.nil?
-    page_list
-  end
-  
   def pages(answer_sheet = active_answer_sheet)
     unless @pages && @pages[answer_sheet.id]
       @pages ||= {}
@@ -90,9 +74,23 @@ class AnswerPagesPresenter < Presenter
     end
     @pages[answer_sheet.id]
   end
+  
+  protected
+  
+  # for pages_list sidebar
+  def page_list(answer_sheets, a = nil, custom_pages = nil)
+    page_list = []
+    answer_sheets.each do |answer_sheet|
+      pages(answer_sheet).each do |page|
+        page_list << new_page_link(answer_sheet, page, a)
+      end
+    end
+    page_list = page_list + custom_pages unless custom_pages.nil?
+    page_list
+  end
 
-  def new_page_link(answer_sheet, page)
-    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page), dom_page(answer_sheet, page))
+  def new_page_link(answer_sheet, page, a = nil)
+    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page))
   end
   
   # page is identified by answer sheet, so can have multiple sheets loaded at once
