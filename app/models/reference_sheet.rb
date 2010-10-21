@@ -38,5 +38,9 @@ class ReferenceSheet < AnswerSheet
   def reference
     self
   end
+  
+  def to_s
+    name
+  end
 end
 

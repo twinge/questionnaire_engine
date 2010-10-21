@@ -20,7 +20,7 @@ class Element < ActiveRecord::Base
   # validates_length_of :label, :maximum => 255, :allow_nil => true
 
   # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
-  validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField ReferenceQuestion}  # leaf classes
+  validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField ReferenceQuestion PaymentQuestion}  # leaf classes
   
   before_validation :set_defaults, :on => :create
   
@@ -89,6 +89,10 @@ class Element < ActiveRecord::Base
     end
   end
   
+  def reuseable?
+    (self.is_a?(Question) || self.is_a?(QuestionGrid) || self.is_a?(QuestionGridWithTotal))
+  end
+  
   protected
   def set_defaults
     if self.content.blank?
@@ -100,19 +104,20 @@ class Element < ActiveRecord::Base
 
     if self.style.blank?
       case self.class.to_s
-        when 'TextField' then self.style ||= 'essay'
-        when 'AttachmentField' then self.style ||= 'attachment'
-        when "DateField" then self.style ||= "date"
-        when "FileField" then self.style ||= "file"
-        when "Paragraph" then self.style ||= "paragraph"
-        when "Section" then self.style ||= "section"
-        when "ChoiceField" then self.style = "checkbox"
-        when "QuestionGrid" then self.style ||= "grid"
-        when "QuestionGridWithTotal" then self.style ||= "grid_with_total"
-        when "SchoolPicker" then self.style ||= "school_picker"
-        when "ProjectPreference" then self.style ||= "project_preference"
-        when "StateChooser" then self.style ||= "state_chooser"
-        when "ReferenceQuestion" then self.style ||= "peer"
+      when 'TextField' then self.style ||= 'essay'
+      when "DateField" then self.style ||= "date"
+      when "FileField" then self.style ||= "file"
+      when "Paragraph" then self.style ||= "paragraph"
+      when "Section" then self.style ||= "section"
+      when "ChoiceField" then self.style = "checkbox"
+      when "QuestionGrid" then self.style ||= "grid"
+      when "QuestionGridWithTotal" then self.style ||= "grid_with_total"
+      when "SchoolPicker" then self.style ||= "school_picker"
+      when "ProjectPreference" then self.style ||= "project_preference"
+      when "StateChooser" then self.style ||= "state_chooser"
+      when "ReferenceQuestion" then self.style ||= "peer"
+      else
+        self.style ||= self.class.to_s.underscore
       end 
     end
   end

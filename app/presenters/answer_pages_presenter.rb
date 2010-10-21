@@ -90,7 +90,7 @@ class AnswerPagesPresenter < Presenter
   end
 
   def new_page_link(answer_sheet, page, a = nil)
-    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page))
+    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page)) if page
   end
   
   # page is identified by answer sheet, so can have multiple sheets loaded at once

@@ -9,15 +9,7 @@ class ReferenceQuestion < Question
   end
   
   def display_response(app=nil)
-    return unless app
-    return format_date_response(app)
-  end
-  
-  def format_date_response(app=nil)
-    return unless app
-    r = response(app)
-    r = r.strftime("%m/%d/%Y") unless r.blank?
-    r
+    return response(app).to_s
   end
   
   # which view to render this element?

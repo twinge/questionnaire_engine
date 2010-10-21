@@ -44,7 +44,7 @@ class QuestionSheet < ActiveRecord::Base
       new_page.question_sheet_id = new_sheet.id
       new_page.save(:validate => false)
       page.elements.each do |element|
-        if !self.archived? && (element.is_a?(Question) || element.is_a?(QuestionGrid) || element.is_a?(QuestionGridWithTotal))
+        if !self.archived? && element.reuseable?
           PageElement.create(:element => element, :page => new_page)
         else
           element.duplicate(new_page)
