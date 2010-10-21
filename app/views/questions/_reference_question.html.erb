@@ -1,4 +1,5 @@
 <% reference = reference_question.response(@answer_sheet) %>
+<% reference ||= ReferenceSheet.new %>
 <div id="<%= dom_id(reference_question) %>">
   <ul class="questions level1">
   <li>
