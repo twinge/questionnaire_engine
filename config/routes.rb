@@ -1,6 +1,7 @@
 Rails::Application.routes.draw do 
   
   namespace :admin do
+    resources :email_templates
     resources :question_sheets do 
       member do
         post :archive

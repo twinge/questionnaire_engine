@@ -1,7 +1,7 @@
 page << <<-END
   $('#page-preview').html('#{escape_javascript(render('admin/question_pages/question_page'))}')
-  $('#panel').html('#{escape_javascript(render('panels/prop_page', :page => @page))}')
-  $('#nav-controls').html('#{escape_javascript(render('panels/nav_controls'))}')
+  $('#panel').html('#{escape_javascript(render('admin/panels/prop_page', :page => @page))}')
+  $('#nav-controls').html('#{escape_javascript(render('admin/panels/nav_controls'))}')
   switchTab('properties');
   selectPage();
   $('#list-pages li').removeClass('active')

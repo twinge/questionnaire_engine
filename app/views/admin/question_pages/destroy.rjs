@@ -1,6 +1,6 @@
 page << <<-END
-  $('#panel').html('#{escape_javascript(render('panels/pages_list'))}')
+  $('#panel').html('#{escape_javascript(render('admin/panels/pages_list'))}')
   $('#page-preview').html('#{escape_javascript(render('admin/question_pages/question_page'))}')
-  $('#nav-controls').html('#{escape_javascript(render('panels/nav_controls'))}')
+  $('#nav-controls').html('#{escape_javascript(render('admin/panels/nav_controls'))}')
   switchTab("pages_list")
 END

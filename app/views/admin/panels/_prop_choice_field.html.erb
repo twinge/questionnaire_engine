@@ -14,7 +14,7 @@
         <%= select_tag 'element[style]', option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style),
           :onchange => "if(['acceptance', 'yes-no'].include($F('element[style]'))) $('choices_section').hide(); else $('choices_section').show();" %></div>
 
-<%= render 'panels/common_fields', :f => f %>
+<%= render 'admin/panels/common_fields', :f => f %>
 
 <div id="choices_section" style="display:<%= ['acceptance', 'yes-no'].include?(@element.style) ? 'none' : 'block' %>">
   <h3>Choices<br/>
