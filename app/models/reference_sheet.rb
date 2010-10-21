@@ -34,5 +34,9 @@ class ReferenceSheet < AnswerSheet
   def name
     [first_name, last_name].join(' ')
   end
+  
+  def reference
+    self
+  end
 end
 
