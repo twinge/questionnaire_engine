@@ -535,6 +535,15 @@ div.tooltip {
   padding:25px;
   width:300px;
 }
+
 .ui-state-highlight {
 	min-height: 200px;
+	border-width: 4px;
+	padding: 4px;
+	margin: -8px;
+}
+
+.inlinecheck {
+  float: left;
+  margin-right: 5px;
 }

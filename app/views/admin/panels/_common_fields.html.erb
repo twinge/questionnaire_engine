@@ -12,13 +12,13 @@
 <p>
   
 <p>
-  <%= f.check_box :required %>
+  <%= f.check_box :required, :class => 'inlinecheck' %>
   <label for="element_required" class="inline">This field is required</label>
 </p>
 
-<p><%= f.check_box :is_confidential %> <label for="element_is_confidential" class="inline">This field is confidential</label></p>
+<p><%= f.check_box :is_confidential, :class => 'inlinecheck' %> <label for="element_is_confidential" class="inline">This field is confidential</label></p>
 
 <p>
-  <%= f.check_box :hide_label %>
+  <%= f.check_box :hide_label, :class => 'inlinecheck' %>
   <label for="element_hide_label" class="inline">Hide Label</label>
 </p>
