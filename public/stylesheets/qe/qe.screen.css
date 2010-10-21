@@ -84,10 +84,20 @@ p.instruction {
   margin: 10px 10px 10px 0;  
 }
 
+#legend {
+  font-size: 11px;
+  margin: 0 0 0 5px;  
+  line-height: 2em
+}
+
+#legend img {
+  vertical-align: middle;
+}
+
 ul#list-pages {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0 0 0;
+  list-style:none outside none;
+  margin:10px 0 0;
+  padding:0;
 }
 
 #list-pages li a {
