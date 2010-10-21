@@ -1,6 +1,7 @@
 function setUpSortables() {
 	$('[data-sortable]').sortable({axis:'y', 
 																  dropOnEmpty:false, 
+																	activeClass: 'moving',
 																  update: function(event, ui) {
 																		sortable = this;
 																		$.ajax({data:$(this).sortable('serialize',{key:sortable.id + '[]'}),
@@ -18,6 +19,7 @@ function setUpSortables() {
 	
 		
 	$('.droppable').droppable({
+		activeClass: 'ui-state-highlight',
 		drop: function( event, ui ) {
 			$.post($(this).attr('data-url'), {draggable_element: ui.draggable.attr('id')}, function() {}, 'script')
 		},

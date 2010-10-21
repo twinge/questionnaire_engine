@@ -55,7 +55,7 @@ class AnswerSheetsController < ApplicationController
   
   protected 
     def answer_sheet_type
-      (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
+      (Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
     end
     
     def get_answer_sheet

@@ -68,6 +68,6 @@ class AnswerPagesController < ApplicationController
   end
 
   def answer_sheet_type
-    (params[:answer_sheet_type] || 'AnswerSheet').constantize
+    (Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
   end
 end
