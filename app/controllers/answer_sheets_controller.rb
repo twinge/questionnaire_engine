@@ -40,13 +40,13 @@ class AnswerSheetsController < ApplicationController
     if @reference.send_invite
 
       # Send notification to applicant
-      # Notifier.deliver_notification(@application.applicant.email, # RECIPIENTS
-      #                               "help@campuscrusadeforchrist.com", # FROM
-      #                               "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
-      #                               {'applicant_full_name' => @application.applicant.informal_full_name,
-      #                                'reference_full_name' => @reference.name,
-      #                                'reference_email' => @reference.email,
-      #                                'application_url' => edit_application_url(@application)})
+      Notifier.deliver_notification(@answer_sheet.email, # RECIPIENTS
+                                    "help@campuscrusadeforchrist.com", # FROM
+                                    "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
+                                    {'applicant_full_name' => @answer_sheet.name,
+                                     'reference_full_name' => @reference.name,
+                                     'reference_email' => @reference.email,
+                                     'application_url' => edit_answer_sheet_url(@answer_sheet)})
 
       @reference.email_sent_at = Time.now
       @reference.save

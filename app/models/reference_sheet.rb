@@ -1,13 +1,15 @@
 class ReferenceSheet < AnswerSheet
+  include Rails.application.routes.url_helpers
   set_table_name "#{Questionnaire.table_name_prefix}references"
   set_inheritance_column 'fake'
   
-  belongs_to :question
-  belongs_to :applicant_answer_sheet, :class_name => "AnswerSheet", :foreign_key => "applicant_answer_sheet_id"
+  belongs_to :question, :class_name => 'Element', :foreign_key => 'question_id'
+  belongs_to :applicant_answer_sheet, :class_name => Questionnaire.answer_sheet_class, :foreign_key => "applicant_answer_sheet_id"
   before_create :generate_access_key
   
+  alias_method :applicant, :applicant_answer_sheet
   def generate_access_key
-    self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s) + '_' + Digest::SHA2.hexdigest((object_id + Time.now.to_i).to_s)
+    self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
   end
   
   def email_sent?() !self.email_sent_at.nil? end
@@ -18,15 +20,19 @@ class ReferenceSheet < AnswerSheet
     
     application = self.applicant_answer_sheet
     
-    # Notifier.deliver_notification(self.email,
-    #                               Questionnaire.from_email, 
-    #                               "Reference Invite", 
-    #                               {'reference_full_name' => self.name, 
-    #                                'applicant_full_name' => application.applicant.informal_full_name,
-    #                                'applicant_email' => application.applicant.email, 
-    #                                'applicant_home_phone' => application.applicant.current_address.homePhone, 
-    #                                'reference_url' => edit_application_reference_url(application, self.token, :host => ActionMailer::Base.default_url_options[:host])})
+    Notifier.deliver_notification(self.email,
+                                  Questionnaire.from_email, 
+                                  "Reference Invite", 
+                                  {'reference_full_name' => self.name, 
+                                   'applicant_full_name' => application.name,
+                                   'applicant_email' => application.email, 
+                                   'applicant_home_phone' => application.phone, 
+                                   'reference_url' => edit_reference_sheet_url(self, :a => self.access_key, :host => ActionMailer::Base.default_url_options[:host])})
     true
+  end
+  
+  def name
+    [first_name, last_name].join(' ')
   end
 end
 

@@ -32,6 +32,7 @@ Rails::Application.routes.draw do
   end
 
   # form capture and review
+  resources :reference_sheets
   resources :answer_sheets do 
     member do
       post :send_reference_invite
