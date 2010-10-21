@@ -1,7 +1,7 @@
 <% css_class = 'radio ' -%>
 <% if radio_button_field.hide_option_labels? && !['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
   <tr id="<%= dom_id(radio_button_field) %>">
-    <td>
+    <td class="col1">
       <label for="<%= dom_id(radio_button_field) %>" class="desc">
         <%= radio_button_field.label %>
         <% if radio_button_field.required? -%><span class="required">required</span><% end -%>
@@ -9,7 +9,7 @@
       </label>
     </td>
   <% radio_button_field.choices.each_with_index do |choice, num| -%>
-    <td>
+    <td class="col">
       <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
          last_choice =  (num == radio_button_field.choices.length - 1)
          css_class += radio_button_field.validation_class if last_choice
