@@ -1,7 +1,7 @@
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
     <% if question_grid.label.present? && !question_grid.hide_label? -%>
-      <label class="desc"><%= question_grid.label %></label>
+      <label class="desc gridname"><%= question_grid.label %></label>
     <% end %>
     <div class="sub_q">
       <!-- Create a sortable list for each grid on the page -->
@@ -16,7 +16,7 @@
   </div>
 <%- else -%>
   <% if question_grid.label.present? && !question_grid.hide_label? -%>
-    <label class="desc"><%= question_grid.label %></label>
+    <label class="desc gridname"><%= question_grid.label %></label>
   <% end %>
   <% headers = question_grid.cols.to_s.split(';') %>
   <% if headers.length > 1 %>
@@ -36,7 +36,7 @@
     	<tr >
     		<%- col_count = 0
     			question_grid.elements.each do |element| -%>
-    			<td id="element_<%= element.id %>">
+    			<td id="element_<%= element.id %>" class="hidecell">
     				<%# grid_el = @elements.to_a.find {|el| el.id == element.id} %>
     				<%= render :partial => 'answer_pages/element', :object => element, :locals => {:col => col_count} %>
     			</td>
@@ -57,5 +57,6 @@
     <% question_grid.elements.each do |element| -%>
       <div class="row" id="element_<%= element.id %>"><%= render :partial => 'answer_pages/element', :object => element, :locals => {:in_grid => true} %></div>
     <% end %>
+    <div class="clear"></div>
   <% end %>
 <%- end -%>
