@@ -41,7 +41,7 @@ class AnswerSheetsController < ApplicationController
 
       # Send notification to applicant
       Notifier.deliver_notification(@answer_sheet.email, # RECIPIENTS
-                                    "help@campuscrusadeforchrist.com", # FROM
+                                    Questionnaire.from_email, # FROM
                                     "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
                                     {'applicant_full_name' => @answer_sheet.name,
                                      'reference_full_name' => @reference.name,
@@ -55,7 +55,7 @@ class AnswerSheetsController < ApplicationController
   
   protected 
     def answer_sheet_type
-      (params[:answer_sheet_type] || 'AnswerSheet').constantize
+      (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
     end
     
     def get_answer_sheet
