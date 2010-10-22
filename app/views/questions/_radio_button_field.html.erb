@@ -5,7 +5,7 @@
       <label for="<%= dom_id(radio_button_field) %>" class="desc">
         <%= radio_button_field.label %>
         <% if radio_button_field.required? -%><span class="required">required</span><% end -%>
-        <%= image_tag('qe/icons/question-balloon.png', :title => radio_button_field.tooltip) if radio_button_field.tooltip.present? %>
+        <%= tip(radio_button_field.tooltip) if radio_button_field.tooltip.present? %>
       </label>
     </td>
   <% radio_button_field.choices.each_with_index do |choice, num| -%>

@@ -6,6 +6,6 @@ page << <<-END
   $('#link-#{dom_id(@page)}').addClass('active')
   clearCurrentElement()
   activeElement = ''
-	$("[title]").tooltip();
+	$(".tip[title]").tooltip();
 END
 

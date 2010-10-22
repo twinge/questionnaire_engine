@@ -66,4 +66,8 @@ module ApplicationHelper
     options.merge!({'data-calendar' => true})
     text_field_tag(name, value, options )
   end
+  
+  def tip(t)
+    image_tag('qe/icons/question-balloon.png', :title => t, :class => 'tip')
+  end
 end

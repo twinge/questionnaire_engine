@@ -2,7 +2,7 @@
   <label for="<%= dom_id(element) %>" class="desc">
     <%= element.label %>
     <% if element.required? -%><span class="required">required</span><% end -%>
-    <%= image_tag('qe/icons/question-balloon.png', :title => element.tooltip) if element.tooltip.present? %>
+    <%= tip(element.tooltip) if element.tooltip.present? %>
   </label>
 <% end -%>
 

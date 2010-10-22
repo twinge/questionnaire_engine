@@ -4,7 +4,7 @@
       <label for="<%= dom_id(checkbox_field) %>" class="desc">
         <%= checkbox_field.label %>
         <% if checkbox_field.required? -%><span class="required">required</span><% end -%>
-        <%= image_tag('qe/icons/question-balloon.png', :title => checkbox_field.tooltip) if checkbox_field.tooltip.present? %>
+        <%= tip(checkbox_field.tooltip) if checkbox_field.tooltip.present? %>
       </label>
     </td>
   <% checkbox_field.choices.each_with_index do |choice, num| -%>
