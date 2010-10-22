@@ -93,6 +93,10 @@ class Element < ActiveRecord::Base
     (self.is_a?(Question) || self.is_a?(QuestionGrid) || self.is_a?(QuestionGridWithTotal))
   end
   
+  def has_response?
+    false
+  end
+  
   protected
   def set_defaults
     if self.content.blank?

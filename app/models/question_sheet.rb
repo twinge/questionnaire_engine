@@ -40,16 +40,7 @@ class QuestionSheet < ActiveRecord::Base
     new_sheet.label = self.label + ' - COPY'
     new_sheet.save(:validate => false)
     self.pages.each do |page|
-      new_page = Page.new(page.attributes)
-      new_page.question_sheet_id = new_sheet.id
-      new_page.save(:validate => false)
-      page.elements.each do |element|
-        if !self.archived? && element.reuseable?
-          PageElement.create(:element => element, :page => new_page)
-        else
-          element.duplicate(new_page)
-        end
-      end
+      page.copy_to(new_sheet)
     end
     new_sheet
   end
