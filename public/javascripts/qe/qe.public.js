@@ -9,13 +9,17 @@
       $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST'});
 			return false;
 		});
-		$('textarea[maxlength]').live('keyup', function(){
+		$('textarea[maxlength]').live('focus', function() {
+			var max = parseInt($(this).attr('maxlength'));
+			$(this).parent().find('.charsRemaining').html('You have ' + (max - $(this).val().length) + ' characters remaining');
+		}).live('keyup', function(){
 			var max = parseInt($(this).attr('maxlength'));
 			if($(this).val().length > max){
 				$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
 			}
-
 			$(this).parent().find('.charsRemaining').html('You have ' + (max - $(this).val().length) + ' characters remaining');
+		}).live('blur', function() {
+			$(this).parent().find('.charsRemaining').html('');
 		});
 
 	});
