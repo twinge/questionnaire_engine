@@ -42,6 +42,7 @@ class AnswerPagesPresenter < Presenter
   end
   
   def active_page
+    return unless @active_page
     link = new_page_link(@active_answer_sheet, @active_page)
     link.save_path = answer_sheet_page_path(@active_answer_sheet, @active_page)
     link
