@@ -9,6 +9,15 @@
       $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST'});
 			return false;
 		});
+		$('textarea[maxlength]').live('keyup', function(){
+			var max = parseInt($(this).attr('maxlength'));
+			if($(this).val().length > max){
+				$(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+			}
+
+			$(this).parent().find('.charsRemaining').html('You have ' + (max - $(this).val().length) + ' characters remaining');
+		});
+
 	});
 	$.qe = {};
 	$.qe.pageHandler = {
@@ -93,7 +102,8 @@
 						 data: {'answer_sheet_type':answer_sheet_type},
 						 success: $.qe.pageHandler.pageLoaded,
              error: function (xhr, status, error) {
-                 alert("There was a problem loading that page. We've been notified and will fix it as soon as possible. To work on other pages, please refresh the website.");
+                alert("There was a problem loading that page. We've been notified and will fix it as soon as possible. To work on other pages, please refresh the website.");
+								document.location = document.location;
              }
          });
 		      // new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 

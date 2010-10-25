@@ -1,42 +1,42 @@
 <% if element.kind == "QuestionGrid" -%>
-<li>
-	<label class="desc"><%= element.label %></label>
-	<table class="grid">
-	<%- if element.cols -%>
-	<tr>
-	<%- element.cols.split(';').each do |header| -%>
-		<th><%= header || '&nbsp;' %></th>
-	<%- end -%>
-	</tr>
-	<%- end -%>
-	<tr >
-		<%- col_count = 0
-			element.elements.each do |grid_element| -%>
-		<td id="element_<%= element.id %>">
-			<% if %w(Paragraph).include?(grid_element.kind) -%>
-  			<%= grid_element.content %>
-			<% else -%>
-  			<% el = elements.find {|el| el.id == grid_element.id } -%>
-  			<%= el.display_response(@answer_sheet) %>
-			<% end -%>
-		</td>
-		<%- 	col_count += 1
-				if col_count % element.num_cols == 0 then col_count = 0 -%></tr><tr><%- end -%>
-		<%-	end -%>
-		<%- while col_count < element.num_cols do 
-				col_count += 1-%>
-				<td>&nbsp;</td>
-		<%- end unless col_count == 0-%>
-	</tr>
-	</table>
-</li>
+  <li>
+  	<label class="desc"><%= element.label %></label>
+  	<table class="grid">
+  	<%- if element.cols -%>
+  	<tr>
+  	<%- element.cols.split(';').each do |header| -%>
+  		<th><%= header || '&nbsp;' %></th>
+  	<%- end -%>
+  	</tr>
+  	<%- end -%>
+  	<tr >
+  		<%- col_count = 0
+  			element.elements.each do |grid_element| -%>
+  		<td id="element_<%= element.id %>">
+  			<% if %w(Paragraph).include?(grid_element.kind) -%>
+    			<%= grid_element.content %>
+  			<% else -%>
+    			<% el = elements.find {|el| el.id == grid_element.id } -%>
+    			<%= el.display_response(@answer_sheet) %>
+  			<% end -%>
+  		</td>
+  		<%- 	col_count += 1
+  				if col_count % element.num_cols == 0 then col_count = 0 -%></tr><tr><%- end -%>
+  		<%-	end -%>
+  		<%- while col_count < element.num_cols do 
+  				col_count += 1-%>
+  				<td>&nbsp;</td>
+  		<%- end unless col_count == 0-%>
+  	</tr>
+  	</table>
+  </li>
 <% elsif element.question_grid_id.nil? && element.conditional_id.nil? -%>
-<li>
-  <% if element.question? -%>
-      <label class="desc"><%= element.label %></label>
-      <span class="answer"><%= element.display_response(@answer_sheet) %></span>
-  <% else -%>
-    <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
-  <% end -%>
-</li>
+  <li>
+    <% if element.question? -%>
+        <label class="desc"><%= element.label %></label>
+        <span class="answer"><%= element.display_response(@answer_sheet) %></span>
+    <% else -%>
+      <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
+    <% end -%>
+  </li>
 <% end -%>
