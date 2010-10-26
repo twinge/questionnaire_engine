@@ -10,7 +10,7 @@ require_dependency 'presenter'
 class AnswerPagesPresenter < Presenter
   unloadable
   
-  attr_accessor :active_answer_sheet, :page_links, :active_page
+  attr_accessor :active_answer_sheet, :page_links, :active_page, :pages
   
   def initialize(controller, answer_sheets, a = nil, custom_pages = nil)
     super(controller)
@@ -20,6 +20,7 @@ class AnswerPagesPresenter < Presenter
       @answer_sheets = answer_sheets
     end
     @active_answer_sheet = @answer_sheets.first
+    initialize_pages(@active_answer_sheet)
     
     @page_links = page_list(@answer_sheets, a, custom_pages)
   end
@@ -63,17 +64,13 @@ class AnswerPagesPresenter < Presenter
     end
   end
   
-  def pages(answer_sheet = active_answer_sheet)
-    unless @pages && @pages[answer_sheet.id]
-      @pages ||= {}
-      @pages[answer_sheet.id] = []
-      answer_sheet.question_sheets.each do |qs|
-        qs.pages.visible.each do |page|
-          @pages[answer_sheet.id] << page
-        end
+  def initialize_pages(answer_sheet)
+    @pages = []
+    answer_sheet.question_sheets.each do |qs|
+      qs.pages.visible.each do |page|
+        @pages << page
       end
     end
-    @pages[answer_sheet.id]
   end
   
   protected
@@ -82,7 +79,7 @@ class AnswerPagesPresenter < Presenter
   def page_list(answer_sheets, a = nil, custom_pages = nil)
     page_list = []
     answer_sheets.each do |answer_sheet|
-      pages(answer_sheet).each do |page|
+      pages.each do |page|
         page_list << new_page_link(answer_sheet, page, a)
       end
     end
