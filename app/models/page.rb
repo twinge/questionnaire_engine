@@ -8,8 +8,8 @@ class Page < ActiveRecord::Base
   has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
   has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :element
   has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
-  has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
-          :conditions => 'toggle_id is NULL', :dependent => :nullify
+  # has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
+  #         :conditions => 'toggle_id is NULL', :dependent => :nullify
   
   acts_as_list :column => :number, :scope => :question_sheet_id
   
@@ -28,14 +28,14 @@ class Page < ActiveRecord::Base
     
   # a page is disabled if there is a condition, and that condition evaluates to false
   # could set multiple conditions to influence this question, in which case all must be met
-  def active?
-    # find first condition that doesn't pass (nil if all pass)
-    self.conditions.detect { |c| !c.evaluate? }.nil?  # true if all pass
-  end
-    
-  def question?
-    false
-  end
+  # def active?
+  #   # find first condition that doesn't pass (nil if all pass)
+  #   self.conditions.detect { |c| !c.evaluate? }.nil?  # true if all pass
+  # end
+  #   
+  # def question?
+  #   false
+  # end
 
   def questions_before_position(position)
     self.elements.where(["#{PageElement.table_name}.position < ?", position])
@@ -57,6 +57,18 @@ class Page < ActiveRecord::Base
         element.duplicate(new_page)
       end
     end
+  end
+  
+  def complete?(answer_sheet)
+    all_elements.all? {|e| !e.required?(answer_sheet) || e.has_response?(answer_sheet)}
+  end
+  
+  def started?(answer_sheet)
+    all_elements.any? {|e| e.has_response?(answer_sheet)}
+  end
+  
+  def has_questions?
+    all_elements.any? {|e| e.is_a?(Question)}
   end
   
   

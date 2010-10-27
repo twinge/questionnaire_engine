@@ -1,4 +1,4 @@
-<% css_class = 'checkbox ' + acceptance.validation_class 
+<% css_class = 'checkbox ' + acceptance.validation_class(@answer_sheet)
    checked = acceptance.has_answer?('1', @answer_sheet)
 -%>
 <%= check_box_tag "answers[#{acceptance.id}]", '1',

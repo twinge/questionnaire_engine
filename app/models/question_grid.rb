@@ -14,8 +14,8 @@ class QuestionGrid < Element
     num
   end
   
-  def has_response?
-    elements.any?(&:has_response?)
+  def has_response?(answer_sheet = nil)
+    elements.any? {|e| e.has_response?(answer_sheet)}
   end
   
 end

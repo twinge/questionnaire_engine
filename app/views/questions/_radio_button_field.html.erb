@@ -4,7 +4,7 @@
     <td class="col1">
       <label for="<%= dom_id(radio_button_field) %>" class="desc">
         <%= radio_button_field.label %>
-        <% if radio_button_field.required? -%><span class="required">required</span><% end -%>
+        <% if radio_button_field.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
         <%= tip(radio_button_field.tooltip) if radio_button_field.tooltip.present? %>
       </label>
     </td>
@@ -12,7 +12,7 @@
     <td class="col">
       <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
          last_choice =  (num == radio_button_field.choices.length - 1)
-         css_class += radio_button_field.validation_class if last_choice
+         css_class += radio_button_field.validation_class(@answer_sheet) if last_choice
          checked = radio_button_field.has_answer?(choice[1], @answer_sheet) -%>
       <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
             :id => dom_id, 
@@ -27,7 +27,7 @@
   <% radio_button_field.choices.each_with_index do |choice, num| -%>
     <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
        last_choice =  (num == radio_button_field.choices.length - 1)
-       css_class += radio_button_field.validation_class if last_choice
+       css_class += radio_button_field.validation_class(@answer_sheet) if last_choice
        checked = radio_button_field.has_answer?(choice[1], @answer_sheet) -%>
     <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
           :id => dom_id, 

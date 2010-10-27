@@ -31,14 +31,14 @@ class QuestionSet
       questions_indexed[question_id.to_i].set_response(posted_values(response), answer_sheet)
     end
   end
-  
-  def valid?
-    valid = true
-    @questions.each do |question|
-      valid = false unless question.valid_response?  # run through ALL questions
-    end
-    valid
-  end
+  # 
+  # def valid?
+  #   valid = true
+  #   @questions.each do |question|
+  #     valid = false unless question.valid_response?  # run through ALL questions
+  #   end
+  #   valid
+  # end
   
   def any_questions?
     @questions.length > 0

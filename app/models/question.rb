@@ -65,8 +65,8 @@ class Question < Element
   end
   
   # css class names for javascript-based validation
-  def validation_class
-    if self.required?
+  def validation_class(answer_sheet)
+    if self.required?(answer_sheet)
       ' required ' 
     else
       ''
@@ -74,22 +74,22 @@ class Question < Element
   end
   
   # just in case something slips through client-side validation?
-  def valid_response?
-    if self.required? && !self.has_response? then
-      false
-    else
-      # other validations
-      true
-    end
-  end
+  # def valid_response?
+  #   if self.required? && !self.has_response? then
+  #     false
+  #   else
+  #     # other validations
+  #     true
+  #   end
+  # end
   
   # just in case something slips through client-side validation?
-  def valid_response_for_answer_sheet?(answers)
-    return true if !self.required? 
-    answer  = answers.detect {|a| a.question_id == self.id}
-    return answer && answer.value.present?
-    # raise answer.inspect 
-  end
+  # def valid_response_for_answer_sheet?(answers)
+  #    return true if !self.required? 
+  #    answer  = answers.detect {|a| a.question_id == self.id}
+  #    return answer && answer.value.present?
+  #    # raise answer.inspect 
+  #  end
   
   # shortcut to return first answer
   def response(app)
@@ -180,15 +180,22 @@ class Question < Element
   end
   
   # has any sort of non-empty response?
-  def has_response?
-    answers = Answer.where(:question_id => self.id)
+  def has_response?(answer_sheet = nil)
+    if answer_sheet.present?
+      answers = responses(answer_sheet)
+    else
+      answers = Answer.where(:question_id => self.id)
+    end
     return false if answers.length == 0
     answers.each do |answer|   # loop through Answers
-      if !answer.value.blank?    # any response is good enough
-        return true
-      end
+      value = answer.is_a?(Answer) ? answer.value : answer
+      return true if value.present? 
     end
     return false
+  end
+  
+  def required?(answer_sheet = nil)
+    super() || (answer_sheet && choice_field && choice_field.has_answer?(true, answer_sheet))
   end
 
 end

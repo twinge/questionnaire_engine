@@ -1,5 +1,5 @@
 <%= file_field_tag "answers[#{attachment_field.id}]", 
-      :class => 'text ' + attachment_field.validation_class,
+      :class => 'text ' + attachment_field.validation_class(@answer_sheet),
       :id => dom_id(attachment_field),
       :disabled => @answer_sheet.frozen?&&!@answer_sheet.reference?,
       :readonly => @answer_sheet.frozen?&&!@answer_sheet.reference?,

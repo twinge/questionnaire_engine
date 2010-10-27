@@ -39,22 +39,6 @@
 			$(this).parent().find('.charsRemaining').html('');
 		});
 		
-		// Payment submission
-		$('.submit_payment').live('click', function() {
-			var form = $(this).closest('form');
-			$.ajax({url: $(this).attr('data-url'), data: form.serializeArray(), type: 'POST', dataType:'script',
-                        beforeSend: function (xhr) {
-                            $('body').trigger('ajax:loading', xhr);
-                        },
-                        complete: function (xhr) {
-                            $('body').trigger('ajax:complete', xhr);
-                        },
-                        error: function (xhr, status, error) {
-                            $('body').trigger('ajax:failure', [xhr, status, error]);
-                        }
-							})
-			return false;
-		});
 	});
 	$.qe = {};
 	$.qe.pageHandler = {
@@ -77,7 +61,7 @@
 	  // swap to a different page
 	  showPage : function(page) {
 	    // hide the old
-	    $('#' + this.current_page + '-link').removeClass('active'); 
+	    $('#' + this.current_page + '-li').removeClass('active'); 
 	    $('#' + this.current_page).hide();
   
 			// HACK: Need to clear the main error message when returning to the submit page
@@ -86,9 +70,9 @@
 			if ((page=='submit_page') && ($('#application_errors')[0] != null)) $('#application_errors').html('');
 
 	    // show the new
-			$('#' + page + '-link').removeClass('incomplete');
-			$('#' + page + '-link').removeClass('valid');
-			$('#' + page + '-link').addClass('active');
+			// $('#' + page + '-li').removeClass('incomplete');
+			// $('#' + page + '-li').removeClass('valid');
+			$('#' + page + '-li').addClass('active');
 	    $('#' + page).show();
 	    this.current_page = page;
 	    this.registerAutoSave(page);
@@ -107,7 +91,7 @@
 				$.qe.pageHandler.showPage(page);  // show after load, unless loading in background
 				setUpJsHelpers();
 	      $.qe.pageHandler.enableValidation(page);
-				$.qe.pageHandler.validatePage('#' + page);
+				// $.qe.pageHandler.validatePage('#' + page);
 	    }
 			$('#page_ajax_spinner').hide();
 			updateTotals();
@@ -126,7 +110,7 @@
 	    
 		    this.savePage();
 	
-		    if( $('#' + page)[0] != null && page.match('no_cache') == null )   // if already loaded (element exists) excluding pages that need reloading
+		    if( $.qe.pageHandler.isPageLoaded(page) && page.match('no_cache') == null )   // if already loaded (element exists) excluding pages that need reloading
 		    {
 		      $.qe.pageHandler.showPage(page);
 					$('#page_ajax_spinner').hide();
@@ -198,25 +182,24 @@
   
 	  // enable form validation (when form is loaded)
 	  enableValidation : function(page) {
-	    $('#' + page + '-form').validate({onsubmit:false, focusInvalid:false});  
+	    $('#' + page + '-form').validate({onsubmit:false, focusInvalid:true, onfocusout: function(element) { this.element(element);}});  
+	    // $('#' + page + '-form').valid();  
 	  },
   
 	  validatePage : function(page) {
 			try {
-			  el = $(page + '-link');
+			  var li = $(page + '-li');
+			  var form = $(page + '-form');
 
-		    valid = el.hasClass('valid');
+		    valid = form.valid();
 
-		    if(!valid)  {  
-				  el.removeClass('valid');
+		    if(valid)  {  
+		      el.removeClass('incomplete');
+				  el.addClass('complete');
+		    } else {
+				  el.removeClass('complete');
 		      el.addClass('incomplete');
 		    }
-		    else  {
-				  el = $(page + '-link');
-			      el.removeClass('incomplete');
-				  el.addClass('valid');
-		    }
-    
 		    return valid;
 			}
 			catch(err) {
@@ -227,20 +210,16 @@
 			$('page_ajax_spinner').hide();
 	  },
   
-  clearAll : function(transport) {
-  	pages = this.page_validation.keys();
-	  pages.each(function(page) { 
-      // HACK: this.current_page is undefined here.  hard-coded.
-	  //alert(this.current_page);
-	    if (page != 'submit_page') $(page).remove();
-    });
-    //Remove all but first page from _validation
-  },
-  
   // callback when falls to 0 active Ajax requests
   completeAll : function()
   {
-		var all_valid = ($('#list-pages a.incomplete').length == 0);
+		// validate all the pages
+  	$('.page_link').each(function(page) {
+			$.qe.pageHandler.validatePage($(page).attr('data-page-id'));
+		});	
+		
+		var all_valid = ($('#list-pages li.incomplete').length == 0);
+		console.log(all_valid)
 		if( all_valid )
 		{
 		  this.savePage($('#' + this.current_page));  // in case any input fields on submit_page
@@ -277,7 +256,7 @@
   // is page loaded? (useful for toggling enabled state of questions)
   isPageLoaded : function(page)
   {
-    return this.page_validation.include(page);
+		return $('#' + page)[0] != null
   }
   
 };

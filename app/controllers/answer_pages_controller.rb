@@ -1,6 +1,6 @@
 require_dependency 'answer_pages_presenter'
 class AnswerPagesController < ApplicationController
-  before_filter :get_answer_sheets, :only => [:edit, :update, :save_file, :index]
+  before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
   unloadable
   
   def edit
@@ -13,10 +13,9 @@ class AnswerPagesController < ApplicationController
   # validate and save captured data for a given page
   # PUT /answer_sheets/1/pages/1
   def update
+    @page = Page.find(params[:id])
     questions = @presenter.all_questions_for_page(params[:id])
     questions.post(params[:answers], @answer_sheet)
-    
-    #if questions.valid? then
     
     questions.save
     
@@ -29,9 +28,9 @@ class AnswerPagesController < ApplicationController
         ref.update_attributes(values)
       end
     end
-    
+    @presenter.active_page = nil
     respond_to do |format|
-      format.js { head :ok }
+      format.js
       #format.html
     end
   end
@@ -62,7 +61,7 @@ class AnswerPagesController < ApplicationController
   
   protected
   
-  def get_answer_sheets
+  def get_answer_sheet
     @answer_sheet = answer_sheet_type.find(params[:answer_sheet_id])
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
   end

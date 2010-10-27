@@ -32,6 +32,14 @@ class Element < ActiveRecord::Base
   #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   # end
   
+  def has_response?(answer_sheet = nil)
+    false
+  end
+  
+  def required?(answer_sheet = nil)
+    super()
+  end
+  
   def position(page = nil)
     if page
       page_elements.where(:page_id => page.id).first.try(:position)
@@ -91,10 +99,6 @@ class Element < ActiveRecord::Base
   
   def reuseable?
     (self.is_a?(Question) || self.is_a?(QuestionGrid) || self.is_a?(QuestionGridWithTotal))
-  end
-  
-  def has_response?
-    false
   end
   
   protected

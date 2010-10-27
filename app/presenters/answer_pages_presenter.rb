@@ -73,6 +73,18 @@ class AnswerPagesPresenter < Presenter
     end
   end
   
+  def started?
+    active_answer_sheet.question_sheets.each do |qs|
+      qs.pages.visible.each do |page|
+        return true if page.started?(active_answer_sheet)
+      end
+    end
+  end
+
+  def new_page_link(answer_sheet, page, a = nil)
+    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page), page) if page
+  end
+  
   protected
   
   # for pages_list sidebar
@@ -85,10 +97,6 @@ class AnswerPagesPresenter < Presenter
     end
     page_list = page_list + custom_pages unless custom_pages.nil?
     page_list
-  end
-
-  def new_page_link(answer_sheet, page, a = nil)
-    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page)) if page
   end
   
   # page is identified by answer sheet, so can have multiple sheets loaded at once

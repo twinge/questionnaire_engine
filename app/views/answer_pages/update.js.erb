@@ -1,0 +1,1 @@
+$('#<%= dom_id(@answer_sheet) %>-<%= dom_id(@page) %>-link').replaceWith('<%= escape_javascript(render('answer_sheets/page_link', :page_link => @presenter.new_page_link(@answer_sheet, @page))) %>')
