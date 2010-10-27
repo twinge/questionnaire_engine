@@ -64,6 +64,8 @@ class ChoiceField < Question
       'rating'
     elsif self.style == 'acceptance'
       'acceptance'
+    elsif self.style == 'country'
+      'country'
     end
 	end
 	

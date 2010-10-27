@@ -1,0 +1,6 @@
+<%= select_tag "answers[#{country.id}]", 
+      options_for_select(['',''] + Carmen::COUNTRIES, country.response(@answer_sheet).to_s),
+      :class => 'select ' + country.validation_class, 
+      :id => dom_id(country),
+      :disabled => @answer_sheet.frozen?&&!@answer_sheet.reference?,
+      :readonly => @answer_sheet.frozen?&&!@answer_sheet.reference? %>

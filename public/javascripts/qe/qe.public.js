@@ -2,11 +2,28 @@
 // NOTE: must restart server after changes, to copy to plugin_assets
 (function($) {
 	$(function() {
+		$('#payment_staff_first, #payment_staff_last').live('keydown', function(e) {
+			if (e.which == 13) {
+				$('#staff_search').trigger('click');
+				return false;
+			}
+			
+		});
 		$('.reference_send_invite').live('click', function() {
       var el = this;
 			var data = $(el).closest('form').serializeArray();
 			data.push({name: 'answer_sheet_type', value: answer_sheet_type});
-      $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST'});
+      $.ajax({url: $(el).attr('href'), data: data, dataType: 'script',  type: 'POST',
+                        beforeSend: function (xhr) {
+                            $('body').trigger('ajax:loading', xhr);
+                        },
+                        complete: function (xhr) {
+                            $('body').trigger('ajax:complete', xhr);
+                        },
+                        error: function (xhr, status, error) {
+                            $('body').trigger('ajax:failure', [xhr, status, error]);
+                        }
+										});
 			return false;
 		});
 		$('textarea[maxlength]').live('focus', function() {
@@ -21,7 +38,23 @@
 		}).live('blur', function() {
 			$(this).parent().find('.charsRemaining').html('');
 		});
-
+		
+		// Payment submission
+		$('.submit_payment').live('click', function() {
+			var form = $(this).closest('form');
+			$.ajax({url: $(this).attr('data-url'), data: form.serializeArray(), type: 'POST', dataType:'script',
+                        beforeSend: function (xhr) {
+                            $('body').trigger('ajax:loading', xhr);
+                        },
+                        complete: function (xhr) {
+                            $('body').trigger('ajax:complete', xhr);
+                        },
+                        error: function (xhr, status, error) {
+                            $('body').trigger('ajax:failure', [xhr, status, error]);
+                        }
+							})
+			return false;
+		});
 	});
 	$.qe = {};
 	$.qe.pageHandler = {
@@ -108,6 +141,12 @@
              error: function (xhr, status, error) {
                 alert("There was a problem loading that page. We've been notified and will fix it as soon as possible. To work on other pages, please refresh the website.");
 								document.location = document.location;
+             },
+             beforeSend: function (xhr) {
+                 $('body').trigger('ajax:loading', xhr);
+             },
+             complete: function (xhr) {
+                 $('body').trigger('ajax:complete', xhr);
              }
          });
 		      // new Ajax.Request(url, {asynchronous:true, evalScripts:false, method:'get', 
