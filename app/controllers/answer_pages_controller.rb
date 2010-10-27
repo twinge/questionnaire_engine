@@ -25,7 +25,8 @@ class AnswerPagesController < ApplicationController
     if params[:reference].present?
       params[:reference].each do |id, values|
         ref = @answer_sheet.reference_sheets.find(id)
-        ref.update_attributes(values)
+        ref.attributes = values
+        ref.save(:validate => false)
       end
     end
     @presenter.active_page = nil

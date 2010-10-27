@@ -217,12 +217,15 @@
   	$('.page_link').each(function(page) {
 			$.qe.pageHandler.validatePage($(page).attr('data-page-id'));
 		});	
-		
 		var all_valid = ($('#list-pages li.incomplete').length == 0);
-		console.log(all_valid)
-		if( all_valid )
+		
+		// Make sure any necessary payments are made
+		var payments_made = $('.payment_question.required').length == $('.payment').length
+		
+		
+		if( all_valid && payments_made)
 		{
-		  this.savePage($('#' + this.current_page));  // in case any input fields on submit_page
+		  this.savePage($('#' + $.qe.pageHandler.current_page));  // in case any input fields on submit_page
   
 		  // submit the application
 		  if($('#submit_to')[0] != null)
@@ -231,12 +234,11 @@
 				alert(url);
 			  // clear out pages array to force reload.  This enables "frozen" apps
 			  //       immediately after submission - :onSuccess (for USCM which stays in the application vs. redirecting to the dashboard)
-			  var curr = this.current_page;
+			  var curr = $.qe.pageHandler.current_page;
 			  $.ajax(url, {dataType:'script', 
 					 method:'post', 
 					 success: function() {
 						$('#list-pages a').each(function() { 
-					    // HACK: this.current_page is undefined here.  hard-coded.
 						  if ($(this).attr('data-page-id') != curr) $('#' + $(this).attr('data-page-id')).remove();
 					  });
 					 }

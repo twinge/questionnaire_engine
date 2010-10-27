@@ -7,6 +7,8 @@ class ReferenceSheet < AnswerSheet
   belongs_to :applicant_answer_sheet, :class_name => Questionnaire.answer_sheet_class, :foreign_key => "applicant_answer_sheet_id"
   before_create :generate_access_key
   
+  validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
+  
   alias_method :applicant, :applicant_answer_sheet
   def generate_access_key
     self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)

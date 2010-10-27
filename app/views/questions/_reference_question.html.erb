@@ -1,27 +1,31 @@
 <% reference = reference_question.response(@answer_sheet) %>
 <% reference ||= ReferenceSheet.new %>
-<div id="<%= dom_id(reference_question) %>">
+<% css_class = reference_question.required?(@answer_sheet) ? 'required' : '' %>
+<% email_css_class = reference_question.required?(@answer_sheet) ? 'required validate-email' : '' %>
+<% phone_css_class = reference_question.required?(@answer_sheet) ? 'required validate-phone' : '' %>
+<%#= hidden_field_tag "reference[#{reference.id}]", :class => reference_question.required? && !reference.email_sent? ? 'required' : '' %>
+<div id="<%= dom_id(reference_question) %>" class="reference_question">
   <ul class="questions level1">
   <li>
     <label for="<%= "name_#{reference.id}" %>" class="desc">First Name</label>
-    <%= text_field_tag "reference[#{reference.id}][first_name]", reference.first_name, :class => 'text required', :id => "name_#{reference.id}" %>
+    <%= text_field_tag "reference[#{reference.id}][first_name]", reference.first_name, :class => "text #{css_class}", :id => "name_#{reference.id}" %>
   </li>
   <li>
     <label for="<%= "name_#{reference.id}" %>" class="desc">Last Name</label>
-    <%= text_field_tag "reference[#{reference.id}][last_name]", reference.last_name, :class => 'text required', :id => "name_#{reference.id}" %>
+    <%= text_field_tag "reference[#{reference.id}][last_name]", reference.last_name, :class => "text #{css_class}", :id => "name_#{reference.id}" %>
   </li>
   <li>
     <label for="<%= "name_#{reference.id}" %>" class="desc">Relationship to You</label>
-    <%= text_field_tag "reference[#{reference.id}][relationship]", reference.relationship, :class => 'text required', :id => "name_#{reference.id}" %>
+    <%= text_field_tag "reference[#{reference.id}][relationship]", reference.relationship, :class => "text #{css_class}", :id => "name_#{reference.id}" %>
   </li>
   <li>
     <label for="<%= "email_#{reference.id}" %>" class="desc">E-mail</label>
     <% if (!reference.email.blank?) %><div class="warningText">Please be aware that any changes to this email address after your reference_question has started filling out their form will cause their answers to be lost.</div><% end %>
-    <%= text_field_tag "reference[#{reference.id}][email]", reference.email, :class => 'text required validate-email', :id => "email_#{reference.id}" %>
+    <%= text_field_tag "reference[#{reference.id}][email]", reference.email, :class => "text #{email_css_class}", :id => "email_#{reference.id}" %>
   </li>
   <li>
     <label for="<%= "phone_#{reference.id}" %>" class="desc">Phone</label>
-    <%= text_field_tag "reference[#{reference.id}][phone]", reference.phone, :class => 'text required validate-phone', :id => "phone_#{reference.id}" %>
+    <%= text_field_tag "reference[#{reference.id}][phone]", reference.phone, :class => "text #{phone_css_class}", :id => "phone_#{reference.id}" %>
   </li>
   <li><p>An invitation will be sent to this reference when you submit your application.  If you would
   	like to get a head start, please feel free to click 'Send Email Invitation' below.</p></li>
