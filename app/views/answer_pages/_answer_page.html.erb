@@ -18,7 +18,8 @@
       
         <% if next_js.empty? -%>
           <div id="submit_message" class="validation-advice" style="display: none;"></div>
-          <%= button_to_function "Submit", "page_handler.completeAll(); return false", :id => 'submit_button' %>
+          <button type="submit" onclick="page_handler.completeAll(); return false;"><span>Submit</span></button>
+          <!-- <%#= button_to_function "Submit", "page_handler.completeAll(); return false", :id => 'submit_button' %> -->
         <% else -%>
 					<div>
 						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
