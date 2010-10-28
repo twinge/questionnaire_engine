@@ -32,7 +32,7 @@ class Admin::EmailTemplatesController < ApplicationController
     
     respond_to do |format|
       if @email_template.save
-        format.html { redirect_to email_templates_path }
+        format.html { redirect_to admin_email_templates_path }
       else
         format.html { render :action => :new }
       end
@@ -44,7 +44,7 @@ class Admin::EmailTemplatesController < ApplicationController
     
     respond_to do |format|
       if @email_template.update_attributes(params[:email_template])
-        format.html { redirect_to email_templates_path }
+        format.html { redirect_to admin_email_templates_path }
       else
         format.html { render :action => "edit" }
       end
