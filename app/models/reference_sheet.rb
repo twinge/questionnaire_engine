@@ -9,6 +9,8 @@ class ReferenceSheet < AnswerSheet
   
   validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
   
+  delegate :style, :to => :question
+  
   acts_as_state_machine :initial => :created, :column => :status
 
   state :started
