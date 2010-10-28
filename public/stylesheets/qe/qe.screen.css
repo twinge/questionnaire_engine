@@ -536,7 +536,7 @@ div.tooltip {
   width:300px;
 }
 
-.ui-state-highlight {
+.droppable-active {
 	min-height: 200px;
 	border-width: 4px;
 	padding: 4px;

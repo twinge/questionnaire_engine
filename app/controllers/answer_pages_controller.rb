@@ -30,6 +30,7 @@ class AnswerPagesController < ApplicationController
       end
     end
     @presenter.active_page = nil
+    @answer_sheet.touch
     respond_to do |format|
       format.js
       #format.html

@@ -2,6 +2,10 @@
 // NOTE: must restart server after changes, to copy to plugin_assets
 (function($) {
 	$(function() {
+		$('.save_button').live('click', function() {
+			$.qe.pageHandler.savePages($(this).closest('.answer-page'), true);
+		});
+		
 		$('#payment_staff_first, #payment_staff_last').live('keydown', function(e) {
 			if (e.which == 13) {
 				$('#staff_search').trigger('click');
@@ -140,23 +144,30 @@
 	  },
   
 	  // save form if any changes were made
-	  savePage : function(page) {  
+	  savePage : function(page, force) {  
 			if (page == null) page = $('#' + this.current_page);
 	    form_data = this.captureForm(page);
 	    if( form_data ) {
-	      if( page.data('form_data') == null || page.data('form_data').data !== form_data.data) {  // if any changes
+	      if( page.data('form_data') == null || page.data('form_data').data !== form_data.data || force) {  // if any changes
 	        page.data('form_data', form_data);
-					$.ajax({url: form_data.url, type: 'put', data: form_data.data, error: function() {
-																															             page.data('form_data', null);    // on error, force save for next call to save
-																														               // WARNING: race conditions with load & show?
-																														               // sort of a mess if save fails while another page is already loading!!
+					$.ajax({url: form_data.url, type: 'put', data: form_data.data,  beforeSend: function (xhr) {
+																								                            $('#spinner_' + page.attr('id')).show();
+																									                        },
+																									                        complete: function (xhr) {
+																								                            $('#spinner_' + page.attr('id')).hide();
+																									                        },
+																																					error: function() {
+																															              page.data('form_data', null);    // on error, force save for next call to save
+																														                // WARNING: race conditions with load & show?
+																														                // sort of a mess if save fails while another page is already loading!!
 																																          }});
 	    	}
 	  	}
+			// Update last saved stamp
 		},
 		
-		savePages : function() {
-			$('.answer-page').each(function() {$.qe.pageHandler.savePage($(this))})
+		savePages : function(force) {
+			$('.answer-page').each(function() {$.qe.pageHandler.savePage($(this), force)})
 		},
   
 	  // setup a timer to auto-save (only one timer, for the page being viewed)
