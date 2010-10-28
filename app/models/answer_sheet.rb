@@ -27,5 +27,9 @@ class AnswerSheet < ActiveRecord::Base
   def completely_filled_out?
     pages.all? {|p| p.complete?(self)}
   end
+  
+  def reference?
+    false
+  end
    
 end

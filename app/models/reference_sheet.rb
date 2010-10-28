@@ -79,5 +79,9 @@ class ReferenceSheet < AnswerSheet
   def required?
     question.required?(applicant_answer_sheet)
   end
+  
+  def reference?
+    true  
+  end
 end
 
