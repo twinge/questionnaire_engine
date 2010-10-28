@@ -24,6 +24,12 @@ $(function() {
 		});
 		return false;
 	});
+	
+	$('.close_prop').live('click', function() {
+  	$('#element_form_' + $(this).attr('data-dom_id')).hide();
+	  $('#element_' + $(this).attr('data-dom_id')).show();
+		return false;
+	});
 });
 // used by form designer
 
