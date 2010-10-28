@@ -36,6 +36,7 @@ Rails::Application.routes.draw do
   resources :answer_sheets do 
     member do
       post :send_reference_invite
+      post :submit
     end
     resources  :page, :controller => :answer_pages do
                 member do

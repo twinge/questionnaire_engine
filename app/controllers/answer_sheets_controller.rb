@@ -2,7 +2,7 @@ class AnswerSheetsController < ApplicationController
   unloadable
   layout 'application'
   helper :answer_pages
-  before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite]
+  before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
   # list existing answer sheets
   def index
     
@@ -36,21 +36,13 @@ class AnswerSheetsController < ApplicationController
   
   def send_reference_invite
     @reference = @answer_sheet.reference_sheets.find(params[:reference_id])
-      # Send invite to reference
-    if @reference.send_invite
-
-      # Send notification to applicant
-      Notifier.deliver_notification(@answer_sheet.email, # RECIPIENTS
-                                    Questionnaire.from_email, # FROM
-                                    "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
-                                    {'applicant_full_name' => @answer_sheet.name,
-                                     'reference_full_name' => @reference.name,
-                                     'reference_email' => @reference.email,
-                                     'application_url' => edit_answer_sheet_url(@answer_sheet)})
-
-      @reference.email_sent_at = Time.now
-      @reference.save
-    end
+    @reference.send_invite
+  end
+    
+  def submit
+    return false unless validate_sheet
+    flash[:notice] = "Your form has been submitted. Thanks!"
+    redirect_to root_path
   end
   
   protected 
@@ -60,5 +52,13 @@ class AnswerSheetsController < ApplicationController
     
     def get_answer_sheet
       @answer_sheet = answer_sheet_type.find(params[:id])
+    end
+    
+    def validate_sheet
+      unless @answer_sheet.completely_filled_out?
+        render 'incomplete'
+        return false
+      end
+      return true
     end
 end

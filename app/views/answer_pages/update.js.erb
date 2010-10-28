@@ -1,2 +1,2 @@
-$('#<%= dom_id(@answer_sheet) %>-<%= dom_id(@page) %>-link').replaceWith('<%= escape_javascript(render('answer_sheets/page_link', :page_link => @presenter.new_page_link(@answer_sheet, @page))) %>')
+$('#<%= dom_id(@answer_sheet) %>-<%= dom_id(@page) %>-li').replaceWith('<%= escape_javascript(render('answer_sheets/page_link', :page_link => @presenter.new_page_link(@answer_sheet, @page))) %>')
 $('.last-saved').html('<%= escape_javascript(l(@answer_sheet.updated_at, :format => :datetime)) %>')

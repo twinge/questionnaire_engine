@@ -9,6 +9,25 @@ class ReferenceSheet < AnswerSheet
   
   validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
   
+  acts_as_state_machine :initial => :created, :column => :status
+
+  state :started
+  state :created
+  state :completed, :enter => Proc.new {|ref|
+                                ref.submitted_at = Time.now
+                                SpReferenceMailer.deliver_completed(ref)
+                                SpReferenceMailer.deliver_completed_confirmation(ref)
+                                ref.sp_application.complete(ref)
+                              }
+
+  event :start do
+    transitions :to => :started, :from => :created
+  end
+
+  event :submit do
+    transitions :to => :completed, :from => :started
+  end
+  
   alias_method :applicant, :applicant_answer_sheet
   def generate_access_key
     self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
@@ -30,6 +49,18 @@ class ReferenceSheet < AnswerSheet
                                    'applicant_email' => application.email, 
                                    'applicant_home_phone' => application.phone, 
                                    'reference_url' => edit_reference_sheet_url(self, :a => self.access_key, :host => ActionMailer::Base.default_url_options[:host])})
+    # Send notification to applicant
+    Notifier.deliver_notification(applicant_answer_sheet.email, # RECIPIENTS
+                                  Questionnaire.from_email, # FROM
+                                  "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
+                                  {'applicant_full_name' => applicant_answer_sheet.name,
+                                   'reference_full_name' => self.name,
+                                   'reference_email' => self.email,
+                                   'application_url' => edit_answer_sheet_url(applicant_answer_sheet, :host => ActionMailer::Base.default_url_options[:host])})
+
+    self.email_sent_at = Time.now
+    self.save(:validate => false)
+    
     true
   end
   
@@ -43,6 +74,10 @@ class ReferenceSheet < AnswerSheet
   
   def to_s
     name
+  end
+  
+  def required?
+    question.required?(applicant_answer_sheet)
   end
 end
 

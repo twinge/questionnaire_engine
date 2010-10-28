@@ -23,5 +23,9 @@ class AnswerSheet < ActiveRecord::Base
   def pages
     Page.where(:question_sheet_id => question_sheets.collect(&:id))
   end
+  
+  def completely_filled_out?
+    pages.all? {|p| p.complete?(self)}
+  end
    
 end
