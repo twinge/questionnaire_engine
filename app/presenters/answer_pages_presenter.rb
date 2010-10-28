@@ -14,11 +14,7 @@ class AnswerPagesPresenter < Presenter
   
   def initialize(controller, answer_sheets, a = nil, custom_pages = nil)
     super(controller)
-    if answer_sheets.kind_of?(AnswerSheet) 
-      @answer_sheets = [answer_sheets]  # stuff single AnswerSheet into an array
-    else
-      @answer_sheets = answer_sheets
-    end
+    @answer_sheets = Array.wrap(answer_sheets)
     @active_answer_sheet = @answer_sheets.first
     initialize_pages(@active_answer_sheet)
     
