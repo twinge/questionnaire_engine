@@ -3,7 +3,7 @@
 
 class DateField < Question
   
-  def validation_class
+  def validation_class(answer_sheet)
     if self.style == 'mmyy'
       'validate-selection ' + super
     else

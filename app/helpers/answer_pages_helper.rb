@@ -3,7 +3,8 @@ module AnswerPagesHelper
   # page sidebar navigation
   def li_page_active_if(condition, attributes = {}, &block)
     if condition
-      attributes["class"] = "active"
+      attributes[:class] ||= ''
+      attributes[:class] += " active"
     end
     content_tag("li", attributes, &block)
   end

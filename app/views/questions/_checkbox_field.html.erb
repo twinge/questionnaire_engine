@@ -3,7 +3,7 @@
     <td>
       <label for="<%= dom_id(checkbox_field) %>" class="desc">
         <%= checkbox_field.label %>
-        <% if checkbox_field.required? -%><span class="required">required</span><% end -%>
+        <% if checkbox_field.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
         <%= tip(checkbox_field.tooltip) if checkbox_field.tooltip.present? %>
       </label>
     </td>
@@ -12,7 +12,7 @@
       <% css_class = 'checkbox ' -%>
       <% dom_id = dom_id(checkbox_field) + "_" + pretty_tag(choice[1]) 
          last_choice = (num == checkbox_field.choices.length - 1)
-         css_class += checkbox_field.validation_class if last_choice
+         css_class += checkbox_field.validation_class(@answer_sheet) if last_choice
       -%>
       <%= hidden_field_tag "answers[#{checkbox_field.id}][#{num}]", '', :id => '' %>
       <div class="field field_check">
@@ -32,7 +32,7 @@
   <% checkbox_field.choices.each_with_index do |choice, num| -%>
     <% dom_id = dom_id(checkbox_field) + "_" + pretty_tag(choice[1]) 
        last_choice = (num == checkbox_field.choices.length - 1)
-       css_class += checkbox_field.validation_class if last_choice
+       css_class += checkbox_field.validation_class(@answer_sheet) if last_choice
     -%>
     <%= hidden_field_tag "answers[#{checkbox_field.id}][#{num}]", '', :id => '' %>
     <div class="field field_check">

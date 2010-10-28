@@ -36,16 +36,17 @@ class ChoiceField < Question
   end
 	
 	def has_answer?(choice, app)
-    # HACK: Crazy hack to support legacy field types where choices may be int or tinyint 
-    r = self.responses(app) 
-	  if @answers.blank?   # external data source?
-      return true if r[0] == is_true(choice) || r[0] == is_false(choice) || r[0] == choice.to_s || r[0] == choice.to_i
-    else 
-  	  r.each do |answer|   # loop through Answers
-        if answer.to_s == choice.to_s   # true if this answer matches the choice passed
-          return true
-        end
-      end
+  	responses(app).each do |r|   # loop through Answers
+      # legacy field type choices may be int or tinyint 
+      r = r.to_s
+      return true if  case choice.class.to_s
+                      when 'TrueClass'
+                        is_true(r)
+                      when 'FalseClass' 
+                        is_false(r)
+                      else
+                        r == choice.to_s || r.to_i == choice.to_i
+                      end
     end
     false
 	end
@@ -64,6 +65,8 @@ class ChoiceField < Question
       'rating'
     elsif self.style == 'acceptance'
       'acceptance'
+    elsif self.style == 'country'
+      'country'
     end
 	end
 	
@@ -77,8 +80,8 @@ class ChoiceField < Question
   end
 	
 	# css class names for javascript-based validation
-  def validation_class
-    if self.required?
+  def validation_class(answer_sheet)
+    if self.required?(answer_sheet)
       if self.style == 'drop-down'
         'validate-selection' 
       elsif self.style == 'rating'

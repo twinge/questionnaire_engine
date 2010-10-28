@@ -11,7 +11,7 @@
     <%= render :partial => 'answer_pages/element', :collection => yes_no.elements, :locals => {:in_grid => false, :in_conditional => true} %>
   </ul>
   <script type="text/javascript" charset="utf-8">
-    $('#<%= dom_id(yes_no) %>_1').live('click', function() {$('#questions_list_<%= yes_no.id %>').show()});
-    $('#<%= dom_id(yes_no) %>_0').live('click', function() {$('#questions_list_<%= yes_no.id %>').hide()});
+    $('#<%= dom_id(yes_no) %>_1').live('click', function() {$('#questions_list_<%= yes_no.id %>').show(); $('input', '#questions_list_<%= yes_no.id %>').addClass('required'); });
+    $('#<%= dom_id(yes_no) %>_0').live('click', function() {$('#questions_list_<%= yes_no.id %>').hide(); $('input', '#questions_list_<%= yes_no.id %>').removeClass('required'); });
   </script>
 <% end %>

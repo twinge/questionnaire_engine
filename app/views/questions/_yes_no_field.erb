@@ -3,7 +3,7 @@
   <% yes_no.choices.each_with_index do |choice, num| -%>
     <% dom_id = dom_id(yes_no) + "_" + pretty_tag(choice[1]) 
        last_choice =  (num == yes_no.choices.length - 1)
-       css_class += yes_no.validation_class if last_choice
+       css_class += yes_no.validation_class(@answer_sheet) if last_choice
        checked = yes_no.has_answer?(choice[1],@answer_sheet) -%>
     <div class="field field_check yesno">
       <%= radio_button_tag "answers[#{yes_no.id}]", choice[1], checked, 
