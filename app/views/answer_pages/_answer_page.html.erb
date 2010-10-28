@@ -21,7 +21,7 @@
           <%= button_to_function "Submit", "page_handler.completeAll(); return false", :id => 'submit_button' %>
         <% else -%>
 					<div>
-						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :long) %></span><%= spinner(page_dom) %>
+						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
 					</div>
 					<div>
 	          <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
