@@ -109,7 +109,7 @@ ul#list-pages {
 }
 
 #list-pages li.active {
-  background: url(/images/qe/selected_bg.jpg) repeat-y #fff;
+  background-color: #fff;
 }
 
 #list-pages li.active a {
