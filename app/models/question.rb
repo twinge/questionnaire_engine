@@ -123,9 +123,9 @@ class Question < Element
   def set_response(values, app)
     values = Array.wrap(values)
     if !object_name.blank? and !attribute_name.blank?
-      if eval("app." + object_name).nil?
-        eval("app.create_" + object_name)
-      end
+      # if eval("app." + object_name).nil?
+      #   eval("app.create_" + object_name)
+      # end
       eval("app." + object_name + ".update_attribute(:" + attribute_name + ", '" + values.first + "')") unless responses(app) == values
     else
       @answers ||= []
