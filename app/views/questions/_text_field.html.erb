@@ -3,5 +3,5 @@
       :id => dom_id(text_field),
       :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
       :readonly => @answer_sheet.frozen?&&!@presenter.reference?,
-      :maxlength => 255 %>
+      :maxlength => text_field.max_length.to_i > 0 ? text_field.max_length : 255 %>
 
