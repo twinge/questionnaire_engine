@@ -14,7 +14,11 @@ class DateField < Question
   def response(app=nil)
     r = super
     return nil if r.blank?
-    return Time.parse(r) if r.is_a?(String)
+    begin
+      r = Time.parse(r) if r.is_a?(String)
+    rescue ArgumentError
+      r = ''
+    end
     r
   end
   

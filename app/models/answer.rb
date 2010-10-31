@@ -9,8 +9,6 @@
 class Answer < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
-  has_attachment :storage => :file_system, :path_prefix => 'public/attachments' if defined?(Technoweenie::AttachmentFu)
-  
   belongs_to :answer_sheet
   belongs_to :question, :class_name => "Element", :foreign_key => "question_id"
   
@@ -31,7 +29,7 @@ class Answer < ActiveRecord::Base
   end
   
   def set_value_from_filename
-    self.value = self.short_value = self.filename if self.filename.present?
+    self.value = self.short_value = self.attachment_file_name if self[:attachment_file_name].present?
   end
   
   

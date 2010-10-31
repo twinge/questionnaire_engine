@@ -157,7 +157,7 @@ class Question < Element
   
   def save_file(answer_sheet, file)
     @answers.collect(&:destroy) if @answers
-    answer = Answer.create!(:question_id => self.id, :answer_sheet_id => answer_sheet.id, :uploaded_data => file)
+    answer = Answer.create!(:question_id => self.id, :answer_sheet_id => answer_sheet.id, :attachment => file)
     @answers = [answer]
   end
   
