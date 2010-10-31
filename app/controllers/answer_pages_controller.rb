@@ -25,6 +25,11 @@ class AnswerPagesController < ApplicationController
     if params[:reference].present?
       params[:reference].each do |id, values|
         ref = @answer_sheet.reference_sheets.find(id)
+        # if the email address has changed, we have to trash the old reference and make a new one
+        if values[:email].present? && ref.email.present? && ref.email != values[:email]
+          ref.destroy
+          ref = ReferenceSheet.create(:question_id => ref.question_id, :applicant_answer_sheet_id => ref.applicant_answer_sheet_id)
+        end
         ref.attributes = values
         ref.save(:validate => false)
       end
@@ -49,9 +54,11 @@ class AnswerPagesController < ApplicationController
       
       responds_to_parent do
         render :update do |page|
-          page[@presenter.active_page.dom_id + '-spinner'].hide
-          page[@presenter.active_page.dom_id + '-attachment'].replace_html "Current File: " + link_to(answer.filename, answer.public_filename)
-          page[@presenter.active_page.dom_id + '-attachment'].highlight
+          page << <<-JS
+            $('#{@presenter.active_page.dom_id}-spinner').hide();
+            $('#{@presenter.active_page.dom_id}-attachment').html('Current File: #{link_to(answer.filename, answer.public_filename)}')
+            $('#{@presenter.active_page.dom_id}-attachment').effect('highlight')
+          JS
         end
       end
     else

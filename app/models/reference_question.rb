@@ -8,9 +8,13 @@ class ReferenceQuestion < Question
     ReferenceSheet.find_by_question_id_and_applicant_answer_sheet_id(id, app.id) || ReferenceSheet.create(:applicant_answer_sheet_id => app.id, :question_id => id) 
   end
   
-  def has_response?(app)
-    reference = response(app)
-    reference && reference.valid?
+  def has_response?(app = nil)
+    if app
+      reference = response(app)
+      reference && reference.valid?
+    else
+      ReferenceSheet.where(:question_id => id).count > 0
+    end
   end
   
   def display_response(app=nil)
