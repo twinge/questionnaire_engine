@@ -7,7 +7,7 @@
     <h3 id='page-name'><%= @presenter.active_page.label %></h3>
     
     <% if @elements.length > 0 -%>
-      <%= form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;", :multipart => true do -%>
+      <%= form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => "$.qe.pageHandler.savePage($('#sp_application_55716-page_331')); return false;", :multipart => true do -%>
         <ul class="questions" id="questions_list">
           <% @elements.each do |element| %>
             <li class="<%= element.class.to_s.downcase %>" id="element_<%= element.id %>">

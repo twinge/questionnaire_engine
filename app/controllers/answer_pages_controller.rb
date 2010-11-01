@@ -25,10 +25,10 @@ class AnswerPagesController < ApplicationController
     if params[:reference].present?
       params[:reference].each do |id, values|
         ref = @answer_sheet.reference_sheets.find(id)
-        # if the email address has changed, we have to trash the old reference and make a new one
+        # if the email address has changed, we have to trash the old reference answers
         if values[:email].present? && ref.email.present? && ref.email != values[:email]
-          ref.destroy
-          ref = ReferenceSheet.create(:question_id => ref.question_id, :applicant_answer_sheet_id => ref.applicant_answer_sheet_id)
+          ref.answers.destroy
+          # ref = ReferenceSheet.create(:question_id => ref.question_id, :applicant_answer_sheet_id => ref.applicant_answer_sheet_id)
         end
         ref.attributes = values
         ref.save(:validate => false)
@@ -43,23 +43,20 @@ class AnswerPagesController < ApplicationController
   end
   
   def save_file
-    if params[:answers]
+    if params[:Filedata]
       @page = Page.find(params[:id])
       @presenter.active_page = @page
       question = Element.find(params[:question_id])
       answer = Answer.find(:first, :conditions => {:answer_sheet_id => @answer_sheet.id, :question_id => question.id})
       question.answers = [answer] if answer
 
-      answer = question.save_file(@answer_sheet, params[:answers][question.id.to_s])[0]
+      answer = question.save_file(@answer_sheet, params[:Filedata])
       
-      responds_to_parent do
-        render :update do |page|
-          page << <<-JS
-            $('#{@presenter.active_page.dom_id}-spinner').hide();
-            $('#{@presenter.active_page.dom_id}-attachment').html('Current File: #{link_to(answer.filename, answer.public_filename)}')
-            $('#{@presenter.active_page.dom_id}-attachment').effect('highlight')
-          JS
-        end
+      render :update do |page|
+        page << <<-JS
+          $('#attachment_field_#{question.id}_filename').html('Current File: #{link_to(answer.attachment_file_name, answer.attachment_file_name)}')
+          $('#attachment_field_#{question.id}_filename').effect('highlight')
+        JS
       end
     else
       respond_to do |format|
