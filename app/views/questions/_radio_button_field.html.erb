@@ -1,4 +1,5 @@
 <% css_class = 'radio ' -%>
+<% css_class += 'required' if radio_button_field.required? %>
 <% if radio_button_field.hide_option_labels? && !['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
   <tr id="<%= dom_id(radio_button_field) %>">
     <td class="col1">
