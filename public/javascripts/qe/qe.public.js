@@ -251,7 +251,8 @@
 			  // clear out pages array to force reload.  This enables "frozen" apps
 			  //       immediately after submission - :onSuccess (for USCM which stays in the application vs. redirecting to the dashboard)
 			  var curr = $.qe.pageHandler.current_page;
-			  $.ajax({url: url, dataType:'script', 
+			  $.ajax({url: url, dataType:'script',
+			 		data: {answer_sheet_type: answer_sheet_type},
 					type:'post', 
 					beforeSend: function(xhr) {
           	$('body').trigger('ajax:loading', xhr);

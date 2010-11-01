@@ -115,7 +115,8 @@ class Question < Element
         [eval("app." + object_name + "." + attribute_name)] 
       end
     else
-      Answer.where(:answer_sheet_id => app.id, :question_id => self.id)
+      app.answers_by_question[id] || []
+      # Answer.where(:answer_sheet_id => app.id, :question_id => self.id)
     end
   end
   
