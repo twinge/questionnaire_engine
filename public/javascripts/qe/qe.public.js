@@ -272,7 +272,7 @@
 		else
 		{
 		  // some pages aren't valid
- 	    $('#submit_message').html("Please ensure all pages are complete and valid, then submit again."); 
+ 	    $('#submit_message').html("Looks like you missed something. Please check for yellow flags on the left."); 
 		  $('#submit_message').show();
   
 		  var btn = $('#submit_button'); if (btn) { btn.attr('disabled', false); }
