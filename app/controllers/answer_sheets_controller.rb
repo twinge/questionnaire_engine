@@ -20,7 +20,6 @@ class AnswerSheetsController < ApplicationController
   end
   
   # display answer sheet for data capture (page 1)
-  # GET /answer_sheets/1;edit
   def edit
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
     @elements = @presenter.questions_for_page(:first).elements

@@ -17,9 +17,9 @@ class ReferenceSheet < AnswerSheet
   state :created
   state :completed, :enter => Proc.new {|ref|
                                 ref.submitted_at = Time.now
-                                SpReferenceMailer.deliver_completed(ref)
-                                SpReferenceMailer.deliver_completed_confirmation(ref)
-                                ref.sp_application.complete(ref)
+                                # SpReferenceMailer.deliver_completed(ref)
+                                # SpReferenceMailer.deliver_completed_confirmation(ref)
+                                ref.applicant_answer_sheet.complete(ref)
                               }
 
   event :start do
