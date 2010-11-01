@@ -95,7 +95,7 @@
 				$.qe.pageHandler.showPage(page);  // show after load, unless loading in background
 				setUpJsHelpers();
 	      $.qe.pageHandler.enableValidation(page);
-				$.qe.pageHandler.validatePage('#' + page);
+				// $.qe.pageHandler.validatePage('#' + page);
 				$('#' + page).data('form_data', $.qe.pageHandler.captureForm($('#' + page)));
 	    }
 			$('#page_ajax_spinner').hide();

@@ -45,7 +45,7 @@ class ChoiceField < Question
                       when 'FalseClass' 
                         is_false(r)
                       else
-                        r == choice.to_s || r.to_i == choice.to_i
+                        r == choice.to_s || r == choice
                       end
     end
     false
