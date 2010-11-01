@@ -83,13 +83,13 @@ class ChoiceField < Question
   def validation_class(answer_sheet)
     if self.required?(answer_sheet)
       if self.style == 'drop-down'
-        'validate-selection' 
+        'validate-selection required' 
       elsif self.style == 'rating'
-        'validate-rating'
+        'validate-rating required'
       elsif self.style == 'acceptance'
         'required'
       else
-        'validate-one-required'
+        'validate-one-required required'
       end
     else
       ''

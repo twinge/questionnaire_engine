@@ -35,9 +35,9 @@ class DateField < Question
   # which view to render this element?
   def ptemplate
     if self.style == 'mmyy'
-      'date_field_mmyy'
+      'date_field_mmyy required'
     else
-      'date_field'
+      'date_field required'
     end
   end
   

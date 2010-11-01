@@ -95,8 +95,8 @@
 				$.qe.pageHandler.showPage(page);  // show after load, unless loading in background
 				setUpJsHelpers();
 	      $.qe.pageHandler.enableValidation(page);
+				$.qe.pageHandler.validatePage('#' + page);
 				$('#' + page).data('form_data', $.qe.pageHandler.captureForm($('#' + page)));
-				// $.qe.pageHandler.validatePage('#' + page);
 	    }
 			$('#page_ajax_spinner').hide();
 			updateTotals();
@@ -204,7 +204,9 @@
 			  var form = $(page + '-form');
 
 		    valid = form.valid();
-
+				// Move radio button errors up
+				$('input[type=radio].error').closest('tr').addClass('error');
+				
 		    if(valid)  {  
 		      el.removeClass('incomplete');
 				  el.addClass('complete');
