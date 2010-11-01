@@ -3,7 +3,7 @@
 (function($) {
 	$(function() {
 		$('.save_button').live('click', function() {
-			$.qe.pageHandler.savePages($(this).closest('.answer-page'), true);
+			$.qe.pageHandler.savePage($(this).closest('.answer-page'), true);
 		});
 		
 		$('#payment_staff_first, #payment_staff_last').live('keydown', function(e) {

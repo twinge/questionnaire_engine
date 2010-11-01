@@ -1,7 +1,6 @@
 function setUpSortables() {
 	$('[data-sortable]').sortable({axis:'y', 
 																  dropOnEmpty:false, 
-																	activeClass: 'moving',
 																  update: function(event, ui) {
 																		sortable = this;
 																		$.ajax({data:$(this).sortable('serialize',{key:sortable.id + '[]'}),
@@ -28,7 +27,7 @@ function setUpSortables() {
 
 function setUpCalendars() {
 	$('[data-calendar]').datepicker({changeYear:true,
-																	 yearRange: '1975:c+5'})
+																	 yearRange: '1950:c+5'})
 }
 
 function setUpJsHelpers() {
@@ -47,5 +46,5 @@ function setUpJsHelpers() {
     
        // use the "slide" effect
        effect: 'slide'
-		}).dynamic({ bottom: { direction: 'down', bounce: true } });;
+		}).dynamic({ bottom: { direction: 'down', bounce: true } });
 }
