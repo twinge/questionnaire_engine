@@ -70,4 +70,10 @@ module ApplicationHelper
   def tip(t)
     image_tag('qe/icons/question-balloon.png', :title => t, :class => 'tip')
   end
+
+  def spinner(extra = nil)
+    e = extra ? "spinner_#{extra}" : 'spinner'
+    image_tag('spinner.gif', :id => e, :style => 'display:none', :class => 'spinner')
+  end
+
 end
