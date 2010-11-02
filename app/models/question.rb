@@ -124,11 +124,19 @@ class Question < Element
   def set_response(values, app)
     values = Array.wrap(values)
     if !object_name.blank? and !attribute_name.blank?
-      if eval("app." + object_name).present?
-        eval("app." + object_name + ".update_attribute(:" + attribute_name + ", '" + ActiveRecord::Base.connection.quote_string(values.first) + "')") unless responses(app) == values
-      else
-        raise object_name.inspect + ' == ' + attribute_name.inspect
+      # if eval("app." + object_name).present?
+      object = eval("app." + object_name)
+      unless object.present?
+        if object_name.include?('.')
+          objects = object_name.split('.')
+          object = eval("app." + objects[0..-2].join('.') + ".create_" + objects.last)
+          eval("app." + objects[0..-2].join('.')).reload
+        end
       end
+      object.update_attribute(attribute_name, ActiveRecord::Base.connection.quote_string(values.first)) unless responses(app) == values
+      # else
+      #   raise object_name.inspect + ' == ' + attribute_name.inspect
+      # end
     else
       @answers ||= []
       @mark_for_destroy ||= []
