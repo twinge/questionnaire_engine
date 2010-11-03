@@ -1,7 +1,11 @@
 class ReferenceSheetsController < AnswerSheetsController
+  skip_before_filter :ssm_login_required
   before_filter :edit_only, :except => [:edit]
   def edit
     @answer_sheet = ReferenceSheet.find_by_id_and_access_key(params[:id], params[:a])
+    unless @answer_sheet
+      render :not_found and return
+    end
     @answer_sheet.start!
     # Set up question_sheet if needed
     if @answer_sheet.question_sheets.empty?
