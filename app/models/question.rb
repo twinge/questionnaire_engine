@@ -135,8 +135,12 @@ class Question < Element
       end
       unless responses(app) == values
         value = ActiveRecord::Base.connection.quote_string(values.first)
-        if self.is_a?(DateField)
-          value = Date.strptime(value, (I18n.t 'date.formats.default'))
+        if self.is_a?(DateField) && value.present?
+          begin
+            value = Date.strptime(value, (I18n.t 'date.formats.default'))
+          rescue
+            raise "invalid date - " + value.inspect
+          end
         end
         object.update_attribute(attribute_name, value) 
       end
