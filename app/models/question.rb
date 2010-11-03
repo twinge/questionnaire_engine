@@ -133,7 +133,13 @@ class Question < Element
           eval("app." + objects[0..-2].join('.')).reload
         end
       end
-      object.update_attribute(attribute_name, ActiveRecord::Base.connection.quote_string(values.first)) unless responses(app) == values
+      unless responses(app) == values
+        value = ActiveRecord::Base.connection.quote_string(values.first)
+        if self.is_a?(DateField)
+          value = Date.strptime(value, (I18n.t 'date.formats.default'))
+        end
+        object.update_attribute(attribute_name, value) 
+      end
       # else
       #   raise object_name.inspect + ' == ' + attribute_name.inspect
       # end
