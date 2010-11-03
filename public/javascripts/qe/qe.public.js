@@ -240,7 +240,7 @@
 		var payments_made = $('.payment_question.required').length == $('.payment').length
 		
 		
-		if( all_valid && payments_made)
+		if(  payments_made)
 		{
 		  this.savePage($('#' + $.qe.pageHandler.current_page));  // in case any input fields on submit_page
   
@@ -273,7 +273,7 @@
 		else
 		{
 		  // some pages aren't valid
- 	    $('#submit_message').html("Looks like you missed something. Please check for yellow flags on the left."); 
+ 	    $('#submit_message').html("Please make a payment"); 
 		  $('#submit_message').show();
   
 		  var btn = $('#submit_button'); if (btn) { btn.attr('disabled', false); }
