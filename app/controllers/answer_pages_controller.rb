@@ -26,10 +26,6 @@ class AnswerPagesController < ApplicationController
       params[:reference].each do |id, values|
         ref = @answer_sheet.reference_sheets.find(id)
         # if the email address has changed, we have to trash the old reference answers
-        if values[:email].present? && ref.email.present? && ref.email != values[:email]
-          ref.answers.destroy
-          # ref = ReferenceSheet.create(:question_id => ref.question_id, :applicant_answer_sheet_id => ref.applicant_answer_sheet_id)
-        end
         ref.attributes = values
         ref.save(:validate => false)
       end

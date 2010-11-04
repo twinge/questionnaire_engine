@@ -10,6 +10,8 @@ class ReferenceSheet < AnswerSheet
   validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
   
   delegate :style, :to => :question
+
+  before_save :check_email_change
   
   acts_as_state_machine :initial => :created, :column => :status
 
@@ -85,5 +87,13 @@ class ReferenceSheet < AnswerSheet
   def reference?
     true  
   end
+  
+  protected
+    # if the email address has changed, we have to trash the old reference answers
+    def check_email_change
+      if changed.include?('email')
+        answers.destroy
+      end
+    end
 end
 
