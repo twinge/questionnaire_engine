@@ -38,14 +38,13 @@ class ChoiceField < Question
 	def has_answer?(choice, app)
   	responses(app).each do |r|   # loop through Answers
       # legacy field type choices may be int or tinyint 
-      r = r.to_s
-      return true if  case choice.class.to_s
-                      when 'TrueClass'
-                        is_true(r)
-                      when 'FalseClass' 
-                        is_false(r)
+      # raise r.inspect + ' - ' + choice.inspect if id == 1137 && r != 1
+      # r = r.to_s
+      return true if  case true
+                      when is_true(r) then is_true(choice)
+                      when is_false(r) then is_false(choice)
                       else
-                        r == choice.to_s || r == choice
+                        r.to_s == choice.to_s
                       end
     end
     false
@@ -122,7 +121,7 @@ class ChoiceField < Question
 
   def is_false(val)
     # returns false if false (a bit odd)
-    ![0,'0',false,'false','No','no'].include?(val)
+    [0,'0',false,'false','No','no'].include?(val)
   end
 
 

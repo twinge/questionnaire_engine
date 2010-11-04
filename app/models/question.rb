@@ -211,7 +211,7 @@ class Question < Element
     return false if answers.length == 0
     answers.each do |answer|   # loop through Answers
       value = answer.is_a?(Answer) ? answer.value : answer
-      return true if value.present? 
+      return true if value === false || value.present? 
     end
     return false
   end
