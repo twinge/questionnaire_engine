@@ -1,5 +1,5 @@
 class ReferenceSheetsController < AnswerSheetsController
-  skip_before_filter :ssm_login_required
+  skip_before_filter :ssm_login_required, :login
   before_filter :edit_only, :except => [:edit]
   def edit
     @answer_sheet = ReferenceSheet.find_by_id_and_access_key(params[:id], params[:a])
