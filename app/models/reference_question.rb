@@ -5,7 +5,16 @@ class ReferenceQuestion < Question
   
   def response(app=nil)
     return unless app
-    ReferenceSheet.find_by_question_id_and_applicant_answer_sheet_id(id, app.id) || ReferenceSheet.create(:applicant_answer_sheet_id => app.id, :question_id => id) 
+    # A reference is the same if the related_question_sheet corresponding to the question is the same
+    references = ReferenceSheet.find_all_by_applicant_answer_sheet_id(app.id)
+    if references.present?
+      reference = references.detect {|r| r.question_id == id }
+      unless reference
+        reference = references.detect {|r| r.question.related_question_sheet_id == related_question_sheet_id}
+        reference.update_attribute(:question_id, id) if reference
+      end
+    end
+    reference || ReferenceSheet.create(:applicant_answer_sheet_id => app.id, :question_id => id) 
   end
   
   def has_response?(app = nil)
