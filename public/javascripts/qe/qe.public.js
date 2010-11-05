@@ -200,8 +200,8 @@
   
 	  validatePage : function(page) {
 			try {
-			  var li = $(page + '-li');
-			  var form = $(page + '-form');
+			  var li = $('#' + page + '-li');
+			  var form = $('#' + page + '-form');
 
 		    valid = form.valid();
 				// Move radio button errors up
@@ -231,7 +231,7 @@
 		$('#submit_message').html('');
 		$('#submit_message').hide();
 		// validate all the pages
-  	$('.page_link').each(function(page) {
+  	$('.page_link').each(function(index, page) {
 			$.qe.pageHandler.validatePage($(page).attr('data-page-id'));
 		});	
 		var all_valid = ($('#list-pages li.incomplete').length == 0);

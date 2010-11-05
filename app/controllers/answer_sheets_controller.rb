@@ -58,6 +58,7 @@ class AnswerSheetsController < ApplicationController
     
     def validate_sheet
       unless @answer_sheet.completely_filled_out?
+        @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
         render 'incomplete'
         return false
       end
