@@ -200,8 +200,8 @@
   
 	  validatePage : function(page) {
 			try {
-			  var li = $(page + '-li');
-			  var form = $(page + '-form');
+			  var li = $('#' + page + '-li');
+			  var form = $('#' + page + '-form');
 
 		    valid = form.valid();
 				// Move radio button errors up
@@ -231,7 +231,7 @@
 		$('#submit_message').html('');
 		$('#submit_message').hide();
 		// validate all the pages
-  	$('.page_link').each(function(page) {
+  	$('.page_link').each(function(index, page) {
 			$.qe.pageHandler.validatePage($(page).attr('data-page-id'));
 		});	
 		var all_valid = ($('#list-pages li.incomplete').length == 0);
@@ -240,7 +240,7 @@
 		var payments_made = $('.payment_question.required').length == $('.payment').length
 		
 		
-		if( all_valid && payments_made)
+		if(  payments_made)
 		{
 		  this.savePage($('#' + $.qe.pageHandler.current_page));  // in case any input fields on submit_page
   
@@ -273,7 +273,7 @@
 		else
 		{
 		  // some pages aren't valid
- 	    $('#submit_message').html("Looks like you missed something. Please check for yellow flags on the left."); 
+ 	    $('#submit_message').html("Please make a payment"); 
 		  $('#submit_message').show();
   
 		  var btn = $('#submit_button'); if (btn) { btn.attr('disabled', false); }

@@ -42,3 +42,10 @@
   </div>
 
 </div>
+<% if session[:attempted_submit] %>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $.qe.pageHandler.validatePage('<%= page_dom %>')
+    });
+  </script>
+<% end %>

@@ -133,7 +133,17 @@ class Question < Element
           eval("app." + objects[0..-2].join('.')).reload
         end
       end
-      object.update_attribute(attribute_name, ActiveRecord::Base.connection.quote_string(values.first)) unless responses(app) == values
+      unless responses(app) == values
+        value = ActiveRecord::Base.connection.quote_string(values.first)
+        if self.is_a?(DateField) && value.present?
+          begin
+            value = Date.strptime(value, (I18n.t 'date.formats.default'))
+          rescue
+            raise "invalid date - " + value.inspect
+          end
+        end
+        object.update_attribute(attribute_name, value) 
+      end
       # else
       #   raise object_name.inspect + ' == ' + attribute_name.inspect
       # end
@@ -201,7 +211,7 @@ class Question < Element
     return false if answers.length == 0
     answers.each do |answer|   # loop through Answers
       value = answer.is_a?(Answer) ? answer.value : answer
-      return true if value.present? 
+      return true if (value.is_a?(FalseClass) && value === false) || value.present? 
     end
     return false
   end

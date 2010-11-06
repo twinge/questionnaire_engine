@@ -36,7 +36,7 @@ class AnswerSheetsController < ApplicationController
   
   def send_reference_invite
     @reference = @answer_sheet.reference_sheets.find(params[:reference_id])
-    @reference.update_attributes(params[:reference][@reference_id.to_s])
+    @reference.update_attributes!(params[:reference][@reference.id.to_s])
     if @reference.valid?
       @reference.send_invite
     end
@@ -59,6 +59,7 @@ class AnswerSheetsController < ApplicationController
     
     def validate_sheet
       unless @answer_sheet.completely_filled_out?
+        @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
         render 'incomplete'
         return false
       end
