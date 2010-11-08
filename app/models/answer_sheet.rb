@@ -3,7 +3,7 @@ class AnswerSheet < ActiveRecord::Base
 
   has_many :answer_sheet_question_sheets
   has_many :question_sheets, :through => :answer_sheet_question_sheets
-  has_many :answers, :class_name => 'Answer', :foreign_key => 'answer_sheet_id', :dependent => :delete_all
+  has_many :answers, :class_name => 'Answer', :foreign_key => 'answer_sheet_id'
   has_many :reference_sheets, :class_name => "ReferenceSheet", :foreign_key => "applicant_answer_sheet_id"
 
   def complete?
@@ -32,4 +32,8 @@ class AnswerSheet < ActiveRecord::Base
     false
   end
    
+  def percent_complete
+    (answers.collect(&:question_id).uniq.count.to_f / 
+     question_sheets.inject(0.0) { |sum, qs| qs.questions.length + sum } * 100.0).to_i
+  end
 end
