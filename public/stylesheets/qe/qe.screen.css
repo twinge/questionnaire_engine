@@ -84,20 +84,10 @@ p.instruction {
   margin: 10px 10px 10px 0;  
 }
 
-#legend {
-  font-size: 11px;
-  margin: 0 0 0 5px;  
-  line-height: 2em
-}
-
-#legend img {
-  vertical-align: middle;
-}
-
 ul#list-pages {
-  list-style:none outside none;
-  margin:10px 0 0;
-  padding:0;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
 }
 
 #list-pages li a {
@@ -144,8 +134,6 @@ ul#nav-controls li a {
   padding: 8px 10px;
   background: #F2F2F2;
   -moz-border-radius: 4px 4px 0 0;
-  -webkit-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
   display: block;
 }
 
@@ -285,6 +273,18 @@ ul.questions li {
   float: left;
 }
 
+.choice_field.error label {
+	color: red;
+	font-weight: bold;
+	width: 50px;
+	background: #FFEAEA;
+	border: 1px solid red;
+}
+
+.choice_field.error label.error {
+	display: none;
+}
+
 div.p_content p {
   margin-bottom: 1em;
 }
@@ -329,8 +329,6 @@ div.p_content ol li {
 
 .buttons button:hover {
   -moz-box-shadow: 0px 0px 5px #999;
-  -webkit-box-shadow: 0px 0px 5px #999;
-  box-shadow: 0px 0px 5px #999;
 }
 
 
@@ -525,8 +523,6 @@ td.actions a {padding: 2px 10px 2px 20px;}
 
 div.tooltip {
   -moz-box-shadow:0 0 9px #555555;
-  -webkit-box-shadow:0 0 9px #555555;
-  box-shadow:0 0 9px #555555;
   background:none repeat scroll 0 0 #411E08;
   border:3px solid #FFFFFF;
   color:#FFFFFF;
@@ -535,7 +531,6 @@ div.tooltip {
   padding:25px;
   width:300px;
 }
-
 .droppable-active {
 	min-height: 200px;
 	border-width: 4px;
