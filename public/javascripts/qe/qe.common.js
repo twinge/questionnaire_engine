@@ -27,7 +27,7 @@ function setUpSortables() {
 
 function setUpCalendars() {
 	now = new Date();
-	year = now.getFullYear() + 5;
+	year = now.getFullYear() + 10;
 	$('[data-calendar]').datepicker({changeYear:true,
 																	 yearRange: '1950:' + year})
 }
