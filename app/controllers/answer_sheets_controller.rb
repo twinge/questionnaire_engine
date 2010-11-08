@@ -29,8 +29,9 @@ class AnswerSheetsController < ApplicationController
   # display captured answers (read-only)
   def show
     @question_sheet = @answer_sheet.question_sheet
-    @elements = @question_sheet.pages.collect {|p| p.elements.includs(:page).order('pages.number,page_elements.position').all}.flatten
-    @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
+    pf = Questionnaire.table_name_prefix
+    @elements = @question_sheet.pages.collect {|p| p.elements.includes(:pages).order("#{pf}pages.number,#{pf}page_elements.position").all}.flatten
+    @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by{ |e| e.pages.first }
   end
   
   def send_reference_invite
