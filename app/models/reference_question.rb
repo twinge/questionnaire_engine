@@ -9,7 +9,8 @@ class ReferenceQuestion < Question
     references = ReferenceSheet.find_all_by_applicant_answer_sheet_id(app.id)
     if references.present?
       reference = references.detect {|r| r.question_id == id }
-      unless reference
+      # If they have another reference that matches this question id, don't go fishing for another one
+      unless reference || ReferenceSheet.find_all_by_applicant_answer_sheet_id_and_question_id(app.id, id)
         reference = references.detect {|r| r.question.related_question_sheet_id == related_question_sheet_id}
         reference.update_attribute(:question_id, id) if reference
       end
