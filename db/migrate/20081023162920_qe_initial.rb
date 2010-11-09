@@ -13,8 +13,6 @@ class QeInitial < ActiveRecord::Migration
       # t.foreign_key :question_sheet_id, QuestionSheet.table_name, :id
     end
     
-    add_index Page.table_name, [:question_sheet_id, :number], :name => "page_number", :unique => true
-    
     create_table Element.table_name do |t|
       t.column :question_sheet_id, :integer, :null => false
       t.column :page_id, :integer, :null => false
