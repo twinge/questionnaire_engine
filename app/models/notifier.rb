@@ -1,7 +1,7 @@
 class Notifier < ActionMailer::Base
 
   # call Notifier.deliver_notification
-  def notification(p_recipients, p_from, template_name, template_params = {})
+  def notification(p_recipients, p_from, template_name, template_params = {}, options = {})
     email_template = EmailTemplate.find_by_name(template_name)
   
     if email_template.nil?
