@@ -33,7 +33,8 @@ class AnswerSheet < ActiveRecord::Base
   end
    
   def percent_complete
-    (answers.collect(&:question_id).uniq.count.to_f / 
-     question_sheets.inject(0.0) { |sum, qs| qs.questions.length + sum } * 100.0).to_i
+    num_questions = question_sheets.inject(0.0) { |sum, qs| qs.questions.length + sum }
+    return 0 if num_questions == 0
+    (answers.collect(&:question_id).uniq.count.to_f / num_questions * 100.0).to_i
   end
 end
