@@ -37,6 +37,10 @@ class ReferenceSheet < AnswerSheet
     self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
   end
   
+  def frozen?
+    !%w(started).include?(self.status)
+  end
+  
   def email_sent?() !self.email_sent_at.nil? end
   
   # send email invite
