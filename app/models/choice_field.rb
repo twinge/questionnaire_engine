@@ -97,9 +97,9 @@ class ChoiceField < Question
   
   def display_response(app=nil)
     r = responses(app)
-
+    r.reject! {|a| a.class == Answer && a.value.blank?}
     if r.blank?
-      "No Answer" 
+      "" 
     elsif self.style == 'yes-no'
       ans = r.first
       if ans.class == Answer
@@ -110,7 +110,7 @@ class ChoiceField < Question
     elsif self.style == 'acceptance'
       "Accepted"  # if not blank, it's accepted
     else
-      r.join(", ")
+      r.compact.join(", ")
     end
   end
 

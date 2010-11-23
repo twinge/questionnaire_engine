@@ -28,6 +28,10 @@ class AnswerSheet < ActiveRecord::Base
     pages.all? {|p| p.complete?(self)}
   end
   
+  def has_answer_for?(question_id)
+    !answers_by_question[question_id].nil?
+  end
+  
   def reference?
     false
   end

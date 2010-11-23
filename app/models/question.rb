@@ -99,7 +99,7 @@ class Question < Element
   def display_response(app)
     r = responses(app)
     if r.blank?
-      "No Answer"
+      ""
     else
       r.join(", ")
     end

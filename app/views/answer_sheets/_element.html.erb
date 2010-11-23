@@ -9,15 +9,15 @@
   	<%- end -%>
   	</tr>
   	<%- end -%>
-  	<tr >
+  	<tr>
   		<%- col_count = 0
   			element.elements.each do |grid_element| -%>
   		<td id="element_<%= element.id %>">
   			<% if %w(Paragraph).include?(grid_element.kind) -%>
     			<%= grid_element.content %>
   			<% else -%>
-    			<% el = elements.find {|el| el.id == grid_element.id } -%>
-    			<%= el.display_response(@answer_sheet) %>
+    			<%# el = elements.detect {|el| el.id == grid_element.id } -%>
+    			<%= grid_element.display_response(@answer_sheet) %>
   			<% end -%>
   		</td>
   		<%- 	col_count += 1
