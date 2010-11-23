@@ -13,6 +13,7 @@ public/stylesheets/calendar_date_select
 db/schema.rb
 .DS_Store
 application_controller.rb
+*.swp
 
 app/controllers/responses_controller.rb
 app/helpers/responses_helper.rb

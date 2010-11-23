@@ -22,8 +22,17 @@ class AnswerSheetsController < ApplicationController
   # display answer sheet for data capture (page 1)
   def edit
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
+    unless @presenter.active_answer_sheet.pages.visible.present?
+      flash[:error] = "Sorry, there are no questions for this form yet."
+      if request.env["HTTP_REFERER"]
+        redirect_to :back
+      else
+        render :text => "", :layout => true
+      end
+    else
     @elements = @presenter.questions_for_page(:first).elements
     @page = @presenter.pages.first
+    end
   end
   
   # display captured answers (read-only)
