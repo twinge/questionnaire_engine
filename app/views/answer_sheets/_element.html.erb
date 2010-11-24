@@ -33,8 +33,15 @@
 <% elsif element.question_grid_id.nil? && element.conditional_id.nil? -%>
   <li>
     <% if element.question? -%>
-        <label class="desc"><%= element.label %></label>
+      <label class="desc"><%= element.label %></label>
+      <%- if @collating -%>
+        <span class="answer collate"><%= @answer_sheet.collat_title %>: <%= element.display_response(@answer_sheet) %></span><br/>
+        <%- for answer_sheet in @collated_answer_sheets -%>
+          <span class="answer collate"><%= answer_sheet.collat_title %>: <%= element.display_response(answer_sheet) %></span><br/>
+        <%- end -%>
+      <%- else -%>
         <span class="answer"><%= element.display_response(@answer_sheet) %></span>
+      <%- end -%>
     <% else -%>
       <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
     <% end -%>

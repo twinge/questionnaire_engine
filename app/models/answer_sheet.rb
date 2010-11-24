@@ -41,4 +41,6 @@ class AnswerSheet < ActiveRecord::Base
     return 0 if num_questions == 0
     (answers.collect(&:question_id).uniq.count.to_f / num_questions * 100.0).to_i
   end
+
+  def collat_title() "" end
 end
