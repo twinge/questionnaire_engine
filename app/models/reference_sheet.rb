@@ -92,6 +92,10 @@ class ReferenceSheet < AnswerSheet
     true  
   end
   
+  def display_type
+    question.label.split(/:| \(/).first
+  end
+  
   protected
     # if the email address has changed, we have to trash the old reference answers
     def check_email_change
