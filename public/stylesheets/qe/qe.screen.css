@@ -123,6 +123,7 @@ ul#nav-controls {
   padding: 0;
   margin: 0 8px 0 0;
   border-bottom: 3px solid #0B486B;
+  height: 31px;
 }
 
 ul#nav-controls li {
