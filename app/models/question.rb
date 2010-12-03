@@ -109,10 +109,11 @@ class Question < Element
     return [] unless app
     # try to find answer from external object
     if !object_name.blank? and !attribute_name.blank?
-      if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
+      obj = object_name == 'application' ? app : eval("app." + object_name)
+      if obj.nil? or eval("obj." + attribute_name + ".nil?")
         []
       else
-        [eval("app." + object_name + "." + attribute_name)] 
+        [eval("obj." + attribute_name)] 
       end
     else
       app.answers_by_question[id] || []
@@ -125,7 +126,7 @@ class Question < Element
     values = Array.wrap(values)
     if !object_name.blank? and !attribute_name.blank?
       # if eval("app." + object_name).present?
-      object = eval("app." + object_name)
+      object = object_name == 'application' ? app : eval("app." + object_name)
       unless object.present?
         if object_name.include?('.')
           objects = object_name.split('.')

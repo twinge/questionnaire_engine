@@ -35,9 +35,15 @@
     <% if element.question? -%>
       <label class="desc"><%= element.label %></label>
       <%- if @collating -%>
-        <span class="answer collate"><%= @answer_sheet.collat_title %>: <%= element.display_response(@answer_sheet) %></span><br/>
+        <div class="answer collate">
+          <span class="reviewer_name"><%= @answer_sheet.collat_title %>:</span>
+          <span class="reviewer_answer"><%= element.display_response(@answer_sheet) %></span>
+        </div>
         <%- for answer_sheet in @collated_answer_sheets -%>
-          <span class="answer collate"><%= answer_sheet.collat_title %>: <%= element.display_response(answer_sheet) %></span><br/>
+          <div class="answer collate">
+            <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
+            <span class="reviewer_answer"><%= element.display_response(answer_sheet) %></span>
+          </div>
         <%- end -%>
       <%- else -%>
         <span class="answer"><%= element.display_response(@answer_sheet) %></span>
