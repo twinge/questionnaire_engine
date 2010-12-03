@@ -35,11 +35,7 @@
     <% if element.question? -%>
       <label class="desc"><%= element.label %></label>
       <%- if @collating -%>
-        <div class="answer collate">
-          <span class="reviewer_name"><%= @answer_sheet.collat_title %>:</span>
-          <span class="reviewer_answer"><%= element.display_response(@answer_sheet) %></span>
-        </div>
-        <%- for answer_sheet in @collated_answer_sheets -%>
+        <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
           <div class="answer collate">
             <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
             <span class="reviewer_answer"><%= element.display_response(answer_sheet) %></span>

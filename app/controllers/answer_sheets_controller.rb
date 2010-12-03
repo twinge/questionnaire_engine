@@ -3,7 +3,6 @@ class AnswerSheetsController < ApplicationController
   layout 'application'
   helper :answer_pages
   before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
-  before_filter :get_collated_answer_sheets, :only => [ :show ]
 
   # list existing answer sheets
   def index
@@ -75,12 +74,5 @@ class AnswerSheetsController < ApplicationController
         return false
       end
       return true
-    end
-
-    def get_collated_answer_sheets
-      if params[:collate_ids]
-        @collating = true
-        @collated_answer_sheets = answer_sheet_type.where(:id => params[:collate_ids].split(","))
-      end
     end
 end
