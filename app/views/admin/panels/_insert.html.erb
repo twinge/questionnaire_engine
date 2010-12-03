@@ -28,8 +28,10 @@
                       :remote => true %></li>
     <li id="qgt"><%= link_to "Grid w/Total", new_admin_question_sheet_page_element_path(route.merge(:element_type => "QuestionGridWithTotal", :human_type => 'Grid w/Total')), 
                       :remote => true %></li>
+    <%- unless Questionnaire.respond_to?(:no_refs) && Questionnaire.no_refs -%>
     <li id="ref"><%= link_to "Reference",  new_admin_question_sheet_page_element_path(route.merge(:element_type => "ReferenceQuestion", :human_type => 'Reference')), 
                       :remote => true %></li>
+    <%- end -%>
   </ul>
   
   <p style="clear: both;">&nbsp;</p>
