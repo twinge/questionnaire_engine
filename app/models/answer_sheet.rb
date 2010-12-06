@@ -39,7 +39,8 @@ class AnswerSheet < ActiveRecord::Base
   def percent_complete
     num_questions = question_sheets.inject(0.0) { |sum, qs| qs.nil? ? sum : qs.questions.length + sum }
     return 0 if num_questions == 0
-    (answers.collect(&:question_id).uniq.count.to_f / num_questions * 100.0).to_i
+    num_answers = answers.where("value IS NOT NULL && value != ''").select("DISTINCT question_id").count
+    [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
   end
 
   def collat_title() "" end
