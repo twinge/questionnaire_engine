@@ -30,6 +30,8 @@ $(function() {
 	  $('#element_' + $(this).attr('data-dom_id')).show();
 		return false;
 	});
+
+	fixGridColumnWidths();
 });
 // used by form designer
 

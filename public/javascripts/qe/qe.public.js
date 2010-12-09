@@ -291,6 +291,7 @@
   
 };
 
+	fixGridColumnWidths();
 })(jQuery);
 
 
