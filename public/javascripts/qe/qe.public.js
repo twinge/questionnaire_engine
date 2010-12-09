@@ -291,9 +291,11 @@
   
 };
 
-	fixGridColumnWidths();
 })(jQuery);
 
+$(function() {
+	fixGridColumnWidths();
+});
 
 
 function updateTotal(id) {

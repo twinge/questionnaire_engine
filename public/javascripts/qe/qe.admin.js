@@ -31,7 +31,6 @@ $(function() {
 		return false;
 	});
 
-	fixGridColumnWidths();
 });
 // used by form designer
 
@@ -112,4 +111,5 @@ function updateSlug(source, dest) {
 
 $(function() {
 	setUpSortables();
+	fixGridColumnWidths();
 });
