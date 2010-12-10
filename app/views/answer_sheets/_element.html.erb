@@ -1,6 +1,6 @@
 <% if element.kind == "QuestionGrid" -%>
   <li>
-  	<label class="desc"><%= element.label %></label>
+  	<label class="desc"><%= raw element.label %></label>
   	<table class="grid">
   	<%- if element.cols -%>
   	<tr>
@@ -33,7 +33,7 @@
 <% elsif element.question_grid_id.nil? && element.conditional_id.nil? -%>
   <li>
     <% if element.question? -%>
-      <label class="desc"><%= element.label %></label>
+      <label class="desc"><%= raw element.label %></label>
       <%- if @collating -%>
         <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
           <div class="answer collate">

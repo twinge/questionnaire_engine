@@ -50,3 +50,11 @@ function setUpJsHelpers() {
        effect: 'slide'
 		}).dynamic({ bottom: { direction: 'down', bounce: true } });
 }
+
+function fixGridColumnWidths() {
+	$("table.grid").each(function(i, grid) {
+		num_columns = $(grid).find("th").length;
+		width = (100 / num_columns) + "%";
+		$(grid).find("td").css("width", width);
+	});
+};

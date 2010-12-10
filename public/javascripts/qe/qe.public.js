@@ -80,7 +80,8 @@
 	    $('#' + page).show();
 	    this.current_page = page;
 	    this.registerAutoSave(page);
-			this.suspendLoad = false;
+	    this.suspendLoad = false;
+	    fixGridColumnWidths();
 	  },
   
 	  // callback onSuccess
@@ -209,6 +210,7 @@
 				$('.choice_field input[type=radio].error').removeClass('error')
 					.closest('.choice_field')
 					.addClass('error');
+				$('div.yesno label.error').hide();
 				
 		    if(valid)  {  
 		      el.removeClass('incomplete');
@@ -293,6 +295,9 @@
 
 })(jQuery);
 
+$(function() {
+	fixGridColumnWidths();
+});
 
 
 function updateTotal(id) {

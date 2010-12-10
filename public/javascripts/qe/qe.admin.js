@@ -30,6 +30,7 @@ $(function() {
 	  $('#element_' + $(this).attr('data-dom_id')).show();
 		return false;
 	});
+
 });
 // used by form designer
 
@@ -110,4 +111,5 @@ function updateSlug(source, dest) {
 
 $(function() {
 	setUpSortables();
+	fixGridColumnWidths();
 });

@@ -2,7 +2,7 @@
   <tr id="<%= dom_id(checkbox_field) %>">
     <td>
       <label for="<%= dom_id(checkbox_field) %>" class="desc">
-        <%= checkbox_field.label %>
+        <%= raw checkbox_field.label %>
         <% if checkbox_field.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
         <%= tip(checkbox_field.tooltip) if checkbox_field.tooltip.present? %>
       </label>
