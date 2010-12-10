@@ -19,7 +19,7 @@
   </div>
 <%- else -%>
   <% if question_grid.label.present? && !question_grid.hide_label? -%>
-    <label class="desc gridname"><%= question_grid.label %></label>
+    <label class="desc gridname"><%= raw question_grid.label %></label>
   <% end %>
   <% headers = question_grid.cols.to_s.split(';') %>
   <% if headers.length > 1 %>

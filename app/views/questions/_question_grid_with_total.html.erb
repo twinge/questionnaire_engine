@@ -12,7 +12,7 @@
     </div>
   </div>      
 <%- else -%>
-  <label class="desc"><%= question_grid_with_total.label %></label>
+  <label class="desc"><%= raw question_grid_with_total.label %></label>
   	<table class="grid">
 	  <% headers = question_grid_with_total.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
