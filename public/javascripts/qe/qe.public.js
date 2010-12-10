@@ -210,6 +210,7 @@
 				$('.choice_field input[type=radio].error').removeClass('error')
 					.closest('.choice_field')
 					.addClass('error');
+				$('div.yesno label.error').hide();
 				
 		    if(valid)  {  
 		      el.removeClass('incomplete');
