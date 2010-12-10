@@ -18,7 +18,10 @@
       
         <% if next_js.empty? -%>
           <div id="submit_message" class="validation-advice" style="display: none;"></div>
-          <button type="submit" onclick="page_handler.completeAll(); return false;" id="submit_button"><span>Submit</span></button>
+					<div>
+            <button type="submit" onclick="page_handler.completeAll(); return false;" id="submit_button"><span>Submit</span></button>
+	          <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
+	        </div>
         <% else -%>
 					<div class="savestatus">
 						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
