@@ -2,7 +2,7 @@
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
     <% if question_grid.label.present? && !question_grid.hide_label? -%>
       <label class="desc gridname">
-				<%= question_grid.label %>
+				<%= raw question_grid.label %>
     		<% if question_grid.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
 			</label>
     <% end %>
