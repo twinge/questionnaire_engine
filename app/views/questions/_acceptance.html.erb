@@ -8,6 +8,6 @@
       :disabled => @answer_sheet.frozen?&&!@answer_sheet.reference?,
       :readonly => @answer_sheet.frozen?&&!@answer_sheet.reference? %>
 <label class="choice" for="<%= dom_id(acceptance) %>">
-  <%= acceptance.label %>
+  <%= raw acceptance.label %>
 </label>
 <%= hidden_field_tag "answers[#{acceptance.id}]", '', :id => '' %>

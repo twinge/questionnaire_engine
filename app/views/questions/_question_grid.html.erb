@@ -27,7 +27,7 @@
 	  <% if headers.detect {|h| h.strip.present?} %>
     	<tr>
     	<%- headers.each do |header| -%>
-    		<th><%= header || '&nbsp;' %></th>
+    		<th><%= raw header || '&nbsp;' %></th>
     	<%- end -%>
     	</tr>
     <% end %>
