@@ -1,6 +1,6 @@
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid_with_total.id) %>">
-    <label class="desc"><%= question_grid_with_total.label %></label>
+    <label class="desc"><%= raw question_grid_with_total.label %></label>
     <div>
     	<ul class="questions" id="questions_list_<%= question_grid_with_total.id %>">
     	<%- if question_grid_with_total.elements.length > 0 -%>
@@ -12,7 +12,7 @@
     </div>
   </div>      
 <%- else -%>
-  <label class="desc"><%= question_grid_with_total.label %></label>
+  <label class="desc"><%= raw question_grid_with_total.label %></label>
   	<table class="grid">
 	  <% headers = question_grid_with_total.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
