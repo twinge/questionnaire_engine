@@ -80,7 +80,8 @@
 	    $('#' + page).show();
 	    this.current_page = page;
 	    this.registerAutoSave(page);
-			this.suspendLoad = false;
+	    this.suspendLoad = false;
+	    fixGridColumnWidths();
 	  },
   
 	  // callback onSuccess
