@@ -218,7 +218,7 @@ class Question < Element
   end
   
   def required?(answer_sheet = nil)
-    super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?(true, answer_sheet))
+    super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?('1', answer_sheet))
   end
 
 end
