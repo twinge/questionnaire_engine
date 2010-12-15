@@ -5,7 +5,7 @@
   	<%- if element.cols -%>
   	<tr>
   	<%- element.cols.split(';').each do |header| -%>
-  		<th><%= header || '&nbsp;' %></th>
+  		<th><%= raw header || '&nbsp;' %></th>
   	<%- end -%>
   	</tr>
   	<%- end -%>
