@@ -54,7 +54,9 @@ function setUpJsHelpers() {
 function fixGridColumnWidths() {
 	$("table.grid").each(function(i, grid) {
 		num_columns = $(grid).find("th").length;
-		width = (100 / num_columns) + "%";
-		$(grid).find("td").css("width", width);
+		if (num_columns > 0) {
+			width = (100 / num_columns) + "%";
+			$(grid).find("td").css("width", width);
+		}
 	});
 };
