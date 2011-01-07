@@ -14,10 +14,13 @@
   			element.elements.each do |grid_element| -%>
   		<td id="element_<%= element.id %>">
   			<% if %w(Paragraph).include?(grid_element.kind) -%>
-    			<%= grid_element.content %>
+    			<%= simple_format grid_element.content %>
   			<% else -%>
     			<%# el = elements.detect {|el| el.id == grid_element.id } -%>
-    			<%= grid_element.display_response(@answer_sheet) %>
+                        <% if grid_element.question? -%>
+                          <label class="desc"><%= raw grid_element.label %></label>
+                        <% end %>
+                        <span class="answer"><%= simple_format grid_element.display_response(@answer_sheet) %></span>
   			<% end -%>
   		</td>
   		<%- 	col_count += 1
@@ -38,11 +41,11 @@
         <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
           <div class="answer collate">
             <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
-            <span class="reviewer_answer"><%= element.display_response(answer_sheet) %></span>
+            <span class="reviewer_answer"><%= simple_format element.display_response(answer_sheet) %></span>
           </div>
         <%- end -%>
       <%- else -%>
-        <span class="answer"><%= element.display_response(@answer_sheet) %></span>
+        <span class="answer"><%= simple_format element.display_response(@answer_sheet) %></span>
       <%- end -%>
     <% else -%>
       <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
