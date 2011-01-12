@@ -101,6 +101,10 @@ class Element < ActiveRecord::Base
     (self.is_a?(Question) || self.is_a?(QuestionGrid) || self.is_a?(QuestionGridWithTotal))
   end
   
+  def Element.max_label_length
+    @@max_label_length ||= Element.columns.find{ |c| c.name == "label" }.limit
+  end
+
   protected
   def set_defaults
     if self.content.blank?
