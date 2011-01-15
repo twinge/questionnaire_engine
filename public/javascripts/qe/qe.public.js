@@ -100,6 +100,7 @@
 				$('#' + page).data('form_data', $.qe.pageHandler.captureForm($('#' + page)));
 	    }
 			$('#page_ajax_spinner').hide();
+			$('.reference_send_invite').button();
 			updateTotals();
 	  },
   
