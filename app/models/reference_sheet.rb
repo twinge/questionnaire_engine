@@ -113,7 +113,7 @@ class ReferenceSheet < AnswerSheet
                               Questionnaire.from_email, 
                               "Reference Deleted", 
                               {'reference_full_name' => self.name, 
-                               'applicant_full_name' => application.name})
+                               'applicant_full_name' => applicant_answer_sheet.name})
       end
     end
 end
