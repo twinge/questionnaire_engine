@@ -12,6 +12,8 @@ class ReferenceSheet < AnswerSheet
 
   before_save :check_email_change
   
+  after_destroy :notify_reference_of_deletion
+  
   acts_as_state_machine :initial => :created, :column => :status
 
   state :started
@@ -44,7 +46,7 @@ class ReferenceSheet < AnswerSheet
   
   # send email invite
   def send_invite    
-    return if self.email.blank?   # bypass blanks for now
+    return if self.email.blank?
     
     application = self.applicant_answer_sheet
     
@@ -102,6 +104,16 @@ class ReferenceSheet < AnswerSheet
         answers.destroy
         # Every time the email address changes, generate a new access_key
         generate_access_key
+      end
+    end
+    
+    def notify_reference_of_deletion
+      if email.present?
+        Notifier.deliver_notification(email,
+                              Questionnaire.from_email, 
+                              "Reference Deleted", 
+                              {'reference_full_name' => self.name, 
+                               'applicant_full_name' => application.name})
       end
     end
 end
