@@ -31,6 +31,10 @@ class ReferenceSheet < AnswerSheet
   event :submit do
     transitions :to => :completed, :from => :started
   end
+
+  event :unsubmit do
+    transitions :to => :started, :from => :completed
+  end
   
   alias_method :applicant, :applicant_answer_sheet
   def generate_access_key
@@ -101,6 +105,8 @@ class ReferenceSheet < AnswerSheet
     def check_email_change
       if changed.include?('email')
         answers.destroy
+        self.email_sent_at = nil
+        unsubmit!
       end
     end
 end
