@@ -5,13 +5,14 @@ class ReferenceSheet < AnswerSheet
   
   belongs_to :question, :class_name => 'Element', :foreign_key => 'question_id'
   belongs_to :applicant_answer_sheet, :class_name => Questionnaire.answer_sheet_class, :foreign_key => "applicant_answer_sheet_id"
-  before_create :generate_access_key
   
   validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
   
   delegate :style, :to => :question
 
   before_save :check_email_change
+  
+  after_destroy :notify_reference_of_deletion
   
   acts_as_state_machine :initial => :created, :column => :status
 
@@ -38,7 +39,7 @@ class ReferenceSheet < AnswerSheet
   
   alias_method :applicant, :applicant_answer_sheet
   def generate_access_key
-    self.access_key = Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
+    self.access_key = Digest::MD5.hexdigest(email + Time.now.to_s)
   end
   
   def frozen?
@@ -49,12 +50,12 @@ class ReferenceSheet < AnswerSheet
   
   # send email invite
   def send_invite    
-    return if self.email.blank?   # bypass blanks for now
+    return if self.email.blank?
     
     application = self.applicant_answer_sheet
     
     Notifier.deliver_notification(self.email,
-                                  Questionnaire.from_email, 
+                                  application.email, 
                                   "Reference Invite", 
                                   {'reference_full_name' => self.name, 
                                    'applicant_full_name' => application.name,
@@ -105,8 +106,20 @@ class ReferenceSheet < AnswerSheet
     def check_email_change
       if changed.include?('email')
         answers.destroy
+        # Every time the email address changes, generate a new access_key
+        generate_access_key
         self.email_sent_at = nil
         unsubmit!
+      end
+    end
+    
+    def notify_reference_of_deletion
+      if email.present?
+        Notifier.deliver_notification(email,
+                              Questionnaire.from_email, 
+                              "Reference Deleted", 
+                              {'reference_full_name' => self.name, 
+                               'applicant_full_name' => applicant_answer_sheet.name})
       end
     end
 end

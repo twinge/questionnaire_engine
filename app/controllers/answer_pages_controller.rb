@@ -50,7 +50,7 @@ class AnswerPagesController < ApplicationController
       
       render :update do |page|
         page << <<-JS
-          $('#attachment_field_#{question.id}_filename').html('Current File: #{link_to(answer.attachment_file_name, answer.attachment_file_name)}')
+          $('#attachment_field_#{question.id}_filename').html('Current File: #{link_to(answer.attachment_file_name, answer.attachment.url)}')
           $('#attachment_field_#{question.id}_filename').effect('highlight')
         JS
       end
