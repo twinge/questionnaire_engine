@@ -105,11 +105,11 @@ class ReferenceSheet < AnswerSheet
     # if the email address has changed, we have to trash the old reference answers
     def check_email_change
       if changed.include?('email')
-        answers.destroy
+        answers.destroy_all
         # Every time the email address changes, generate a new access_key
         generate_access_key
         self.email_sent_at = nil
-        unsubmit!
+        self.status = 'created'
       end
     end
     
