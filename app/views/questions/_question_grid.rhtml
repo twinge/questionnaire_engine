@@ -7,7 +7,7 @@
   <div style="border: solid 1px #dadada; padding: 9px;">
   	<ul class="questions" id="questions_list_<%= question_grid.id %>">
   	<%- if question_grid.elements.length > 0 -%>
-      <%= render :partial => 'question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
+      <%= render :partial => 'question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true, :elements => elements} %>
   	<%- else -%>
   		Grid
   	<%- end -%>
@@ -29,7 +29,7 @@
   			question_grid.elements.each do |element| -%>
   			<td id="element_<%= element.id %>">
   				<% grid_el = @elements.to_a.find {|el| el.id == element.id} %>
-  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} %>
+  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count, :elements => elements} %>
   			</td>
   			<%- 	col_count += 1
   					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 -%></tr><tr><%- end -%>
