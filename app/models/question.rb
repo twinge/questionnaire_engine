@@ -101,33 +101,32 @@ class Question < Element
   end
   
   # shortcut to return first answer
-  def response(app=nil)
-    get_response(app)
+  def response(app)
+    response = responses(app).first.to_s
   end
   
-  def display_response(app=nil)
-    r = get_response(app)
+  def display_response(app)
+    r = responses(app)
     if r.blank?
-      "No Answer"
+      ""
     else
       r.join(", ")
     end
   end
   
-  def get_response(app=nil)
-    if @answers.nil? || @answers.empty?
-      # try to find answer from external object
-      if !app.nil? and !object_name.blank? and !attribute_name.blank?
-        if eval("app." + object_name + ".nil?") or eval("app." + object_name + "." + attribute_name + ".nil?")
-          []
-        else
-          [eval("app." + object_name + "." + attribute_name)] 
-        end
+  def responses(app)
+    return [] unless app
+    # try to find answer from external object
+    if !object_name.blank? and !attribute_name.blank?
+      obj = object_name == 'application' ? app : eval("app." + object_name)
+      if obj.nil? or eval("obj." + attribute_name + ".nil?")
+        []
       else
-        ""
+        [eval("obj." + attribute_name)] 
       end
     else
-      @answers
+      app.answer_sheet.answers_by_question[id] || []
+      # Answer.where(:answer_sheet_id => app.id, :question_id => self.id)
     end
   end
   
