@@ -23,7 +23,7 @@ class AnswerSheetsController < ApplicationController
   # display answer sheet for data capture (page 1)
   def edit
     @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
-    unless @presenter.active_answer_sheet.pages.visible.present?
+    unless @presenter.active_answer_sheet.pages.present?
       flash[:error] = "Sorry, there are no questions for this form yet."
       if request.env["HTTP_REFERER"]
         redirect_to :back
@@ -31,8 +31,8 @@ class AnswerSheetsController < ApplicationController
         render :text => "", :layout => true
       end
     else
-    @elements = @presenter.questions_for_page(:first).elements
-    @page = @presenter.pages.first
+      @elements = @presenter.questions_for_page(:first).elements
+      @page = @presenter.pages.first
     end
   end
   

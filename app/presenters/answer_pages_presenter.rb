@@ -23,7 +23,7 @@ class AnswerPagesPresenter < Presenter
     
   def questions_for_page(page_id=:first)
     @active_page = page_id == :first ? pages.first : pages.detect {|p| p.id == page_id.to_i}
-    @active_page ||= @active_answer_sheet.pages.visible.find(page_id).includes(:elements)
+    @active_page ||= @active_answer_sheet.pages.visible.includes(:elements).find(page_id)
     QuestionSet.new(@active_page ? @active_page.elements : [], @active_answer_sheet)
   end
     
