@@ -16,7 +16,7 @@
 <script type="text/javascript">
   $(function() {
     page_handler = $.qe.pageHandler;
-    page_handler.initialize('<%= @presenter.active_page.dom_id %>');
+    page_handler.initialize('<%= @presenter.active_page.try(:dom_id) %>');
     // Event.observe(window, 'unload', page_handler.savePage);
         
     // Validation.add('validate-phone', 'Please enter a valid phone number +1-800-555-1234 x102', {
@@ -40,19 +40,21 @@
     });
   });
   function updateTotals() {
-        // Set up js for all question grids with totals
-    <% @page.question_sheet.pages.collect(&:question_grid_with_totals).flatten.each do |question_grid_with_total| 
-        question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
-          try {
-            updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
-            $$(".col_<%= "#{question_grid_with_total.id}_#{col - 1}" %>").each(function(e) {
-              Event.observe(e, 'blur', function(event) {
-                updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
+    // Set up js for all question grids with totals
+    <% if @page %>
+      <% @page.question_sheet.pages.collect(&:question_grid_with_totals).flatten.each do |question_grid_with_total| 
+          question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
+            try {
+              updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
+              $$(".col_<%= "#{question_grid_with_total.id}_#{col - 1}" %>").each(function(e) {
+                Event.observe(e, 'blur', function(event) {
+                  updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
+                });
               });
-            });
-          } catch(e) {}
-    <%  end
-      end %>
+            } catch(e) {}
+      <%  end
+        end %>
+    <% end %>
   }
 </script>
 <%= hidden_field_tag 'submit_to', submit_answer_sheet_path(@answer_sheet), :id => 'submit_to' %>
