@@ -15,7 +15,14 @@ class DateField < Question
     r = super
     return nil if r.blank?
     begin
-      r = Time.parse(r) if r.is_a?(String)
+      if r.is_a?(String)
+        parts = r.split('/')
+        if parts.length == 3
+          r = Time.mktime(parts[2], parts[0], parts[1]) 
+        else
+          r = Time.parse(r)
+        end
+      end
     rescue ArgumentError
       r = ''
     end
