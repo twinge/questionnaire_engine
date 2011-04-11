@@ -17,6 +17,9 @@
             <% end %>
           </ul>     
       
+					<div class="savestatus">
+						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
+					</div>
           <% if next_js.empty? -%>
             <div id="submit_message" class="validation-advice" style="display: none;"></div>
   					<div>
@@ -24,9 +27,6 @@
   	          <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
   	        </div>
           <% else -%>
-  					<div class="savestatus">
-  						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
-  					</div>
   					<div>
   	          <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
   	          <button type="button" onclick="<%= next_js %>" style="font-family: Arial; cursor: pointer;"><span>Next >></span></button>
