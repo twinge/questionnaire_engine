@@ -1,6 +1,6 @@
 class CreateAnswerSheetQuestionSheets < ActiveRecord::Migration
   def self.up
-    create_table :answer_sheet_question_sheets do |t|
+    create_table AnswerSheetQuestionSheet.table_name do |t|
       t.integer :answer_sheet_id
       t.integer :question_sheet_id
 
@@ -9,6 +9,6 @@ class CreateAnswerSheetQuestionSheets < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :answer_sheet_question_sheets
+    drop_table AnswerSheetQuestionSheet.table_name
   end
 end

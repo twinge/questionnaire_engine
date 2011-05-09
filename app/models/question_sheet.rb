@@ -3,6 +3,7 @@ require 'model_extensions'
 class QuestionSheet < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
+  belongs_to :questionnable, :polymorphic => true
   has_many :pages, :dependent => :destroy, :order => 'number'
   # has_many :elements
   # has_many :questions

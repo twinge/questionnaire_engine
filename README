@@ -9,7 +9,7 @@ Plugin Dependencies:
 http://github.com/rails/acts_as_list.git
 http://github.com/markcatley/responds_to_parent.git
 
-git://github.com/technoweenie/attachment_fu.git
+https://github.com/pluginaweek/state_machine
 
 
 You must define #check_valid_user
