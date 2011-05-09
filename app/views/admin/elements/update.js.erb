@@ -1,0 +1,9 @@
+$('#element_form_<%= dom_id(@element) %>').hide();
+$('#element_<%= dom_id(@element) %>').html('<%= escape_javascript(render('admin/question_pages/element_show', :element => @element)) %>')
+$('#element_<%= dom_id(@element) %>').show()
+clearCurrentElement()
+$('#questions_list').sortable('refresh');
+
+<% @page.question_grids.each do |grid| %>
+  $('#questions_list_<%= grid.id %>').sortable('refresh');
+<% end %>

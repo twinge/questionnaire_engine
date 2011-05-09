@@ -57,8 +57,8 @@ module ApplicationHelper
     return "" if @qe_already_included
     @qe_already_included=true
     
-    js = javascript_include_tag(*questionnaire_engine_javascripts(options))
-    css = stylesheet_link_tag(*questionnaire_engine_stylesheets(options))
+    js = questionnaire_engine_javascripts(options).collect {|file| javascript_include_tag(file)}.join("\n")
+    css = questionnaire_engine_stylesheets(options).collect {|file| stylesheet_link_tag(file)}.join("\n")
     "#{js}\n#{css}\n".html_safe
   end
   

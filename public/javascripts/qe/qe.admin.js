@@ -1,4 +1,5 @@
 $(function() {
+	setUpJsHelpers();
 	$('#status').ajaxStart(function() {
 		$(this).show();
 	}).ajaxComplete(function() {

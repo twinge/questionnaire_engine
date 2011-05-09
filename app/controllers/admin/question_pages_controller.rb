@@ -1,7 +1,7 @@
 require 'model_extensions'
 class Admin::QuestionPagesController < ApplicationController
   unloadable
-  before_filter :check_valid_user
+  before_filter :check_valid_user if respond_to?(:check_valid_user)
   layout 'qe.admin'
   
   before_filter :get_sheet

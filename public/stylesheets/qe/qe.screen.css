@@ -91,7 +91,7 @@ ul#list-pages {
 }
 
 #list-pages li a {
-  background: url(/images/qe/icons/document--pencil.png) no-repeat 4px 50%;
+  background: url(/assets/qe/icons/document--pencil.png) no-repeat 4px 50%;
   padding: 8px 0 8px 24px;
   border-bottom: 1px dotted #999;
   display: block;
@@ -110,7 +110,7 @@ ul#list-pages {
 }
 
 #link-page-add {
-  background: #f0f0f0 url(/images/qe/icons/add.png) no-repeat 4px 50%;
+  background: #f0f0f0 url(/assets/qe/icons/add.png) no-repeat 4px 50%;
   padding: 5px 0 5px 24px;
   display: block;
   margin-right: 8px;
@@ -172,21 +172,21 @@ ul#nav-controls li a:hover {
   width:107px;  
 }
 
-.list-elements #qg a { background-image: url(/images/qe/icons/table.png); }
-.list-elements #qgt a { background-image: url(/images/qe/icons/table.png); }
-.list-elements #sl a {background-image: url(/images/qe/icons/textfield.png);}
-.list-elements #ml a {background-image: url(/images/qe/icons/textfield.png);}
-.list-elements #co a {  background-image: url(/images/qe/icons/radio.png);}
-.list-elements #cm a {  background-image: url(/images/qe/icons/checkbox.png);}
-.list-elements #dt a {   background-image: url(/images/qe/icons/calendar_view_day.png);}
-.list-elements #fu a {background-image: url(/images/qe/icons/disk.png);}
-.list-elements #pa a {  background-image: url(/images/qe/icons/text_align_left.png);}
-.list-elements #sp a {  background-image: url(/images/qe/icons/text_horizontalrule.png);}
-.list-elements #sk a {  background-image: url(/images/qe/icons/book_open.png);}
-.list-elements #pp a {  background-image: url(/images/qe/icons/asterisk_yellow.png);}
-.list-elements #sc a {  background-image: url(/images/qe/icons/map_magnify.png);}
-.list-elements #at a {  background-image: url(/images/qe/icons/paper-clip.png);}
-.list-elements #ref a {  background-image: url(/images/qe/icons/book-open-list.png);}
+.list-elements #qg a { background-image: url(/assets/qe/icons/table.png); }
+.list-elements #qgt a { background-image: url(/assets/qe/icons/table.png); }
+.list-elements #sl a {background-image: url(/assets/qe/icons/textfield.png);}
+.list-elements #ml a {background-image: url(/assets/qe/icons/textfield.png);}
+.list-elements #co a {  background-image: url(/assets/qe/icons/radio.png);}
+.list-elements #cm a {  background-image: url(/assets/qe/icons/checkbox.png);}
+.list-elements #dt a {   background-image: url(/assets/qe/icons/calendar_view_day.png);}
+.list-elements #fu a {background-image: url(/assets/qe/icons/disk.png);}
+.list-elements #pa a {  background-image: url(/assets/qe/icons/text_align_left.png);}
+.list-elements #sp a {  background-image: url(/assets/qe/icons/text_horizontalrule.png);}
+.list-elements #sk a {  background-image: url(/assets/qe/icons/book_open.png);}
+.list-elements #pp a {  background-image: url(/assets/qe/icons/asterisk_yellow.png);}
+.list-elements #sc a {  background-image: url(/assets/qe/icons/map_magnify.png);}
+.list-elements #at a {  background-image: url(/assets/qe/icons/paper-clip.png);}
+.list-elements #ref a {  background-image: url(/assets/qe/icons/book-open-list.png);}
 
 
 
@@ -236,7 +236,7 @@ li.element .q_form {
 }
 
 span.required {
-  background: url(/images/qe/icons/star-small.png) no-repeat 50% 50%;
+  background: url(/assets/qe/icons/star-small.png) no-repeat 50% 50%;
   display:inline-block;
   height:16px;
   text-indent:-10000px;
@@ -366,10 +366,10 @@ ul.questions li .controls li {
   margin-left: 5px;
 }
 
-.controls .edit {background: url(/images/qe/icons/document--pencil.png) no-repeat 50% 50%;}
-.controls .duplicate {background: url(/images/qe/icons/document-copy.png) no-repeat 50% 50%;}
-.controls .handle {background: url(/images/qe/icons/arrow-move.png) no-repeat 50% 50%;}
-.controls .remove {background: url(/images/qe/icons/arrow_out.png) no-repeat 50% 50%;}
+.controls .edit {background: url(/assets/qe/icons/document--pencil.png) no-repeat 50% 50%;}
+.controls .duplicate {background: url(/assets/qe/icons/document-copy.png) no-repeat 50% 50%;}
+.controls .handle {background: url(/assets/qe/icons/arrow-move.png) no-repeat 50% 50%;}
+.controls .remove {background: url(/assets/qe/icons/arrow_out.png) no-repeat 50% 50%;}
 
 /* QUESTIONS MODAL */
 #question_modal {
@@ -445,7 +445,7 @@ table, tr, td {
 }
 
 .add-link {
-  background:url("/images/qe/icons/add.png") no-repeat scroll 4px 50% #F0F0F0;
+  background:url("/assets/qe/icons/add.png") no-repeat scroll 4px 50% #F0F0F0;
   display:inline;
   font-size:11px;
   font-weight:bold;
@@ -477,9 +477,9 @@ table.list tr:hover {
 td.title {width: 90%; padding: 5px;}
 td.actions {width: 100px;}
 td.actions a {padding: 2px 10px 2px 20px;}
-.duplicate {background: url(/images/qe/icons/document-copy.png) no-repeat 0% 50%;}
-.archive {background: url(/images/qe/icons/briefcase.png) no-repeat 0% 50%;}
-.delete {background: url(/images/qe/icons/minus-button.png) no-repeat 0% 50%;}
+.duplicate {background: url(/assets/qe/icons/document-copy.png) no-repeat 0% 50%;}
+.archive {background: url(/assets/qe/icons/briefcase.png) no-repeat 0% 50%;}
+.delete {background: url(/assets/qe/icons/minus-button.png) no-repeat 0% 50%;}
 
 
 /* HEADER */

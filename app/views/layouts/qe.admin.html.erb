@@ -4,11 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>Dynamic Forms</title>
-  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
-                             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
-  <%= stylesheet_link_tag 'jquery-ui-1.8.2.custom' %>
+  <%= javascript_include_tag 'jquery'  %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
+  <%= stylesheet_link_tag 'qe/jquery-ui-1.8.2.custom' %>
   <%= questionnaire_engine_includes %>
-  <%= javascript_include_tag 'rails', 'rails.extra' %>
+  <%= javascript_include_tag 'jquery_ujs'  %>
   <%= csrf_meta_tag %>
 </head>
 <body>

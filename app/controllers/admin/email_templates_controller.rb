@@ -1,6 +1,6 @@
 class Admin::EmailTemplatesController < ApplicationController
   unloadable
-  before_filter :check_valid_user
+  before_filter :check_valid_user if respond_to?(:check_valid_user)
   layout 'qe.admin'
   
   def index 
