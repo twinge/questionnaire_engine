@@ -38,13 +38,12 @@ class AnswerSheet < ActiveRecord::Base
    
   def percent_complete
     num_questions = question_sheets.inject(0.0) { |sum, qs| qs.nil? ? sum : qs.questions.length + sum }
-    return 0 if num_questions == 0
+      return 0 if num_questions == 0
     num_answers = answers.where("value IS NOT NULL && value != ''").select("DISTINCT question_id").count
-    #[ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
     if [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max == 100 && !complete? 
-    return 99
+      return 99
     else
-    return [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
+      return [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
     end
   end
 
