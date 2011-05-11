@@ -2,5 +2,5 @@
       :class => 'text ' + text_area_field.validation_class(@answer_sheet),
       :id => dom_id(text_area_field),
       :rows => 6,
-      :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-      :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+      :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+      :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %>

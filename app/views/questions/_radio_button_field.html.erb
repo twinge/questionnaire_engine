@@ -18,8 +18,8 @@
       <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
             :id => dom_id, 
             :class => css_class,
-            :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-            :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+            :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+            :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %>
      </td>
   <% end -%>
   </tr>
@@ -33,8 +33,8 @@
     <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
           :id => dom_id, 
           :class => css_class,
-          :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-          :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+          :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+          :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %>
     <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
   <% end -%>
   </div>

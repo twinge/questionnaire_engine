@@ -20,8 +20,8 @@
               checkbox_field.has_answer?(choice[1], @answer_sheet), 
               :id => dom_id, 
               :class => css_class,
-              :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-              :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+              :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+              :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %>
       </div>
      </td>
   <% end -%>
@@ -40,8 +40,8 @@
           checkbox_field.has_answer?(choice[1], @answer_sheet), 
           :id => dom_id, 
           :class => css_class,
-          :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-          :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+          :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+          :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %>
     <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
     </div>
   <% end -%>

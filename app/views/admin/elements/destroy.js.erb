@@ -1,0 +1,4 @@
+$('#element_<%= @element.id%>').remove()
+$('#panel').html('<%= escape_javascript(render('admin/panels/insert'))%>')
+activeElement = ''
+switchTab('insert')

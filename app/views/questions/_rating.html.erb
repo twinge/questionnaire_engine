@@ -11,8 +11,8 @@
 	  <td><%= radio_button_tag "answers[#{rating.id}]", choice[1], checked, 
 	        :id => dom_id,
             :class => css_class,
-            :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
-            :readonly => @answer_sheet.frozen?&&!@presenter.reference? %></td>
+            :disabled => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?),
+            :readonly => @answer_sheet.frozen?&&!(@presenter && @presenter.reference?) %></td>
     <% end -%>
 	</tr>
 	<tr>
