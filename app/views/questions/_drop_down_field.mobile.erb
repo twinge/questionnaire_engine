@@ -1,6 +1,0 @@
-<%= select_tag "answers[#{drop_down_field.id}]", 
-      options_for_select([""] + drop_down_field.choices, drop_down_field.response(@answer_sheet).to_s), 
-      :class => 'select ' + drop_down_field.validation_class(@answer_sheet), 
-      :id => dom_id(drop_down_field),
-      :disabled => @answer_sheet.frozen?&&(@answer_sheet && !@answer_sheet.reference?),
-      :readonly => @answer_sheet.frozen?&&(@answer_sheet && !@answer_sheet.reference?) %>
