@@ -13,7 +13,9 @@
   <% answers = attachment_field.response(@application)
     if answers.present?
       answer = answers[0] %>
-      Current File: <%= link_to(answer.filename, answer.public_filename) %>
+      <% if answer.value.is_a?(String) %>
+        Current File: <%= link_to(answer.filename, answer.public_filename) %>
+      <% end %>
   <% end %>
   </div>
   <iframe id="<%= dom_id %>-iframe" name="<%= @presenter.active_page.dom_id %>-iframe" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
