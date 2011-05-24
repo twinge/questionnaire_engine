@@ -43,7 +43,8 @@ class ChoiceField < Question
       return true if r[0] == is_true(choice) || r[0] == is_false(choice) || r[0] == choice.to_s || r[0] == choice.to_i
     else 
   	  r.each do |answer|   # loop through Answers
-        if answer.value.to_s == choice.to_s   # true if this answer matches the choice passed
+  	    answer = answer.is_a?(Answer) ? answer.value : answer
+        if answer.to_s == choice.to_s   # true if this answer matches the choice passed
           return true
         end
       end
