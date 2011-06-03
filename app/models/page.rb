@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   has_many :page_elements, :dependent => :destroy, :order => :position
   has_many :elements, :through => :page_elements, :order => PageElement.table_name + '.position'
   has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
-  has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :element
+  has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :element, :order => 'position'
   has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
   # has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
   #         :conditions => 'toggle_id is NULL', :dependent => :nullify

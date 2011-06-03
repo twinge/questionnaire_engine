@@ -154,7 +154,7 @@ class Question < Element
       # go through existing answers (in reverse order, as we delete)
       (@answers.length - 1).downto(0) do |index|
         # reject: skip over responses that are unchanged
-        unless values.reject! {|value| value == @answers[index]}
+        unless values.reject! {|value| value == @answers[index].value}
           # remove any answers that don't match the posted values
           @mark_for_destroy << @answers[index]   # destroy from database later 
           @answers.delete_at(index)
@@ -164,12 +164,13 @@ class Question < Element
       # insert any new answers
       for value in values
         if @mark_for_destroy.empty?
-          answer = Answer.new(:question_id => self.id)
+          answer = Answer.new(:question_id => self.id, :answer_sheet_id => app.id)
         else
           # re-use marked answers (an update vs. a delete+insert)
           answer = @mark_for_destroy.pop
         end
         answer.set(value)
+        answer.save!
         @answers << answer
       end
     end
