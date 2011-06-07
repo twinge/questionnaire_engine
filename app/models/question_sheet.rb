@@ -5,8 +5,9 @@ class QuestionSheet < ActiveRecord::Base
   
   belongs_to :questionnable, :polymorphic => true
   has_many :pages, :dependent => :destroy, :order => 'number'
-  # has_many :elements
-  # has_many :questions
+  has_many :page_elements, :through => :pages
+  has_many :questions, :through => :pages, :order => 'position'
+  has_many :elements, :through => :pages, :order => 'position'
   has_many :answer_sheets
   scope :active, where(:archived => false)
   scope :archived, where(:archived => true)
@@ -25,13 +26,13 @@ class QuestionSheet < ActiveRecord::Base
     question_sheet
   end
  
-  def questions
-    pages.collect(&:questions).flatten
-  end
- 
-  def elements
-    pages.collect(&:elements).flatten
-  end
+  # def questions
+  #   pages.collect(&:questions).flatten
+  # end
+  #  
+  # def elements
+  #   pages.collect(&:elements).flatten
+  # end
   
   # Pages get duplicated
   # Question elements get associated
