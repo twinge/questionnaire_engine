@@ -16,9 +16,9 @@ class AnswerSheet < ActiveRecord::Base
   end
   
   # Convenience method if there is only one question sheet in your system
-  def question_sheet
-    question_sheets.first
-  end
+  # def question_sheet
+  #   question_sheets.first
+  # end
   
   def pages
     Page.where(:question_sheet_id => question_sheets.collect(&:id))
