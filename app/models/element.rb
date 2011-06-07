@@ -8,6 +8,7 @@ class Element < ActiveRecord::Base
   
   has_many :page_elements, :dependent => :destroy
   has_many :pages, :through => :page_elements
+  has_many :question_sheets, :through => :pages
   
   scope :active, select("distinct(#{Questionnaire.table_name_prefix}elements.id), #{Questionnaire.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
   
