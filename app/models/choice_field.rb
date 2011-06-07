@@ -113,6 +113,16 @@ class ChoiceField < Question
       r.compact.join(", ")
     end
   end
+  
+  def label_with_choices
+    unless @label_with_choices
+      letters = %w{a b c d e f g h i j k l m n o p q r s t u v w x y z}
+      choices = []
+      choices.each_with_index {|c, i| choices << "#{letters[i]}) #{c[0]}"}
+      @label_with_choices = label + choices.join('; ')
+    end
+    @label_with_choices
+  end
 
   protected
   def is_true(val)
