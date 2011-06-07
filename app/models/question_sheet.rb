@@ -6,8 +6,8 @@ class QuestionSheet < ActiveRecord::Base
   belongs_to :questionnable, :polymorphic => true
   has_many :pages, :dependent => :destroy, :order => 'number'
   has_many :page_elements, :through => :pages
-  has_many :questions, :through => :pages, :order => 'position'
-  has_many :elements, :through => :pages, :order => 'position'
+  has_many :questions, :through => :pages, :order => "#{PageElement.table_name}.position"
+  has_many :elements, :through => :pages, :order => "#{PageElement.table_name}.position"
   has_many :answer_sheets
   scope :active, where(:archived => false)
   scope :archived, where(:archived => true)
