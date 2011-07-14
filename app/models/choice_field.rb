@@ -114,12 +114,14 @@ class ChoiceField < Question
     end
   end
   
+  def choices_by_letter
+    letters = %w{a b c d e f g h i j k l m n o p q r s t u v w x y z}
+    choices_by_letter = Hash[choices.map.with_index {|c, i| [letters[i], c[0]]}]
+  end
+  
   def label_with_choices
     unless @label_with_choices
-      letters = %w{a b c d e f g h i j k l m n o p q r s t u v w x y z}
-      choices = []
-      choices.each_with_index {|c, i| choices << "#{letters[i]}) #{c[0]}"}
-      @label_with_choices = label + choices.join('; ')
+      @label_with_choices = label + ' ' + choices_by_letter.collect {|k, v| "#{k})#{v}"}.join(' ')
     end
     @label_with_choices
   end
