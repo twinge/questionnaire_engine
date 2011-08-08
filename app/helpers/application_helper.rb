@@ -33,6 +33,7 @@ module ApplicationHelper
   def questionnaire_engine_stylesheets(options = {})
     output = []
     output << "qe/qe.screen"
+    output << "qe/jquery-ui-1.8.2.custom"
     return output
   end
 
@@ -49,6 +50,7 @@ module ApplicationHelper
       output << "qe/ckeditor/ckeditor"
     end
     output << "qe/jquery.scrollTo-min"
+    output << "qe/rails.extra"
     output << {:cache => true} if options[:cache]
     return output 
   end
