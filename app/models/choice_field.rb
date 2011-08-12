@@ -69,6 +69,11 @@ class ChoiceField < Question
     end
 	end
 	
+  
+  def multiple_answers_allowed?
+    self.style == 'checkbox'
+  end
+	
 	# element view provides the element label?
   def default_label?
     if self.style == 'acceptance' || self.hide_option_labels?
