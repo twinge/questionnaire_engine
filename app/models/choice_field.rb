@@ -115,7 +115,7 @@ class ChoiceField < Question
     elsif self.style == 'acceptance'
       "Accepted"  # if not blank, it's accepted
     else
-      r.compact.join(", ")
+      r.compact.select {|a| a.to_s.strip.present? }.join(", ")
     end
   end
   
