@@ -8,6 +8,7 @@ class QuestionSheet < ActiveRecord::Base
   has_many :page_elements, :through => :pages
   has_many :questions, :through => :pages, :order => "#{PageElement.table_name}.position"
   has_many :archived_questions, :through => :pages, :order => "#{PageElement.table_name}.position"
+  has_many :all_questions, :through => :pages, :order => "#{PageElement.table_name}.position"
   has_many :elements, :through => :pages, :order => "#{PageElement.table_name}.position"
   has_many :answer_sheets
   scope :active, where(:archived => false)

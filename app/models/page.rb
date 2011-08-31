@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
   has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
   has_many :questions, :through => :page_elements, :source => :question, :order => 'position', :conditions => "#{PageElement.table_name}.archived = 0", :order => "#{PageElement.table_name}.position"
   has_many :archived_questions, :through => :page_elements, :source => :question, :order => 'position', :conditions => "#{PageElement.table_name}.archived = 1", :order => "#{PageElement.table_name}.position"
+  has_many :all_questions, :through => :page_elements, :source => :question, :order => 'position', :order => "#{PageElement.table_name}.position"
   has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
   # has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
   #         :conditions => 'toggle_id is NULL', :dependent => :nullify
