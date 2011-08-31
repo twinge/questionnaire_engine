@@ -26,7 +26,7 @@ class ChoiceField < Question
         retVal = [ doc.elements.collect(text_xpath){|c|c.text}, doc.elements.collect(value_xpath){|c|c.text} ].transpose.sort
       end
     elsif !content.nil?
-      content.split("\n").each do |opt|
+      content.strip.split("\n").each do |opt|
         pair = opt.strip.split(";").reverse!
         pair[1] ||= pair[0]
         retVal << pair
