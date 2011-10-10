@@ -12,7 +12,7 @@ class AnswerSheet < ActiveRecord::Base
   
   # answers for this sheet, grouped by question id
   def answers_by_question
-    @answers_by_question ||= self.answers.find(:all).group_by { |answer| answer.question_id }
+    @answers_by_question ||= self.answers.group_by { |answer| answer.question_id }
   end
   
   # Convenience method if there is only one question sheet in your system
