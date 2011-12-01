@@ -135,7 +135,7 @@ class Question < Element
         end
       end
       unless responses(app) == values
-        value = ActiveRecord::Base.connection.quote_string(values.first)
+        value = values.first
         if self.is_a?(DateField) && value.present?
           begin
             value = Date.strptime(value, (I18n.t 'date.formats.default'))
