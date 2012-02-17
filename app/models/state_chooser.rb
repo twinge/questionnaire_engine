@@ -3,6 +3,6 @@
 
 class StateChooser < Question
   def choices(country = 'US')
-    @states = Carmen::states(country)
+    @states = Carmen.states(country)
   end
 end
