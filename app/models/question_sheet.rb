@@ -4,8 +4,8 @@ class QuestionSheet < ActiveRecord::Base
   set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
   
   has_many :pages, :dependent => :destroy, :order => 'number'
-  # has_many :elements
-  # has_many :questions
+  #has_many :elements
+  #has_many :questions
   has_many :answer_sheets
   scope :active, where(:archived => false)
   scope :archived, where(:archived => true)
@@ -20,12 +20,21 @@ class QuestionSheet < ActiveRecord::Base
   # create a new form with a page already attached
   def self.new_with_page
     question_sheet = self.new(:label => next_label)
-    question_sheet.pages.build(:label => 'Page 1', :number => 1)    
+    question_sheet.pages.build(:label => 'Page 1', :number => 1)
     question_sheet
   end
  
   def questions
-    pages.collect(&:questions).flatten
+    ret_val = []
+    pages.each do |p|
+      p.elements.each do |e|
+        ret_val << e if e.is_a?(Question)
+        if e.respond_to?(:questions)
+          ret_val += e.questions
+        end
+      end
+    end
+    ret_val
   end
  
   def elements
@@ -64,3 +73,4 @@ class QuestionSheet < ActiveRecord::Base
   end
 
 end
+
