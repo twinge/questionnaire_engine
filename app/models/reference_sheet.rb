@@ -1,5 +1,6 @@
 class ReferenceSheet < AnswerSheet
   include Rails.application.routes.url_helpers
+  include AASM
   set_table_name "#{Questionnaire.table_name_prefix}references"
   set_inheritance_column 'fake'
   
@@ -14,27 +15,28 @@ class ReferenceSheet < AnswerSheet
   
   after_destroy :notify_reference_of_deletion
   
-  acts_as_state_machine :initial => :created, :column => :status
+  aasm :initial => :created, :column => :status do
 
-  state :started
-  state :created
-  state :completed, :enter => Proc.new {|ref|
-                                ref.submitted_at = Time.now
-                                # SpReferenceMailer.deliver_completed(ref)
-                                # SpReferenceMailer.deliver_completed_confirmation(ref)
-                                ref.applicant_answer_sheet.complete(ref)
-                              }
+    state :started
+    state :created
+    state :completed, :enter => Proc.new {|ref|
+                                  ref.submitted_at = Time.now
+                                  # SpReferenceMailer.deliver_completed(ref)
+                                  # SpReferenceMailer.deliver_completed_confirmation(ref)
+                                  ref.applicant_answer_sheet.complete(ref)
+                                }
 
-  event :start do
-    transitions :to => :started, :from => :created
-  end
+    event :start do
+      transitions :to => :started, :from => :created
+    end
 
-  event :submit do
-    transitions :to => :completed, :from => :started
-  end
+    event :submit do
+      transitions :to => :completed, :from => :started
+    end
 
-  event :unsubmit do
-    transitions :to => :started, :from => :completed
+    event :unsubmit do
+      transitions :to => :started, :from => :completed
+    end
   end
   
   alias_method :applicant, :applicant_answer_sheet
