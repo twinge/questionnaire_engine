@@ -6,7 +6,7 @@ class ReferenceSheetsController < AnswerSheetsController
     unless @answer_sheet
       render :not_found and return
     end
-    @answer_sheet.start!
+    @answer_sheet.start! if @answer_sheet.created?
     # Set up question_sheet if needed
     if @answer_sheet.question_sheets.empty?
       @answer_sheet.question_sheets << QuestionSheet.find(@answer_sheet.question.related_question_sheet)
