@@ -22,9 +22,9 @@ class QeInitial < ActiveRecord::Migration
     end
 
     create_table Qe::Page.table_name do |t|
-      t.column :question_sheet_id, :integer, :null => false
-      t.column :label, :string, :limit => 60, :null => false    # page title
-      t.column :number, :integer                                # page number (order)
+      t.column :question_sheet_id,  :integer,               :null => false
+      t.column :label,              :string,  :limit => 60, :null => false    # page title
+      t.column :number,             :integer                                  # page number (order)
       
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
@@ -35,20 +35,20 @@ class QeInitial < ActiveRecord::Migration
     add_index Qe::Element.table_name, :slug
     add_index Qe::Element.table_name, [:question_sheet_id, :position, :page_id], :unique => false
     
-    create_table :qe_answer_sheets do |t|
-      t.column :question_sheet_id, :integer, :null => false
-      t.column :created_at, :datetime, :null => false
-      t.column :completed_at, :datetime, :null => true        # null if incomplete
+    create_table Qe::AnswerSheet.table_name do |t|
+      t.column :question_sheet_id,  :integer,   :null => false
+      t.column :created_at,         :datetime,  :null => false
+      t.column :completed_at,       :datetime,  :null => true        # null if incomplete
       
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
     end
     
     create_table Qe::Answer.table_name do |t|
-      t.column :answer_sheet_id, :integer, :null => false
-      t.column :question_id, :integer, :null => false
-      t.column :value, :text
-      t.column :short_value, :string, :null => true, :limit => 255   # indexed copy of :response
+      t.column :answer_sheet_id,  :integer, :null => false
+      t.column :question_id,      :integer, :null => false
+      t.column :value,            :text
+      t.column :short_value,      :string,  :null => true,  :limit => 255   # indexed copy of :response
       
       # foreign keys
       # t.foreign_key :answer_sheet_id, AnswerSheet, :id

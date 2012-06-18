@@ -1,6 +1,6 @@
 class AddHiddenToPage < ActiveRecord::Migration
   def self.up
-    add_column Qe::Page.table_name,:hidden, :boolean, :default => false
+    add_column Qe::Page.table_name,		:hidden, :boolean, :default => false
     change_column Qe::Page.table_name, :label, :string, :limit => 100
   end
 

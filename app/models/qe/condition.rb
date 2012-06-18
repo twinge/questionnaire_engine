@@ -6,7 +6,7 @@ module Qe
   class Condition < ActiveRecord::Base
     set_table_name "#{self.table_name}"
     
-    belongs_to :question_sheet
+    belongs_to :qe_question_sheet
     belongs_to :trigger, :class_name => "Qe::Question", :foreign_key => "trigger_id"
 
     validates_presence_of :expression

@@ -1,11 +1,11 @@
 module Qe
   class AnswerSheet < ActiveRecord::Base
-    set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
+    set_table_name "#{self.table_name}"
 
-    has_many :answer_sheet_question_sheets
-    has_many :question_sheets, :through => :answer_sheet_question_sheets
-    has_many :answers, :class_name => 'Answer', :foreign_key => 'answer_sheet_id'
-    has_many :reference_sheets, :class_name => "ReferenceSheet", :foreign_key => "applicant_answer_sheet_id"
+    has_many :qe_answer_sheet_question_sheets
+    has_many :qe_question_sheets,   :through => :qe_answer_sheet_question_sheets
+    has_many :qe_answers,           :foreign_key => 'answer_sheet_id'
+    has_many :qe_reference_sheets,  :foreign_key => 'applicant_answer_sheet_id'
 
     def complete?
       !completed_at.nil?
@@ -22,7 +22,7 @@ module Qe
     end
     
     def pages
-      Page.where(:question_sheet_id => question_sheets.collect(&:id))
+      Qe::Page.where(:question_sheet_id => question_sheets.collect(&:id))
     end
     
     def completely_filled_out?

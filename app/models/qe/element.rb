@@ -2,13 +2,13 @@
 module Qe
   class Element < ActiveRecord::Base
     set_table_name "#{self.table_name}"
-    belongs_to :question_grid, :class_name => "QuestionGrid", :foreign_key => "question_grid_id"
-    belongs_to :choice_field, :class_name => "ChoiceField", :foreign_key => "conditional_id"
+    belongs_to :qe_question_grids, :foreign_key => "question_grid_id"
+    belongs_to :qe_choice_fields, :foreign_key => "conditional_id"
     
     self.inheritance_column = :kind
     
-    has_many :page_elements, :dependent => :destroy
-    has_many :pages, :through => :page_elements
+    has_many :qe_page_elements, :dependent => :destroy
+    has_many :qe_pages, :through => :page_elements
     
     scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
     
@@ -79,7 +79,7 @@ module Qe
         new_element.question_grid_id = parent.id
       end
       new_element.save(:validate => false)
-      PageElement.create(:element => new_element, :page => page) unless parent
+      Qe::PageElement.create(:element => new_element, :page => page) unless parent
       
       # duplicate children
       if respond_to?(:elements) && elements.present?
@@ -103,7 +103,7 @@ module Qe
     end
     
     def Element.max_label_length
-      @@max_label_length ||= Element.columns.find{ |c| c.name == "label" }.limit
+      @@max_label_length ||= Qe::Element.columns.find{ |c| c.name == "label" }.limit
     end
 
     protected
