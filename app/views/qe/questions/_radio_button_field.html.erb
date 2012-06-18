@@ -1,0 +1,41 @@
+<% css_class = 'radio ' -%>
+<% css_class += 'required' if radio_button_field.required? %>
+<% if radio_button_field.hide_option_labels? && !['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
+  <tr id="<%= dom_id(radio_button_field) %>">
+    <td class="col1">
+      <label for="<%= dom_id(radio_button_field) %>" class="desc">
+        <%= raw radio_button_field.label %>
+        <% if radio_button_field.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
+        <%= tip(radio_button_field.tooltip) if radio_button_field.tooltip.present? %>
+      </label>
+    </td>
+  <% radio_button_field.choices.each_with_index do |choice, num| -%>
+    <td class="col">
+      <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
+         last_choice =  (num == radio_button_field.choices.length - 1)
+         css_class += radio_button_field.validation_class(@answer_sheet) if last_choice
+         checked = radio_button_field.has_answer?(choice[1], @answer_sheet) -%>
+      <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
+            :id => dom_id, 
+            :class => css_class,
+            :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
+            :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+     </td>
+  <% end -%>
+  </tr>
+<% else %>
+  <div id="<%= dom_id(radio_button_field) %>">
+  <% radio_button_field.choices.each_with_index do |choice, num| -%>
+    <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) 
+       last_choice =  (num == radio_button_field.choices.length - 1)
+       css_class += radio_button_field.validation_class(@answer_sheet) if last_choice
+       checked = radio_button_field.has_answer?(choice[1], @answer_sheet) -%>
+    <%= radio_button_tag "answers[#{radio_button_field.id}]", choice[1], checked, 
+          :id => dom_id, 
+          :class => css_class,
+          :disabled => @answer_sheet.frozen?&&!@presenter.reference?,
+          :readonly => @answer_sheet.frozen?&&!@presenter.reference? %>
+    <label class="choice" for="<%= dom_id %>"><%= choice[0] %></label>
+  <% end -%>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<div id="content">
+    <h1>Edit Email Template</h1>
+    
+    <%= error_messages_for :email_template %>
+    
+    <%= form_for(:email_template, :url => admin_email_template_path(@email_template), :html => { :method => :put } ) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+        
+      <p><%= submit_tag "Update" %> or <%= link_to "Cancel", admin_email_templates_path, :class => "cancel" %></p>
+    <% end %>
+
+
+</div>

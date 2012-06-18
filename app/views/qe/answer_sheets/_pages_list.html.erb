@@ -1,0 +1,11 @@
+<div id="panel-pages" class="panel" style="display:block;">
+  <div id="page_ajax_spinner" style="display:none;">
+    <div>
+    <%= image_tag 'qe/ajax-loader.gif' %> Loading...
+    </div>
+  </div>
+  <ul id="list-pages">
+    <%= render :partial => 'answer_sheets/page_link', :collection => @presenter.page_links %>
+  </ul>
+  
+</div>

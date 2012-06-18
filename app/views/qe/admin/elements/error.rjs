@@ -1,0 +1,6 @@
+page << <<-END
+  $('#errors').html('#{escape_javascript(render('errors', :element => @element))}')
+END
+@element.errors.each do |attr_name, message| 
+  page << "addError('element_#{attr_name}')";
+end

@@ -1,0 +1,24 @@
+<h2 id='sheet-name'><%= answer_sheet.question_sheet.label %></h2>
+
+<% if elements.length > 0 -%>
+  
+  <% elements.each do |page, page_elements| -%>
+  
+    <div class="page">
+      <h3><%= page.label %></h3>
+      <ul class="questions readonly" start="<%= @question_number %>">
+        <%= render :partial => 'answer_sheets/element', :collection => page_elements, :locals => {:elements => page_elements} %>
+      </ul>
+    </div>
+    
+    <br />
+  
+  <% end -%>
+
+<% else -%>
+
+    <div style="background: #ffc;">
+      <p>That's odd. There are no answers to review.</p>
+    </div>
+
+<% end -%>

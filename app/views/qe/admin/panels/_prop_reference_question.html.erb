@@ -1,0 +1,12 @@
+<div class="field">
+  <label for="element_style" class="desc">Related Question Sheet
+  <%= image_tag('qe/icons/question-balloon.png', :title => "This list includes any template with 'Reference' in the name.") %></label>
+  <%= f.select :related_question_sheet_id, (QuestionSheet.active.where("label like '%reference%'").order(:label).all - [@page.question_sheet]).collect {|qs| [qs.label, qs.id]} %>
+</div>
+
+<div class="field">
+  <label for="element_style" class="desc">Style</label>
+  <%= f.select :style, [["Peer", "peer"], ["Spiritual", "spiritual"], ["Parent", "parent"]] %>
+</div>
+
+<%= render 'admin/panels/common_fields', :f => f %>

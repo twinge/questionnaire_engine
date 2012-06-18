@@ -1,0 +1,63 @@
+<% if element.kind == "QuestionGrid" -%>
+  <li>
+  <label class="desc"><%= raw element.label %></label>
+  <table class="grid">
+  <%- if element.cols -%>
+    <tr>
+    <%- element.cols.split(';').each do |header| -%>
+      <th><%= raw header || '&nbsp;' %></th>
+    <%- end -%>
+    </tr>
+  <%- end -%>
+  <tr>
+  <%- col_count = 0
+  element.elements.each do |grid_element| -%>
+    <td id="element_<%= element.id %>">
+    <% if %w(Paragraph).include?(grid_element.kind) -%>
+      <%= simple_format grid_element.content %>
+    <% else -%>
+      <%# el = elements.detect {|el| el.id == grid_element.id } -%>
+      <% if grid_element.question? -%>
+        <label class="desc"><%= raw grid_element.label %></label>
+      <% end %>
+      <%- if @collating -%>
+        <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
+          <div class="answer collate">
+          <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
+          <span class="reviewer_answer"><%= simple_format grid_element.display_response(answer_sheet) %></span>
+          </div>
+        <%- end -%>
+      <%- else -%>
+        <span class="answer"><%= simple_format grid_element.display_response(@answer_sheet) %></span>
+      <%- end -%>
+    <% end -%>
+    </td>
+    <%- col_count += 1
+    if col_count % element.num_cols == 0 then col_count = 0 -%></tr><tr><%- end -%>
+  <%- end -%>
+  <%- while col_count < element.num_cols do 
+    col_count += 1-%>
+    <td>&nbsp;</td>
+  <%- end unless col_count == 0-%>
+  </tr>
+  </table>
+  </li>
+<% elsif element.question_grid_id.nil? && element.conditional_id.nil? -%>
+  <li>
+  <% if element.question? -%>
+    <label class="desc"><%= raw element.label %></label>
+    <%- if @collating -%>
+      <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
+        <div class="answer collate">
+        <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
+        <span class="reviewer_answer"><%= simple_format element.display_response(answer_sheet) %></span>
+        </div>
+      <%- end -%>
+    <%- else -%>
+      <span class="answer"><%= simple_format element.display_response(@answer_sheet) %></span>
+    <%- end -%>
+  <% else -%>
+    <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
+  <% end -%>
+  </li>
+<% end -%>

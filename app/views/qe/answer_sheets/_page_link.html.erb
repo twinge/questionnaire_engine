@@ -1,0 +1,7 @@
+<% css_class = '' %>
+<% if session[:attempted_submit] && page_link.page.has_questions? %>
+	<% css_class = page_link.page.complete?(@answer_sheet) ? 'complete' : 'incomplete' %>
+<% end %>
+<%= li_page_active_if(@presenter.active_page && page_link.dom_id == @presenter.active_page.dom_id, :id => page_link.dom_id + '-li', :class => css_class) do %>
+  <%= link_to_function(page_link.label, load_page_js(page_link), :id => page_link.dom_id + '-link', 'data-page-id' => page_link.dom_id, :class => 'page_link', :href => page_link.load_path) %>
+<% end -%>

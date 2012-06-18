@@ -1,0 +1,9 @@
+<% if element.question? && element.default_label? && element.label.present? && !element.hide_label? -%>
+  <label for="<%= dom_id(element) %>" class="desc">
+    <%= raw element.label %>
+    <% if element.required?(@answer_sheet) -%><span class="required">required</span><% end -%>
+    <%= tip(element.tooltip) if element.tooltip.present? %>
+  </label>
+<% end -%>
+
+<%= render :partial => 'questions/' + element.ptemplate, :object => element, :locals => {:col => nil} %>

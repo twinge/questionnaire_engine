@@ -1,0 +1,5 @@
+$('#submit_message').html('<%= escape_javascript(render('incomplete')) %>')
+<% @answer_sheet.pages.each do |page| %>
+  $('#<%= dom_id(@answer_sheet) %>-<%= dom_id(page) %>-li').replaceWith('<%= escape_javascript(render('answer_sheets/page_link', :page_link => @presenter.new_page_link(@answer_sheet, page))) %>')
+<% end %>
+$('#submit_message').show();

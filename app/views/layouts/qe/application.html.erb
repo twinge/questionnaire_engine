@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questionnaire</title>
+
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
+                             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
+  <%# <%= questionnaire_engine_includes(:area => :public) %>
+
+  <%= stylesheet_link_tag    "questionnaire/application", :media => "all" %>
+  <%= javascript_include_tag "questionnaire/application" %>
+
+  <%= javascript_include_tag 'rails' %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div id="wrapper">
+   <div id="header"></div>
+   <div id="main"><%= yield %></div>
+	</div>
+
+	<div id="footer">
+  	Questionnaire Engine | Created by <a href="http://www.26am.com">26AM Design Studio</a>
+	</div>
+
+</body>
+</html>
