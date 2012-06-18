@@ -4,10 +4,10 @@
 # a question can have more than one answer (choose many) in which case ANY answer will do (find)
 module Qe
   class Condition < ActiveRecord::Base
-    set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
+    set_table_name "#{self.table_name}"
     
     belongs_to :question_sheet
-    belongs_to :trigger, :class_name => "Question", :foreign_key => "trigger_id"
+    belongs_to :trigger, :class_name => "Qe::Question", :foreign_key => "trigger_id"
 
     validates_presence_of :expression
     validates_length_of :expression, :maximum => 255, :allow_nil => true  

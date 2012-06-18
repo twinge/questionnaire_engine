@@ -44,7 +44,7 @@ class QeInitial < ActiveRecord::Migration
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
     end
     
-    create_table :qe_answers do |t|
+    create_table Qe::Answer.table_name do |t|
       t.column :answer_sheet_id, :integer, :null => false
       t.column :question_id, :integer, :null => false
       t.column :value, :text
@@ -55,9 +55,9 @@ class QeInitial < ActiveRecord::Migration
       # t.foreign_key :question_id, Element, :id
     end
     
-    add_index :qe_answers, :short_value
+    add_index Qe::Answer.table_name, :short_value
     
-    create_table :qe_conditions do |t|
+    create_table Qe::Condition.table_name do |t|
       t.column :question_sheet_id,  :integer, :null => false
       t.column :trigger_id,         :integer, :null => false
       t.column :expression,         :string,  :limit => 255, :null => false
@@ -71,26 +71,26 @@ class QeInitial < ActiveRecord::Migration
       # t.foreign_key :toggle_id, Element, :id
     end
     
-    add_column :qe_elements, :source,           :string
-    add_column :qe_elements, :value_xpath,      :string
-    add_column :qe_elements, :text_xpath,       :string
-    add_column :qe_elements, :question_grid_id, :integer
-    add_column :qe_elements, :cols,             :string
-    add_column :qe_pages,    :no_cache,         :boolean, :default => 0
+    add_column Qe::Element.table_name, :source,           :string
+    add_column Qe::Element.table_name, :value_xpath,      :string
+    add_column Qe::Element.table_name, :text_xpath,       :string
+    add_column Qe::Element.table_name, :question_grid_id, :integer
+    add_column Qe::Element.table_name, :cols,             :string
+    add_column Qe::Element.table_name, :no_cache,         :boolean, :default => 0
   end
 
   def self.down
-    remove_column :qe_pages,    :no_cache
-    remove_column :qe_elements, :question_grid_id
-    remove_column :qe_elements, :cols
-    remove_column :qe_elements, :source
-    remove_column :qe_elements, :value_xpath
-    remove_column :qe_elements, :text_xpath
-    drop_table :qe_conditions
-    drop_table :qe_answers
-    drop_table :qe_answer_sheets
-    drop_table :qe_elements
-    drop_table :qe_pages
-    drop_table :qe_question_sheets
+    remove_column Qe::Page.table_name,    :no_cache
+    remove_column Qe::Element.table_name, :question_grid_id
+    remove_column Qe::Element.table_name, :cols
+    remove_column Qe::Element.table_name, :source
+    remove_column Qe::Element.table_name, :value_xpath
+    remove_column Qe::Element.table_name, :text_xpath
+    drop_table Qe::Condition.table_name
+    drop_table Qe::Answer.table_name
+    drop_table Qe::AnswerSheet.table_name
+    drop_table Qe::Element.table_name
+    drop_table Qe::Page.table_name
+    drop_table Qe::QuestionSheet.table_name
   end
 end
