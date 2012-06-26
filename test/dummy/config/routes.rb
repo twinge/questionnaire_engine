@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  get "home/index"
-
+  # == Questionnaire
   # This line mounts QuestionnaireEngine's routes at the root of your application.
   # This means, any requests to URLs such as http://localhost:3000/user, will go to 
   # Questionnaire::Elements. If you would like to change where this engine
@@ -12,6 +11,10 @@ Rails.application.routes.draw do
   #
   mount Qe::Engine, :at => '/'
 
-  root :to => 'home#index'
+
   
+  get "home/index"
+  
+  root :to => 'home#index'
+
 end

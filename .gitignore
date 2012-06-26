@@ -6,3 +6,8 @@ test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
 vendor/ruby
+
+## custom additions
+
+# to force gem migrations to right
+test/dummy/db/

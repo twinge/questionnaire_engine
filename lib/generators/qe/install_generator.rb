@@ -2,7 +2,7 @@ module Qe
 	class InstallGenerator < Rails::Generators::Base
 
 		class_option :migrate, :type => :boolean, :default => true, :banner => 'Run Questionnaire migrations'
-    class_option :lib_name, :type => :string, :default => 'questionnaire'
+    class_option :lib_name, :type => :string, :default => 'qe'
     class_option :quite, :type => :boolean, :default => false
 
     # def self.source_paths
@@ -52,6 +52,7 @@ module Qe
       insert_into_file File.join('config', 'routes.rb'), 
       :after => "pplication.routes.draw do\n" do
 %Q{
+  # == Questionnaire
   # This line mounts QuestionnaireEngine's routes at the root of your application.
   # This means, any requests to URLs such as http://localhost:3000/user, will go to 
   # Questionnaire::Elements. If you would like to change where this engine
@@ -75,13 +76,13 @@ module Qe
     def noify_about_javascripts
       insert_into_file File.join('app', 'assets', 'javascripts', 'application.js'), 
       :before => "//= require_tree ." do
-        %Q{//= require qe/app/assets/javascripts/qe \n} 
+        %Q{//= require qe/application \n} 
       end
       unless options[:quiet]
         puts "*" * 75
         puts "We added the following line tou your applications javascripts file,"
         puts " "
-        puts "  //= require qe/app/assets/javascripts/qe/application.js"
+        puts "  //= require qe/application "
       end
     end
 
@@ -89,13 +90,13 @@ module Qe
     def notify_about_stylesheets
       insert_into_file File.join('app', 'assets', 'stylesheets', 'application.css'), 
       :before => "*= require_tree ." do
-          %Q{*= require qe/app/assets/stylesheets/application.css \n }
+          %Q{*= require qe/application \n }
       end 
       unless options[:quiet]
         puts "*" * 75
         puts "We added the following line tou your applications stylesheets file,"
         puts " "
-        puts "  //= require qe/app/assets/stylesheets/qe/application.css"
+        puts "  //= require qe/application "
       end
     end
 

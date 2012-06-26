@@ -41,24 +41,51 @@ end
 
 require 'thor/actions'
 
-task :data do 
-  sh "rake db:drop; rake db:create; rake db:migrate --trace"
+desc "run :: master action"
+task :run => [:run_migrations] do end
+
+  desc "_run :: drops, creates, migrates QE migrations"
+  task :run_migrations do 
+    sh "rake db:drop; rake db:create; rake db:migrate --trace"
+  end
+
+
+desc "clean :: master action"
+task :clean => [:clean_drop_db, :clean_db_folder] do end
+
+  desc "_clean :: drop db"
+  task :clean_drop_db do 
+    sh "rake db:drop;"
+  end
+
+  desc "_clean :: rm db/schema.rb and db/migrate/*"
+  task :clean_db_folder do
+    gem_dir = File.dirname(__FILE__)
+    db_dir = gem_dir + "/test/dummy/db"
+    sh "rm -rf " + db_dir
+    sh "mkdir " + db_dir
+    sh "mkdir " + db_dir + "/migrate"
+  end
+
+    # TODO code this
+    desc "_clean :: rm the Qe mounting in config/routes.rb"
+    task :clean_routes do
+      puts "TODO regex delete the Qe engine mounting"
+    end
+
+    # TODO code this
+    desc "_clean :: rm the Qe refs in test/dummy/app/assets"
+    task :clean_assets do
+      puts "TODO regex delete the Qe engine refs"
+    end
+
+
+desc "install gem to test/dummy application "
+task :ginstall do
+  dummy_dir = File.dirname(__FILE__) + "/test/dummy"
+  cmd = "cd " + dummy_dir + " && bundle exec rails generate qe:install"
+  sh cmd
+  puts ">> QE ran installer"
 end
 
-task :rm do
-  gem_dir = File.dirname(__FILE__)
-  db_dir = gem_dir + "/test/dummy/db"
-  sh "rm -rf " + db_dir
-  sh "mkdir " + db_dir
-  sh "mkdir " + db_dir + "/migrate"
-end
 
-task :kin do
-  gem_dir = File.dirname(__FILE__)
-  dummy_dir = gem_dir + "test/dummy"
-  sh dummy_dir.to_s + " rails generate qe:install"
-  sh "echo \">> QE ran installer\""
-end
-
-# task :default => :app_rake_db_ops
-# task :default => :app_install_remove_files

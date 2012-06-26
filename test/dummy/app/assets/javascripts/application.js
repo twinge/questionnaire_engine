@@ -12,5 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require qe/app/assets/javascripts/qe/applicaiton.js 
+//= require qe/application 
 //= require_tree .
