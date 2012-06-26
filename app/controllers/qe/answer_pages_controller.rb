@@ -1,4 +1,6 @@
-require_dependency 'answer_pages_presenter'
+require_dependency "qe/application_controller"
+require_dependency "qe/application_controller"
+require_dependency "qe/answer_pages_presenter"
 
 module Qe
   class AnswerPagesController < ApplicationController
@@ -7,15 +9,15 @@ module Qe
     
     def edit
       @elements = @presenter.questions_for_page(params[:id]).elements
-      @page = Page.find(params[:id]) || Page.find_by_number(1)
+      @page = Qe::Page.find(params[:id]) || Qe::Page.find_by_number(1)
       
-      render :partial => 'answer_page', :locals => { :show_first => nil }
+      render :partial => 'qe/answer_page', :locals => { :show_first => nil }
     end
 
     # validate and save captured data for a given page
     # PUT /answer_sheets/1/pages/1
     def update
-      @page = Page.find(params[:id])
+      @page = Qe::Page.find(params[:id])
       questions = @presenter.all_questions_for_page(params[:id])
       questions.post(params[:answers], @answer_sheet)
       
@@ -42,10 +44,10 @@ module Qe
     
     def save_file
       if params[:Filedata]
-        @page = Page.find(params[:id])
+        @page = Qe::Page.find(params[:id])
         @presenter.active_page = @page
-        question = Element.find(params[:question_id])
-        answer = Answer.find(:first, :conditions => {:answer_sheet_id => @answer_sheet.id, :question_id => question.id})
+        question = Qe::Element.find(params[:question_id])
+        answer = Qe::Answer.find(:first, :conditions => {:answer_sheet_id => @answer_sheet.id, :question_id => question.id})
         question.answers = [answer] if answer
 
         answer = question.save_file(@answer_sheet, params[:Filedata])
@@ -67,11 +69,13 @@ module Qe
     
     def get_answer_sheet
       @answer_sheet = answer_sheet_type.find(params[:answer_sheet_id])
-      @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
+      @presenter = Qe::AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
     end
 
     def answer_sheet_type
-      (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
+      # TODO code this dynamically
+      # (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
+      (params[:answer_sheet_type] || 'Qe::AnswerSheet').constantize
     end
   end
 end

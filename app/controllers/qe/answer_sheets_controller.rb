@@ -1,31 +1,34 @@
+require_dependency "qe/application_controller"
+
 module Qe
   class AnswerSheetsController < ApplicationController
     unloadable
-    layout 'application'
-    helper :answer_pages
+    layout 'qe/application'
+    helper 'qe/answer_pages'
     before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
 
     # list existing answer sheets
     def index
       
-      # raise "testing"
+      # TODO dynamically reference this
+      # @answer_sheets = answer_sheet_type.find(:all, :order => 'created_at')
+      @answer_sheets = Qe::AnswerSheet.find(:all, :order => 'created_at')
 
-      @answer_sheets = answer_sheet_type.find(:all, :order => 'created_at')
-      
       # drop down of sheets to capture data for
-      @question_sheets = QeQuestionSheet.find(:all, :order => 'label').map {|s| [s.label, s.id]}
+      @question_sheets = Qe::QuestionSheet.find(:all, :order => 'label').map {|s| [s.label, s.id]}
     end
     
     def create
-      @question_sheet = QeQuestionSheet.find(params[:question_sheet_id])
+      @question_sheet = Qe::QuestionSheet.find(params[:question_sheet_id])
       @answer_sheet = @question_sheet.answer_sheets.create
+      
       
       redirect_to edit_answer_sheet_path(@answer_sheet)
     end
     
     # display answer sheet for data capture (page 1)
     def edit
-      @presenter = QeAnswerPagesPresenter.new(self, @answer_sheet, params[:a])
+      @presenter = Qe::AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
       unless @presenter.active_answer_sheet.pages.present?
         flash[:error] = "Sorry, there are no questions for this form yet."
         if request.env["HTTP_REFERER"]
@@ -42,9 +45,9 @@ module Qe
     # display captured answers (read-only)
     def show
       @question_sheet = @answer_sheet.question_sheet
-      pf = QeQuestionnaire.table_name_prefix
+      pf = Qe.table_name_prefix
       @elements = @question_sheet.pages.collect {|p| p.elements.includes(:pages).order("#{pf}pages.number,#{pf}page_elements.position").all}.flatten
-      @elements = QeQuestionSet.new(@elements, @answer_sheet).elements.group_by{ |e| e.pages.first }
+      @elements = Qe::QuestionSet.new(@elements, @answer_sheet).elements.group_by{ |e| e.pages.first }
     end
     
     def send_reference_invite
@@ -62,9 +65,9 @@ module Qe
     end
     
     protected 
-      def answer_sheet_type
-        (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
-      end
+      # def answer_sheet_type
+      #   (params[:answer_sheet_type] || Qe::Questionnaire.answer_sheet_class || 'Qe::AnswerSheet').constantize
+      # end
       
       def get_answer_sheet
         @answer_sheet = answer_sheet_type.find(params[:id])
@@ -72,7 +75,7 @@ module Qe
       
       def validate_sheet
         unless @answer_sheet.completely_filled_out?
-          @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
+          @presenter = Qe::AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
           render 'incomplete'
           return false
         end

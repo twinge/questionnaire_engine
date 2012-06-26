@@ -1,5 +1,3 @@
-
-
 module Qe
   module AnswerPagesHelper
     

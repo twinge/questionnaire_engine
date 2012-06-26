@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   #
   mount Qe::Engine, :at => '/'
 
-
-  
   get "home/index"
   
   root :to => 'home#index'
