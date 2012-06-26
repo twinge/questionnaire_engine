@@ -1,0 +1,19 @@
+
+development:
+  adapter: mysql2
+  database: questionnaire
+  username: root
+  password: 
+
+test:
+  adapter: mysql2
+  database: test-questionnaire
+  username: root
+  password: 
+
+
+production:
+  adapter: mysql2
+  database: questionnaire
+  username: root
+  password: 

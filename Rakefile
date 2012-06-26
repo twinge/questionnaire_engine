@@ -35,10 +35,30 @@ Rake::TestTask.new(:test) do |t|
 end
 
 
-# task :default => :test
 
-task :jj do 
+# ==============================================================================
+# custom, non-standard rake tasks
+
+require 'thor/actions'
+
+task :data do 
   sh "rake db:drop; rake db:create; rake db:migrate --trace"
 end
 
-task :default => :jj
+task :rm do
+  gem_dir = File.dirname(__FILE__)
+  db_dir = gem_dir + "/test/dummy/db"
+  sh "rm -rf " + db_dir
+  sh "mkdir " + db_dir
+  sh "mkdir " + db_dir + "/migrate"
+end
+
+task :kin do
+  gem_dir = File.dirname(__FILE__)
+  dummy_dir = gem_dir + "test/dummy"
+  sh dummy_dir.to_s + " rails generate qe:install"
+  sh "echo \">> QE ran installer\""
+end
+
+# task :default => :app_rake_db_ops
+# task :default => :app_install_remove_files

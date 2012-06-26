@@ -23,18 +23,10 @@ module Qe
     # def additional_tweaks
     # end
 
-    # def setup_assets
-    #   @lib_name = 'questionnaire'
-    #   %w{javascripts stylesheets images}.each do |path|
-    #     puts "I could be imported, but not at this moment"
-    #     # empty_directory "app/assets/#{path}/"       
-    #   end
-    # end
-
     def install_migrations
       say_status :copying, "migrations"
       silence_stream(STDOUT) do
-        silence_warnings { rake 'railties:install:migrations' }
+        silence_warnings { rake 'qe:install:migrations' }
       end
     end
 
@@ -57,32 +49,69 @@ module Qe
     end
 
     def notify_about_routes
-      insert_into_file File.join('config', 'routes.rb'), :after => "pplication.routes.draw do\n" do
+      insert_into_file File.join('config', 'routes.rb'), 
+      :after => "pplication.routes.draw do\n" do
 %Q{
   # This line mounts QuestionnaireEngine's routes at the root of your application.
   # This means, any requests to URLs such as http://localhost:3000/user, will go to 
   # Questionnaire::Elements. If you would like to change where this engine
   # is mounted, simply change the :at option to something different.
   #
-  ## DON'T TRUST THIS - We ask that you don't use the :as option here, as
-  ##    Questionnaire relies on it being the default of "Questionnaire"
+  # DON'T TRUST THIS - We ask that you don't use the :as option here, as
+  # Questionnaire relies on it being the default of "Qe"
+  #
   mount Qe::Engine, :at => '/'
-\b
+\n
 } end
       unless options[:quiet]
         puts "*" * 75
         puts "We added the following line to your application's config/routes.rb file:"
         puts " "
-        puts "    mount Questionnaire::Engine, :at => '/'"
+        puts "    mount Qe::Engine, :at => '/'"
       end
     end
+
+
+    def noify_about_javascripts
+      insert_into_file File.join('app', 'assets', 'javascripts', 'application.js'), 
+      :before => "//= require_tree ." do
+        %Q{//= require qe/app/assets/javascripts/qe \n} 
+      end
+      unless options[:quiet]
+        puts "*" * 75
+        puts "We added the following line tou your applications javascripts file,"
+        puts " "
+        puts "  //= require qe/app/assets/javascripts/qe/application.js"
+      end
+    end
+
+
+    def notify_about_stylesheets
+      insert_into_file File.join('app', 'assets', 'stylesheets', 'application.css'), 
+      :before => "*= require_tree ." do
+          %Q{*= require qe/app/assets/stylesheets/application.css \n }
+      end 
+      unless options[:quiet]
+        puts "*" * 75
+        puts "We added the following line tou your applications stylesheets file,"
+        puts " "
+        puts "  //= require qe/app/assets/stylesheets/qe/application.css"
+      end
+    end
+
+    # TODO figure out image refernces
+    # def notify_about_images
+    #   insert_into_file File.join('app', 'assets', 'images', 'application.css')
+    # end
 
     def complete
       unless options[:quiet]
         puts "*" * 75
-        puts "Questionnaire has been installed successfully. You're all ready to go!"
         puts " "
-        puts "Enjoy!"
+        puts ">> Questionnaire has been installed successfully."
+        puts ">> You're all ready to go!"
+        puts " "
+        puts ">> Enjoy!"
       end
     end
 
