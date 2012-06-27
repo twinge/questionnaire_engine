@@ -6,7 +6,7 @@
   your page (you can drag and drop fields to reorder them later). <a href="qe/help/builder.html" class="lbOn help" id="link-builder-help" >Help</a></p>
      
   <ul id="list-elements" class="list-elements">
-    <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Qe::Section")), 
+    <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Section")), 
                       :remote => true,
                       :method => :post %></li>
     <li id="pa"><%= link_to "Paragraph", admin_question_sheet_page_elements_path(route.merge(:element_type => "Paragraph")), 

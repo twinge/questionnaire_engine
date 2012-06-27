@@ -6,5 +6,5 @@ $('#question_modal').html('<%= link_to("Add \"#{params[:human_type]}\"", admin_q
                       						:remote => true, 
                       						:method => :post,
  																	:class => "add_type") %><p>Or you can also use an existing Short Answer element. If you are unsure, just <strong>Add <%= params[:human_type] %>.</strong></p><div id="questions_div" title=""></div>');
-$('#questions_div').html("<%= escape_javascript(render('questions/questions', :questions => @questions)) %>")
+$('#questions_div').html('<%= escape_javascript(render('qe/questions/qe/questions', :questions => @questions)) %>')
 $('#question_modal').dialog({width: 500, height: 400});
