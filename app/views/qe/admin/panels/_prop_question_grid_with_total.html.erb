@@ -1,4 +1,4 @@
-<p><%= link_to "Question Grid Help", "/qe/help/question_grid.html", { :class=>"lbOn", :id => "link-question-grid-help" } %></p>
+<p><%= link_to "Question Grid Help", "qe/help/question_grid.html", { :class=>"lbOn", :id => "link-question-grid-help" } %></p>
 
 <div class="field">
   <label for="element_slug" class="desc">Column Headings <span class="required">required</span></label>
@@ -11,4 +11,4 @@
   <span class="help">Which columns should be totaled? e.g. 2 OR 2,3</span>
 </div>
 
-<%= render 'admin/panels/common_fields', :f => f %>
+<%= render 'qe/admin/panels/common_fields', :f => f %>

@@ -6,13 +6,19 @@
   <title>Dynamic Forms</title>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
                              'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
-  <%= questionnaire_engine_includes %>
-  <%= javascript_include_tag 'rails', 'rails.extra' %>
+  
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<div id="status" style="display: none;"><div class="status_content"><%= image_tag('qe/status.gif', :id => "status-img" ) %> <span id="status-msg">Please Wait...</span></div></div>
+<div id="status" style="display: none;">
+  <div class="status_content">
+    <%= image_tag('qe/status.gif', :id => "status-img" ) %> <span id="status-msg">Please Wait...</span>
+  </div>
+</div>
 
 <div id="wrapper">
    <div id="header">
@@ -23,7 +29,7 @@
    </div>
    
    <div id="main">
-   <%= yield %>
+    <%= yield %>
    </div>
 </div>
 

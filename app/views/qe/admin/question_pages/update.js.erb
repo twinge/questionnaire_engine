@@ -1,0 +1,2 @@
+p$("#page-name").html('<%= escape_javascript(@page.label) %>')
+$("#panel").html('<%= escape_javascript(render(:partial => 'qe/admin/panels/prop_page', :locals => { :page => @page })) %>')

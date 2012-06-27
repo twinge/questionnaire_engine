@@ -2,21 +2,21 @@
     <p>Update the settings for this element.</p>
     
     <div id="errors">
-       <%= render :partial => 'errors', :locals => { :element => element }%>
+       <%= render :partial => 'qe/errors', :locals => { :element => element }%>
     </div>
 
 <%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| -%>
 
-  <%= render :partial => 'admin/panels/prop_' + element.class.to_s.underscore, :locals => { :f => f, :element => element } %>
+  <%= render :partial => 'qe/admin/panels/prop_' + element.class.to_s.underscore, :locals => { :f => f, :element => element } %>
   
   <% if element.question? -%>
     <!-- <h3>Dependency</h3>
     <p><strong>Ask this question if:</strong></p> 
     <% element.conditions.each_with_index do |condition, i| %>
-      <%#= render :partial => 'admin/panels/condition', :object => condition, :locals => {:i => i} %>
+      <%#= render :partial => 'qe/admin/panels/condition', :object => condition, :locals => {:i => i} %>
     <% end %> -->
     
-    <%= render :partial => 'admin/panels/advanced_options', :locals => { :f => f, :element => element } %>
+    <%= render :partial => 'qe/admin/panels/advanced_options', :locals => { :f => f, :element => element } %>
   <% end-%>
 
   <p class="buttons">

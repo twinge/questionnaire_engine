@@ -4,7 +4,7 @@
   <%= link_to "Add a page", admin_question_sheet_pages_path(@page.question_sheet_id), :remote => true, :method => :post,  :id => "link-page-add"  %>
      
   <ul id="list-pages" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_pages_path(@page.question_sheet_id) %>">
-    <%= render :partial => 'admin/panels/page', :collection => @all_pages, :locals => { :current_page => @page } %>
+    <%= render :partial => 'qe/admin/panels/page', :collection => @all_pages, :locals => { :current_page => @page } %>
   </ul>
   
   

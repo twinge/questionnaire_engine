@@ -3,10 +3,10 @@
 <div id="panel-elements" class="panel">
 
   <p class="instruction">Click an element to add it to the end of 
-  your page (you can drag and drop fields to reorder them later). <a href="/qe/help/builder.html" class="lbOn help" id="link-builder-help" >Help</a></p>
+  your page (you can drag and drop fields to reorder them later). <a href="qe/help/builder.html" class="lbOn help" id="link-builder-help" >Help</a></p>
      
   <ul id="list-elements" class="list-elements">
-    <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Section")), 
+    <li id="sp"><%= link_to "Heading", admin_question_sheet_page_elements_path(route.merge(:element_type => "Qe::Section")), 
                       :remote => true,
                       :method => :post %></li>
     <li id="pa"><%= link_to "Paragraph", admin_question_sheet_page_elements_path(route.merge(:element_type => "Paragraph")), 
@@ -28,10 +28,10 @@
                       :remote => true %></li>
     <li id="qgt"><%= link_to "Grid w/Total", new_admin_question_sheet_page_element_path(route.merge(:element_type => "QuestionGridWithTotal", :human_type => 'Grid w/Total')), 
                       :remote => true %></li>
-    <%- unless Questionnaire.respond_to?(:no_refs) && Questionnaire.no_refs -%>
+    <% unless Qe.respond_to?(:no_refs) && Qe.no_refs %>
     <li id="ref"><%= link_to "Reference",  new_admin_question_sheet_page_element_path(route.merge(:element_type => "ReferenceQuestion", :human_type => 'Reference')), 
                       :remote => true %></li>
-    <%- end -%>
+    <% end %>
   </ul>
   
   <p style="clear: both;">&nbsp;</p>

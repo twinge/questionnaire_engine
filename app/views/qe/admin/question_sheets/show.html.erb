@@ -5,11 +5,11 @@ var activeElement = "";
 
 <div id="controls">
   <ul id="nav-controls">
-    <%= render :partial => 'admin/panels/nav_controls' %>
+    <%= render :partial => 'qe/admin/panels/nav_controls' %>
   </ul>
       
   <div id="panel">
-    <%= render :partial => 'admin/panels/pages_list' %>
+    <%= render :partial => 'qe/admin/panels/pages_list' %>
   </div>
 </div>
 
@@ -19,7 +19,7 @@ var activeElement = "";
     <%= link_to @question_sheet.label, edit_admin_question_sheet_path(@question_sheet), :remote => true, :method => :get , :class => "ctl"  -%>
   </h2>
   <div id="page-preview">
-    <%= render :partial => 'admin/question_pages/question_page' %>
+    <%= render :partial => 'qe/admin/question_pages/question_page' %>
   </div>
 </div>
 
