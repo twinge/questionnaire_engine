@@ -31,39 +31,6 @@ module Qe
       name
     end
     
-    def questionnaire_engine_stylesheets(options = {})
-      output = []
-      output << "qe/qe.screen"
-      output << "qe/jquery-ui-1.8.2.custom"
-      return output
-    end
-
-    def questionnaire_engine_javascripts(options = {})
-      output = []
-      output << "qe/jquery.validate.pack"
-      output << "qe/jquery.metadata"
-      output << "qe/jquery.tooltips.min"
-      output << "qe/qe.common"
-      if options[:area] == :public
-        output << "qe/qe.public"
-      else
-        output << "qe/qe.admin"
-        output << "qe/ckeditor/ckeditor"
-      end
-      output << "qe/jquery.scrollTo-min"
-      output << "qe/rails.extra"
-      output << {:cache => true} if options[:cache]
-      return output 
-    end
-
-    def questionnaire_engine_includes(options = {})
-      return "" if @qe_already_included
-      @qe_already_included=true
-      
-      js = javascript_include_tag(*questionnaire_engine_javascripts(options))
-      css = stylesheet_link_tag(*questionnaire_engine_stylesheets(options))
-      "#{js}\n#{css}\n".html_safe
-    end
     
     def calendar_date_select_tag(name, value = nil, options = {})
       options.merge!({'data-calendar' => true})
@@ -76,7 +43,7 @@ module Qe
 
     def spinner(extra = nil)
       e = extra ? "spinner_#{extra}" : 'spinner'
-      image_tag('spinner.gif', :id => e, :style => 'display:none', :class => 'spinner')
+      image_tag('qe/spinner.gif', :id => e, :style => 'display:none', :class => 'spinner')
     end
 
   end
