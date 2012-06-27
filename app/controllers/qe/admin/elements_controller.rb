@@ -2,13 +2,13 @@ module Qe
   class Admin::ElementsController < ApplicationController
     unloadable
     before_filter :check_valid_user
-    layout 'qe.admin'
+    layout 'qe/qe.admin'
     
     before_filter :get_page
     
     # GET /elements/1
     def show
-      @element = QeElement.find(params[:id])
+      @element = Element.find(params[:id])
 
       respond_to do |format|
         format.js
@@ -17,7 +17,7 @@ module Qe
 
     # GET /element/1/edit
     def edit
-      @element = QeElement.find(params[:id])
+      @element = Element.find(params[:id])
       
       # for dependencies
       if @element.question?
@@ -31,7 +31,9 @@ module Qe
     end
     
     def new
-      @questions = params[:element_type].constantize.active.order('label')
+
+      qe_class = "Qe::" + params[:element_type]
+      @questions = qe_class.constantize.active.order('label')
       params[:element] ||= {}
       if params[:element][:style]
         @questions = @questions.where(:style => params[:element][:style]).all.uniq
@@ -39,10 +41,10 @@ module Qe
     end
     
     def use_existing
-      @element = QeElement.find(params[:id])
+      @element = Element.find(params[:id])
       # Don't put the same question on a questionnaire twice
       unless @page.question_sheet.elements.include?(@element)
-        @page_element = QePageElement.create(:element => @element, :page => @page)
+        @page_element = PageElement.create(:element => @element, :page => @page)
       end
       @question_sheet = @page.question_sheet
       render :create
@@ -50,28 +52,35 @@ module Qe
 
     # POST /elements
     def create
-      @element = params[:element_type].constantize.new(params[:element])
+      # TODO do this within the Rails framework
+      # @element = params[:element_type].constantize.new(params[:element])
+
+      qe_class = "Qe::" + params[:element_type]
+      @element = qe_class.constantize.new(params[:element])
       @element.required = true if @element.question?
       @question_sheet = @page.question_sheet
       respond_to do |format|
-        if @element.save!
-          @page_element = QePageElement.create(:element => @element, :page => @page)
+
+        # raise @element.inspect 
+
+        if @element.save!(:without_protection => true)
+          @page_element = PageElement.create(:element => @element, :page => @page)
           format.js
         else
-          format.js { render :action => 'error.rjs' }
+          format.js { render :action => 'error.js.erb' }
         end
       end
     end
 
     # PUT /elements/1
     def update
-      @element = QeElement.find(params[:id])
+      @element = Element.find(params[:id])
 
       respond_to do |format|
         if @element.update_attributes(params[:element])
           format.js
         else
-          format.js { render :action => 'error.rjs' }
+          format.js { render :action => 'error.js.erb' }
         end
       end
     end
@@ -79,13 +88,13 @@ module Qe
     # DELETE /elements/1
     # DELETE /elements/1.xml
     def destroy
-      @element = QeElement.find(params[:id])
+      @element = Element.find(params[:id])
       # Start by removing the element from the page
-      page_element = QePageElement.where(:element_id => @element.id, :page_id => @page.id).first
+      page_element = PageElement.where(:element_id => @element.id, :page_id => @page.id).first
       page_element.destroy if page_element
       
       # If this element is not on any other pages, is not a question or has no answers, Destroy it
-      if @element.reuseable? && (QePageElement.where(:element_id => params[:id]).present? || @element.has_response?)
+      if @element.reuseable? && (PageElement.where(:element_id => params[:id]).present? || @element.has_response?)
         @element.update_attributes(:question_grid_id => nil, :conditional_id => nil)
       else
         @element.destroy
@@ -103,7 +112,7 @@ module Qe
           grid_id = key.sub('questions_list_', '').to_i
           # See if we're ordering inside of a grid
           if grid_id > 0
-            QeElement.find(grid_id).elements.each do |element|
+            Element.find(grid_id).elements.each do |element|
               if index = params[key].index(element.id.to_s)
                 element.position = index + 1 
                 element.save(:validate => false)
@@ -129,6 +138,7 @@ module Qe
     def drop
       element = Element.find(params[:draggable_element].split('_')[1])  # element being dropped
       target = Element.find(params[:id])
+      # TODO might need to revise due to namespacing
       case target.class.to_s
       when 'QuestionGrid', 'QuestionGridWithTotal'
         # abort if the element is already in this box
@@ -148,12 +158,12 @@ module Qe
         end
       end
       # Remove page element for this page since it's now in a grid
-      QePageElement.where(:page_id => @page.id, :element_id => element.id).first.try(:destroy)
+      PageElement.where(:page_id => @page.id, :element_id => element.id).first.try(:destroy)
     end
     
     def remove_from_grid
-      element = QeElement.find(params[:id])
-      QePageElement.create(:element_id => element.id, :page_id => @page.id) unless QePageElement.where(:element_id => element.id, :page_id => @page.id).first
+      element = Element.find(params[:id])
+      PageElement.create(:element_id => element.id, :page_id => @page.id) unless PageElement.where(:element_id => element.id, :page_id => @page.id).first
       if element.question_grid_id
         element.set_position(element.question_grid.position(@page), @page) 
         element.question_grid_id = nil
@@ -166,7 +176,7 @@ module Qe
     end
     
     def duplicate
-      element = QeElement.find(params[:id])
+      element = Element.find(params[:id])
       @element = element.duplicate(@page, element.question_grid || element.choice_field)
       respond_to do |format|
         format.js 
@@ -175,7 +185,7 @@ module Qe
     
     private
     def get_page
-      @page = QePage.find(params[:page_id])
+      @page = Page.find(params[:page_id])
     end
     
   end

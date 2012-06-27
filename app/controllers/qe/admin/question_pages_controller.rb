@@ -3,7 +3,7 @@ module Qe
   class Admin::QuestionPagesController < ApplicationController
     unloadable
     before_filter :check_valid_user
-    layout 'qe.admin'
+    layout 'qe/qe.admin'
     
     before_filter :get_sheet
     

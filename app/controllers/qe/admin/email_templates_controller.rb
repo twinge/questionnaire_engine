@@ -2,7 +2,7 @@ module Qe
   class Admin::EmailTemplatesController < ApplicationController
     unloadable
     before_filter :check_valid_user
-    layout 'qe.admin'
+    layout 'qe/qe.admin'
     
     def index 
       @email_templates = EmailTemplate.order('name')

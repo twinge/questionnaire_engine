@@ -1,4 +1,4 @@
-# QuestionSheets is used exclusively on the administration side to design a Questionniare
+# Qe::QuestionSheets is used exclusively on the administration side to design a Questionniare
 #  which can than be instantiated as an AnswerSheet for data capture on the front-end
 
 module Qe
@@ -6,7 +6,7 @@ module Qe
     unloadable
     before_filter :check_valid_user
     before_filter :get_question_sheet, :only => [:show, :archive, :unarchive, :destroy, :edit, :update, :duplicate]
-    layout 'qe.admin'
+    layout 'qe/qe.admin'
    
     # list of all questionnaires/forms to edit
     # GET /question_sheets
@@ -75,7 +75,6 @@ module Qe
     # save changes to properties panel (label, language)
     # PUT /question_sheets/1
     def update
-
       respond_to do |format|
         if @question_sheet.update_attributes(params[:question_sheet])
           format.html { redirect_to admin_question_sheet_path(@question_sheet) }
@@ -83,7 +82,7 @@ module Qe
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }
-          format.js { render :action => "error.rjs"}
+          format.js { render :action => "error.js.erb"}
           format.xml  { render :xml => @question_sheet.errors.to_xml }
         end
       end
