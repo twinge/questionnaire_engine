@@ -1,18 +1,18 @@
 # Element represents a section, question or content element on the question sheet
 module Qe
   class Element < ActiveRecord::Base
-    set_table_name "#{self.table_name}"
-    belongs_to :qe_question_grids, :foreign_key => "question_grid_id"
-    belongs_to :qe_choice_fields, :foreign_key => "conditional_id"
+    # self.table_name = "#{self.table_name}"
+    belongs_to :question_grids, :foreign_key => "question_grid_id"
+    belongs_to :choice_fields, :foreign_key => "conditional_id"
     
     self.inheritance_column = :kind
     
-    has_many :qe_page_elements, :dependent => :destroy
-    has_many :qe_pages, :through => :page_elements
+    has_many :page_elements, :dependent => :destroy
+    has_many :pages, :through => :page_elements
     
     scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
     
-    # belongs_to :question_sheet
+    belongs_to :question_sheet
 
     validates_presence_of :kind, :style
     # validates_presence_of :label, :style, :on => :update
@@ -21,10 +21,53 @@ module Qe
     # validates_length_of :label, :maximum => 255, :allow_nil => true
 
     # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
-    validates_inclusion_of :kind, :in => %w{Section Paragraph TextField ChoiceField DateField FileField SchoolPicker ProjectPreference StateChooser QuestionGrid QuestionGridWithTotal AttachmentField ReferenceQuestion PaymentQuestion}  # leaf classes
+    validates_inclusion_of :kind, :in => %w{
+    Section 
+    Paragraph 
+    TextField 
+    ChoiceField 
+    DateField 
+    FileField 
+    SchoolPicker 
+    ProjectPreference 
+    StateChooser 
+    QuestionGrid 
+    QuestionGridWithTotal 
+    AttachmentField 
+    ReferenceQuestion 
+    PaymentQuestion
+    }  # leaf classes
     
     before_validation :set_defaults, :on => :create
     
+    attr_accessible :attribute_name, 
+                    :cols, 
+                    :conditional_id, 
+                    :content, 
+                    :created_at, 
+                    :css_class, 
+                    :css_id, 
+                    :hide_label, 
+                    :hide_option_labels, 
+                    :is_confidential, 
+                    :kind, 
+                    :label, 
+                    :max_length, 
+                    :no_cache, 
+                    :object_name, 
+                    :position, 
+                    :question_grid_id, 
+                    :related_question_sheet_id, 
+                    :required, 
+                    :slug, 
+                    :source, 
+                    :style, 
+                    :text_xpath, 
+                    :tooltip, 
+                    :total_cols, 
+                    :updated_at, 
+                    :value_xpath
+
     # HUMANIZED_ATTRIBUTES = {
     #   :slug => "Variable"
     # }
@@ -79,7 +122,7 @@ module Qe
         new_element.question_grid_id = parent.id
       end
       new_element.save(:validate => false)
-      Qe::PageElement.create(:element => new_element, :page => page) unless parent
+      PageElement.create(:element => new_element, :page => page) unless parent
       
       # duplicate children
       if respond_to?(:elements) && elements.present?
@@ -103,13 +146,13 @@ module Qe
     end
     
     def Element.max_label_length
-      @@max_label_length ||= Qe::Element.columns.find{ |c| c.name == "label" }.limit
+      @@max_label_length ||= Element.columns.find{ |c| c.name == "label" }.limit
     end
 
     protected
     def set_defaults
       if self.content.blank?
-        case self.class.to_s
+        case self.class.to_s.demodulize
           when "ChoiceField" then self.content ||= "Choice One\nChoice Two\nChoice Three"
           when "Paragraph" then self.content ||="Lorem ipsum..." 
         end 
@@ -118,17 +161,17 @@ module Qe
       if self.style.blank?
         case self.class.to_s
         when 'TextField' then self.style ||= 'essay'
-        when "DateField" then self.style ||= "date"
-        when "FileField" then self.style ||= "file"
-        when "Paragraph" then self.style ||= "paragraph"
-        when "Section" then self.style ||= "section"
-        when "ChoiceField" then self.style = "checkbox"
-        when "QuestionGrid" then self.style ||= "grid"
-        when "QuestionGridWithTotal" then self.style ||= "grid_with_total"
-        when "SchoolPicker" then self.style ||= "school_picker"
-        when "ProjectPreference" then self.style ||= "project_preference"
-        when "StateChooser" then self.style ||= "state_chooser"
-        when "ReferenceQuestion" then self.style ||= "peer"
+        when 'DateField' then self.style ||= 'date'
+        when 'FileField' then self.style ||= 'file'
+        when 'Paragraph' then self.style ||= 'paragraph'
+        when 'Section' then self.style ||= 'section'
+        when 'ChoiceField' then self.style = 'checkbox'
+        when 'QuestionGrid' then self.style ||= 'grid'
+        when 'QuestionGridWithTotal' then self.style ||= 'grid_with_total'
+        when 'SchoolPicker' then self.style ||= 'school_picker'
+        when 'ProjectPreference' then self.style ||= 'project_preference'
+        when 'StateChooser' then self.style ||= 'state_chooser'
+        when 'ReferenceQuestion' then self.style ||= 'peer'
         else
           self.style ||= self.class.to_s.underscore
         end 

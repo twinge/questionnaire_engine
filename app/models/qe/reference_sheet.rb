@@ -3,13 +3,12 @@ module Qe
     include Rails.application.routes.url_helpers
     
     # since inheriting from AnswerSheet
-    set_table_name "qe_reference_sheets"
+    self.table_name = "qe_reference_sheets"
     
     set_inheritance_column 'fake'
     
-    belongs_to :qe_question,
-      :class_name => 'Qe::Element', :foreign_key => 'question_id'
-    # belongs_to :qe_applicant_answer_sheet, 
+    belongs_to :question, :class_name => 'Element', :foreign_key => 'question_id'
+    # belongs_to :applicant_answer_sheet, 
     #   # :class_name => Questionnaire.answer_sheet_class, 
     #   :class_name => Questionnaire.answer_sheet_class, 
     #   :foreign_key => "applicant_answer_sheet_id"
@@ -124,7 +123,7 @@ module Qe
       def notify_reference_of_deletion
         if email.present?
           Notifier.deliver_notification(email,
-                                Qe::Questionnaire.from_email, 
+                                Questionnaire.from_email, 
                                 "Reference Deleted", 
                                 {'reference_full_name' => self.name, 
                                  'applicant_full_name' => applicant_answer_sheet.name})

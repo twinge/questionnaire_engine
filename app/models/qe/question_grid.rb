@@ -7,7 +7,7 @@
 module Qe
   class QuestionGrid < Element
 
-    has_many :elements, :class_name => "Element", :foreign_key => "question_grid_id", :dependent => :nullify, :order => :position
+    has_many :elements, :foreign_key => "question_grid_id", :dependent => :nullify, :order => :position
     has_many :first_level_questions, :class_name => "Element", :foreign_key => "question_grid_id", :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')"
    
     def num_cols

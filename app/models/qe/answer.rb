@@ -10,8 +10,8 @@ module Qe
   class Answer < ActiveRecord::Base
     self.table_name = "#{self.table_name}"
     
-    belongs_to :qe_answer_sheet
-    belongs_to :qe_question, :class_name => "Qe::Element", :foreign_key => "question_id"
+    belongs_to :answer_sheet
+    belongs_to :question, :foreign_key => "question_id"
     
   #  validates_presence_of :value
     validates_length_of :short_value, :maximum => 255, :allow_nil => true  

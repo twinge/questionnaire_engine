@@ -11,9 +11,9 @@
 module Qe
   class Question < Element
     include ActionController::RecordIdentifier # dom_id
-    has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_id", :dependent => :nullify
-    has_many :dependents, :class_name => "Condition", :foreign_key => "trigger_id", :dependent => :nullify
-    has_many :sheet_answers, :class_name => "Answer", :foreign_key => "question_id", :dependent => :destroy
+    has_many :conditions, :foreign_key => "toggle_id", :dependent => :nullify
+    has_many :dependents, :foreign_key => "trigger_id", :dependent => :nullify
+    has_many :sheet_answers, :foreign_key => "question_id", :dependent => :destroy
 
     belongs_to :related_question_sheet, :class_name => "QuestionSheet", :foreign_key => "related_question_sheet_id"
     

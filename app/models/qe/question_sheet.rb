@@ -1,13 +1,13 @@
-require 'model_extensions'
+require 'qe/model_extensions'
 # QuestionSheet represents a particular form
 module Qe
   class QuestionSheet < ActiveRecord::Base
-    set_table_name "#{self.table_name}"
+    # self.table_name = "#{self.table_name}"
     
-    has_many :qe_pages, :dependent => :destroy, :order => 'number'
-    has_many :qe_elements
-    has_many :qe_questions
-    has_many :qe_answer_sheets
+    has_many :pages, :dependent => :destroy, :order => 'number'
+    has_many :elements
+    has_many :questions
+    has_many :answer_sheets
     scope :active, where(:archived => false)
     scope :archived, where(:archived => true)
     
@@ -17,6 +17,8 @@ module Qe
     
     before_destroy :check_for_answers
 
+    # TODO should this be attr_accessible?
+    attr_accessible :label, :number
     
     # create a new form with a page already attached
     def self.new_with_page
@@ -46,7 +48,7 @@ module Qe
     # Question elements get associated
     # non-question elements get cloned
     def duplicate
-      new_sheet = Qe::QuestionSheet.new(self.attributes)
+      new_sheet = QuestionSheet.new(self.attributes)
       new_sheet.label = self.label + ' - COPY'
       new_sheet.save(:validate => false)
       self.pages.each do |page|
@@ -60,17 +62,16 @@ module Qe
     
     # next unused label with "Untitled form" prefix
     def self.next_label
-      Qe::ModelExtensions.next_label("Untitled form", untitled_labels)
+      ModuleExtensions.next_label("Untitled form", untitled_labels)
     end
 
     # returns a list of existing Untitled forms
     # (having a separate method makes it easy to mock in the spec)
     def self.untitled_labels
-      Qe::QuestionSheet.find(:all, :conditions => %{label like 'Untitled form%'}).map {|s| s.label}
+      QuestionSheet.find(:all, :conditions => %{label like 'Untitled form%'}).map {|s| s.label}
     end
     
     def check_for_answers
-      
     end
 
   end

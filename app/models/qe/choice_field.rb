@@ -10,7 +10,7 @@ end
 
 module Qe
   class ChoiceField < Question
-    has_many :qe_elements, :foreign_key => "conditional_id", :dependent => :nullify#, :order => :position
+    has_many :elements, :foreign_key => "conditional_id", :dependent => :nullify#, :order => :position
     # Returns choices stored one per line in content field
   	def choices
       retVal = Array.new 

@@ -1,18 +1,19 @@
-require 'model_extensions'
+require 'qe/model_extensions'
+
 module Qe
   class Page < ActiveRecord::Base
-    set_table_name "#{self.table_name}"
+    # self.table_name = "#{self.table_name}"
     
-    belongs_to :qe_question_sheet
-    has_many :qe_page_elements, :dependent => :destroy, :order => :position
-    has_many :qe_elements,                  :through => :qe_page_elements, :order => Qe::PageElement.table_name + '.position'
-    has_many :qe_question_grid_with_totals, :through => :qe_page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :qe_element
-    has_many :qe_questions,                 :through => :qe_page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :qe_element
-    has_many :qe_question_grids,            :through => :qe_page_elements, :conditions => "kind = 'QuestionGrid'", :source => :qe_element
+    belongs_to :question_sheet
+    has_many :page_elements, :dependent => :destroy, :order => :position
+    has_many :elements, :through => :page_elements, :order => PageElement.table_name + '.position'
+    has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
+    has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :element
+    has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
     # has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
     #         :conditions => 'toggle_id is NULL', :dependent => :nullify
     
-    # acts_as_list :column => :number, :scope => :qe_question_sheet
+    # acts_as_list :column => :number, :scope => :question_sheet
     
     scope :visible, :conditions => {:hidden => false}
     
@@ -23,10 +24,12 @@ module Qe
     validates_presence_of :label, :number
     validates_length_of :label, :maximum => 100, :allow_nil => true
     
-    # validates_uniqueness_of :number, :scope => :question_sheet_id
+    validates_uniqueness_of :number, :scope => :question_sheet_id
        
     validates_numericality_of :number, :only_integer => true
-      
+    
+    attr_accessible :label, :number
+     
     # a page is disabled if there is a condition, and that condition evaluates to false
     # could set multiple conditions to influence this question, in which case all must be met
     # def active?

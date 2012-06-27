@@ -1,6 +1,6 @@
 module Qe
   class AnswerSheet < ActiveRecord::Base
-    set_table_name "#{self.table_name}"
+    self.table_name = "#{self.table_name}"
 
     has_many :qe_answer_sheet_question_sheets
     has_many :qe_question_sheets,   :through => :qe_answer_sheet_question_sheets
@@ -22,7 +22,7 @@ module Qe
     end
     
     def pages
-      Qe::Page.where(:question_sheet_id => question_sheets.collect(&:id))
+      Page.where(:question_sheet_id => question_sheets.collect(&:id))
     end
     
     def completely_filled_out?

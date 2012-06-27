@@ -46,7 +46,7 @@ module Qe
     end
     
     def save
-      Qe::AnswerSheet.transaction do
+      AnswerSheet.transaction do
         @questions.each do |question|
           question.save_response(@answer_sheet)
         end
