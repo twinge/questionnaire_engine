@@ -1,8 +1,0 @@
-*.swp
-*~
-.rake_tasks~
-html
-doc
-pkg
-publish
-coverage
