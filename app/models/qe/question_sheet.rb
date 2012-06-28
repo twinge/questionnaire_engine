@@ -1,4 +1,4 @@
-require 'qe/model_extensions'
+require 'model_extensions'
 # QuestionSheet represents a particular form
 module Qe
   class QuestionSheet < ActiveRecord::Base
@@ -62,7 +62,7 @@ module Qe
     
     # next unused label with "Untitled form" prefix
     def self.next_label
-      ModuleExtensions.next_label("Untitled form", untitled_labels)
+      ModelExtensions.next_label("Untitled form", untitled_labels)
     end
 
     # returns a list of existing Untitled forms

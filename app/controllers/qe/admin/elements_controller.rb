@@ -60,9 +60,7 @@ module Qe
       @element.required = true if @element.question?
       @question_sheet = @page.question_sheet
       respond_to do |format|
-
-        # raise @element.inspect 
-
+        # TODO engineer the mass assignment flow of the engine
         if @element.save!(:without_protection => true)
           @page_element = PageElement.create(:element => @element, :page => @page)
           format.js

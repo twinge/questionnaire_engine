@@ -22,20 +22,20 @@ module Qe
 
     # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
     validates_inclusion_of :kind, :in => %w{
-    Section 
-    Paragraph 
-    TextField 
-    ChoiceField 
-    DateField 
-    FileField 
-    SchoolPicker 
-    ProjectPreference 
-    StateChooser 
-    QuestionGrid 
-    QuestionGridWithTotal 
-    AttachmentField 
-    ReferenceQuestion 
-    PaymentQuestion
+    Qe::Section 
+    Qe::Paragraph 
+    Qe::TextField 
+    Qe::ChoiceField 
+    Qe::DateField 
+    Qe::FileField 
+    Qe::SchoolPicker 
+    Qe::ProjectPreference 
+    Qe::StateChooser 
+    Qe::QuestionGrid 
+    Qe::QuestionGridWithTotal 
+    Qe::AttachmentField 
+    Qe::ReferenceQuestion 
+    Qe::PaymentQuestion
     }  # leaf classes
     
     before_validation :set_defaults, :on => :create
