@@ -10,4 +10,4 @@ vendor/ruby
 ## custom additions
 
 # to force gem migrations to right
-test/dummy/db/
+test/dummy/db/vendor/ruby

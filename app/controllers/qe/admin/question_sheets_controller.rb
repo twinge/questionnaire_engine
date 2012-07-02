@@ -76,7 +76,7 @@ module Qe
     # PUT /question_sheets/1
     def update
       respond_to do |format|
-        if @question_sheet.update_attributes(params[:question_sheet])
+        if @question_sheet.update_attributes(params[:question_sheet], :without_protection => true)
           format.html { redirect_to admin_question_sheet_path(@question_sheet) }
           format.js 
           format.xml  { head :ok }

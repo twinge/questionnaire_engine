@@ -46,7 +46,7 @@ module Qe
       @page = @question_sheet.pages.find(params[:id])
 
       respond_to do |format|
-        if @page.update_attributes(params[:page])
+        if @page.update_attributes(params[:page], :without_protection => true)
           format.js
         else
           format.js { render :action => "error.rjs"}
