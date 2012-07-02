@@ -16,15 +16,15 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "3.2.6"
-  s.add_dependency "ckeditor", "3.7.1"
+  s.add_dependency 'rails', '3.2.6'
+  s.add_dependency 'ckeditor', '3.7.1'
   s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
   s.add_development_dependency 'dynamic_form'
 
-  s.add_development_dependency "mysql2", "~> 0.3.11"
-  s.add_development_dependency "ckeditor", "3.7.1"
-  s.add_development_dependency "rails",  "3.2.6"
+  s.add_development_dependency 'mysql2', '~> 0.3.11'
+  s.add_development_dependency 'ckeditor', '3.7.1'
+  s.add_development_dependency 'rails',  '3.2.6'
   s.add_development_dependency 'sass'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'dynamic_form'
