@@ -2,13 +2,14 @@ module Qe
   class ReferenceSheet < AnswerSheet
     include Rails.application.routes.url_helpers
     
-    # since inheriting from AnswerSheet
-    # self.table_name = "qe_reference_sheets"
+    # NOTE -- since inheriting from AnswerSheet, you need to explicitly declare the table name,
+    #         rather than it being implicitly inherited from the module/class.
+    self.table_name = "qe_reference_sheets"
     
     set_inheritance_column 'fake'
     
-    belongs_to :question, :class_name => 'Element', :foreign_key => 'question_id'
-    belongs_to :applicant_answer_sheet, :class_name => Qe::AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
+    belongs_to :question, :class_name => Element, :foreign_key => 'question_id'
+    belongs_to :applicant_answer_sheet, :class_name => AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
     
     validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
     
