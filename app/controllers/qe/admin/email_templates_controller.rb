@@ -29,7 +29,8 @@ module Qe
     end
     
     def create
-      @email_template = EmailTemplate.new(params[:email_template])
+      # TODO mass-assignment engineering
+      @email_template = EmailTemplate.new(params[:email_template], :without_protection => true)
       
       respond_to do |format|
         if @email_template.save
@@ -41,10 +42,11 @@ module Qe
     end
     
     def update 
+      # TODO mass-assignment engineering
       @email_template = EmailTemplate.find(params[:id])
       
       respond_to do |format|
-        if @email_template.update_attributes(params[:email_template])
+        if @email_template.update_attributes(params[:email_template], :without_protection => true)
           format.html { redirect_to admin_email_templates_path }
         else
           format.html { render :action => "edit" }
@@ -57,7 +59,7 @@ module Qe
       @email_template.destroy
 
       respond_to do |format|
-        format.html { redirect_to email_templates_path }
+        format.html { redirect_to admin_email_templates_path }
       end
     end
   end
