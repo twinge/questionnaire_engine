@@ -36,7 +36,7 @@ module Qe
     
     # which view to render this element?
     def ptemplate
-      "qe/reference_#{style}"
+      style
     end
     
   end

@@ -21,20 +21,20 @@ module Qe
     attr_accessible :first_name, :last_name, :phone, :email, :relationship
 
     # state column is 'status'
-    state_machine :status, :initial => :created
+    state_machine :status, :initial => :created do
 
       after_transition :on => :completed, :do => :prod_method
     
       event :start do
-        transitions :to => :started, :from => :created
+        transition :to => :started, :from => :created
       end
       
       event :submit do
-        transitions :to => :completed, :from => :started
+        transition :to => :completed, :from => :started
       end
 
       event :unsubmit do
-        transitions :to => :started, :from => :completed
+        transition :to => :started, :from => :completed
       end
     end
 
