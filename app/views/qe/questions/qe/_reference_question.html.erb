@@ -1,5 +1,5 @@
 <% reference = reference_question.response(@answer_sheet) %>
-<% reference ||= ReferenceSheet.new %>
+<% reference ||= Qe::ReferenceSheet.new %>
 <% css_class = reference_question.required?(@answer_sheet) ? 'required' : '' %>
 <% email_css_class = reference_question.required?(@answer_sheet) ? 'required validate-email' : '' %>
 <% phone_css_class = reference_question.required?(@answer_sheet) ? 'required validate-phone' : '' %>

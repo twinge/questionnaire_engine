@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'ckeditor', '3.7.1'
   s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
-  s.add_development_dependency 'dynamic_form'
+  s.add_dependency 'dynamic_form'
+  s.add_dependency 'state_machine'
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
   s.add_development_dependency 'ckeditor', '3.7.1'
@@ -28,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'dynamic_form'
+  s.add_development_dependency 'state_machine'
 end
