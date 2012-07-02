@@ -2,7 +2,7 @@
   <% page_dom = @presenter.active_page.dom_id
      next_js = load_page_js(@presenter.next_page) -%>
 
-  <div id="<%= page_dom %>" class="answer-page" style="<% if show_first.nil? -%>display: none;<% end -%>">  <!-- this id is parsed by qe.public.js -->
+  <div id="<%= page_dom %>" class="answer-page" style="<% if show_first.nil? %>display: none;<% end %>">  <!-- this id is parsed by qe.public.js -->
 
     <div class="page">
       <h3 id='page-name'><%= @presenter.active_page.label %></h3>
@@ -35,13 +35,13 @@
          
         <% end -%>
   
-      <% else -%>
+      <% else %>
         
           <div style="background: #ffc;">
             <p>There are no questions on this page.</p>
           </div>
     
-      <% end -%>
+      <% end %>
     
     </div>
 

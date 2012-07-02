@@ -5,8 +5,8 @@
        <%= render :partial => 'errors', :locals => { :element => element }%>
     </div>
 
-<%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| -%>
-  
+<%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| -%>`
+
   <%= render :partial => 'qe/admin/panels/prop_' + element.class.to_s.demodulize.underscore, :locals => { :f => f, :element => element } %>
   
   <% if element.question? -%>
