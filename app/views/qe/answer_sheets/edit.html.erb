@@ -43,7 +43,7 @@
     // Set up js for all question grids with totals
     <% if @page %>
       <% @page.question_sheet.pages.collect(&:question_grid_with_totals).flatten.each do |question_grid_with_total| 
-          question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| -%>
+          question_grid_with_total.total_cols.split(',').collect(&:to_i).each do |col| %>
             try {
               updateTotal('<%= "#{question_grid_with_total.id}_#{col - 1}" %>')
               $$(".col_<%= "#{question_grid_with_total.id}_#{col - 1}" %>").each(function(e) {

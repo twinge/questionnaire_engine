@@ -3,7 +3,7 @@
 <% form_tag answer_sheets_path() do %>
   <%= select_tag("question_sheet_id", options_for_select(@question_sheets)) %>
   <%= submit_tag("Capture") %>
-<% end -%>
+<% end %>
 
 <table cellspacing="0" class="list"> 
 <% for answer_sheet in @answer_sheets %>

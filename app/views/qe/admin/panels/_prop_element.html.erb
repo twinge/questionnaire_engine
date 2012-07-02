@@ -5,11 +5,11 @@
        <%= render :partial => 'errors', :locals => { :element => element }%>
     </div>
 
-<%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| -%>`
+<%= form_for :element, :url => admin_question_sheet_page_element_path( @page.question_sheet_id, @page.id, element.id), :remote => true, :html => {:method => :put} do |f| %>`
 
   <%= render :partial => 'qe/admin/panels/prop_' + element.class.to_s.demodulize.underscore, :locals => { :f => f, :element => element } %>
   
-  <% if element.question? -%>
+  <% if element.question? %>
     <!-- <h3>Dependency</h3>
     <p><strong>Ask this question if:</strong></p> 
     <% element.conditions.each_with_index do |condition, i| %>
@@ -17,7 +17,7 @@
     <% end %> -->
     
     <%= render :partial => 'qe/admin/panels/advanced_options', :locals => { :f => f, :element => element } %>
-  <% end-%>
+  <% end%>
 
   <p class="buttons">
     <button type="submit"><span>Update</span></button>
@@ -25,6 +25,6 @@
     <%#= link_to('Delete', admin_question_sheet_page_element_path( @page.question_sheet_id,  @page.id, element.id), :remote => true, :method => :delete, :confirm => "Are you sure you want to delete this element?") %>
   </p>
 
-<% end -%>
+<% end %>
 
 </div>

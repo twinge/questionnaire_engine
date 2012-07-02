@@ -1,6 +1,6 @@
 <div class="page">
   <h3 id='page-name'>
-    <%= link_to @page.label, edit_admin_question_sheet_page_path(@page.question_sheet_id, @page.id), :remote => true, :method => :get , :class => "ctl", :id => "link-page-name"  -%>
+    <%= link_to @page.label, edit_admin_question_sheet_page_path(@page.question_sheet_id, @page.id), :remote => true, :method => :get , :class => "ctl", :id => "link-page-name"  %>
   </h3>
   <% if @page.elements.length > 0 %>
     <ul>

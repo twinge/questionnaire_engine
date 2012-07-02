@@ -2,7 +2,7 @@
     <p>Update the settings for this page.</p>
     
     <div id="errors">
-       <%= render :partial => 'errors', :locals => { :page => page }%>
+       <%= render :partial => 'errors', :locals => { :page => page } %>
     </div>
 
   <%= form_for page, :url => admin_question_sheet_page_path(page.question_sheet_id, page.id), :remote => true, :html => {:method => :put} do |f| %>

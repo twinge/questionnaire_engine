@@ -1,9 +1,9 @@
 <div id="content">
   <h1>Questionnaires</h1>
     
-	<% if flash[:error] -%>
+	<% if flash[:error] %>
 		<div style="background: #ffe5df; border: solid 1px #efbeb3; padding: 9px; margin: 0 0 18px;"><%= flash[:error] %></div>
-	<% end -%>
+	<% end %>
 
   <%= link_to 'New Questionnaire', admin_question_sheets_path(), :method => :post, :class => "add-link" %>
   <br/>	
