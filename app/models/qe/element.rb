@@ -10,7 +10,8 @@ module Qe
     has_many :page_elements, :dependent => :destroy
     has_many :pages, :through => :page_elements
     
-    scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
+    # TODO rework with namespacing.
+    # scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
     
     belongs_to :question_sheet
 
@@ -106,7 +107,6 @@ module Qe
       self.kind_of?(Question)
     end
     
-    
     # by default the partial for an element matches the class name (override as necessary)
     def ptemplate
       self.class.to_s.underscore
@@ -160,18 +160,18 @@ module Qe
 
       if self.style.blank?
         case self.class.to_s
-        when 'TextField' then self.style ||= 'essay'
-        when 'DateField' then self.style ||= 'date'
-        when 'FileField' then self.style ||= 'file'
-        when 'Paragraph' then self.style ||= 'paragraph'
-        when 'Section' then self.style ||= 'section'
-        when 'ChoiceField' then self.style = 'checkbox'
-        when 'QuestionGrid' then self.style ||= 'grid'
-        when 'QuestionGridWithTotal' then self.style ||= 'grid_with_total'
-        when 'SchoolPicker' then self.style ||= 'school_picker'
-        when 'ProjectPreference' then self.style ||= 'project_preference'
-        when 'StateChooser' then self.style ||= 'state_chooser'
-        when 'ReferenceQuestion' then self.style ||= 'peer'
+        when 'TextField' then self.style ||= 'qe/essay'
+        when 'DateField' then self.style ||= 'qe/date'
+        when 'FileField' then self.style ||= 'qe/file'
+        when 'Paragraph' then self.style ||= 'qe/paragraph'
+        when 'Section' then self.style ||= 'qe/section'
+        when 'ChoiceField' then self.style = 'qe/checkbox'
+        when 'QuestionGrid' then self.style ||= 'qe/grid'
+        when 'QuestionGridWithTotal' then self.style ||= 'qe/grid_with_total'
+        when 'SchoolPicker' then self.style ||= 'qe/school_picker'
+        when 'ProjectPreference' then self.style ||= 'qe/project_preference'
+        when 'StateChooser' then self.style ||= 'qe/state_chooser'
+        when 'ReferenceQuestion' then self.style ||= 'qe/peer'
         else
           self.style ||= self.class.to_s.underscore
         end 

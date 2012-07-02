@@ -42,10 +42,10 @@ module Qe
     
     # which view to render this element?
     def ptemplate
-      if self.style == 'mmyy'
-        'date_field_mmyy'
+      if self.style == 'qe/mmyy'
+        'qe/date_field_mmyy'
       else
-        'date_field'
+        'qe/date_field'
       end
     end
     

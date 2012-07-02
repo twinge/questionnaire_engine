@@ -3,7 +3,7 @@ module Qe
     include Rails.application.routes.url_helpers
     
     # since inheriting from AnswerSheet
-    self.table_name = "qe_reference_sheets"
+    # self.table_name = "qe_reference_sheets"
     
     set_inheritance_column 'fake'
     

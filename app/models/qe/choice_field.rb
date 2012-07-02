@@ -53,20 +53,16 @@ module Qe
   	
   	# which view to render this element?
     def ptemplate
-      if self.style == 'checkbox'
-        'checkbox_field'
-      elsif self.style == 'drop-down'
-        'drop_down_field'
-      elsif self.style == 'radio'
-        'radio_button_field'
-      elsif self.style == 'yes-no'
-        'yes_no'
-      elsif self.style == 'rating'
-        'rating'
-      elsif self.style == 'acceptance'
-        'acceptance'
-      elsif self.style == 'country'
-        'country'
+      case self.style
+                      when 'qe/checkbox'    then 'qe/checkbox_field'
+                      when 'qe/drop-down'   then 'qe/drop_down_field'
+                      when 'qe/radio'       then 'qe/radio_button_field'
+                      when 'qe/yes-no'      then 'qe/yes_no'
+                      when 'qe/rating'      then 'qe/rating'
+                      when 'qe/acceptance'  then 'qe/acceptance'
+                      when 'qe/country'     then 'qe/country'
+                      else 'qe/drop_down_field'
+
       end
   	end
   	

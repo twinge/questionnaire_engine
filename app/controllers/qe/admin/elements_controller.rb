@@ -30,10 +30,10 @@ module Qe
       end
     end
     
+    # GET /elements/new
     def new
-
-      qe_class = "Qe::" + params[:element_type]
-      @questions = qe_class.constantize.active.order('label')
+      # raise params.inspect
+      @questions = "Qe::#{params[:element_type]}".constantize.active.order('label')
       params[:element] ||= {}
       if params[:element][:style]
         @questions = @questions.where(:style => params[:element][:style]).all.uniq
@@ -55,8 +55,7 @@ module Qe
       # TODO do this within the Rails framework
       # @element = params[:element_type].constantize.new(params[:element])
 
-      qe_class = "Qe::" + params[:element_type]
-      @element = qe_class.constantize.new(params[:element])
+      @element = "Qe::#{paramsp[:element_type]}".constantize.new(params[:element])
       @element.required = true if @element.question?
       @question_sheet = @page.question_sheet
       respond_to do |format|

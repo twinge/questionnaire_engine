@@ -6,10 +6,10 @@ module Qe
     
     # which view to render this element?
     def ptemplate
-      if self.style == 'essay'
-        'text_area_field'
+      if self.style == 'qe/essay'
+        'qe/text_area_field'
       else
-        'text_field'
+        'qe/text_field'
       end
     end
     
