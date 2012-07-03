@@ -11,7 +11,7 @@ module Qe
     has_many :pages, :through => :page_elements
     
     # TODO rework with namespacing.
-    # scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
+    scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
     
     belongs_to :question_sheet
 
@@ -150,6 +150,7 @@ module Qe
     end
 
     protected
+    
     def set_defaults
       if self.content.blank?
         case self.class.to_s.demodulize

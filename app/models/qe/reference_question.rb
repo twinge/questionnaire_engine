@@ -3,7 +3,7 @@
 
 module Qe
   class ReferenceQuestion < Question
-    
+      
     def response(app=nil)
       return unless app
       # A reference is the same if the related_question_sheet corresponding to the question is the same
@@ -33,10 +33,10 @@ module Qe
     def display_response(app=nil)
       return response(app).to_s
     end
-    
-    # which view to render this element?
+
+    # style format is detetermined in the views
     def ptemplate
-      style
+      style 
     end
     
   end

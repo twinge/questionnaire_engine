@@ -55,7 +55,7 @@ module Qe
       # TODO do this within the Rails framework
       # @element = params[:element_type].constantize.new(params[:element])
 
-      @element = "Qe::#{paramsp[:element_type]}".constantize.new(params[:element])
+      @element = "Qe::#{params[:element_type]}".constantize.new(params[:element])
       @element.required = true if @element.question?
       @question_sheet = @page.question_sheet
       respond_to do |format|
