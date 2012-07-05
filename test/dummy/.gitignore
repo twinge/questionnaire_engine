@@ -1,1 +1,3 @@
 vendor/ruby
+db/migrate/*
+!db/migrate/*whats_up_with_no_migrations
