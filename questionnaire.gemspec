@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Qe::VERSION
   s.authors     = ["Josh Starcher", "Weston Platter"]
   s.email       = ["j@some-email.com", "westonplatter@gmail.com"]
-  s.homepage    = "http://www.google.com"
-  s.summary     = "Summary of Questionnaire."
-  s.description = "Description of Questionnaire."
+  s.homepage    = "http://www.github.com/thelabtech/questionnaire"
+  s.summary     = "Questionnaire Rails Engine in gem form"
+  s.description = "to be added"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
