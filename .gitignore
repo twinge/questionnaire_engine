@@ -11,3 +11,4 @@ vendor/ruby
 
 # to force gem migrations to right
 test/dummy/db/vendor/ruby
+*.gem
