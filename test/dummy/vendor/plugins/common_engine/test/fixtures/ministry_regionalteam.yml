@@ -1,0 +1,265 @@
+--- 
+ministry_regionalteam_009: 
+  city: ''
+  address1: ''
+  name: Greater Northwest
+  "no": ''
+  zip: ''
+  address2: ''
+  region: NW
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "9"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_010: 
+  city: ''
+  address1: ''
+  name: Pacific Southwest
+  "no": ''
+  zip: ''
+  address2: ''
+  region: SW
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "10"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_011: 
+  city: ''
+  address1: ''
+  name: "National Campus Office - Donations"
+  "no": ''
+  zip: ''
+  address2: ''
+  region: NC
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "11"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_012: 
+  city: ''
+  address1: ''
+  name: Non-CCC
+  "no": ''
+  zip: ''
+  address2: ''
+  region: ''
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "12"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_001: 
+  city: ''
+  address1: ''
+  name: Northeast
+  "no": ''
+  zip: ''
+  address2: ''
+  region: NE
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "1"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_002: 
+  city: ''
+  address1: ''
+  name: Mid-Atlantic
+  "no": ''
+  zip: ''
+  address2: ''
+  region: MA
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "2"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_003: 
+  city: ''
+  address1: ''
+  name: MidSouth
+  "no": ''
+  zip: ''
+  address2: ''
+  region: MS
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "3"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_004: 
+  city: ''
+  address1: ''
+  name: Southeast
+  "no": ''
+  zip: ''
+  address2: ''
+  region: SE
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "4"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_005: 
+  city: ''
+  address1: ''
+  name: Great Lakes Regional Office
+  "no": ''
+  zip: ''
+  address2: ''
+  region: GL
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "5"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_006: 
+  city: ''
+  address1: ''
+  name: Upper Midwest
+  "no": ''
+  zip: ''
+  address2: ''
+  region: UM
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "6"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_007: 
+  city: ''
+  address1: ''
+  name: Great Plains
+  "no": ''
+  zip: ''
+  address2: ''
+  region: GP
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "7"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
+ministry_regionalteam_008: 
+  city: ''
+  address1: ''
+  name: Red River Regional Team
+  "no": ''
+  zip: ''
+  address2: ''
+  region: RR
+  hrd: ''
+  url: ''
+  country: ''
+  isActive: ''
+  teamID: "8"
+  fax: ''
+  phone: ''
+  note: ''
+  oldPrimaryKey: ''
+  abbrv: ''
+  stopdate: 0000-00-00 00:00:00
+  startdate: 0000-00-00 00:00:00
+  email: ''
+  state: ''
