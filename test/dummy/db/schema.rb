@@ -11,25 +11,68 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101123130420) do
+ActiveRecord::Schema.define(:version => 20120705161250) do
 
-  create_table "qe_answer_sheet_question_sheets", :force => true do |t|
+  create_table "dummy_elements", :force => true do |t|
+    t.integer "question_sheet_id",               :null => false
+    t.integer "page_id",                         :null => false
+    t.string  "kind",              :limit => 40, :null => false
+    t.string  "style",             :limit => 40
+    t.string  "label"
+    t.text    "content"
+    t.boolean "required"
+    t.string  "slug",              :limit => 36
+    t.integer "position"
+    t.string  "object_name"
+    t.string  "attribute_name"
+  end
+
+  add_index "dummy_elements", ["slug"], :name => "index_dummy_elements_on_slug"
+
+  create_table "dummy_pages", :force => true do |t|
+    t.integer "question_sheet_id",               :null => false
+    t.string  "label",             :limit => 60, :null => false
+    t.integer "number"
+  end
+
+  create_table "dummy_question_sheets", :force => true do |t|
+    t.string "label", :limit => 60, :null => false
+  end
+
+  create_table "qe_reference_sheets", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "applicant_answer_sheet_id"
+    t.datetime "email_sent_at"
+    t.string   "relationship"
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "status"
+    t.datetime "submitted_at"
+    t.string   "access_key"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "te_answer_sheet_question_sheets", :force => true do |t|
     t.integer  "answer_sheet_id"
     t.integer  "question_sheet_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
 
-  add_index "qe_answer_sheet_question_sheets", ["answer_sheet_id"], :name => "index_qe_answer_sheet_question_sheets_on_answer_sheet_id"
-  add_index "qe_answer_sheet_question_sheets", ["question_sheet_id"], :name => "index_qe_answer_sheet_question_sheets_on_question_sheet_id"
+  add_index "te_answer_sheet_question_sheets", ["answer_sheet_id"], :name => "index_te_answer_sheet_question_sheets_on_answer_sheet_id"
+  add_index "te_answer_sheet_question_sheets", ["question_sheet_id"], :name => "index_te_answer_sheet_question_sheets_on_question_sheet_id"
 
-  create_table "qe_answer_sheets", :force => true do |t|
+  create_table "te_answer_sheets", :force => true do |t|
     t.integer  "question_sheet_id", :null => false
     t.datetime "created_at",        :null => false
     t.datetime "completed_at"
   end
 
-  create_table "qe_answers", :force => true do |t|
+  create_table "te_answers", :force => true do |t|
     t.integer  "answer_sheet_id",         :null => false
     t.integer  "question_id",             :null => false
     t.text     "value"
@@ -40,11 +83,11 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
     t.datetime "attachment_updated_at"
   end
 
-  add_index "qe_answers", ["answer_sheet_id"], :name => "index_qe_answers_on_answer_sheet_id"
-  add_index "qe_answers", ["question_id"], :name => "index_qe_answers_on_question_id"
-  add_index "qe_answers", ["short_value"], :name => "index_qe_answers_on_short_value"
+  add_index "te_answers", ["answer_sheet_id"], :name => "index_te_answers_on_answer_sheet_id"
+  add_index "te_answers", ["question_id"], :name => "index_te_answers_on_question_id"
+  add_index "te_answers", ["short_value"], :name => "index_te_answers_on_short_value"
 
-  create_table "qe_conditions", :force => true do |t|
+  create_table "te_conditions", :force => true do |t|
     t.integer "question_sheet_id", :null => false
     t.integer "trigger_id",        :null => false
     t.string  "expression",        :null => false
@@ -52,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
     t.integer "toggle_id"
   end
 
-  create_table "qe_elements", :force => true do |t|
+  create_table "te_elements", :force => true do |t|
     t.string   "kind",                      :limit => 40,                    :null => false
     t.string   "style",                     :limit => 40
     t.string   "label"
@@ -82,12 +125,12 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
     t.integer  "max_length"
   end
 
-  add_index "qe_elements", ["conditional_id"], :name => "index_qe_elements_on_conditional_id"
-  add_index "qe_elements", ["position"], :name => "index_qe_elements_on_question_sheet_id_and_position_and_page_id"
-  add_index "qe_elements", ["question_grid_id"], :name => "index_qe_elements_on_question_grid_id"
-  add_index "qe_elements", ["slug"], :name => "index_qe_elements_on_slug"
+  add_index "te_elements", ["conditional_id"], :name => "index_te_elements_on_conditional_id"
+  add_index "te_elements", ["position"], :name => "index_te_elements_on_question_sheet_id_and_position_and_page_id"
+  add_index "te_elements", ["question_grid_id"], :name => "index_te_elements_on_question_grid_id"
+  add_index "te_elements", ["slug"], :name => "index_te_elements_on_slug"
 
-  create_table "qe_email_templates", :force => true do |t|
+  create_table "te_email_templates", :force => true do |t|
     t.string   "name",       :limit => 1000, :null => false
     t.text     "content"
     t.boolean  "enabled"
@@ -96,9 +139,9 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
     t.datetime "updated_at",                 :null => false
   end
 
-  add_index "qe_email_templates", ["name"], :name => "index_qe_email_templates_on_name", :length => {"name"=>255}
+  add_index "te_email_templates", ["name"], :name => "index_te_email_templates_on_name", :length => {"name"=>255}
 
-  create_table "qe_page_elements", :force => true do |t|
+  create_table "te_page_elements", :force => true do |t|
     t.integer  "page_id"
     t.integer  "element_id"
     t.integer  "position"
@@ -106,33 +149,16 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "qe_pages", :force => true do |t|
+  create_table "te_pages", :force => true do |t|
     t.integer "question_sheet_id",                                   :null => false
     t.string  "label",             :limit => 100,                    :null => false
     t.integer "number"
     t.boolean "hidden",                           :default => false
   end
 
-  create_table "qe_question_sheets", :force => true do |t|
+  create_table "te_question_sheets", :force => true do |t|
     t.string  "label",    :limit => 60,                    :null => false
     t.boolean "archived",               :default => false
-  end
-
-  create_table "qe_reference_sheets", :force => true do |t|
-    t.integer  "question_id"
-    t.integer  "applicant_answer_sheet_id"
-    t.datetime "email_sent_at"
-    t.string   "relationship"
-    t.string   "title"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "status"
-    t.datetime "submitted_at"
-    t.string   "access_key"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
   end
 
 end
