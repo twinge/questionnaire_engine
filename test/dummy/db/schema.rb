@@ -11,50 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705161250) do
-
-  create_table "dummy_elements", :force => true do |t|
-    t.integer "question_sheet_id",               :null => false
-    t.integer "page_id",                         :null => false
-    t.string  "kind",              :limit => 40, :null => false
-    t.string  "style",             :limit => 40
-    t.string  "label"
-    t.text    "content"
-    t.boolean "required"
-    t.string  "slug",              :limit => 36
-    t.integer "position"
-    t.string  "object_name"
-    t.string  "attribute_name"
-  end
-
-  add_index "dummy_elements", ["slug"], :name => "index_dummy_elements_on_slug"
-
-  create_table "dummy_pages", :force => true do |t|
-    t.integer "question_sheet_id",               :null => false
-    t.string  "label",             :limit => 60, :null => false
-    t.integer "number"
-  end
-
-  create_table "dummy_question_sheets", :force => true do |t|
-    t.string "label", :limit => 60, :null => false
-  end
-
-  create_table "qe_reference_sheets", :force => true do |t|
-    t.integer  "question_id"
-    t.integer  "applicant_answer_sheet_id"
-    t.datetime "email_sent_at"
-    t.string   "relationship"
-    t.string   "title"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "status"
-    t.datetime "submitted_at"
-    t.string   "access_key"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
+ActiveRecord::Schema.define(:version => 20101123130420) do
 
   create_table "te_answer_sheet_question_sheets", :force => true do |t|
     t.integer  "answer_sheet_id"
@@ -159,6 +116,23 @@ ActiveRecord::Schema.define(:version => 20120705161250) do
   create_table "te_question_sheets", :force => true do |t|
     t.string  "label",    :limit => 60,                    :null => false
     t.boolean "archived",               :default => false
+  end
+
+  create_table "te_reference_sheets", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "applicant_answer_sheet_id"
+    t.datetime "email_sent_at"
+    t.string   "relationship"
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "status"
+    t.datetime "submitted_at"
+    t.string   "access_key"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end

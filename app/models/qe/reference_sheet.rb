@@ -4,7 +4,7 @@ module Qe
     
     # NOTE -- since inheriting from AnswerSheet, you need to explicitly declare the table name,
     #         rather than it being implicitly inherited from the module/class.
-    self.table_name = "qe_reference_sheets"
+    self.table_name = "#{Qe.table_name_prefix}reference_sheets"
     
     set_inheritance_column 'fake'
     
