@@ -6,7 +6,7 @@
 # We always need data to render the current page for editing. 
 # On the initial load, we need data for the page list (sidebar).
 # On later page loads, we need to determine the "next page" which basically requires the page list again.
-require_dependency 'presenter'
+require_dependency 'qe/presenter'
 module Qe
   class AnswerPagesPresenter < Presenter
     unloadable
