@@ -3,8 +3,6 @@
 
 module Qe
 	class StateChooser < Question
-	  def choices(country = 'US')
-	    @states = Carmen::states(country)
-	  end
-	end
+    include Qe::Concerns::Models::StateChooser
+  end
 end

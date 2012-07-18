@@ -6,8 +6,8 @@
 # :style        - ?
 # :content      - ? instructions, agreements, etc. to display
 
-module Qe
-	class Section < Element  
-    include Qe::Concerns::Models::Section
-  end
+require 'active_support/concerns'
+
+module Qe::Conerns::Models::Section < Element  
+	extend ActiveSupport::Concerns
 end
