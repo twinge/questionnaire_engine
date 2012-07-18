@@ -1,9 +1,9 @@
 # require_dependency 'answer_pages_presenter'
 
-require 'active_support/concerns'
+# require 'active_support/concern'
 
 module Qe::Concerns::Controllers::AnswerPagesController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
 
   included do
     before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]

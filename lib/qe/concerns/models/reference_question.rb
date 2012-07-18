@@ -1,9 +1,11 @@
 # ReferenceQuestion
 # - a question that provides a fields to specify a reference
-require 'active_support/concerns'
+# require 'active_support/concern'
+# require 'qe/concerns/models/question'
 
-module Qe::Conerns::Models::ReferenceQuestion < Question
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::ReferenceQuestion
+  extend ActiveSupport::Concern  
+  include Qe::Concerns::Models::Question
   
   def response(app=nil)
     return unless app

@@ -1,7 +1,7 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::AnswerSheet
-  extend ActiveSupport::Concerns  
+module Qe::Concerns::Models::AnswerSheet
+  extend ActiveSupport::Concern  
 
   included do
     self.table_name = "#{self.table_name}"
@@ -39,7 +39,7 @@ module Qe::Conerns::Models::AnswerSheet
   end
   
   def reference?
-    false
+    return false
   end
    
   def percent_complete
@@ -58,4 +58,6 @@ module Qe::Conerns::Models::AnswerSheet
   def collat_title() 
     "" 
   end
+
 end
+

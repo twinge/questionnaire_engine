@@ -6,15 +6,11 @@
 # We always need data to render the current page for editing. 
 # On the initial load, we need data for the page list (sidebar).
 # On later page loads, we need to determine the "next page" which basically requires the page list again.
-require 'active_support/concerns'
 
-## this should be taken care of within the engine loadind since file is loaded
-## in lib/qe.rb
-## require_dependency 'qe/presenter'
-
-module Qe::Conerns::Presenters::AnswerPagesPresenter < Presenter
-  extend ActiveSupport::Concerns
-     
+module Qe::Concerns::Presenters::AnswerPagesPresenter
+  extend ActiveSupport::Concern
+  include Qe::Concerns::Presenters::Presenter
+  
   included do
     unloadable
       

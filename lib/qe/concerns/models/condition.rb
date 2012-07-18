@@ -1,12 +1,11 @@
-require 'active_support/concerns'
-
+require 'active_support/concern'
 # :trigger_id     - question that controls the state of the dependent pages/questions
 # :expresion      - a single expression for eval() by both Javascript and Ruby
 #                   i.e. "answer == 'yes'"
 # a question can have more than one answer (choose many) in which case ANY answer will do (find)
 
-module Qe::Conerns::Models::Condition
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Condition
+  extend ActiveSupport::Concern
 
   included do
     # self.table_name = "#{self.table_name}"

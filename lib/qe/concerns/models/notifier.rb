@@ -1,8 +1,7 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
-
-module Qe::Conerns::Models::Notifier #< ActionMailer::Base
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Notifier #< ActionMailer::Base
+  extend ActiveSupport::Concern
 
   # call Notifier.deliver_notification
   def notification(p_recipients, p_from, template_name, template_params = {}, options = {})

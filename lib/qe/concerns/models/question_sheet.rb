@@ -1,8 +1,8 @@
 require 'qe/model_extensions'
 
 # QuestionSheet represents a particular form
-module Qe::Conerns::Models::QuestionSheet
-  extend ActiveSupport::Concerns 
+module Qe::Concerns::Models::QuestionSheet
+  extend ActiveSupport::Concern
   
   included do
     # self.table_name = "#{self.table_name}"

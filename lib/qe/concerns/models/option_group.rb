@@ -1,7 +1,7 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::OptionGroup
-	extend ActiveSupport::Concerns
+module Qe::Concerns::Models::OptionGroup
+	extend ActiveSupport::Concern
 
 	included do
 	  attr_reader :label

@@ -1,10 +1,10 @@
-require 'active_support/concerns'
+# require 'active_support/concern'
 
 # this should be loaded since it's required in the qe manifest file
 # require 'qe/model_extensions'
 
 module Qe::Concerns::Controllers::QuestionPagesController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
 
   included do
     unloadable

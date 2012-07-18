@@ -4,10 +4,11 @@
 # :kind         - 'QuestionGrid' for single table inheritance (STI)
 # :content      - questions
 
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::QuestionGrid < Element
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::QuestionGrid
+  extend ActiveSupport::Concern
+  include Qe::Concerns::Models::Element
 
   included do
     has_many :elements, :foreign_key => "question_grid_id", :dependent => :nullify, :order => :position

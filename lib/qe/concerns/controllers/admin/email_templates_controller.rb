@@ -1,7 +1,7 @@
-require 'active_support/concerns'
+# require 'active_support/concern'
 
 module Qe::Concerns::Controllers::EmailTemplatesController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
   
   included do
     unloadable

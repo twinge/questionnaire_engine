@@ -1,7 +1,7 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::Option
-	extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Option
+	extend ActiveSupport::Concern
 
 	included do
 	  attr_reader :key

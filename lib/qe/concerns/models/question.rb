@@ -8,11 +8,14 @@
 # :required     - is this question itself required or optional?
 # :content      - choices (one per line) for choice field
 
-require 'active_support/concerns'
+require 'active_support/concern'
+require 'qe/concerns/models/element'
 
-module Qe::Conerns::Models::Question < Element
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Question
+  extend ActiveSupport::Concern
   
+  include Qe::Concerns::Models::Element
+
   included do
     include ActionController::RecordIdentifier # dom_id
     has_many :conditions, :foreign_key => "toggle_id", :dependent => :nullify

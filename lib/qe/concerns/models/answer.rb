@@ -6,10 +6,10 @@
 # essay questions have a nil short value
 # may want special handling for ChoiceFields to store both id/slug and text representations
 
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::Answer
-    extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Answer
+    extend ActiveSupport::Concern
 
     included do
       self.table_name = "#{self.table_name}"
@@ -38,5 +38,4 @@ module Qe::Conerns::Models::Answer
     end
 
   end
-end
   

@@ -1,11 +1,12 @@
 # State Dropdown
 # - drop down of states
 
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::StateChooser < Question
-	extend ActiveSupport::Concerns
-
+module Qe::Concerns::Models::StateChooser
+	extend ActiveSupport::Concern
+	include Qe::Concerns::Models::Question
+  
   def choices(country = 'US')
     @states = Carmen::states(country)
   end

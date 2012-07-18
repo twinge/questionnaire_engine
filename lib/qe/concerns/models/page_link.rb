@@ -1,9 +1,9 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
 # represents a link to a page for the page_list sidebar or next page links
-module Qe::Conerns::Models::PageLink
-	extend ActiveSupport::Concerns
-	
+module Qe::Concerns::Models::PageLink
+	extend ActiveSupport::Concern	
+
 	included do
 	  attr_accessor :dom_id, :label, :load_path, :page
 	  attr_accessor :save_path  # to save current page

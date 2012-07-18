@@ -1,11 +1,12 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
 # DateField
 # - a question that provides a calendar/date picker
 
-module Qe::Conerns::Models::DateField < Question
-  extend ActiveSupport::Concerns
-  
+module Qe::Concerns::Models::DateField
+  extend ActiveSupport::Concern  
+  include Qe::Concerns::Models::Question
+
   def validation_class(answer_sheet)
     if self.style == 'mmyy'
       'validate-selection ' + super

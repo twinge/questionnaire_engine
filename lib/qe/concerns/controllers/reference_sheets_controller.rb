@@ -1,7 +1,10 @@
-require_dependency 'answer_sheets_controller'
+require 'active_support/concern'
+
+# should be required within lib/qe.rb
+# require_dependency 'answer_sheets_controller'
 
 module Qe::Concerns::Controllers::ReferenceSheetsController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
   
   included do
     skip_before_filter :ssm_login_required, :login

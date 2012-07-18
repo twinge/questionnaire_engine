@@ -1,8 +1,10 @@
-require 'active_support/concerns'
+require 'active_support/concern'
+require 'qe/concerns/models/question'
 
 # AttachmentField
 # - a file upload question
 
-module Qe::Conerns::Models::AttachmentField < Question
-	extend ActiveSupport::Concerns
+module Qe::Concerns::Models::AttachmentField
+	extend ActiveSupport::Concern
+	include Qe::Concerns::Models::Question
 end

@@ -1,4 +1,4 @@
-require 'active_support/concerns'
+# require 'active_support/concern'
 require 'net/http'
 
 begin
@@ -10,9 +10,10 @@ end
 # ChoiceField
 # - a question that allows the selection of one or more choices
 
-module Qe::Conerns::Models::ChoiceField < Question
-  extend ActiveSupport::Concerns
-
+module Qe::Concerns::Models::ChoiceField
+  extend ActiveSupport::Concern
+  include Qe::Concerns::Models::Question
+  
   included do
     has_many :elements, :foreign_key => "conditional_id", :dependent => :nullify#, :order => :position
   end

@@ -1,7 +1,7 @@
-require 'active_support/conerns'
+# require 'active_support/conern'
 
 module Qe::Concerns::Controllers::AnswerSheetsController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
   
   included do
     unloadable

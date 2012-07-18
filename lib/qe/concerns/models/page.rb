@@ -1,8 +1,8 @@
 require 'qe/model_extensions'
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::Page
-  extend ActiveSupport::Concerns
+module Qe::Concerns::Models::Page
+  extend ActiveSupport::Concern
 
   included do
     # self.table_name = "#{self.table_name}"

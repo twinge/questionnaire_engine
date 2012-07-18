@@ -1,9 +1,11 @@
-require 'active_support/concerns'
+require 'active_support/concern'
+require 'state_machine'
 
-module Qe::Conerns::Models::ReferenceSheet < AnswerSheet
-  extend ActiveSupport::Concerns
-
-  include Rails.application.routes.url_helpers
+module Qe::Concerns::Models::ReferenceSheet
+  extend ActiveSupport::Concern
+  include Qe::Concerns::Models::AnswerSheet
+  
+  # include Rails.application.routes.url_helpers
   
   included do    
     # NOTE -- since inheriting from AnswerSheet, you need to explicitly declare the table name,
@@ -27,21 +29,21 @@ module Qe::Conerns::Models::ReferenceSheet < AnswerSheet
   end
 
   # state column is 'status'
-  state_machine :status, :initial => :created do
-    after_transition :on => :completed, :do => :prod_method
+  # state_machine :status, :initial => :created do
+  #   after_transition :on => :completed, :do => :prod_method
     
-    event :start do
-      transition :to => :started, :from => :created
-    end
+  #   event :start do
+  #     transition :to => :started, :from => :created
+  #   end
     
-    event :submit do
-      transition :to => :completed, :from => :started
-    end
+  #   event :submit do
+  #     transition :to => :completed, :from => :started
+  #   end
 
-    event :unsubmit do
-      transition :to => :started, :from => :completed
-    end
-  end
+  #   event :unsubmit do
+  #     transition :to => :started, :from => :completed
+  #   end
+  # end
 
   def proc_method
 
@@ -60,7 +62,7 @@ module Qe::Conerns::Models::ReferenceSheet < AnswerSheet
   end
 
   # TODO check this out within the ActiveSupport::Concerns strategy
-  alias_method :applicant, :applicant_answer_sheet
+  # alias_method :applicant, :applicant_answer_sheet
   
   def generate_access_key
     self.access_key = Digest::MD5.hexdigest(email + Time.now.to_s)

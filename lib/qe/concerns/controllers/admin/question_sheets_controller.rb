@@ -1,10 +1,10 @@
-require 'active_support/concerns'
+# require 'active_support/concern'
 
 # Qe::QuestionSheets is used exclusively on the administration side to design a Questionniare
 #  which can than be instantiated as an AnswerSheet for data capture on the front-end
 
 module Qe::Concerns::Controllers::QuestionSheetsController
-  extend ActiveSupport::Concerns
+  extend ActiveSupport::Concern
 
   included do
     unloadable

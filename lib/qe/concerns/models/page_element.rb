@@ -1,7 +1,7 @@
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::PageElement
-	extend ActiveSupport::Concerns
+module Qe::Concerns::Models::PageElement
+	extend ActiveSupport::Concern
 
 	included do
 	  # self.table_name = "#{self.table_name}"

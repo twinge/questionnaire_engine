@@ -1,11 +1,12 @@
 # TextField
 # - a question that prompts for one or more lines of text
 
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::TextField < Question
-  extend ActiveSupport::Concerns
-    
+module Qe::Concerns::Models::TextField
+  extend ActiveSupport::Concern    
+  include Qe::Concerns::Models::Question
+  
   # which view to render this element?
   def ptemplate
     if self.style == 'qe/essay'

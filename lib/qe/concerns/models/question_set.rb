@@ -1,10 +1,10 @@
 # QuestionSet
 # represents a group of elements, with their answers
-require 'active_support/concerns'
+require 'active_support/concern'
 
-module Qe::Conerns::Models::QuestionSet
-  extend ActiveSupport::Concerns
-  
+module Qe::Concerns::Models::QuestionSet
+  extend ActiveSupport::Concern  
+
   included do
     attr_reader :elements
   end
