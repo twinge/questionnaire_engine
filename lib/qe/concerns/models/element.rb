@@ -16,7 +16,7 @@ module Qe::Concerns::Models
       has_many :pages, :through => :page_elements
       
       # TODO rework with namespacing.
-      scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
+      scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(Qe::QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
       
       belongs_to :question_sheet
 

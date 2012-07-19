@@ -14,10 +14,10 @@ module Qe::Concerns::Controllers::QuestionSheetsController
   end
    
   # list of all questionnaires/forms to edit
-  # GET /question_sheets
+  # GET /question_sheets  
   def index
-    @active_question_sheets = QuestionSheet.active.order('label')
-    @archived_question_sheets = QuestionSheet.archived.order('label')
+    @active_question_sheets = Qe::QuestionSheet.active.order('label')
+    @archived_question_sheets = Qe::QuestionSheet.archived.order('label')
 
     respond_to do |format|
       format.html # index.rhtml
@@ -55,7 +55,7 @@ module Qe::Concerns::Controllers::QuestionSheetsController
   # create sheet with inital page, redirect to show
   # POST /question_sheets
   def create
-    @question_sheet = QuestionSheet.new_with_page
+    @question_sheet = Qe::QuestionSheet.new_with_page
     
     respond_to do |format|
       if @question_sheet.save
@@ -107,6 +107,6 @@ module Qe::Concerns::Controllers::QuestionSheetsController
   protected
   
   def get_question_sheet
-    @question_sheet = QuestionSheet.find(params[:id])
+    @question_sheet = Qe::QuestionSheet.find(params[:id])
   end
 end

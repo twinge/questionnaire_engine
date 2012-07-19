@@ -1,5 +1,4 @@
 require 'active_support/concern'
-require 'state_machine'
 
 module Qe::Concerns::Models::ReferenceSheet
   extend ActiveSupport::Concern
@@ -8,14 +7,15 @@ module Qe::Concerns::Models::ReferenceSheet
   # include Rails.application.routes.url_helpers
   
   included do    
+    require 'state_machine'
     # NOTE -- since inheriting from AnswerSheet, you need to explicitly declare the table name,
     #         rather than it being implicitly inherited from the module/class.
     self.table_name = "#{Qe.table_name_prefix}reference_sheets"
     
     set_inheritance_column 'fake'
     
-    belongs_to :question, :class_name => Element, :foreign_key => 'question_id'
-    belongs_to :applicant_answer_sheet, :class_name => AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
+    belongs_to :question, :class_name => Qe::Element, :foreign_key => 'question_id'
+    belongs_to :applicant_answer_sheet, :class_name => Qe::AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
     
     validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
     
@@ -26,24 +26,24 @@ module Qe::Concerns::Models::ReferenceSheet
     after_destroy :notify_reference_of_deletion
 
     attr_accessible :first_name, :last_name, :phone, :email, :relationship
+
+    # state column is 'status'
+    state_machine :status, :initial => :created do
+      after_transition :on => :completed, :do => :prod_method
+      
+      event :start do
+        transition :to => :started, :from => :created
+      end
+      
+      event :submit do
+        transition :to => :completed, :from => :started
+      end
+
+      event :unsubmit do
+        transition :to => :started, :from => :completed
+      end
+    end
   end
-
-  # state column is 'status'
-  # state_machine :status, :initial => :created do
-  #   after_transition :on => :completed, :do => :prod_method
-    
-  #   event :start do
-  #     transition :to => :started, :from => :created
-  #   end
-    
-  #   event :submit do
-  #     transition :to => :completed, :from => :started
-  #   end
-
-  #   event :unsubmit do
-  #     transition :to => :started, :from => :completed
-  #   end
-  # end
 
   def proc_method
 

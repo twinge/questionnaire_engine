@@ -13,7 +13,6 @@ module Qe::Concerns::Presenters::AnswerPagesPresenter
   
   included do
     unloadable
-      
     attr_accessor :active_answer_sheet, :page_links, :active_page, :pages
   end
 

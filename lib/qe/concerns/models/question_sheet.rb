@@ -11,6 +11,7 @@ module Qe::Concerns::Models::QuestionSheet
     has_many :elements
     has_many :questions
     has_many :answer_sheets
+    
     scope :active, where(:archived => false)
     scope :archived, where(:archived => true)
     

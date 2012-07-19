@@ -1,8 +1,14 @@
 # require 'active_support/conern'
+# require 'application_controller'
 
 module Qe::Concerns::Controllers::AnswerSheetsController
   extend ActiveSupport::Concern
+  # include Qe::Concerns::Controllers::ApplicationController
   
+  def check_valid_user
+    true
+  end
+
   included do
     unloadable
     layout 'qe/application'
@@ -15,10 +21,10 @@ module Qe::Concerns::Controllers::AnswerSheetsController
     
     # TODO dynamically reference this
     # @answer_sheets = answer_sheet_type.find(:all, :order => 'created_at')
-    @answer_sheets = AnswerSheet.find(:all, :order => 'created_at')
+    @answer_sheets = Qe::AnswerSheet.find(:all, :order => 'created_at')
 
     # drop down of sheets to capture data for
-    @question_sheets = QuestionSheet.find(:all, :order => 'label').map {|s| [s.label, s.id]}
+    @question_sheets = Qe::QuestionSheet.find(:all, :order => 'label').map {|s| [s.label, s.id]}
   end
   
   def create
