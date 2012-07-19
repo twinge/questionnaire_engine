@@ -1,5 +1,26 @@
-= Questionnaire
-
-A Rails Engine in gem form based on https://github.com/twinge/questionnaire_engine.
-
-This project rocks and uses MIT-LICENSE.
+= Questionnaire (Engine)  
+  
+A Rails Engine in gem form based on https://github.com/twinge/questionnaire_engine.  
+  
+  
+== Development  
+  
+  
+=== Custom Rake Tasks  
+There are 2 parent rake tasks that are worth mentioning.  
+````  
+be rake run  
+be run clean  
+````  
+  
+```rake run```` - drops, creates, copies/runs engine specific migrations. This helps since all the tablenames are dynamically defined in the respective app/models rather than the db migrations.  
+    
+````rake clean```` - removes db/migration/* files, removes db/schema.rb, and drops db. This is important because removing all these files from and running ````rake run```` simulates a clean gem install.  
+  
+=== Testing Procedures  
+````  
+be rake db:test:prepare
+be rspec spec  
+````  
+  
+This project rocks and uses MIT-LICENSE.  

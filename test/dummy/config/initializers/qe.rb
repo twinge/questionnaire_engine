@@ -2,7 +2,7 @@ module Qe
 	# prefix for database tables
   mattr_accessor :table_name_prefix
   # self.table_name_prefix ||= ''
-  self.table_name_prefix = 'te_'
+  self.table_name_prefix = 'pr_'
 
   
   # mattr_accessor :answer_sheet_class

@@ -10,7 +10,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   end
 
   def index 
-    @email_templates = EmailTemplate.order('name')
+    @email_templates = Qe::EmailTemplate.order('name')
   
     respond_to do |format|
       format.html
@@ -18,7 +18,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   end
   
   def new 
-    @email_template = EmailTemplate.new
+    @email_template = Qe::EmailTemplate.new
   
     respond_to do |format|
       format.html
@@ -26,7 +26,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   end
   
   def edit
-    @email_template = EmailTemplate.find(params[:id])
+    @email_template = Qe::EmailTemplate.find(params[:id])
     
     respond_to do |format|
       format.html
@@ -35,7 +35,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   
   def create
     # TODO mass-assignment engineering
-    @email_template = EmailTemplate.new(params[:email_template], :without_protection => true)
+    @email_template = Qe::EmailTemplate.new(params[:email_template], :without_protection => true)
     
     respond_to do |format|
       if @email_template.save
@@ -48,7 +48,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   
   def update 
     # TODO mass-assignment engineering
-    @email_template = EmailTemplate.find(params[:id])
+    @email_template = Qe::EmailTemplate.find(params[:id])
     
     respond_to do |format|
       if @email_template.update_attributes(params[:email_template], :without_protection => true)
@@ -60,7 +60,7 @@ module Qe::Concerns::Controllers::EmailTemplatesController
   end
   
   def destroy
-    @email_template = EmailTemplate.find(params[:id])
+    @email_template = Qe::EmailTemplate.find(params[:id])
     @email_template.destroy
 
     respond_to do |format|

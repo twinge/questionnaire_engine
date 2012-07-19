@@ -13,7 +13,11 @@ group :development do
 	gem 'rails-footnotes', '>= 3.7.5.rc4'
 	gem 'rspec-rails'
 	gem 'capybara'
+	gem 'guard-rspec'
 end
 
 # gems needed for common_engine
+# see gitmodules
+##   git submodule init
+##   git submodule update
 gem 'paperclip'
