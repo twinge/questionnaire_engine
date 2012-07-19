@@ -12,7 +12,7 @@ module Qe::Concerns::Models::ReferenceSheet
     #         rather than it being implicitly inherited from the module/class.
     self.table_name = "#{Qe.table_name_prefix}reference_sheets"
     
-    set_inheritance_column 'fake'
+    self.inheritance_column = 'fake'
     
     belongs_to :question, :class_name => Qe::Element, :foreign_key => 'question_id'
     belongs_to :applicant_answer_sheet, :class_name => Qe::AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
