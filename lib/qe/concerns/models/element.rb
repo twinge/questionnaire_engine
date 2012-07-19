@@ -1,79 +1,78 @@
 require 'active_support/concern'
 
 # Element represents a section, question or content element on the question sheet
-module Qe::Concerns::Models
-  module Element
-    extend ActiveSupport::Concern
+module Qe::Concerns::Models::Element
+  extend ActiveSupport::Concern
 
-    included do
-      # self.table_name = "#{self.table_name}"
-      belongs_to :question_grids, :foreign_key => "question_grid_id"
-      belongs_to :choice_fields, :foreign_key => "conditional_id"
-      
-      self.inheritance_column = :kind
-      
-      has_many :page_elements, :dependent => :destroy
-      has_many :pages, :through => :page_elements
-      
-      # TODO rework with namespacing.
-      scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(Qe::QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
-      
-      belongs_to :question_sheet
+  included do
+    # self.table_name = "#{self.table_name}"
+    belongs_to :question_grids, :foreign_key => "question_grid_id"
+    belongs_to :choice_fields, :foreign_key => "conditional_id"
+    
+    self.inheritance_column = :kind
+    
+    has_many :page_elements, :dependent => :destroy
+    has_many :pages, :through => :page_elements
+    
+    # TODO rework with namespacing.
+    scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(Qe::QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
+    
+    belongs_to :question_sheet
 
-      validates_presence_of :kind, :style
-      # validates_presence_of :label, :style, :on => :update
-      
-      validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
-      # validates_length_of :label, :maximum => 255, :allow_nil => true
+    validates_presence_of :kind, :style
+    # validates_presence_of :label, :style, :on => :update
+    
+    validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
+    # validates_length_of :label, :maximum => 255, :allow_nil => true
 
-      # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
-      validates_inclusion_of :kind, :in => %w{
-      Qe::Section 
-      Qe::Paragraph 
-      Qe::TextField 
-      Qe::ChoiceField 
-      Qe::DateField 
-      Qe::FileField 
-      Qe::SchoolPicker 
-      Qe::ProjectPreference 
-      Qe::StateChooser 
-      Qe::QuestionGrid 
-      Qe::QuestionGridWithTotal 
-      Qe::AttachmentField 
-      Qe::ReferenceQuestion 
-      Qe::PaymentQuestion
-      }  # leaf classes
-      
-      before_validation :set_defaults, :on => :create
-      
-      attr_accessible :attribute_name, 
-                      :cols, 
-                      :conditional_id, 
-                      :content, 
-                      :created_at, 
-                      :css_class, 
-                      :css_id, 
-                      :hide_label, 
-                      :hide_option_labels, 
-                      :is_confidential, 
-                      :kind, 
-                      :label, 
-                      :max_length, 
-                      :no_cache, 
-                      :object_name, 
-                      :position, 
-                      :question_grid_id, 
-                      :related_question_sheet_id, 
-                      :required, 
-                      :slug, 
-                      :source, 
-                      :style, 
-                      :text_xpath, 
-                      :tooltip, 
-                      :total_cols, 
-                      :updated_at, 
-                      :value_xpath
-    end
+    # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
+    validates_inclusion_of :kind, :in => %w{
+    Qe::Section 
+    Qe::Paragraph 
+    Qe::TextField 
+    Qe::ChoiceField 
+    Qe::DateField 
+    Qe::FileField 
+    Qe::SchoolPicker 
+    Qe::ProjectPreference 
+    Qe::StateChooser 
+    Qe::QuestionGrid 
+    Qe::QuestionGridWithTotal 
+    Qe::AttachmentField 
+    Qe::ReferenceQuestion 
+    Qe::PaymentQuestion
+    }  # leaf classes
+    
+    before_validation :set_defaults, :on => :create
+    
+    attr_accessible :attribute_name, 
+                    :cols, 
+                    :conditional_id, 
+                    :content, 
+                    :created_at, 
+                    :css_class, 
+                    :css_id, 
+                    :hide_label, 
+                    :hide_option_labels, 
+                    :is_confidential, 
+                    :kind, 
+                    :label, 
+                    :max_length, 
+                    :no_cache, 
+                    :object_name, 
+                    :position, 
+                    :question_grid_id, 
+                    :related_question_sheet_id, 
+                    :required, 
+                    :slug, 
+                    :source, 
+                    :style, 
+                    :text_xpath, 
+                    :tooltip, 
+                    :total_cols, 
+                    :updated_at, 
+                    :value_xpath
+  
 
       # HUMANIZED_ATTRIBUTES = {
       #   :slug => "Variable"
@@ -110,7 +109,7 @@ module Qe::Concerns::Models
     end
     
     def question?
-      self.kind_of?(Question)
+      self.kind_of?(Qe::Question)
     end
     
     # by default the partial for an element matches the class name (override as necessary)
@@ -128,7 +127,7 @@ module Qe::Concerns::Models
         new_element.question_grid_id = parent.id
       end
       new_element.save(:validate => false)
-      PageElement.create(:element => new_element, :page => page) unless parent
+      Qe::PageElement.create(:element => new_element, :page => page) unless parent
       
       # duplicate children
       if respond_to?(:elements) && elements.present?
@@ -148,11 +147,7 @@ module Qe::Concerns::Models
     end
     
     def reuseable?
-      (self.is_a?(Question) || self.is_a?(QuestionGrid) || self.is_a?(QuestionGridWithTotal))
-    end
-    
-    def Element.max_label_length
-      @@max_label_length ||= Element.columns.find{ |c| c.name == "label" }.limit
+      (self.is_a?(Qe::Question) || self.is_a?(QuestionGrid) || self.is_a?(Qe::QuestionGridWithTotal))
     end
 
     protected
@@ -184,6 +179,12 @@ module Qe::Concerns::Models
         end 
       end
     end
-      
   end
+
+  module ClassMethods
+    def max_label_length
+      @@max_label_length ||= Qe::Element.columns.find{ |c| c.name == "label" }.limit
+    end
+  end
+
 end
