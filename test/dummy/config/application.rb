@@ -62,6 +62,7 @@ module Dummy
       g.integration_tool :rspec
     end
     
+    ActiveSupport::Deprecation.silenced = true
   end
 end
 
