@@ -1,6 +1,6 @@
 development: &default
   adapter: mysql2
-  database: prod
+  database: prod-test
   username: root
   password: 
 

@@ -14,6 +14,9 @@ group :development do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'guard-rspec'
+	gem 'guard-rails'
+	gem 'rb-fsevent'
+	gem 'factory_girl_rails'
 end
 
 # gems needed for common_engine

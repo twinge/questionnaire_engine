@@ -5,7 +5,7 @@ module Qe::Concerns::Models::Page
   extend ActiveSupport::Concern
 
   included do
-    # self.table_name = "#{self.table_name}"
+    self.table_name = "#{self.table_name}"
     
     belongs_to :question_sheet
     has_many :page_elements, :dependent => :destroy, :order => :position
@@ -26,12 +26,12 @@ module Qe::Concerns::Models::Page
     # validation
     validates_presence_of :label, :number
     validates_length_of :label, :maximum => 100, :allow_nil => true
-    
     validates_uniqueness_of :number, :scope => :question_sheet_id
-       
     validates_numericality_of :number, :only_integer => true
     
-    attr_accessible :label, :number, :page
+    # attribute rules
+    attr_accessible :label, :number, :page, :id, :question_sheet_id, :no_cache, :hidden
+
   end
     # a page is disabled if there is a condition, and that condition evaluates to false
     # could set multiple conditions to influence this question, in which case all must be met
@@ -45,7 +45,7 @@ module Qe::Concerns::Models::Page
     # end
 
   def questions_before_position(position)
-    self.elements.where(["#{PageElement.table_name}.position < ?", position])
+    self.elements.where(["#{Qe::PageElement.table_name}.position < ?", position])
   end
   
   # Include nested elements
@@ -53,17 +53,23 @@ module Qe::Concerns::Models::Page
     (elements + elements.collect(&:all_elements)).flatten
   end
   
+  # Called by QuestionSheet#duplicate for recursive copy action.
   def copy_to(question_sheet)
-    new_page = Page.new(self.attributes)
+    
+    # sets id, the primary key, to nil. assigned on
+    attributes = self.attributes
+    attributes[:id] = nil
+
+    new_page = Qe::Page.new(attributes)
     new_page.question_sheet_id = question_sheet.id
     new_page.save(:validate => false)
-    self.elements.each do |element|
-      if !question_sheet.archived? && element.reuseable?
-        PageElement.create(:element => element, :page => new_page)
-      else
-        element.duplicate(new_page)
-      end
-    end
+    # self.elements.each do |element|
+    #   if !question_sheet.archived? && element.reuseable?
+    #     Qe::PageElement.create(:element => element, :page => new_page)
+    #   else
+    #     element.duplicate(new_page)
+    #   end
+    # end
   end
   
   def complete?(answer_sheet)
@@ -79,11 +85,11 @@ module Qe::Concerns::Models::Page
   end
   
   
-  private
+  # private
   
   # next unused label with "Page" prefix
   def set_default_label
-    self.label = ModelExtensions.next_label("Page", Page.untitled_labels(self.question_sheet)) if self.label.blank?
+    self.label = Qe::ModelExtensions.next_label("Page", Qe::Page.untitled_labels(self.question_sheet)) if self.label.blank?
   end
   
   def self.untitled_labels(sheet)
