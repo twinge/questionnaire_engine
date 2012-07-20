@@ -1,26 +1,25 @@
+{<img src="https://secure.travis-ci.org/thelabtech/questionniare.png?branch=activesupport" alt="Build Status" />}[https://secure.travis-ci.org/thelabtech/questionniare]
+
 = Questionnaire (Engine)  
   
-A Rails Engine in gem form based on https://github.com/twinge/questionnaire_engine.  
+A mountable Rails Engine to handle question/answer interaction. Based on the original rails plugin, {quesitonnaire_engine}[https://github.com/twinge/questionnaire_engine] by {@twinge}[https://github.com/twinge].
   
   
 == Development  
+
+=== Contributing
   
+Spot an issue? Have an idea? Go for it. Create a branch, write the code, include appropriate tests, and put in a pull request. 
   
-=== Custom Rake Tasks  
-There are 2 parent rake tasks that are worth mentioning.  
-````  
-be rake run  
-be run clean  
-````  
+
+=== Testing
   
-```rake run```` - drops, creates, copies/runs engine specific migrations. This helps since all the tablenames are dynamically defined in the respective app/models rather than the db migrations.  
-    
-````rake clean```` - removes db/migration/* files, removes db/schema.rb, and drops db. This is important because removing all these files from and running ````rake run```` simulates a clean gem install.  
+The project uses RSpec + Capybara for testing.  
   
-=== Testing Procedures  
-````  
-be rake db:test:prepare
-be rspec spec  
-````  
+The test suite can set to run automatically using Guard-Rspec by running this while in the /test/dummy folder,
+  
+    be guard 
+
+== Misc.  
   
 This project rocks and uses MIT-LICENSE.  
