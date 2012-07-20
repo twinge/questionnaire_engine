@@ -1,4 +1,4 @@
-{<img src="https://secure.travis-ci.org/thelabtech/questionniare.png?branch=activesupport" alt="Build Status" />}[https://secure.travis-ci.org/thelabtech/questionniare]
+{<img src="https://secure.travis-ci.org/thelabtech/questionnaire.png?branch=activesupport" alt="Build Status" />}[https://secure.travis-ci.org/thelabtech/questionnaire]
 
 = Questionnaire (Engine)  
   
