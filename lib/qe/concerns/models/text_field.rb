@@ -1,8 +1,6 @@
 # TextField
 # - a question that prompts for one or more lines of text
 
-require 'active_support/concern'
-
 module Qe::Concerns::Models::TextField
   extend ActiveSupport::Concern    
   include Qe::Concerns::Models::Question

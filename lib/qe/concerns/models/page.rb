@@ -1,11 +1,10 @@
 require 'qe/model_extensions'
-require 'active_support/concern'
 
 module Qe::Concerns::Models::Page
   extend ActiveSupport::Concern
 
   included do
-    self.table_name = "#{self.table_name}"
+    # self.table_name = "#{self.table_name}"
     
     belongs_to :question_sheet
     has_many :page_elements, :dependent => :destroy, :order => :position
@@ -63,13 +62,13 @@ module Qe::Concerns::Models::Page
     new_page = Qe::Page.new(attributes)
     new_page.question_sheet_id = question_sheet.id
     new_page.save(:validate => false)
-    # self.elements.each do |element|
-    #   if !question_sheet.archived? && element.reuseable?
-    #     Qe::PageElement.create(:element => element, :page => new_page)
-    #   else
-    #     element.duplicate(new_page)
-    #   end
-    # end
+    self.elements.each do |element|
+      if !question_sheet.archived? && element.reuseable?
+        Qe::PageElement.create(:element => element, :page => new_page)
+      else
+        element.duplicate(new_page)
+      end
+    end
   end
   
   def complete?(answer_sheet)

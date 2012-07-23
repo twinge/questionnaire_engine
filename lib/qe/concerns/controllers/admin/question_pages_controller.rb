@@ -107,18 +107,18 @@ module Qe
           
           private
           def get_sheet
-            @question_sheet = QuestionSheet.find(params[:question_sheet_id])
+            @question_sheet = Qe::QuestionSheet.find(params[:question_sheet_id])
           end
           
           # next unused label with "Untitled form" prefix
           def next_label
-            ModelExtensions.next_label("Page", untitled_labels)
+            Qe::ModelExtensions.next_label("Page", untitled_labels)
           end
 
           # returns a list of existing Untitled forms
           # (having a separate method makes it easy to mock in the spec)
           def untitled_labels
-            Page.find(:all, :conditions => %{label like 'Page%'}).map {|s| s.label}
+            Qe::Page.find(:all, :conditions => %{label like 'Page%'}).map {|s| s.label}
           end
 
         end

@@ -1,8 +1,6 @@
 # State Dropdown
 # - drop down of states
 
-require 'active_support/concern'
-
 module Qe::Concerns::Models::StateChooser
 	extend ActiveSupport::Concern
 	include Qe::Concerns::Models::Question

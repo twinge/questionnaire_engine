@@ -1,6 +1,7 @@
+# QuestionSheet represents a particular form
+
 require 'qe/model_extensions'
 
-# QuestionSheet represents a particular form
 module Qe::Concerns::Models::QuestionSheet
   extend ActiveSupport::Concern
   
@@ -49,7 +50,8 @@ module Qe::Concerns::Models::QuestionSheet
       new_sheet
     end
   
-    # create a new form with a page already attached
+    # get all questions for pages of a question_sheet object
+    # OLD VERSION, INCORRECT. create a new form with a page already attached
     def questions
       ret_val = []
       pages.each do |p|

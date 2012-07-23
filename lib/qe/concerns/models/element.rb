@@ -1,31 +1,30 @@
-require 'active_support/concern'
-
 # Element represents a section, question or content element on the question sheet
+
 module Qe::Concerns::Models::Element
   extend ActiveSupport::Concern
 
   included do
     # self.table_name = "#{self.table_name}"
+    self.inheritance_column = :kind
+
+    belongs_to :question_sheet
     belongs_to :question_grids, :foreign_key => "question_grid_id"
     belongs_to :choice_fields, :foreign_key => "conditional_id"
-    
-    self.inheritance_column = :kind
-    
     has_many :page_elements, :dependent => :destroy
     has_many :pages, :through => :page_elements
     
     # TODO rework with namespacing.
     scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(Qe::QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
-    
-    belongs_to :question_sheet
 
     validates_presence_of :kind, :style
+    # TODO uncomment this line
     # validates_presence_of :label, :style, :on => :update
     
     validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
+    # TODO uncomment this line
     # validates_length_of :label, :maximum => 255, :allow_nil => true
 
-    # TODO: This needs to get abstracted out to a CustomQuestion class in BOAT
+    # TODO (added before put in gem form): This needs to get abstracted out to a CustomQuestion class in BOAT
     validates_inclusion_of :kind, :in => %w{
     Qe::Section 
     Qe::Paragraph 
@@ -71,7 +70,8 @@ module Qe::Concerns::Models::Element
                     :tooltip, 
                     :total_cols, 
                     :updated_at, 
-                    :value_xpath
+                    :value_xpath,
+                    :element
   
 
       # HUMANIZED_ATTRIBUTES = {
@@ -119,13 +119,17 @@ module Qe::Concerns::Models::Element
     
     # copy an item and all it's children
     def duplicate(page, parent = nil)
-      new_element = self.class.new(self.attributes)
+
+      attributes = self.attributes
+      attributes[:id] = nil
+
+      new_element = self.class.new(attributes)
       case parent.class.to_s
-      when ChoiceField
-        new_element.conditional_id = parent.id
-      when QuestionGrid, QuestionGridWithTotal
-        new_element.question_grid_id = parent.id
-      end
+                            when Qe::ChoiceField
+                              new_element.conditional_id = parent.id
+                            when Qe::QuestionGrid, Qe::QuestionGridWithTotal
+                              new_element.question_grid_id = parent.id
+                            end
       new_element.save(:validate => false)
       Qe::PageElement.create(:element => new_element, :page => page) unless parent
       
@@ -147,7 +151,7 @@ module Qe::Concerns::Models::Element
     end
     
     def reuseable?
-      (self.is_a?(Qe::Question) || self.is_a?(QuestionGrid) || self.is_a?(Qe::QuestionGridWithTotal))
+      (self.is_a?(Qe::Question) || self.is_a?(Qe::QuestionGrid) || self.is_a?(Qe::QuestionGridWithTotal))
     end
 
     protected

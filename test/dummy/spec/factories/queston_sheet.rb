@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :question_sheet, :class => Qe::QuestionSheet do
     label "label"
+    id 1
   end
 
   factory :qs_with_page, parent: :question_sheet do

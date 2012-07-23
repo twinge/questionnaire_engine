@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module Qe::Concerns::Models::ReferenceSheet
   extend ActiveSupport::Concern
   include Qe::Concerns::Models::AnswerSheet

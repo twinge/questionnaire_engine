@@ -22,6 +22,5 @@ module Qe::Concerns::Presenters
     def request
       @controller.request
     end
-
   end
 end

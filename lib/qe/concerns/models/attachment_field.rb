@@ -1,8 +1,7 @@
-require 'active_support/concern'
-require 'qe/concerns/models/question'
-
 # AttachmentField
 # - a file upload question
+
+require 'qe/concerns/models/question'
 
 module Qe::Concerns::Models::AttachmentField
 	extend ActiveSupport::Concern

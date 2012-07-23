@@ -12,7 +12,7 @@ module Qe::Concerns::Controllers::AnswerPagesController
 
   def edit
     @elements = @presenter.questions_for_page(params[:id]).elements
-    @page = Page.find(params[:id]) || Page.find_by_number(1)
+    @page = Qe::Page.find(params[:id]) || Page.find_by_number(1)
     
     render :partial => 'qe/answer_page', :locals => { :show_first => nil }
   end
@@ -20,7 +20,7 @@ module Qe::Concerns::Controllers::AnswerPagesController
   # validate and save captured data for a given page
   # PUT /answer_sheets/1/pages/1
   def update
-    @page = Page.find(params[:id])
+    @page = Qe::Page.find(params[:id])
     questions = @presenter.all_questions_for_page(params[:id])
     questions.post(params[:answers], @answer_sheet)
     
@@ -47,10 +47,10 @@ module Qe::Concerns::Controllers::AnswerPagesController
   
   def save_file
     if params[:Filedata]
-      @page = Page.find(params[:id])
+      @page = Qe::Page.find(params[:id])
       @presenter.active_page = @page
-      question = Element.find(params[:question_id])
-      answer = Answer.find(:first, :conditions => {:answer_sheet_id => @answer_sheet.id, :question_id => question.id})
+      question = Qe::Element.find(params[:question_id])
+      answer = Qe::Answer.find(:first, :conditions => {:answer_sheet_id => @answer_sheet.id, :question_id => question.id})
       question.answers = [answer] if answer
 
       answer = question.save_file(@answer_sheet, params[:Filedata])
@@ -72,7 +72,7 @@ module Qe::Concerns::Controllers::AnswerPagesController
   
   def get_answer_sheet
     @answer_sheet = answer_sheet_type.find(params[:answer_sheet_id])
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
+    @presenter = Qe::AnswerPagesPresenter.new(self, @answer_sheet, params[:a])
   end
 
   def answer_sheet_type

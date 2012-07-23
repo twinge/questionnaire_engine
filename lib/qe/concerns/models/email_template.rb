@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module Qe::Concerns::Models::EmailTemplate
 	extend ActiveSupport::Concern	  
 

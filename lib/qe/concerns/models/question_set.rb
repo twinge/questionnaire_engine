@@ -1,6 +1,5 @@
 # QuestionSet
 # represents a group of elements, with their answers
-require 'active_support/concern'
 
 module Qe::Concerns::Models::QuestionSet
   extend ActiveSupport::Concern  
@@ -50,7 +49,7 @@ module Qe::Concerns::Models::QuestionSet
   end
   
   def save
-    AnswerSheet.transaction do
+    Qe::AnswerSheet.transaction do
       @questions.each do |question|
         question.save_response(@answer_sheet)
       end

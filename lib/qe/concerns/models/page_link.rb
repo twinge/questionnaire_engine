@@ -1,6 +1,5 @@
-require 'active_support/concern'
-
 # represents a link to a page for the page_list sidebar or next page links
+
 module Qe::Concerns::Models::PageLink
 	extend ActiveSupport::Concern	
 
@@ -15,5 +14,4 @@ module Qe::Concerns::Models::PageLink
     @dom_id = dom_id
     @page = page
   end
-  	    
 end

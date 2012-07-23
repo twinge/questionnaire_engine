@@ -8,12 +8,10 @@
 # :required     - is this question itself required or optional?
 # :content      - choices (one per line) for choice field
 
-require 'active_support/concern'
 require 'qe/concerns/models/element'
 
 module Qe::Concerns::Models::Question
   extend ActiveSupport::Concern
-  
   include Qe::Concerns::Models::Element
 
   included do
@@ -22,7 +20,7 @@ module Qe::Concerns::Models::Question
     has_many :dependents, :foreign_key => "trigger_id", :dependent => :nullify
     has_many :sheet_answers, :foreign_key => "question_id", :dependent => :destroy
 
-    belongs_to :related_question_sheet, :class_name => "QuestionSheet", :foreign_key => "related_question_sheet_id"
+    belongs_to :related_question_sheet, :class_name => "Qe::QuestionSheet", :foreign_key => "related_question_sheet_id"
     
     # validates_inclusion_of :required, :in => [false, true]
     
@@ -41,6 +39,7 @@ module Qe::Concerns::Models::Question
     
     attr_accessor :answers
   end
+  
   # @answers = nil            # one or more answers in response to this question
   # @mark_for_destroy = nil   # when something is unchecked, there are less answers to the question than before
   
@@ -172,7 +171,7 @@ module Qe::Concerns::Models::Question
       # insert any new answers
       for value in values
         if @mark_for_destroy.empty?
-          answer = Answer.new(:question_id => self.id)
+          answer = Qe::Answer.new(:question_id => self.id)
         else
           # re-use marked answers (an update vs. a delete+insert)
           answer = @mark_for_destroy.pop
@@ -228,5 +227,4 @@ module Qe::Concerns::Models::Question
   def required?(answer_sheet = nil)
     super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?('1', answer_sheet))
   end
-
 end

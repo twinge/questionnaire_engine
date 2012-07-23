@@ -1,10 +1,8 @@
-require 'active_support/concern'
-
 module Qe::Concerns::Models::AnswerSheet
   extend ActiveSupport::Concern  
 
   included do
-    self.table_name = "#{self.table_name}"
+    # self.table_name = "#{self.table_name}"
 
     has_many :qe_answer_sheet_question_sheets
     has_many :qe_question_sheets,   :through => :qe_answer_sheet_question_sheets
@@ -27,7 +25,7 @@ module Qe::Concerns::Models::AnswerSheet
   end
   
   def pages
-    Page.where(:question_sheet_id => question_sheets.collect(&:id))
+    Qe::Page.where(:question_sheet_id => question_sheets.collect(&:id))
   end
   
   def completely_filled_out?
@@ -58,6 +56,5 @@ module Qe::Concerns::Models::AnswerSheet
   def collat_title() 
     "" 
   end
-
 end
 

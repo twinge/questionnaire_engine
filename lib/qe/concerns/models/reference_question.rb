@@ -1,7 +1,7 @@
 # ReferenceQuestion
 # - a question that provides a fields to specify a reference
-# require 'active_support/concern'
-# require 'qe/concerns/models/question'
+
+require 'qe/concerns/models/question'
 
 module Qe::Concerns::Models::ReferenceQuestion
   extend ActiveSupport::Concern  

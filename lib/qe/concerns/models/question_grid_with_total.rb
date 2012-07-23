@@ -4,7 +4,7 @@
 # :kind         - 'QuestionGridWithTotal' for single table inheritance (STI)
 # :content      - questions
 # :total_cols    - Which column(s) of the grid should be used for totals
-require 'active_support/concern'
+
 require 'qe/concerns/models/question_grid'
 
 module Qe::Concerns::Models::QuestionGridWithTotal
