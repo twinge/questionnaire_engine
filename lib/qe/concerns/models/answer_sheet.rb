@@ -2,7 +2,7 @@ module Qe::Concerns::Models::AnswerSheet
   extend ActiveSupport::Concern  
 
   included do
-    self.table_name = "#{self.table_name}"
+    # self.table_name = "#{self.table_name}"
 
     has_many :answer_sheet_question_sheets
     has_many :question_sheets,   :through => :answer_sheet_question_sheets

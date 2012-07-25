@@ -5,10 +5,21 @@ describe Qe::QuestionSheet do
 	before(:each) do
 		# @question_sheet = Qe::QuestionSheet.new_with_page
 		@question_sheet = FactoryGirl.create(:qs_with_page)
-		@question_sheet.save!
 		@page = @question_sheet.pages.first
 		@page.save!
 	end
+
+	describe "model relationships" do
+		it "answer_sheets" do
+			# create 2 answer sheets
+			@question_sheet.answer_sheets.create!
+			@question_sheet.answer_sheets.create!
+
+			# count related answer sheets
+			@question_sheet.answer_sheets.count.should == 2
+		end
+	end
+
 
 	it "ELEMENTS" do	
 		@page.elements.create!(:kind => 'Qe::TextField', :style => 'text_field', :label => 'elements label')

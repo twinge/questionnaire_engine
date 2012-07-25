@@ -10,7 +10,7 @@ describe Qe::AnswerSheet do
 		@as.answer_sheet_question_sheets.create!(:question_sheet => @qs)
 		@as.save!
 
-		# class variable
+		# quesiton
 		@question = @qs.pages.first.questions.first
 	end
 
@@ -47,7 +47,7 @@ describe Qe::AnswerSheet do
 		# the extent of the method
 		@as.reference?.should == false
 	end
-	it "COUNT_ANSWERS" do
+	xit "COUNT_ANSWERS" do
 
 	end
 	it "COUNT_QUESTIONS" do

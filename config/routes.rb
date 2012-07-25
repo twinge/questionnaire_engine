@@ -36,7 +36,7 @@ Qe::Engine.routes.draw do
   # form capture and review
   resources :reference_sheets
   
-  resources :answer_sheets do 
+  resources :answer_sheets, :except => :new do
     member do
       post :send_reference_invite
       post :submit

@@ -1,13 +1,13 @@
 # require 'active_support/conern'
-# require 'application_controller'
+require 'qe/concerns/controllers/application_controller'
 
 module Qe::Concerns::Controllers::AnswerSheetsController
   extend ActiveSupport::Concern
-  # include Qe::Concerns::Controllers::ApplicationController
+  include Qe::Concerns::Controllers::ApplicationController
   
-  def check_valid_user
-    true
-  end
+  # def check_valid_user
+  #   true
+  # end
 
   included do
     unloadable
@@ -18,10 +18,7 @@ module Qe::Concerns::Controllers::AnswerSheetsController
 
   # list existing answer sheets
   def index
-    
-    # TODO dynamically reference this
-    # @answer_sheets = answer_sheet_type.find(:all, :order => 'created_at')
-    @answer_sheets = Qe::AnswerSheet.find(:all, :order => 'created_at')
+    @answer_sheets = answer_sheet_type.find(:all, :order => 'created_at')
 
     # drop down of sheets to capture data for
     @question_sheets = Qe::QuestionSheet.find(:all, :order => 'label').map {|s| [s.label, s.id]}
@@ -30,7 +27,6 @@ module Qe::Concerns::Controllers::AnswerSheetsController
   def create
     @question_sheet = Qe::QuestionSheet.find(params[:question_sheet_id])
     @answer_sheet = @question_sheet.answer_sheets.create
-    
     
     redirect_to edit_answer_sheet_path(@answer_sheet)
   end
@@ -75,7 +71,7 @@ module Qe::Concerns::Controllers::AnswerSheetsController
   
   # protected 
     def answer_sheet_type
-      (params[:answer_sheet_type] || Qe::Questionnaire.answer_sheet_class || 'Qe::AnswerSheet').constantize
+      (params[:answer_sheet_type] || Qe.answer_sheet_class || 'Qe::AnswerSheet').constantize
     end
     
     def get_answer_sheet
