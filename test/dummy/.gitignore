@@ -1,0 +1,4 @@
+vendor/ruby
+db/migrate/*
+config/database.yml
+

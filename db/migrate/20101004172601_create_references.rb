@@ -1,6 +1,7 @@
 class CreateReferences < ActiveRecord::Migration
+  
   def self.up
-    create_table ReferenceSheet.table_name do |t|
+    create_table Qe::ReferenceSheet.table_name do |t| 
       t.integer :question_id, :applicant_answer_sheet_id
       t.datetime :email_sent_at
       t.string :relationship
@@ -15,11 +16,11 @@ class CreateReferences < ActiveRecord::Migration
     
       t.timestamps
     end
-    add_column Element.table_name, :related_question_sheet_id, :integer
+    add_column Qe::Element.table_name, :related_question_sheet_id, :integer
   end
 
   def self.down
-    remove_column Element.table_name, :related_question_sheet_id
-    drop_table ReferenceSheet.table_name
+    remove_column Qe::Element.table_name, :related_question_sheet_id
+    drop_table Qe::ReferenceSheet.table_name
   end
 end

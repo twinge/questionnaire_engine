@@ -1,0 +1,56 @@
+<% if @presenter.active_page %>
+  <% page_dom = @presenter.active_page.dom_id
+     next_js = load_page_js(@presenter.next_page) %>
+
+  <div id="<%= page_dom %>" class="answer-page" style="<% if show_first.nil? %>display: none;<% end %>">  <!-- this id is parsed by qe.public.js -->
+
+    <div class="page">
+      <h3 id='page-name'><%= @presenter.active_page.label %></h3>
+    
+      <% if @elements.length > 0 %>
+        <%= form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => "$.qe.pageHandler.savePage($('#sp_application_55716-page_331')); return false;", :multipart => true do %>
+          <ul class="questions" id="questions_list">
+            <% @elements.each do |element| %>
+              <li class="<%= element.class.to_s.downcase %>" id="element_<%= element.id %>">
+                <%= render 'answer_pages/element', :element => element %>
+              </li>
+            <% end %>
+          </ul>     
+      
+					<div class="savestatus">
+						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
+					</div>
+          <% if next_js.empty? %>
+            <div id="submit_message" class="validation-advice" style="display: none;"></div>
+  					<div>
+  	       	  <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
+              	  <button type="submit" onclick="page_handler.completeAll(); return false;" id="submit_button"><span>Submit</span></button>
+  	        </div>
+          <% else %>
+  					<div>
+  	          <button type="button" class="save_button" style="font-family: Arial; cursor: pointer;"><span>Save Now</span></button>
+  	          <button type="button" onclick="<%= next_js %>" style="font-family: Arial; cursor: pointer;"><span>Next >></span></button>
+  					</div>
+          <% end %>
+         
+        <% end %>
+  
+      <% else %>
+        
+          <div style="background: #ffc;">
+            <p>There are no questions on this page.</p>
+          </div>
+    
+      <% end %>
+    
+    </div>
+
+  </div>
+  <% if session[:attempted_submit] %>
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        $.qe.pageHandler.validatePage('<%= page_dom %>')
+      });
+    </script>
+  <% end %>
+<% end %>

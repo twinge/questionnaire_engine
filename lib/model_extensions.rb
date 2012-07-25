@@ -11,7 +11,6 @@ module ModelExtensions
   
     "#{prefix} #{max.next}"
   end
-  
   module_function :next_label
   
 end

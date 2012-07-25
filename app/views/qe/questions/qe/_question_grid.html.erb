@@ -1,0 +1,65 @@
+<% if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
+  <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
+    <% if question_grid.label.present? && !question_grid.hide_label? %>
+      <label class="desc gridname">
+				<%= raw question_grid.label %>
+    		<% if question_grid.required?(@answer_sheet) %><span class="required">required</span><% end %>
+			</label>
+    <% end %>
+    <div class="sub_q">
+      <!-- Create a sortable list for each grid on the page -->
+    	<ul class="questions" id="questions_list_<%= question_grid.id %>" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
+    	<%- if question_grid.elements.length > 0 %>
+        <%= render :partial => 'qe/admin/question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
+    	<%- else %>
+    		Grid
+    	<%- end %>
+       </ul>
+    </div>
+  </div>
+<%- else %>
+  <% if question_grid.label.present? && !question_grid.hide_label? %>
+    <label class="desc gridname"><%= raw question_grid.label %></label>
+  <% end %>
+  <% headers = question_grid.cols.to_s.split(';') %>
+  <% if headers.length > 1 %>
+  	<table class="grid <%= question_grid.css_class %>" id="<%= question_grid.css_id %>">
+	  <% if headers.detect {|h| h.strip.present?} %>
+    	<tr>
+    	<%- headers.each do |header| %>
+    		<th><%= raw header || '&nbsp;' %></th>
+    	<%- end %>
+    	</tr>
+    <% end %>
+    <% if question_grid.style == 'radio' %>
+    	<% question_grid.elements.each do |element| %>
+    	  <%= render :partial => 'qe/answer_pages/element', :object => element %>
+    	<% end %>
+    <% else %>
+    	<tr >
+    		<%- col_count = 0
+    			question_grid.elements.each do |element| %>
+    			<td id="element_<%= element.id %>" class="hidecell">
+    				<%# grid_el = @elements.to_a.find {|el| el.id == element.id} %>
+    				<%= render :partial => 'qe/answer_pages/element', :object => element, :locals => {:col => col_count} %>
+    			</td>
+    			<%- 	col_count += 1
+    					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 %></tr><tr><%- end %>
+    		<%-	end %>
+    		<%- while col_count < question_grid.num_cols do 
+    				col_count += 1%>
+    				<td>&nbsp;</td>
+    		<%- end unless col_count == 0%>
+    	</tr>
+    <% end %>
+  	</table>
+  <% else %>
+    <% if headers[0].to_s.strip.present? %>
+      <div class="header"><%= headers[0] %></div>
+    <% end %>
+    <% question_grid.elements.each do |element| %>
+      <div class="row" id="element_<%= element.id %>"><%= render :partial => 'qe/answer_pages/element', :object => element, :locals => {:in_grid => true} %></div>
+    <% end %>
+    <div class="clear"></div>
+  <% end %>
+<%- end %>

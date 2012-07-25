@@ -1,0 +1,38 @@
+<% reference = reference_question.response(@answer_sheet) %>
+<% reference ||= Qe::ReferenceSheet.new %>
+<% css_class = reference_question.required?(@answer_sheet) ? 'required' : '' %>
+<% email_css_class = reference_question.required?(@answer_sheet) ? 'required validate-email' : '' %>
+<% phone_css_class = reference_question.required?(@answer_sheet) ? 'required validate-phone' : '' %>
+<%#= hidden_field_tag "reference[#{reference.id}]", :class => reference_question.required? && !reference.email_sent? ? 'required' : '' %>
+<div id="<%= dom_id(reference_question) %>" class="reference_question">
+  <ul class="questions level1">
+  <li>
+    <label for="<%= "name_#{reference.id}" %>" class="desc">First Name</label>
+    <%= text_field_tag "reference[#{reference.id}][first_name]", reference.first_name, :class => "text #{css_class}", :id => "name_#{reference.id}", :readonly => !@answer_sheet.try(:can_change_references?), :disabled => !@answer_sheet.try(:can_change_references?) %>
+  </li>
+  <li>
+    <label for="<%= "name_#{reference.id}" %>" class="desc">Last Name</label>
+    <%= text_field_tag "reference[#{reference.id}][last_name]", reference.last_name, :class => "text #{css_class}", :id => "name_#{reference.id}", :readonly => !@answer_sheet.try(:can_change_references?), :disabled => !@answer_sheet.try(:can_change_references?) %>
+  </li>
+  <li>
+    <label for="<%= "name_#{reference.id}" %>" class="desc">Relationship to You</label>
+    <%= text_field_tag "reference[#{reference.id}][relationship]", reference.relationship, :class => "text #{css_class}", :id => "name_#{reference.id}", :readonly => !@answer_sheet.try(:can_change_references?), :disabled => !@answer_sheet.try(:can_change_references?) %>
+  </li>
+  <li>
+    <label for="<%= "email_#{reference.id}" %>" class="desc">E-mail</label>
+    <% if (!reference.email.blank?) %><div class="warningText">Please be aware that any changes to this email address after your reference has started filling out their form will cause their answers to be lost.</div><% end %>
+    <%= text_field_tag "reference[#{reference.id}][email]", reference.email, :class => "text #{email_css_class}", :id => "email_#{reference.id}", :readonly => !@answer_sheet.try(:can_change_references?), :disabled => !@answer_sheet.try(:can_change_references?) %>
+  </li>
+  <li>
+    <label for="<%= "phone_#{reference.id}" %>" class="desc">Phone</label>
+    <%= text_field_tag "reference[#{reference.id}][phone]", reference.phone, :class => "text #{phone_css_class}", :id => "phone_#{reference.id}", :readonly => !@answer_sheet.try(:can_change_references?), :disabled => !@answer_sheet.try(:can_change_references?) %>
+  </li>
+  <li><p>An invitation will be sent to this reference when you submit your application.  If you would
+  	like to get a head start, please feel free to click 'Send Email Invitation' below.<br/>
+  	  <em><strong>If you already submitted your application and have returned to update your reference information - you must click "Send Email Invitation" after you
+   have edited the information in order for your reference to receive another email. </strong></em></p></li>
+
+  <li><%= link_to('Send Email Invitation', @answer_sheet ? send_reference_invite_answer_sheet_path(@answer_sheet, :reference_id => reference.id) : '#', :class => 'reference_send_invite') %>
+  	<br/>Invitation last sent: <span id="ref_last_sent_<%= reference.id %>"><% if reference.email_sent_at.nil? %>Never<% else %><%= reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %><% end %></span></li>
+  </ul>
+</div>

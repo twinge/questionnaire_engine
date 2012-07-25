@@ -1,0 +1,3 @@
+[submodule "test/dummy/vendor/plugins/common_engine"]
+	path = test/dummy/vendor/plugins/common_engine
+	url = git@github.com:thelabtech/common_engine.git

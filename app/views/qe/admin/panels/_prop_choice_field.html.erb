@@ -1,0 +1,46 @@
+<%- options = [ OptionGroup.new('Choose One', [
+                    Option.new('drop-down', 'Drop Down'),
+                    Option.new('radio', 'Radio Buttons'),
+					          Option.new('rating', 'Rating'),
+					          Option.new('acceptance', 'Acceptance'),
+	                  Option.new('yes-no', 'Yes/No'),
+                    Option.new('country', 'Country')
+                  ]),
+                OptionGroup.new('Choose Many', [
+                    Option.new('checkbox', 'Checkboxes')
+                  ])
+              ]
+%>
+    <div class="field"><label for="element_style" class="desc">Style</label>
+        <%= select_tag 'element[style]', option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style),
+          :onchange => "if(['acceptance', 'yes-no'].include($F('element[style]'))) $('choices_section').hide(); else $('choices_section').show();" %></div>
+
+<%= render 'qe/admin/panels/common_fields', :f => f %>
+
+<div id="choices_section" style="display:<%= ['acceptance', 'yes-no'].include?(@element.style) ? 'none' : 'block' %>">
+  <h3>Choices<br/>
+  <% showXML = !@element.source.blank? %>
+  <a id="link-show-xml" style="font-size: 11px; font-weight: normal; display:<% if showXML %>none<%else%>block<%end%>" href="javascript:void(0);" onclick="$('xmlChoices').show();$('link-show-csv').show();$('link-show-xml').hide();$('csvChoices').hide();">Use External XML Feed</a>
+  <a id="link-show-csv" style="font-size: 11px; font-weight: normal; display:<% if showXML %>block<%else%>none<%end%>" href="javascript:void(0);" onclick="$('csvChoices').show();$('link-show-xml').show();$('link-show-csv').hide();$('xmlChoices').hide();">Manually Enter Choices</a></h3>
+
+  <div id="csvChoices" style="display:<% if showXML %>none<%else%>block<%end%>">
+      <p><label for="element_content" class="desc">Choices</label>
+          <%= f.text_area :content, :rows => 4, :cols => 25 %></p>
+  </div>
+
+  <p>
+    <%= f.check_box :hide_option_labels, :class => 'inlinecheck' %>
+    <label for="element_hide_option_labels" class="inline">Hide Option Labels</label>
+  </p>
+  
+  <div id="xmlChoices" style="display:<% if showXML %>block<%else%>none<%end%>">
+  	<p><label for="element_source" class="desc">XML Feed for Choices</label>
+  		<%= f.text_field :source %></p>
+		
+      <p><label for="element_text_xpath" class="desc">XPath to Choice Text</label>
+  		<%= f.text_field :text_xpath %></p>
+		
+      <p><label for="element_value_xpath" class="desc">XPath to Choice Value</label>
+  		<%= f.text_field :value_xpath %></p>
+  </div>
+</div>		

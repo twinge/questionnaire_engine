@@ -1,0 +1,13 @@
+<div class="page">
+  <h3 id='page-name'>
+    <%= link_to @page.label, edit_admin_question_sheet_page_path(@page.question_sheet_id, @page.id), :remote => true, :method => :get , :class => "ctl", :id => "link-page-name"  %>
+  </h3>
+  <% if @page.elements.length > 0 %>
+    <ul>
+    <ul class="questions" id="questions_list" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
+      <%= render :partial => 'qe/admin/question_pages/element', :collection => @page.elements, :locals => {:in_grid => false} %>
+    </ul>
+  <% else %>
+    <div style="background: #ffc;"><p>You don't have any questions on this page yet.</p></div>
+  <% end %>
+</div>

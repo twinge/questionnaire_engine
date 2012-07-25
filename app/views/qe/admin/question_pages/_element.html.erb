@@ -1,0 +1,18 @@
+<li class="element" id="element_<%= element.id %>">
+  <div class="controls">
+  	<ul>
+  		<li><%= link_to "edit", edit_admin_question_sheet_page_element_path(@page.question_sheet.id, @page.id, element.id), :remote => true, :method => :get, :class => "edit", :title => "Edit this element" %></li>
+  <% if in_grid %>		
+  		<li><%= link_to("remove", remove_from_grid_admin_question_sheet_page_element_path(@page.question_sheet.id, @page.id, element.id), :remote => true, :class => "remove", :title => "remove" )%></li>
+  <% end %>
+      <li><%= link_to "duplicate",  duplicate_admin_question_sheet_page_element_path(@page.question_sheet.id, @page.id, element.id), :remote => true, :method => :post, :class => "duplicate", :title => "Duplicate this element" %></li>
+      <li><%= link_to('Delete', admin_question_sheet_page_element_path( @page.question_sheet_id,  @page.id, element.id), :remote => true, :method => :delete, :class => "delete", :data => { :confirm => "Are you sure you want to remove this element from this form?" }, :title => "Permanently delete this item") %></li>
+  		<li><a href="#" class="handle" title="Reorder this element">drag</a></li>
+  	</ul>
+  </div>
+  <div class="q" id="element_<%= dom_id(element) %>">
+      <%= render 'qe/admin/question_pages/element_show', :element => element %>
+  </div>
+  <div class="q q_form" id="element_form_<%= dom_id(element) %>">
+  </div>
+</li>

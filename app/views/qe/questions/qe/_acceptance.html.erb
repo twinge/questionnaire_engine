@@ -1,0 +1,13 @@
+<% css_class = 'checkbox ' + acceptance.validation_class(@answer_sheet)
+   checked = acceptance.has_answer?('1', @answer_sheet)
+%>
+<%= check_box_tag "answers[#{acceptance.id}]", '1',
+       checked,
+      :id => dom_id(acceptance),
+      :class => css_class,
+      :disabled => @answer_sheet.frozen?&&!@answer_sheet.reference?,
+      :readonly => @answer_sheet.frozen?&&!@answer_sheet.reference? %>
+<label class="choice" for="<%= dom_id(acceptance) %>">
+  <%= raw acceptance.label %>
+</label>
+<%= hidden_field_tag "answers[#{acceptance.id}]", '', :id => '' %>
