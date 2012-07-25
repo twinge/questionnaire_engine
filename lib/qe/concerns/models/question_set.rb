@@ -56,7 +56,6 @@ module Qe::Concerns::Models::QuestionSet
     end
   end
   
-  
   private
   
   # convert posted response to a question into Array of values
@@ -78,7 +77,7 @@ module Qe::Concerns::Models::QuestionSet
     end
   
     # Hash may contain empty string to force post for no checkboxes
-#    values = values.reject {|r| r == ''}
+    # values = values.reject {|r| r == ''}
   end
   
 end

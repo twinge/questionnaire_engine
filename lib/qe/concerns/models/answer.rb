@@ -20,6 +20,8 @@ module Qe::Concerns::Models::Answer
       validates_length_of :short_value, :maximum => 255, :allow_nil => true  
       
       before_save :set_value_from_filename
+
+      attr_accessible :answer_sheet, :question, :value
     end
     
     def set(value, short_value = value)

@@ -1,4 +1,5 @@
-require 'active_support/concern'
+# require 'active_support/concern'
+
 # :trigger_id     - question that controls the state of the dependent pages/questions
 # :expresion      - a single expression for eval() by both Javascript and Ruby
 #                   i.e. "answer == 'yes'"

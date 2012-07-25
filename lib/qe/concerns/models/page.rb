@@ -8,10 +8,10 @@ module Qe::Concerns::Models::Page
     
     belongs_to :question_sheet
     has_many :page_elements, :dependent => :destroy, :order => :position
-    has_many :elements, :through => :page_elements, :order => PageElement.table_name + '.position'
-    has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'QuestionGridWithTotal'", :source => :element
-    has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Paragraph', 'Section', 'QuestionGrid', 'QuestionGridWithTotal')", :source => :element
-    has_many :question_grids, :through => :page_elements, :conditions => "kind = 'QuestionGrid'", :source => :element
+    has_many :elements, :through => :page_elements, :order => Qe::PageElement.table_name + '.position'
+    has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'Qe::QuestionGridWithTotal'", :source => :element
+    has_many :questions, :through => :page_elements, :conditions => "kind NOT IN('Qe::Paragraph', 'Qe::Section', 'Qe::QuestionGrid', 'Qe::QuestionGridWithTotal')", :source => :element
+    has_many :question_grids, :through => :page_elements, :conditions => "kind = 'Qe::QuestionGrid'", :source => :element
     # has_many :conditions, :class_name => "Condition", :foreign_key => "toggle_page_id",   # conditions associated with page as a whole
     #         :conditions => 'toggle_id is NULL', :dependent => :nullify
     
@@ -31,17 +31,29 @@ module Qe::Concerns::Models::Page
     # attribute rules
     attr_accessible :label, :number, :page, :id, :question_sheet_id, :no_cache, :hidden
 
+
+    private
+  
+    # next unused label with "Page" prefix
+    def set_default_label
+      self.label = Qe::ModelExtensions.next_label("Page", Qe::Page.untitled_labels(self.question_sheet)) if self.label.blank?
+    end
+    
+    def self.untitled_labels(sheet)
+      sheet ? sheet.pages.where("label like 'Page %'").map {|p| p.label} : []
+    end
   end
-    # a page is disabled if there is a condition, and that condition evaluates to false
-    # could set multiple conditions to influence this question, in which case all must be met
-    # def active?
-    #   # find first condition that doesn't pass (nil if all pass)
-    #   self.conditions.detect { |c| !c.evaluate? }.nil?  # true if all pass
-    # end
-    #   
-    # def question?
-    #   false
-    # end
+
+  # a page is disabled if there is a condition, and that condition evaluates to false
+  # could set multiple conditions to influence this question, in which case all must be met
+  # def active?
+  #   # find first condition that doesn't pass (nil if all pass)
+  #   self.conditions.detect { |c| !c.evaluate? }.nil?  # true if all pass
+  # end
+  #   
+  # def question?
+  #   false
+  # end
 
   def questions_before_position(position)
     self.elements.where(["#{Qe::PageElement.table_name}.position < ?", position])
@@ -80,19 +92,6 @@ module Qe::Concerns::Models::Page
   end
   
   def has_questions?
-    all_elements.any? {|e| e.is_a?(Question)}
+    all_elements.any? {|e| e.is_a?(Qe::Question)}
   end
-  
-  
-  # private
-  
-  # next unused label with "Page" prefix
-  def set_default_label
-    self.label = Qe::ModelExtensions.next_label("Page", Qe::Page.untitled_labels(self.question_sheet)) if self.label.blank?
-  end
-  
-  def self.untitled_labels(sheet)
-    sheet ? sheet.pages.where("label like 'Page %'").map {|p| p.label} : []
-  end
-
 end

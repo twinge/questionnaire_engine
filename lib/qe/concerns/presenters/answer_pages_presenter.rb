@@ -7,6 +7,8 @@
 # On the initial load, we need data for the page list (sidebar).
 # On later page loads, we need to determine the "next page" which basically requires the page list again.
 
+require 'qe/concerns/presenters/presenter'
+
 module Qe::Concerns::Presenters::AnswerPagesPresenter
   extend ActiveSupport::Concern
   include Qe::Concerns::Presenters::Presenter
@@ -28,13 +30,13 @@ module Qe::Concerns::Presenters::AnswerPagesPresenter
   def questions_for_page(page_id=:first)
     @active_page = page_id == :first ? pages.first : pages.detect {|p| p.id == page_id.to_i}
     @active_page ||= @active_answer_sheet.pages.visible.includes(:elements).find(page_id)
-    QuestionSet.new(@active_page ? @active_page.elements : [], @active_answer_sheet)
+    Qe::QuestionSet.new(@active_page ? @active_page.elements : [], @active_answer_sheet)
   end
     
   def all_questions_for_page(page_id=:first)
     @active_page = page_id == :first ? pages.first : pages.detect {|p| p.id == page_id.to_i}
     @active_page ||= @active_answer_sheet.pages.visible.find(page_id)
-    QuestionSet.new(@active_page ? @active_page.all_elements : [], @active_answer_sheet)
+    Qe::QuestionSet.new(@active_page ? @active_page.all_elements : [], @active_answer_sheet)
   end
   
   # title
@@ -82,7 +84,7 @@ module Qe::Concerns::Presenters::AnswerPagesPresenter
   end
 
   def new_page_link(answer_sheet, page, a = nil)
-    PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page), page) if page
+    Qe::PageLink.new(page.label, edit_answer_sheet_page_path(answer_sheet, page, :a => a), dom_page(answer_sheet, page), page) if page
   end
   
   protected

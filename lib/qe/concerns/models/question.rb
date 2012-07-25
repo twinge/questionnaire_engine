@@ -22,7 +22,7 @@ module Qe::Concerns::Models::Question
 
     belongs_to :related_question_sheet, :class_name => "Qe::QuestionSheet", :foreign_key => "related_question_sheet_id"
     
-    # validates_inclusion_of :required, :in => [false, true]
+    validates_inclusion_of :required, :in => [false, true]
     
     validates_format_of :slug, :with => /^[a-z_][a-z0-9_]*$/, 
       :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? },
@@ -184,7 +184,7 @@ module Qe::Concerns::Models::Question
   
   def save_file(answer_sheet, file)
     @answers.collect(&:destroy) if @answers
-    answer = Answer.create!(:question_id => self.id, :answer_sheet_id => answer_sheet.id, :attachment => file)
+    answer = Qe::Answer.create!(:question_id => self.id, :answer_sheet_id => answer_sheet.id, :attachment => file)
   end
   
   # save this question's @answers to database
@@ -214,7 +214,7 @@ module Qe::Concerns::Models::Question
     if answer_sheet.present?
       answers = responses(answer_sheet)
     else
-      answers = Answer.where(:question_id => self.id)
+      answers = Qe::Answer.where(:question_id => self.id)
     end
     return false if answers.length == 0
     answers.each do |answer|   # loop through Answers

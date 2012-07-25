@@ -1,17 +1,17 @@
 <h1>Questionnaires</h1>
 
-<% form_tag answer_sheets_path() do %>
-  <%= select_tag("question_sheet_id", options_for_select(@question_sheets)) %>
+<% form_tag qe.answer_sheets_path do %>
+  <%= select_tag("qe/question_sheet_id", options_for_select(@question_sheets)) %>
   <%= submit_tag("Capture") %>
 <% end %>
 
 <table cellspacing="0" class="list"> 
-<% for answer_sheet in @answer_sheets %>
-  <tr>
-    <td><%= link_to answer_sheet.question_sheet.label, edit_answer_sheet_path(answer_sheet) %></td>
-    <td><%= link_to 'Review', answer_sheet_path(answer_sheet), :method => :get %></td>
-  </tr>
-<% end %>
+	<% @answer_sheets.each do |answer_sheet| %>
+	  <tr>
+	    <td><%= link_to answer_sheet.question_sheet.label, qe.edit_answer_sheet_path(answer_sheet) %></td>
+	    <td><%= link_to 'Review', qe.answer_sheet_path(answer_sheet.id), :method => :get %></td>
+	  </tr>
+	<% end %>
 </table>
 
 <br />

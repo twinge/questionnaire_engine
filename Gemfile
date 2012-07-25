@@ -17,6 +17,7 @@ group :development do
 	gem 'guard-rails'
 	gem 'rb-fsevent'
 	gem 'factory_girl_rails'
+	gem 'database_cleaner'
 
 	gem 'yard'
 end

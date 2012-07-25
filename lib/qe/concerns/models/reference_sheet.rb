@@ -46,13 +46,13 @@ module Qe::Concerns::Models::ReferenceSheet
   def proc_method
 
     # state :completed, :enter => Proc.new {|ref|
-    #                               ref.submitted_at = Time.now
+    #                               ref.submitted_at = Time.current
     #                               # SpReferenceMailer.deliver_completed(ref)
     #                               # SpReferenceMailer.deliver_completed_confirmation(ref)
     #                               ref.applicant_answer_sheet.complete(ref)
     #                             }
 
-    submitted_at = Time.now
+    submitted_at = Time.current
     # SpReferenceMailer.deliver_completed(ref)
     # SpReferenceMailer.deliver_completed_confirmation(ref)
     ref.applicant_answer_sheet.completed(ref)
@@ -63,7 +63,7 @@ module Qe::Concerns::Models::ReferenceSheet
   # alias_method :applicant, :applicant_answer_sheet
   
   def generate_access_key
-    self.access_key = Digest::MD5.hexdigest(email + Time.now.to_s)
+    self.access_key = Digest::MD5.hexdigest(email + Time.current.to_s)
   end
   
   def frozen?
@@ -78,7 +78,7 @@ module Qe::Concerns::Models::ReferenceSheet
     
     application = self.applicant_answer_sheet
     
-    Notifier.deliver_notification(self.email,
+    Qe::Notifier.deliver_notification(self.email,
                                   application.email, 
                                   "Reference Invite", 
                                   {'reference_full_name' => self.name, 
@@ -87,8 +87,8 @@ module Qe::Concerns::Models::ReferenceSheet
                                    'applicant_home_phone' => application.phone, 
                                    'reference_url' => edit_reference_sheet_url(self, :a => self.access_key, :host => ActionMailer::Base.default_url_options[:host])})
     # Send notification to applicant
-    Notifier.deliver_notification(applicant_answer_sheet.email, # RECIPIENTS
-                                  Questionnaire.from_email, # FROM
+    Qe::Notifier.deliver_notification(applicant_answer_sheet.email, # RECIPIENTS
+                                  Qe.from_email, # FROM
                                   "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
                                   {'applicant_full_name' => applicant_answer_sheet.name,
                                    'reference_full_name' => self.name,
@@ -140,8 +140,8 @@ module Qe::Concerns::Models::ReferenceSheet
   
   def notify_reference_of_deletion
     if email.present?
-      Notifier.deliver_notification(email,
-                            Questionnaire.from_email, 
+      Qe::Notifier.deliver_notification(email,
+                            Qe.from_email, 
                             "Reference Deleted", 
                             {'reference_full_name' => self.name, 
                              'applicant_full_name' => applicant_answer_sheet.name})

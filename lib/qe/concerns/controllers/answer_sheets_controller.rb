@@ -73,10 +73,10 @@ module Qe::Concerns::Controllers::AnswerSheetsController
     redirect_to root_path
   end
   
-  protected 
-    # def answer_sheet_type
-    #   (params[:answer_sheet_type] || Qe::Questionnaire.answer_sheet_class || 'Qe::AnswerSheet').constantize
-    # end
+  # protected 
+    def answer_sheet_type
+      (params[:answer_sheet_type] || Qe::Questionnaire.answer_sheet_class || 'Qe::AnswerSheet').constantize
+    end
     
     def get_answer_sheet
       @answer_sheet = answer_sheet_type.find(params[:id])

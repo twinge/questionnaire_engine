@@ -1,15 +1,16 @@
 # QuestionSheet represents a particular form
 
 require 'qe/model_extensions'
+require 'qe/concerns/models/question'
 
 module Qe::Concerns::Models::QuestionSheet
   extend ActiveSupport::Concern
-  
+
   included do
     # self.table_name = "#{self.table_name}"
     
     has_many :pages, :class_name => Qe::Page, :dependent => :destroy, :order => 'number'
-    has_many :elements, :class_name => Qe::Element
+    has_many :elements, :class_name => Qe::Element, :through => Qe::PageElement
     has_many :questions, :class_name => Qe::Question
     has_many :answer_sheets, :class_name => Qe::AnswerSheet
     
@@ -22,20 +23,17 @@ module Qe::Concerns::Models::QuestionSheet
     
     before_destroy :check_for_answers
 
-    # TODO should this be attr_accessible?
+    # TODO engineer the accessible attribute securities
     attr_accessible :label, :number, :archived, :fake_deleted
 
-    # Instantiates new QuestionSheet with associated Page.
+    # Creates a new QuestionSheet a Page already attached.
     def self.new_with_page
       question_sheet = self.new(:label => next_label)
       question_sheet.pages.build(:label => 'Page 1', :number => 1)
       question_sheet
     end
 
-    # Instantiates new QuestionSheet and copies over attributes.
-    # Page(s) get duplicated.
-    # Question elements get associated.
-    # Non-question elements get cloned
+    # Clones QuestionSheet recursivelly.
     def duplicate
 
       # set id to nil for save (ActiveRecord handles id value)
@@ -49,34 +47,20 @@ module Qe::Concerns::Models::QuestionSheet
       end
       new_sheet
     end
-  
-    # get all questions for pages of a question_sheet object
-    # OLD VERSION, INCORRECT. create a new form with a page already attached
-    def questions
-      ret_val = []
-      pages.each do |p|
-        p.elements.each do |e|
-          ret_val << e if e.is_a?(Question)
-          if e.respond_to?(:questions)
-            ret_val += e.questions
-          end
-        end
-      end
-      ret_val
-    end
 
+    # Get all the elements of a QuesitonSheet
     def elements
       pages.collect(&:elements).flatten
     end
 
     private
 
-    # next unused label with "Untitled form" prefix
+    # Next unused label with "Untitled form" prefix
     def self.next_label
       Qe::ModelExtensions.next_label("Untitled form", untitled_labels)
     end
 
-    # returns a list of existing Untitled forms
+    # Returns a list of existing Untitled forms
     # (having a separate method makes it easy to mock in the spec)
     def self.untitled_labels
       Qe::QuestionSheet.find(:all, :conditions => %{label like 'Untitled form%'}).map {|s| s.label}

@@ -6,8 +6,9 @@ FactoryGirl.define do
 
   factory :qs_with_page, parent: :question_sheet do
   	after :create do |qs|
-  		FactoryGirl.create(:page, question_sheet: qs)
-  		# FactoryGirl.create(:element, question_sheet: qs)
+  		page = FactoryGirl.create(:page, question_sheet: qs)
+      element = FactoryGirl.create(:element)
+      FactoryGirl.create(:page_element, element: element, page: page)
   	end
   end
 end

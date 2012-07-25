@@ -1,4 +1,4 @@
-<%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
+<% if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
     <% if question_grid.label.present? && !question_grid.hide_label? %>
       <label class="desc gridname">

@@ -74,13 +74,14 @@ module Qe::Concerns::Models::Element
                     :element
   
 
-      # HUMANIZED_ATTRIBUTES = {
-      #   :slug => "Variable"
-      # }
-      #   
-      # def self.human_attrib_name(attr)
-      #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
-      # end
+    # HUMANIZED_ATTRIBUTES = {
+    #   :slug => "Variable"
+    # }
+    #   
+    # def self.human_attrib_name(attr)
+    #   HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+    # end
+  
       
     def has_response?(answer_sheet = nil)
       false
