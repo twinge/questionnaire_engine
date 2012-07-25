@@ -17,10 +17,12 @@ group :development do
 	gem 'guard-rails'
 	gem 'rb-fsevent'
 	gem 'factory_girl_rails'
+
+	gem 'yard'
 end
 
 # gems needed for common_engine
-# see gitmodules
+# see gitmodules, IE
 ##   git submodule init
 ##   git submodule update
 gem 'paperclip'
