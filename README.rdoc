@@ -1,17 +1,15 @@
-{<img src="https://secure.travis-ci.org/thelabtech/questionnaire.png?branch=activesupport" alt="Build Status" />}[https://secure.travis-ci.org/thelabtech/questionnaire]
+{<img src="https://secure.travis-ci.org/westonplatter/questionnaire_engine.png?branch=engine" alt="Build Status" />}[https://secure.travis-ci.org/westonplatter/questionnaire_engine]
 
-= Questionnaire (Engine)  
+= Questionnaire Engine  
   
-A mountable Rails Engine to handle question/answer interaction. Based on the original rails plugin, {quesitonnaire_engine}[https://github.com/twinge/questionnaire_engine] by {@twinge}[https://github.com/twinge].
-  
-  
+A mountable Rails Engine to handle question/answer interaction.
+
 == Development  
 
 === Contributing
   
-Spot an issue? Have an idea? Go for it. Create a branch, write the code, include appropriate tests, and put in a pull request. 
+Spot an issue? Have an idea? Go for it. Seriously! Create a branch, write the code, include appropriate tests, and put in a pull request. 
   
-
 === Testing
   
 The project uses RSpec + Capybara for testing.  
