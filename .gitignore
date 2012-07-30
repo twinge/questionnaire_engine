@@ -11,3 +11,4 @@ test/dummy/db/vendor/ruby
 *.gem
 doc/*
 rdoc/*
+vendor/ruby

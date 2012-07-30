@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dummy</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+	<%= image_tag("qe/status.gif") %>
+
+<%= yield %>
+
+<br><br><br><br><br><br><br>
+<%= link_to qe.admin_question_sheets_path %>
+<br><br><br><br><br><br><br>
+
+</body>
+</html>

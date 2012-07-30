@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    questionnaire (0.0.2)
+    questionnaire_engine (0.0.2)
       aasm
       ckeditor (= 3.7.1)
       dynamic_form
@@ -189,7 +189,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   paperclip
-  questionnaire!
+  questionnaire_engine!
   rails (= 3.2.6)
   rails-footnotes (>= 3.7.5.rc4)
   rb-fsevent
