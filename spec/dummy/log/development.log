@@ -4624,3 +4624,175 @@ Served asset /application.js - 200 OK (8ms)
 
 Started GET "/assets/qe/status.gif" for 127.0.0.1 at 2012-07-30 10:40:58 -0400
 Served asset /qe/status.gif - 200 OK (2ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (15.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (21.8ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to QeInitial (20120806203516)
+  [1m[35m (7.8ms)[0m  CREATE TABLE `pr_question_sheets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `label` varchar(60) NOT NULL) ENGINE=InnoDB
+  [1m[36m (14.1ms)[0m  [1mCREATE TABLE `pr_elements` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_sheet_id` int(11) NOT NULL, `page_id` int(11) NOT NULL, `kind` varchar(40) NOT NULL, `style` varchar(40), `label` varchar(255), `content` text, `required` tinyint(1), `slug` varchar(36), `position` int(11), `object_name` varchar(255), `attribute_name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (8.5ms)[0m  CREATE TABLE `pr_pages` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_sheet_id` int(11) NOT NULL, `label` varchar(60) NOT NULL, `number` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (10.3ms)[0m  [1mCREATE INDEX `index_pr_elements_on_slug` ON `pr_elements` (`slug`)[0m
+  [1m[35m (10.9ms)[0m  CREATE INDEX `index_pr_elements_on_question_sheet_id_and_position_and_page_id` ON `pr_elements` (`question_sheet_id`, `position`, `page_id`)
+  [1m[36m (15.7ms)[0m  [1mCREATE TABLE `pr_answer_sheets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_sheet_id` int(11) NOT NULL, `completed_at` datetime, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (10.1ms)[0m  CREATE TABLE `pr_answers` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `answer_sheet_id` int(11) NOT NULL, `question_id` int(11) NOT NULL, `value` text, `short_value` varchar(255)) ENGINE=InnoDB
+  [1m[36m (16.4ms)[0m  [1mCREATE INDEX `index_pr_answers_on_short_value` ON `pr_answers` (`short_value`)[0m
+  [1m[35m (12.9ms)[0m  CREATE TABLE `pr_conditions` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_sheet_id` int(11) NOT NULL, `trigger_id` int(11) NOT NULL, `expression` varchar(255) NOT NULL, `toggle_page_id` int(11) NOT NULL, `toggle_id` int(11)) ENGINE=InnoDB
+  [1m[36m (15.4ms)[0m  [1mALTER TABLE `pr_elements` ADD `source` varchar(255)[0m
+  [1m[35m (9.1ms)[0m  ALTER TABLE `pr_elements` ADD `value_xpath` varchar(255)
+  [1m[36m (8.7ms)[0m  [1mALTER TABLE `pr_elements` ADD `text_xpath` varchar(255)[0m
+  [1m[35m (10.2ms)[0m  ALTER TABLE `pr_elements` ADD `question_grid_id` int(11)
+  [1m[36m (24.6ms)[0m  [1mALTER TABLE `pr_elements` ADD `cols` varchar(255)[0m
+  [1m[35m (24.3ms)[0m  ALTER TABLE `pr_elements` ADD `no_cache` tinyint(1) DEFAULT 0
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203516')[0m
+Migrating to AddIsConfidentialToElement (20120806203517)
+  [1m[35m (27.9ms)[0m  ALTER TABLE `pr_elements` ADD `is_confidential` tinyint(1)
+  [1m[36m (3.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203517')[0m
+Migrating to AddHiddenToPage (20120806203518)
+  [1m[35m (28.0ms)[0m  ALTER TABLE `pr_pages` ADD `hidden` tinyint(1) DEFAULT 0
+  [1m[36m (23.0ms)[0m  [1mALTER TABLE `pr_pages` CHANGE `label` `label` varchar(100) NOT NULL[0m
+  [1m[35m (2.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203518')
+Migrating to AddAttachmentFieldsToAnswer (20120806203519)
+  [1m[36m (27.8ms)[0m  [1mALTER TABLE `pr_answers` ADD `size` int(11)[0m
+  [1m[35m (8.0ms)[0m  ALTER TABLE `pr_answers` ADD `content_type` varchar(255)
+  [1m[36m (10.9ms)[0m  [1mALTER TABLE `pr_answers` ADD `filename` varchar(255)[0m
+  [1m[35m (15.1ms)[0m  ALTER TABLE `pr_answers` ADD `height` int(11)
+  [1m[36m (8.3ms)[0m  [1mALTER TABLE `pr_answers` ADD `width` int(11)[0m
+  [1m[35m (8.7ms)[0m  ALTER TABLE `pr_answers` ADD `parent_id` int(11)
+  [1m[36m (9.8ms)[0m  [1mALTER TABLE `pr_answers` ADD `thumbnail` varchar(255)[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203519')
+Migrating to AddTotalColsToElement (20120806203520)
+  [1m[36m (12.4ms)[0m  [1mALTER TABLE `pr_elements` ADD `total_cols` varchar(255)[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203520')
+Migrating to AddCssIdAndCssClassToElement (20120806203521)
+  [1m[36m (9.8ms)[0m  [1mALTER TABLE `pr_elements` ADD `css_id` varchar(255)[0m
+  [1m[35m (10.6ms)[0m  ALTER TABLE `pr_elements` ADD `css_class` varchar(255)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203521')[0m
+Migrating to CreatePageElements (20120806203522)
+  [1m[35m (7.0ms)[0m  CREATE TABLE `pr_page_elements` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `page_id` int(11), `element_id` int(11), `position` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (9.3ms)[0m  [1mALTER TABLE `pr_elements` DROP `question_sheet_id`[0m
+  [1m[35mQe::Element Load (0.2ms)[0m  SELECT `pr_elements`.* FROM `pr_elements` 
+  [1m[36m (10.6ms)[0m  [1mALTER TABLE `pr_elements` DROP `page_id`[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203522')
+Migrating to CreateReferences (20120806203523)
+  [1m[36m (14.3ms)[0m  [1mCREATE TABLE `pr_reference_sheets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `question_id` int(11), `applicant_answer_sheet_id` int(11), `email_sent_at` datetime, `relationship` varchar(255), `title` varchar(255), `first_name` varchar(255), `last_name` varchar(255), `phone` varchar(255), `email` varchar(255), `status` varchar(255), `submitted_at` datetime, `access_key` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (10.7ms)[0m  ALTER TABLE `pr_elements` ADD `related_question_sheet_id` int(11)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203523')[0m
+Migrating to CreateAnswerSheetQuestionSheets (20120806203524)
+  [1m[35m (9.6ms)[0m  CREATE TABLE `pr_answer_sheet_question_sheets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `answer_sheet_id` int(11), `question_sheet_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203524')[0m
+Migrating to AddConditionalIdToElement (20120806203525)
+  [1m[35m (11.0ms)[0m  ALTER TABLE `pr_elements` ADD `conditional_id` int(11)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203525')[0m
+Migrating to AddArchivedToQuestionSheet (20120806203526)
+  [1m[35m (9.4ms)[0m  ALTER TABLE `pr_question_sheets` ADD `archived` tinyint(1) DEFAULT 0
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203526')[0m
+Migrating to AddIndexesToAnswers (20120806203527)
+  [1m[35m (19.6ms)[0m  CREATE INDEX `index_pr_answers_on_answer_sheet_id` ON `pr_answers` (`answer_sheet_id`)
+  [1m[36m (15.7ms)[0m  [1mCREATE INDEX `index_pr_answers_on_question_id` ON `pr_answers` (`question_id`)[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203527')
+Migrating to AddTooltipToElement (20120806203528)
+  [1m[36m (12.7ms)[0m  [1mALTER TABLE `pr_elements` ADD `tooltip` text[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203528')
+Migrating to HideLabelOnElement (20120806203529)
+  [1m[36m (11.2ms)[0m  [1mALTER TABLE `pr_elements` ADD `hide_label` tinyint(1) DEFAULT 0[0m
+  [1m[35m (9.1ms)[0m  ALTER TABLE `pr_elements` ADD `hide_option_labels` tinyint(1) DEFAULT 0
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203529')[0m
+Migrating to AddIndexToAnswerSheetQuestionSheets (20120806203530)
+  [1m[35m (13.0ms)[0m  CREATE INDEX `index_pr_answer_sheet_question_sheets_on_answer_sheet_id` ON `pr_answer_sheet_question_sheets` (`answer_sheet_id`)
+  [1m[36m (12.2ms)[0m  [1mCREATE INDEX `index_pr_answer_sheet_question_sheets_on_question_sheet_id` ON `pr_answer_sheet_question_sheets` (`question_sheet_id`)[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203530')
+Migrating to CreateEmailTemplates (20120806203531)
+  [1m[36m (15.5ms)[0m  [1mCREATE TABLE `pr_email_templates` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(1000) NOT NULL, `content` text, `enabled` tinyint(1), `subject` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (16.6ms)[0m  CREATE INDEX `index_pr_email_templates_on_name` ON `pr_email_templates` (`name`)
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203531')[0m
+Migrating to ChangeAnswerFromAttachmentFuToPaperclip (20120806203532)
+  [1m[35m (0.6ms)[0m  SHOW COLUMNS FROM `pr_answers` LIKE 'size'
+  [1m[36m (14.6ms)[0m  [1mALTER TABLE `pr_answers` CHANGE `size` `attachment_file_size` int(11) DEFAULT NULL[0m
+  [1m[35m (0.7ms)[0m  SHOW COLUMNS FROM `pr_answers` LIKE 'filename'
+  [1m[36m (13.8ms)[0m  [1mALTER TABLE `pr_answers` CHANGE `filename` `attachment_file_name` varchar(255) DEFAULT NULL[0m
+  [1m[35m (0.7ms)[0m  SHOW COLUMNS FROM `pr_answers` LIKE 'content_type'
+  [1m[36m (15.7ms)[0m  [1mALTER TABLE `pr_answers` CHANGE `content_type` `attachment_content_type` varchar(255) DEFAULT NULL[0m
+  [1m[35m (12.3ms)[0m  ALTER TABLE `pr_answers` ADD `attachment_updated_at` datetime
+  [1m[36m (8.6ms)[0m  [1mALTER TABLE `pr_answers` DROP `height`[0m
+  [1m[35m (10.9ms)[0m  ALTER TABLE `pr_answers` DROP `width`
+  [1m[36m (8.7ms)[0m  [1mALTER TABLE `pr_answers` DROP `parent_id`[0m
+  [1m[35m (15.3ms)[0m  ALTER TABLE `pr_answers` DROP `thumbnail`
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203532')[0m
+Migrating to AddMaxLengthToElement (20120806203533)
+  [1m[35m (9.0ms)[0m  ALTER TABLE `pr_elements` ADD `max_length` int(11)
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20120806203533')[0m
+Migrating to AddIndexToConditionalIdOnElements (20120806203534)
+  [1m[35m (14.6ms)[0m  CREATE INDEX `index_pr_elements_on_conditional_id` ON `pr_elements` (`conditional_id`)
+  [1m[36m (12.7ms)[0m  [1mCREATE INDEX `index_pr_elements_on_question_grid_id` ON `pr_elements` (`question_grid_id`)[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20120806203534')
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to QeInitial (20120806203516)
+Migrating to AddIsConfidentialToElement (20120806203517)
+Migrating to AddHiddenToPage (20120806203518)
+Migrating to AddAttachmentFieldsToAnswer (20120806203519)
+Migrating to AddTotalColsToElement (20120806203520)
+Migrating to AddCssIdAndCssClassToElement (20120806203521)
+Migrating to CreatePageElements (20120806203522)
+Migrating to CreateReferences (20120806203523)
+Migrating to CreateAnswerSheetQuestionSheets (20120806203524)
+Migrating to AddConditionalIdToElement (20120806203525)
+Migrating to AddArchivedToQuestionSheet (20120806203526)
+Migrating to AddIndexesToAnswers (20120806203527)
+Migrating to AddTooltipToElement (20120806203528)
+Migrating to HideLabelOnElement (20120806203529)
+Migrating to AddIndexToAnswerSheetQuestionSheets (20120806203530)
+Migrating to CreateEmailTemplates (20120806203531)
+Migrating to ChangeAnswerFromAttachmentFuToPaperclip (20120806203532)
+Migrating to AddMaxLengthToElement (20120806203533)
+Migrating to AddIndexToConditionalIdOnElements (20120806203534)
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Connecting to database specified by database.yml
+  [1m[36m (0.3ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to QeInitial (20120806203516)
+Migrating to AddIsConfidentialToElement (20120806203517)
+Migrating to AddHiddenToPage (20120806203518)
+Migrating to AddAttachmentFieldsToAnswer (20120806203519)
+Migrating to AddTotalColsToElement (20120806203520)
+Migrating to AddCssIdAndCssClassToElement (20120806203521)
+Migrating to CreatePageElements (20120806203522)
+Migrating to CreateReferences (20120806203523)
+Migrating to CreateAnswerSheetQuestionSheets (20120806203524)
+Migrating to AddConditionalIdToElement (20120806203525)
+Migrating to AddArchivedToQuestionSheet (20120806203526)
+Migrating to AddIndexesToAnswers (20120806203527)
+Migrating to AddTooltipToElement (20120806203528)
+Migrating to HideLabelOnElement (20120806203529)
+Migrating to AddIndexToAnswerSheetQuestionSheets (20120806203530)
+Migrating to CreateEmailTemplates (20120806203531)
+Migrating to ChangeAnswerFromAttachmentFuToPaperclip (20120806203532)
+Migrating to AddMaxLengthToElement (20120806203533)
+Migrating to AddIndexToConditionalIdOnElements (20120806203534)
+  [1m[35m (0.2ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+Connecting to database specified by database.yml
+  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to QeInitial (20120806203516)
+Migrating to AddIsConfidentialToElement (20120806203517)
+Migrating to AddHiddenToPage (20120806203518)
+Migrating to AddAttachmentFieldsToAnswer (20120806203519)
+Migrating to AddTotalColsToElement (20120806203520)
+Migrating to AddCssIdAndCssClassToElement (20120806203521)
+Migrating to CreatePageElements (20120806203522)
+Migrating to CreateReferences (20120806203523)
+Migrating to CreateAnswerSheetQuestionSheets (20120806203524)
+Migrating to AddConditionalIdToElement (20120806203525)
+Migrating to AddArchivedToQuestionSheet (20120806203526)
+Migrating to AddIndexesToAnswers (20120806203527)
+Migrating to AddTooltipToElement (20120806203528)
+Migrating to HideLabelOnElement (20120806203529)
+Migrating to AddIndexToAnswerSheetQuestionSheets (20120806203530)
+Migrating to CreateEmailTemplates (20120806203531)
+Migrating to ChangeAnswerFromAttachmentFuToPaperclip (20120806203532)
+Migrating to AddMaxLengthToElement (20120806203533)
+Migrating to AddIndexToConditionalIdOnElements (20120806203534)
+  [1m[35m (0.1ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 

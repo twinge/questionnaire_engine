@@ -16,9 +16,9 @@ module Qe::Concerns::Models::Question
 
   included do
     include ActionController::RecordIdentifier # dom_id
-    has_many :conditions, :foreign_key => "toggle_id", :dependent => :nullify
-    has_many :dependents, :foreign_key => "trigger_id", :dependent => :nullify
-    has_many :sheet_answers, :foreign_key => "question_id", :dependent => :destroy
+    has_many :conditions,     :foreign_key => "toggle_id",   :dependent => :nullify
+    has_many :dependents,     :foreign_key => "trigger_id",  :dependent => :nullify
+    has_many :sheet_answers,  :foreign_key => "question_id", :dependent => :destroy
 
     belongs_to :related_question_sheet, :class_name => "Qe::QuestionSheet", :foreign_key => "related_question_sheet_id"
     
@@ -38,7 +38,7 @@ module Qe::Concerns::Models::Question
     # however, "Choose Many" (checkbox) questions have multiple answers in a single response
     
     attr_accessor :answers
-  end
+  
   
   # @answers = nil            # one or more answers in response to this question
   # @mark_for_destroy = nil   # when something is unchecked, there are less answers to the question than before
@@ -225,6 +225,12 @@ module Qe::Concerns::Models::Question
   end
   
   def required?(answer_sheet = nil)
-    super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?('1', answer_sheet))
+    if self.required == true
+      return true
+    else
+      return false
+    end
+    # self.super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?('1', answer_sheet))
   end
+end
 end

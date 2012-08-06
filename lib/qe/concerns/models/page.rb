@@ -4,9 +4,8 @@ module Qe::Concerns::Models::Page
   extend ActiveSupport::Concern
 
   included do
-    # self.table_name = "#{self.table_name}"
+    belongs_to :question_sheet, :class_name => Qe::QuestionSheet
     
-    belongs_to :question_sheet
     has_many :page_elements, :dependent => :destroy, :order => :position
     has_many :elements, :through => :page_elements, :order => Qe::PageElement.table_name + '.position'
     has_many :question_grid_with_totals, :through => :page_elements, :conditions => "kind = 'Qe::QuestionGridWithTotal'", :source => :element
@@ -23,14 +22,14 @@ module Qe::Concerns::Models::Page
     before_validation :set_default_label, :on => :create    # Page x
     
     # validation
-    validates_presence_of :label, :number
-    validates_length_of :label, :maximum => 100, :allow_nil => true
-    validates_uniqueness_of :number, :scope => :question_sheet_id
-    validates_numericality_of :number, :only_integer => true
+    validates_presence_of     :label,   :number
+    validates_length_of       :label,   :maximum => 100, :allow_nil => true
+    validates_uniqueness_of   :number,  :scope => :question_sheet_id
+    validates_numericality_of :number,  :only_integer => true
     
     # attribute rules
-    attr_accessible :label, :number, :page, :id, :question_sheet_id, :no_cache, :hidden
-
+    attr_accessible :label, :number, :page, :id, :question_sheet_id, 
+                    :no_cache, :hidden, :updated_at, :created_at
 
     private
   
@@ -66,17 +65,27 @@ module Qe::Concerns::Models::Page
   
   # Called by QuestionSheet#duplicate for recursive copy action.
   def copy_to(question_sheet)
-    
     # sets id, the primary key, to nil. assigned on
     attributes = self.attributes
     attributes[:id] = nil
+    attributes[:updated_at] = nil
+    attributes[:created_at] = nil
+
+    # clear_unique_attributes = Hash.new(:updated_at => nil, :created_at => nil, :id => nil)      
+    # cloned_attributes = self.attributes.merge(clear_unique_attributes)
 
     new_page = Qe::Page.new(attributes)
     new_page.question_sheet_id = question_sheet.id
     new_page.save(:validate => false)
     self.elements.each do |element|
+      
       if !question_sheet.archived? && element.reuseable?
-        Qe::PageElement.create(:element => element, :page => new_page)
+        
+        set_time_nil = Hash.new(:created_at => nil, :updated_at => nil)
+        cloned_attributes = element.attributes.merge(set_time_nil)
+        element.attributes = cloned_attributes
+        Qe::PageElement.create!(:element => element, :page => new_page)
+      
       else
         element.duplicate(new_page)
       end

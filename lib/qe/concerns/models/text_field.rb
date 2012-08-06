@@ -10,7 +10,7 @@ module Qe::Concerns::Models::TextField
     if self.style == 'qe/essay'
       'qe/text_area_field'
     else
-      'qe/text_field'
+      'qe/text_field' 
     end
   end
   

@@ -4,19 +4,20 @@ class CreatePageElements < ActiveRecord::Migration
       t.integer :page_id, :element_id, :position
       t.timestamps
     end
-    add_column Qe::Element.table_name, :created_at, :datetime
-    add_column Qe::Element.table_name, :updated_at, :datetime
+    # add_column Qe::Element.table_name, :created_at, :datetime
+    # add_column Qe::Element.table_name, :updated_at, :datetime
     remove_column Qe::Element.table_name, :question_sheet_id
     Qe::Element.all.each do |e|
-      e.update_attributes({:created_at => Time.now, :updated_at => Time.now})
-      Qe::PageElement.create(:element_id => e.id, :page_id => e.page_id, :position => e.position, :updated_at => e.updated_at, :created_at => e.created_at)
+      # e.update_attributes({:created_at => Time.now, :updated_at => Time.now})
+      # Qe::PageElement.create(:element_id => e.id, :page_id => e.page_id, :position => e.position, :updated_at => e.updated_at, :created_at => e.created_at)
+      Qe::PageElement.create(:element_id => e.id, :page_id => e.page_id, :position => e.position)
     end
     remove_column Qe::Element.table_name, :page_id
   end
 
   def self.down
-    remove_column Qe::Element.table_name, :created_at
-    remove_column Qe::Element.table_name, :updated_at
+    # remove_column Qe::Element.table_name, :created_at
+    # remove_column Qe::Element.table_name, :updated_at
     add_column Qe::Element.table_name, :question_sheet_id,  :integer
     add_column Qe::Element.table_name, :page_id,            :integer
     drop_table Qe::PageElement.table_name

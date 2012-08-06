@@ -16,6 +16,7 @@ class QeInitial < ActiveRecord::Migration
       t.column :position,           :integer
       t.string :object_name,        :attribute_name
       
+      t.timestamps
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
       # t.foreign_key :page_id, Page, :id
@@ -26,6 +27,7 @@ class QeInitial < ActiveRecord::Migration
       t.column :label,              :string,  :limit => 60, :null => false    # page title
       t.column :number,             :integer                                  # page number (order)
       
+      t.timestamps
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
     end
@@ -37,9 +39,9 @@ class QeInitial < ActiveRecord::Migration
     
     create_table Qe::AnswerSheet.table_name do |t|
       t.column :question_sheet_id,  :integer,   :null => false
-      t.column :created_at,         :datetime,  :null => false
       t.column :completed_at,       :datetime,  :null => true        # null if incomplete
       
+      t.timestamps
       # foreign keys
       # t.foreign_key :question_sheet_id, QuestionSheet, :id
     end
@@ -50,6 +52,7 @@ class QeInitial < ActiveRecord::Migration
       t.column :value,            :text
       t.column :short_value,      :string,  :null => true,  :limit => 255   # indexed copy of :response
       
+      t.timestamps
       # foreign keys
       # t.foreign_key :answer_sheet_id, AnswerSheet, :id
       # t.foreign_key :question_id, Element, :id

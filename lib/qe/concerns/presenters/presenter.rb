@@ -1,26 +1,26 @@
-# based on http://blog.caboo.se/articles/2007/8/23/simple-presenters
-
 module Qe::Concerns::Presenters
   module Presenter
     extend ActiveSupport::Concern
     
-    include ActionView::Helpers::TagHelper # link_to
-    # include ActionView::Helpers::UrlHelper # url_for
-    include ActionController::UrlFor # named routes
-    include ActionController::RecordIdentifier # dom_id
-    # include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TagHelper      # link_to
+    include ActionView::Helpers::UrlHelper      # url_for
+    include ActionController::UrlFor            # named routes
+    include ActionController::RecordIdentifier  # dom_id
+    
     
     included do
+      include Qe::Engine.routes.url_helpers
+
       unloadable
       attr_accessor :controller # so we can be lazy
-    end
-
-    def initialize(controller)
-      @controller = controller
-    end
     
-    def request
-      @controller.request
+      def initialize(controller)
+        @controller = controller
+      end
+      
+      def request
+        @controller.request
+      end
     end
   end
 end

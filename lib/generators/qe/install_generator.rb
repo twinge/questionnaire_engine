@@ -69,6 +69,7 @@ module Qe
         puts "We added the following line to your application's config/routes.rb file:"
         puts " "
         puts "    mount Qe::Engine, :at => '/'"
+        puts " "
       end
     end
 
@@ -82,7 +83,8 @@ module Qe
         puts "*" * 75
         puts "We added the following line tou your applications javascripts file,"
         puts " "
-        puts "  //= require qe/application "
+        puts "  //= require qe/application"
+        puts " "
       end
     end
 
@@ -96,7 +98,8 @@ module Qe
         puts "*" * 75
         puts "We added the following line tou your applications stylesheets file,"
         puts " "
-        puts "  //= require qe/application "
+        puts "  //= require qe/application"
+        puts " "
       end
     end
 

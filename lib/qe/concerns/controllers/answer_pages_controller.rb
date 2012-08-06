@@ -14,7 +14,7 @@ module Qe::Concerns::Controllers::AnswerPagesController
     @elements = @presenter.questions_for_page(params[:id]).elements
     @page = Qe::Page.find(params[:id]) || Page.find_by_number(1)
     
-    render :partial => 'qe/answer_page', :locals => { :show_first => nil }
+    render :partial => 'answer_page', :locals => { :show_first => nil }
   end
 
   # validate and save captured data for a given page

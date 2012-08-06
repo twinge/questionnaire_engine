@@ -11,6 +11,8 @@ module Qe::Concerns::Models::AnswerSheet
 
     attr_accessible :question_sheets, :question_sheet, :question_sheet_id
 
+    attr_readonly :updated_at
+
   end
 
   def complete?
