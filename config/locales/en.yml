@@ -1,0 +1,5 @@
+en: 
+  time: 
+    formats: 
+      default: 
+      datetime: "%m/%d/%Y"

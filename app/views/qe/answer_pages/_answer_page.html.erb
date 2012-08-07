@@ -11,13 +11,11 @@
         <%= form_tag @presenter.active_page.save_path, :id => "#{page_dom}-form", :onsubmit => "$.qe.pageHandler.savePage($('#sp_application_55716-page_331')); return false;", :multipart => true do %>
           <ul class="questions" id="questions_list">
             <% @elements.each do |element| %>
-
               <li class="<%= element.class.to_s.downcase %>" id="element_<%= element.id %>">
                 <%= render :partial =>'element', :object => element %>
               </li>
             <% end %>
           </ul>     
-      
 					<div class="savestatus">
 						Last Saved: <span class="last-saved"><%= l(@answer_sheet.updated_at, :format => :datetime) %></span><%= spinner(page_dom) %>
 					</div>

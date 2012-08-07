@@ -40,9 +40,7 @@ describe "AnswerSheets" do
   describe "EDIT qe/answer_sheet" do
   	it "success" do
   		page = @qs.pages.first
-  		path = get qe.edit_answer_sheet_page_path(@as.id, page)
-  		
-      get path
+  		get qe.edit_answer_sheet_page_path(@as.id, page)
   		response.status.should == 200
   	end
   end

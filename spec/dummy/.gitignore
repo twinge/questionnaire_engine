@@ -3,3 +3,4 @@ db/migrate/*
 config/database.yml
 
 tmp/*
+log/*.log
