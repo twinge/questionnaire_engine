@@ -9,8 +9,7 @@ gem 'dynamic_form'
 gem 'state_machine'
 gem 'aasm'
 
-group :development do
-	gem 'rails-footnotes', '>= 3.7.5.rc4'
+group :development, :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'guard-rspec'
@@ -21,6 +20,8 @@ group :development do
 	gem 'launchy'
 
 	gem 'yard'
+	gem 'simplecov', :require => false
+	gem 'rails-footnotes', '>= 3.7.5.rc4'
 end
 
 # gems needed for common_engine
@@ -28,3 +29,5 @@ end
 ##   git submodule init
 ##   git submodule update
 gem 'paperclip'
+
+

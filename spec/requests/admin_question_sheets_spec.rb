@@ -1,23 +1,31 @@
 require 'spec_helper'
 
-describe "AdminQuestionSheets" do
-	before(:each) do
-		@qs = create(:qs_with_page)
-	end
-
-  describe "GET /admin_question_sheets" do
-    it "success" do
-      get qe.admin_question_sheets_path
-      response.status.should == 200
+describe Qe::Admin::QuestionSheetsController do
+  
+  describe 'simple non-AJAX CRUD operations' do
+    before(:each) do
+      visit qe.admin_question_sheets_path
+      click_link 'New Questionnaire'
     end
-
-    it "show admin_question_sheet" do
-    	get qe.new_admin_email_template_path
-    	response.status.should == 200
+    
+    it 'confirm new sheet' do    
+      visit qe.admin_question_sheets_path
+      within("#active") do
+        page.should have_content 'Untitled form 1'
+      end
     end
-
-    it "weston" do
-    	get qe.admin_email_templates_path
+    it 'delete' do
+      visit qe.admin_question_sheets_path
+      click_link 'Destroy'
+      page.should_not have_content 'Untitled form 1'
+    end
+    it 'archive' do
+      visit qe.admin_question_sheets_path
+      click_link 'Archive'
+      within("#inactive") do
+        page.should have_content 'Untitled form 1'
+      end
     end
   end
+
 end

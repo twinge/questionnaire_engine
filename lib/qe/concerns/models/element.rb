@@ -4,27 +4,24 @@ module Qe::Concerns::Models::Element
   extend ActiveSupport::Concern
 
   included do
-    # self.table_name = "#{self.table_name}"
     self.inheritance_column = :kind
 
     belongs_to :question_sheet
     belongs_to :question_grids, :foreign_key => "question_grid_id"
     belongs_to :choice_fields, :foreign_key => "conditional_id"
+    
     has_many :page_elements, :dependent => :destroy
     has_many :pages, :through => :page_elements
     
     # TODO rework with namespacing.
     scope :active, select("distinct(#{Qe.table_name_prefix}elements.id), #{Qe.table_name_prefix}elements.*").where(Qe::QuestionSheet.table_name + '.archived' => false).joins({:pages => :question_sheet})
 
-    validates_presence_of :kind, :style
-    # TODO uncomment this line
-    # validates_presence_of :label, :style, :on => :update
+    validates_presence_of :label, :style, :on => :update
     
     validates_length_of :kind, :style, :maximum => 40, :allow_nil => true
-    # TODO uncomment this line
-    # validates_length_of :label, :maximum => 255, :allow_nil => true
 
-    # TODO (added before put in gem form): This needs to get abstracted out to a CustomQuestion class in BOAT
+    # TODO (added before put in gem form): 
+    # This needs to get abstracted out to a CustomQuestion class in BOAT
     validates_inclusion_of :kind, :in => %w{
     Qe::Section 
     Qe::Paragraph 
@@ -121,10 +118,12 @@ module Qe::Concerns::Models::Element
     # copy an item and all it's children
     def duplicate(page, parent = nil)
 
+      # remove the id, so db table has only 1 primary key
       attributes = self.attributes
       attributes[:id] = nil
 
       new_element = self.class.new(attributes)
+
       case parent.class.to_s
                             when Qe::ChoiceField
                               new_element.conditional_id = parent.id

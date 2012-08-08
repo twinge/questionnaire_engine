@@ -7,7 +7,7 @@
 
   <%= link_to 'New Questionnaire', admin_question_sheets_path(), :method => :post, :class => "add-link" %>
   <br/>	
-  <table cellspacing="0" class="list"> 
+  <table cellspacing="0" class="list" id="active"> 
     <tr>
       <th>Active Question Sheets</th>
       <th colspan="3">&nbsp;</th>
@@ -23,7 +23,7 @@
   </table>
     
 	
-  <table cellspacing="0" class="list"> 
+  <table cellspacing="0" class="list" id="inactive"> 
     <tr>
       <th>Archived Question Sheets</th>
       <th>&nbsp;</th>

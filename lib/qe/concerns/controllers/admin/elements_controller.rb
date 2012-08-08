@@ -4,7 +4,6 @@ module Qe
   module Concerns
     module Controllers
       module ElementsController
-
         extend ActiveSupport::Concern
 
         included do
@@ -15,15 +14,7 @@ module Qe
           before_filter :get_page
         end
 
-        # GET /elements/1
-        def show
-          @element = Qe::Element.find(params[:id])
-
-          respond_to do |format|
-            format.js
-          end
-        end
-
+        # Edit the element.
         # GET /element/1/edit
         def edit
           @element = Qe::Element.find(params[:id])
@@ -39,6 +30,7 @@ module Qe
           end
         end
 
+        # Instantiate a new element (not saved to the database).
         # GET /elements/new
         def new
           @questions = "Qe::#{params[:element_type]}".constantize.active.order('label')
@@ -48,6 +40,7 @@ module Qe
           end
         end
 
+        # Ensures questionnaire does not contain the same question.
         def use_existing
           @element = Qe::Element.find(params[:id])
           # Don't put the same question on a questionnaire twice
@@ -58,6 +51,7 @@ module Qe
           render :create
         end
 
+        # Create a new element (saved to the database)
         # POST /elements
         def create
           @element = "Qe::#{params[:element_type]}".constantize.new(params[:element])
@@ -74,6 +68,7 @@ module Qe
           end
         end
 
+        # Update element
         # PUT /elements/1
         def update
           @element = Qe::Element.find(params[:id])
@@ -87,13 +82,16 @@ module Qe
           end
         end
 
+        # Delete an element.
+        # Also deletes the corresponding Qe::PageElement object 
         # DELETE /elements/1
-        # DELETE /elements/1.xml
         def destroy
           @element = Qe::Element.find(params[:id])
           # Start by removing the element from the page
           page_element = Qe::PageElement.where(:element_id => @element.id, :page_id => @page.id).first
           page_element.destroy if page_element
+
+          @element.destroy.inspect
           
           # If this element is not on any other pages, is not a question or has no answers, Destroy it
           if @element.reuseable? && (Qe::PageElement.where(:element_id => params[:id]).present? || @element.has_response?)
@@ -107,6 +105,7 @@ module Qe
           end
         end
 
+        # TODO describe method
         def reorder 
           # since we don't know the name of the list, just find the first param that is an array
           params.each_key do |key| 
@@ -137,9 +136,10 @@ module Qe
           end
         end
 
+        # TODO describe the method
         def drop
           element = Qe::Element.find(params[:draggable_element].split('_')[1])  # element being dropped
-          target = Qe::Element.find(params[:id])
+          target  = Qe::Element.find(params[:id])
           
           # TODO might need to revise due to namespacing
           case target.class.to_s
@@ -164,6 +164,7 @@ module Qe
           Qe::PageElement.where(:page_id => @page.id, :element_id => element.id).first.try(:destroy)
         end
 
+        # TODO describe method
         def remove_from_grid
           element = Qe::Element.find(params[:id])
           Qe::PageElement.create(:element_id => element.id, :page_id => @page.id) unless Qe::PageElement.where(:element_id => element.id, :page_id => @page.id).first
@@ -178,9 +179,21 @@ module Qe
           render :action => :drop
         end
 
+        # Duplicates the element; handles logic for nested elements.
+        # POST qe/admin/elements
         def duplicate
           element = Qe::Element.find(params[:id])
-          @element = element.duplicate(@page, element.question_grid || element.choice_field)
+
+          # this may not be a good idea. works in controller specs,
+          # might need to change this later.
+          if element.question_grid_id 
+            @element = element.duplicate(@page, element.question_grid)
+          elsif element.conditional_id
+            @element = element.duplicate(@page, element.choice_field_id)
+          else
+            @element = element.duplicate(@page)
+          end
+
           respond_to do |format|
             format.js 
           end
