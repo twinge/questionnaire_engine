@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806203534) do
+ActiveRecord::Schema.define(:version => 20101123130420) do
 
   create_table "pr_answer_sheet_question_sheets", :force => true do |t|
     t.integer  "answer_sheet_id"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20120806203534) do
     t.integer  "question_id",             :null => false
     t.text     "value"
     t.string   "short_value"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "attachment_file_size"
     t.string   "attachment_content_type"
     t.string   "attachment_file_name"

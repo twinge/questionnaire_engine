@@ -4,6 +4,10 @@
   
 A mountable Rails Engine to handle question/answer interaction.
 
+== Overview
+
+=== TODO: UML like picture + explanation of how the major pieces fit together.
+
 == Development  
 
 === Contributing
@@ -12,9 +16,9 @@ Spot an issue? Have an idea? Go for it. Seriously! Create a branch, write the co
   
 === Testing
   
-The project uses RSpec + Capybara for testing.  
+The project uses RSpec + Capybara for testing. Typical Rails tests are located in ````/spec```` as well as a dummy application.
   
-The test suite can set to run automatically using Guard-Rspec by running this while in the /test/dummy folder,
+The test suite can set to run automatically using Guard-Rspec by running this from the Questionnaire root directory.
   
     be guard 
 

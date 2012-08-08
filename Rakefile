@@ -20,24 +20,22 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
+APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
 load 'rails/tasks/engine.rake'
 
 Bundler::GemHelper.install_tasks
 
-require 'rake/testtask'
+require "rspec/core/rake_task" 
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+task :default => :rspec
+
+RSpec::Core::RakeTask.new(:rspec) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rspec_opts = ['-cfs --backtrace']
 end
 
-
-
 # ==============================================================================
-# custom, non-standard rake tasks
+# custom, non-standard development rake tasks
 
 require 'thor/actions'
 
@@ -61,7 +59,7 @@ task :clean => [:clean_drop_db, :clean_db_folder] do end
   desc "_clean :: rm db/schema.rb and db/migrate/*"
   task :clean_db_folder do
     gem_dir = File.dirname(__FILE__)
-    db_dir = gem_dir + "/test/dummy/db"
+    db_dir = gem_dir + "/spec/dummy/db"
     sh "rm -rf " + db_dir
     sh "mkdir " + db_dir
     sh "mkdir " + db_dir + "/migrate"
@@ -74,15 +72,15 @@ task :clean => [:clean_drop_db, :clean_db_folder] do end
     end
 
     # TODO code this
-    desc "_clean :: rm the Qe refs in test/dummy/app/assets"
+    desc "_clean :: rm the Qe refs in spec/dummy/app/assets"
     task :clean_assets do
       puts "TODO regex delete the Qe engine refs"
     end
 
 
-desc "install gem to test/dummy application "
+desc "install gem to spec/dummy application "
 task :ginstall do
-  dummy_dir = File.dirname(__FILE__) + "/test/dummy"
+  dummy_dir = File.dirname(__FILE__) + "/spec/dummy"
   cmd = "cd " + dummy_dir + " && bundle exec rails generate qe:install"
   sh cmd
   puts ">> QE ran installer"
