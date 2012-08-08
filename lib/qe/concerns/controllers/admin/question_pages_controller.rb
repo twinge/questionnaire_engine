@@ -19,7 +19,7 @@ module Qe
             before_filter :get_sheet
           end
 
-          # selecting a page
+          # Selects a page.
           # GET /pages/1
           def show
             @page = @question_sheet.pages.find(params[:id])
@@ -30,6 +30,7 @@ module Qe
             end
           end
 
+          # Returns @page for editing.
           # GET /pages/1/edit
           def edit
             @page = @question_sheet.pages.find(params[:id])
@@ -39,6 +40,7 @@ module Qe
             end
           end
 
+          # Creates @page.
           # POST /pages
           def create
             @page = @question_sheet.pages.build(:label => next_label, :number => @question_sheet.pages.length + 1)
@@ -53,11 +55,13 @@ module Qe
             end
           end
 
+          # Updates @page with params[:page] attributes.
           # PUT /pages/1
           def update
             @page = @question_sheet.pages.find(params[:id])
 
             respond_to do |format|
+              # TODO engineer attribute protection
               if @page.update_attributes(params[:page], :without_protection => true)
                 format.js
               else
@@ -66,6 +70,7 @@ module Qe
             end
           end
 
+          # Deletes page if the question sheet has more than 1 page.
           # DELETE /pages/1
           def destroy
             unless @question_sheet.pages.length <= 1
@@ -81,8 +86,8 @@ module Qe
             end
           end
           
-          # load panel all AJAX-like
-          # GET
+          # Load panel using AJAX functionality.
+          # GET /pages/:id/show_panel
           def show_panel
             @tab_name = params[:panel_name]
             @panel_name = params[:panel_name] == "properties" ? "prop_sheet" : params[:panel_name]
@@ -94,11 +99,13 @@ module Qe
             end
           end
           
+          # Reorders pages so according to 
+          # POST /pages/reorder
           def reorder 
             @question_sheet.pages.each do |page|
               if params['list-pages'].index(page.id.to_s)
-                page.number = params['list-pages'].index(page.id.to_s) + 1 
-                page.save!
+                page.number = params['list-pages'].index(page.id.to_s) + 1
+                page.save!(:validate => false)
                 @page = page
               end
             end

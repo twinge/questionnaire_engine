@@ -27,6 +27,7 @@ module Qe::Concerns::Models::Page
     validates_uniqueness_of   :number,  :scope => :question_sheet_id
     validates_numericality_of :number,  :only_integer => true
     
+    # TODO engineer attributes
     # attribute rules
     attr_accessible :label, :number, :page, :id, :question_sheet_id, 
                     :no_cache, :hidden, :updated_at, :created_at

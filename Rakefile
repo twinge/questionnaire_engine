@@ -31,8 +31,14 @@ task :default => :rspec
 
 RSpec::Core::RakeTask.new(:rspec) do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
-  spec.rspec_opts = ['-cfs --backtrace']
+  # spec.rspec_opts = ['-cfs --backtrace']
 end
+
+desc "runs simplecov report"
+task :cov do
+  # sh "COVERAGE=true rake"
+  sh 'bundle exec rake rspec COVERAGE=true'
+end 
 
 # ==============================================================================
 # custom, non-standard development rake tasks
