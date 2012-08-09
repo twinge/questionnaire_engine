@@ -21,7 +21,7 @@ module Qe::Concerns::Models::Answer
       
       before_save :set_value_from_filename
 
-      attr_accessible :answer_sheet, :question, :value
+      attr_accessible :answer_sheet, :question, :value, :question_id
     end
     
     def set(value, short_value = value)

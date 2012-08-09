@@ -193,7 +193,7 @@ module Qe::Concerns::Models::Question
     def save_response(answer_sheet)
       unless @answers.nil?
         for answer in @answers
-          if answer.is_a?(Answer)
+          if answer.is_a?(Qe::Answer)
             answer.answer_sheet_id = answer_sheet.id
             answer.save!
           end

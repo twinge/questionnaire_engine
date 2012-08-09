@@ -24,10 +24,9 @@ ActiveRecord::Schema.define(:version => 20101123130420) do
   add_index "pr_answer_sheet_question_sheets", ["question_sheet_id"], :name => "index_pr_answer_sheet_question_sheets_on_question_sheet_id"
 
   create_table "pr_answer_sheets", :force => true do |t|
-    t.integer  "question_sheet_id", :null => false
     t.datetime "completed_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "pr_answers", :force => true do |t|

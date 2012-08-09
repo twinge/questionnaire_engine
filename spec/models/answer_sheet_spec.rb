@@ -6,8 +6,7 @@ describe Qe::AnswerSheet do
 		@qs = FactoryGirl.create(:qs_with_page) and @qs.save!
 
 		# create answer_sheet_question_sheets object
-		@as = @qs.answer_sheets.create
-		@as.answer_sheet_question_sheets.create!(:question_sheet => @qs)
+		@as = @qs.answer_sheets.create!
 		@as.save!
 
 		# quesiton

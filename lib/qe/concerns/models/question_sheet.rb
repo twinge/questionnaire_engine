@@ -7,11 +7,13 @@ module Qe::Concerns::Models::QuestionSheet
   extend ActiveSupport::Concern
 
   included do
+    has_many :answer_sheet_question_sheets
     has_many :pages,      :class_name => Qe::Page, :dependent => :destroy, :order => 'number'
     has_many :elements,   :class_name => Qe::Element, :through => Qe::PageElement
     has_many :questions,  :class_name => Qe::Question
-    has_many :answer_sheets, :class_name => Qe::AnswerSheet
+    has_many :answer_sheets, :through => :answer_sheet_question_sheets
     
+
     scope :active, where(:archived => false)
     scope :archived, where(:archived => true)
     

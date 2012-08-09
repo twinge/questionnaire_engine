@@ -7,14 +7,17 @@ describe Qe::AnswerPagesPresenter do
 		@qs.save!
 
 		# create answer_sheet_question_sheets object
-		@as = @qs.answer_sheets.create
-		@as.answer_sheet_question_sheets.create!(:question_sheet => @qs)
+		@as = @qs.answer_sheets.create!
 		@as.save!
 
 		# quesiton
 		@question = @qs.pages.first.questions.first
 
 		# need a controller class
+	end
+
+	it 'true' do
+		@as.should_not == nil
 	end
 
 	xit "INITIALIZE" do

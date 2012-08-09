@@ -38,7 +38,7 @@ class QeInitial < ActiveRecord::Migration
     add_index Qe::Element.table_name, [:question_sheet_id, :position, :page_id], :unique => false
     
     create_table Qe::AnswerSheet.table_name do |t|
-      t.column :question_sheet_id,  :integer,   :null => false
+      # t.column :question_sheet_id,  :integer,   :null => false     # created has_many :through relationship
       t.column :completed_at,       :datetime,  :null => true        # null if incomplete
       
       t.timestamps

@@ -2,17 +2,14 @@ module Qe::Concerns::Models::AnswerSheet
   extend ActiveSupport::Concern  
 
   included do
-    # self.table_name = "#{self.table_name}"
-
     has_many :answer_sheet_question_sheets
     has_many :question_sheets,   :through => :answer_sheet_question_sheets
     has_many :answers,           :foreign_key => 'answer_sheet_id'
     has_many :reference_sheets,  :foreign_key => 'applicant_answer_sheet_id'
 
-    attr_accessible :question_sheets, :question_sheet, :question_sheet_id
+    attr_accessible :question_sheets
 
     attr_readonly :updated_at
-
   end
 
   def complete?
@@ -26,7 +23,7 @@ module Qe::Concerns::Models::AnswerSheet
   
   # Convenience method if there is only one question sheet in your system
   def question_sheet
-    question_sheets.first
+    qs = question_sheets.first
   end
   
   def pages
@@ -55,11 +52,6 @@ module Qe::Concerns::Models::AnswerSheet
       num_questions = qs.elements.count + num_questions
     end
     num_questions
-  end
-  
-  # new method
-  def count_answers
-    answers.where("value IS NOT NULL && value != ''").select("DISTINCT question_id").count
   end
 
   def percent_complete

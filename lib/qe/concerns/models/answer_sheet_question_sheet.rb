@@ -3,7 +3,6 @@ module Qe::Concerns::Models
 		extend ActiveSupport::Concern
 		
 		included do
-		  # self.table_name = "#{self.table_name}"
 		  belongs_to :answer_sheet
 		  belongs_to :question_sheet
 
