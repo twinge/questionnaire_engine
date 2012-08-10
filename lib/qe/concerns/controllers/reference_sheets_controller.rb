@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 # should be required within lib/qe.rb
 # require_dependency 'answer_sheets_controller'
 
@@ -13,6 +11,9 @@ module Qe::Concerns::Controllers::ReferenceSheetsController
 
   def edit
     @answer_sheet = @reference_sheet = Qe::ReferenceSheet.find_by_id_and_access_key(params[:id], params[:a])
+    
+    # raise @answer_sheet.question.inspect
+  
     unless @answer_sheet
       render :not_found and return
     end

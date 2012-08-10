@@ -2,8 +2,6 @@ module Qe::Concerns::Models::ReferenceSheet
   extend ActiveSupport::Concern
   include Qe::Concerns::Models::AnswerSheet
   
-  # include Rails.application.routes.url_helpers
-  
   included do    
     require 'state_machine'
     # NOTE -- since inheriting from AnswerSheet, you need to explicitly declare the table name,
@@ -15,15 +13,12 @@ module Qe::Concerns::Models::ReferenceSheet
     belongs_to :question, :class_name => Qe::Element, :foreign_key => 'question_id'
     belongs_to :applicant_answer_sheet, :class_name => Qe::AnswerSheet, :foreign_key => "applicant_answer_sheet_id"
     
-    validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
-    
     delegate :style, :to => :question
-
     before_save :check_email_change
-    
     after_destroy :notify_reference_of_deletion
-
-    attr_accessible :first_name, :last_name, :phone, :email, :relationship
+    attr_accessible :first_name, :last_name, :phone, :email, :relationship, 
+      :applicant_answer_sheet_id, :question_id
+    validates_presence_of :first_name, :last_name, :phone, :email, :relationship, :on => :update, :message => "can't be blank"
 
     # state column is 'status'
     state_machine :status, :initial => :created do
@@ -63,7 +58,7 @@ module Qe::Concerns::Models::ReferenceSheet
   # alias_method :applicant, :applicant_answer_sheet
   
   def generate_access_key
-    self.access_key = Digest::MD5.hexdigest(email + Time.current.to_s)
+    self.access_key = Digest::MD5.hexdigest(email.to_s + Time.current.to_s)
   end
   
   def frozen?

@@ -71,7 +71,6 @@ module Qe::Concerns::Controllers::QuestionSheetsController
   # display sheet properties panel
   # GET /question_sheets/1/edit
   def edit
-    
     respond_to do |format|
       format.js
     end
