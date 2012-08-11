@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module Qe::Concerns::Models::OptionGroup
 	extend ActiveSupport::Concern
 

@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 # DateField
 # - a question that provides a calendar/date picker
 

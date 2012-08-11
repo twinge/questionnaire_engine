@@ -1,5 +1,3 @@
-require 'qe/engine'
-
 # represents a link to a page for the page_list sidebar or next page links
 
 module Qe::Concerns::Models::PageLink

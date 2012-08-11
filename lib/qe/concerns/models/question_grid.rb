@@ -4,8 +4,6 @@
 # :kind         - 'QuestionGrid' for single table inheritance (STI)
 # :content      - questions
 
-require 'qe/concerns/models/element'
-
 module Qe::Concerns::Models::QuestionGrid
   extend ActiveSupport::Concern
   include Qe::Concerns::Models::Element

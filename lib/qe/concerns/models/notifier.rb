@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module Qe::Concerns::Models::Notifier #< ActionMailer::Base
   extend ActiveSupport::Concern
 

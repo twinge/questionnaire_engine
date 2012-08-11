@@ -1,5 +1,3 @@
-require 'qe/model_extensions'
-
 module Qe::Concerns::Models::Page
   extend ActiveSupport::Concern
 
