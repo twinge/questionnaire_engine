@@ -16,40 +16,7 @@ describe Qe::AnswerPagesPresenter do
 		# need a controller class
 	end
 
-	it 'true' do
+	it 'place holder' do
 		@as.should_not == nil
-	end
-
-	xit "INITIALIZE" do
-	end
-
-	xit "QUESTIONS_FOR_PAGE" do
-	end
-
-	xit "ALL_QUESTIONS_FOR_PAGE" do
-	end
-
-	xit "SHEET_TITLE" do
-	end
-
-	xit "ACTIVE_PAGE" do
-	end
-
-	xit "NEXT_PAGE" do
-	end
-
-	xit "REFERENCE?" do
-	end
-
-	xit "INITIALZE_PAGES?" do
-	end
-
-	xit "STARTED?" do
-	end
-
-	xit "NEW_PAGE_LINK" do
-	end
-
-	xit "REFERENCE?" do
 	end
 end

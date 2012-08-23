@@ -7,11 +7,11 @@ module Qe::Concerns::Models::QuestionSheet
 
   included do
     has_many :answer_sheet_question_sheets
+    has_many :answer_sheets, :through => :answer_sheet_question_sheets
     has_many :pages, :dependent => :destroy, :order => 'number'
     has_many :elements, :through => :page_elements
     has_many :questions
-    has_many :answer_sheets, :through => :answer_sheet_question_sheets
-
+    
     scope :active, where(:archived => false)
     scope :archived, where(:archived => true)
     
