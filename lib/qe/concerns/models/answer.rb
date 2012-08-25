@@ -17,9 +17,9 @@ module Qe
           # self.table_name = "#{self.table_name}"
           
           belongs_to :answer_sheet
-          belongs_to :question, :foreign_key => "question_id"
+          belongs_to :question #, :foreign_key => "question_id"
           
-          # validates_presence_of :value
+          validates_presence_of :value
           validates_length_of :short_value, :maximum => 255, :allow_nil => true  
           
           before_save :set_value_from_filename

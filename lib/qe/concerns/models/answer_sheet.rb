@@ -46,21 +46,15 @@ module Qe::Concerns::Models::AnswerSheet
 
   def count_questions
     num_questions = 0
-    question_sheets.all.each do |qs|
+    question_sheets.each do |qs|
       num_questions = qs.elements.count + num_questions
     end
     num_questions
   end
 
   def percent_complete
-    # replaced this line with new method
-    # num_questions = 0
-    # question_sheets.each { |qs| num_questions += qs.elements.length }
     num_questions = count_questions
-
     return 0 if num_questions == 0
-    # replacee this line with new method
-    # num_answers = answers.where("value IS NOT NULL && value != ''").select("DISTINCT question_id").count
     num_answers = count_answers
     if [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max == 100 && !complete? 
       return 99

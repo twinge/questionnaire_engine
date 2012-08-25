@@ -7,7 +7,6 @@ describe Qe::AnswerSheet do
 
 		# create answer_sheet_question_sheets object
 		@as = @qs.answer_sheets.create!
-		@as.save!
 
 		# quesiton
 		@question = @qs.pages.first.questions.first
@@ -18,7 +17,7 @@ describe Qe::AnswerSheet do
 	# end
 	
  	it "ANSWERS_BY_QUESTION" do
- 		answer = Qe::Answer.new(:answer_sheet => @as, :question =>  @question)
+ 		answer = Qe::Answer.new(:answer_sheet => @as, :question =>  @question, :value => 'value')
  		answer.save!
  		@as.answers_by_question.count.should == 1
 	end
@@ -28,5 +27,15 @@ describe Qe::AnswerSheet do
 	it "COMPLETE?" do
 		@as.completed_at = nil
 		@as.complete?.should == false
+	end
+	it 'COUNT_QUESTIONS' do
+		# 1 element => 1 question
+		@as.count_questions.should == 1
+	end
+	it 'COUNT_ANSWERS' do
+		@as.count_answers.should == 0
+		
+		Qe::Answer.create!(:answer_sheet => @as, :question =>  @question, :value => 'value')
+		@as.answers.count.should == 1
 	end
 end
