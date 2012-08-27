@@ -6,10 +6,10 @@ module Qe
   self.table_name_prefix ||= 'qe_'
   
   mattr_accessor :answer_sheet_class
-  self.answer_sheet_class = 'AnswerSheet'
+  self.answer_sheet_class ||='Qe::AnswerSheet'
   
   mattr_accessor :from_email
-  self.from_email = 'info@example.com'
+  self.from_email ||= 'info@example.com'
 end
 
 require 'qe/model_extensions'
