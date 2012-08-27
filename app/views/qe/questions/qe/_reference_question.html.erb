@@ -32,7 +32,7 @@
   	  <em><strong>If you already submitted your application and have returned to update your reference information - you must click "Send Email Invitation" after you
    have edited the information in order for your reference to receive another email. </strong></em></p></li>
 
-  <li><%= link_to('Send Email Invitation', @answer_sheet ? send_reference_invite_answer_sheet_path(@answer_sheet, :reference_id => reference.id) : '#', :class => 'reference_send_invite') %>
+  <li><%= link_to('Send Email Invitation', @answer_sheet ? qe.send_reference_invite_answer_sheet_path(@answer_sheet, :reference_id => reference.id) : '#', :class => 'reference_send_invite') %>
   	<br/>Invitation last sent: <span id="ref_last_sent_<%= reference.id %>"><% if reference.email_sent_at.nil? %>Never<% else %><%= reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %><% end %></span></li>
   </ul>
 </div>
