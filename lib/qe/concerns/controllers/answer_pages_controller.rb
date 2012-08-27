@@ -76,8 +76,6 @@ module Qe::Concerns::Controllers::AnswerPagesController
   end
 
   def answer_sheet_type
-    # TODO code this dynamically
-    # (params[:answer_sheet_type] || Questionnaire.answer_sheet_class || 'AnswerSheet').constantize
-    (params[:answer_sheet_type] || 'Qe::AnswerSheet').constantize
+    (params[:answer_sheet_type] || Qe.answer_sheet_class || 'Qe::AnswerSheet').constantize
   end
 end

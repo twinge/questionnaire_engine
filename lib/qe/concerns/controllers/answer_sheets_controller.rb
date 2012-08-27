@@ -73,7 +73,8 @@ module Qe::Concerns::Controllers::AnswerSheetsController
     redirect_to  main_app.root_path
   end
   
-  protected 
+  protected
+  
   def answer_sheet_type
     (params[:answer_sheet_type] || Qe.answer_sheet_class || 'Qe::AnswerSheet').constantize
   end
