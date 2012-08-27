@@ -57,7 +57,7 @@
       <span class="answer"><%= simple_format element.display_response(@answer_sheet) %></span>
     <% end %>
   <% else %>
-    <%= render :partial => 'qe/questions/' + element.ptemplate, :object => :element %>
+    <%= render :partial => 'qe/questions/' + element.ptemplate, :object => element %>
   <% end %>
   </li>
 <% end %>
