@@ -1,12 +1,12 @@
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, yes_no.id) %>">
-    <%= render 'questions/yes_no_field', :yes_no => yes_no %>
-  	<ul class="questions" id="questions_list_<%= yes_no.id %>" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
+    <%= render 'qe/questions/qe/yes_no_field', :yes_no => yes_no %>
+  	<ul class="questions" id="questions_list_<%= yes_no.id %>" data-sortable="true" data-sortable-url="<%= qe.reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
       <%= render :partial => 'qe/admin/question_pages/element', :collection => yes_no.elements, :locals => {:in_grid => true} %>
     </ul>
   </div>
 <% else %>
-  <%= render 'qe/questions/yes_no_field', :yes_no => yes_no %>
+  <%= render 'qe/questions/qe/yes_no_field', :yes_no => yes_no %>
   <ul class="questions" id="questions_list_<%= yes_no.id %>" style="<%= yes_no.has_answer?(1,@answer_sheet) ? '' : 'display:none' %>">
     <%= render :partial => 'qe/answer_pages/element', :collection => yes_no.elements, :locals => {:in_grid => false, :in_conditional => true} %>
   </ul>

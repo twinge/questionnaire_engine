@@ -1,5 +1,5 @@
 <% if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
-  <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
+  <div class="droppable" data-url="<%= qe.drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid.id) %>">
     <% if question_grid.label.present? && !question_grid.hide_label? %>
       <label class="desc gridname">
 				<%= raw question_grid.label %>
@@ -8,7 +8,7 @@
     <% end %>
     <div class="sub_q">
       <!-- Create a sortable list for each grid on the page -->
-    	<ul class="questions" id="questions_list_<%= question_grid.id %>" data-sortable="true" data-sortable-url="<%= reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
+    	<ul class="questions" id="questions_list_<%= question_grid.id %>" data-sortable="true" data-sortable-url="<%= qe.reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
     	<%- if question_grid.elements.length > 0 %>
         <%= render :partial => 'qe/admin/question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
     	<%- else %>

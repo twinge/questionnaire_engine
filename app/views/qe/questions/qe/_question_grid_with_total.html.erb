@@ -1,46 +1,46 @@
-<%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
-  <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid_with_total.id) %>">
+<% if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
+  <div class="droppable" data-url="<%= qe.drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, question_grid_with_total.id) %>">
     <label class="desc"><%= raw question_grid_with_total.label %></label>
     <div>
     	<ul class="questions" id="questions_list_<%= question_grid_with_total.id %>">
-    	<%- if question_grid_with_total.elements.length > 0 %>
-        <%= render :partial => 'question_pages/element', :collection => question_grid_with_total.elements, :locals => {:in_grid => true} %>
-    	<%- else %>
+    	<% if question_grid_with_total.elements.length > 0 %>
+        <%= render :partial => 'qe/question_pages/element', :collection => question_grid_with_total.elements, :locals => {:in_grid => true} %>
+    	<% else %>
     		Grid
-    	<%- end %>
+    	<% end %>
        </ul>
     </div>
   </div>      
-<%- else %>
+<% else %>
   <label class="desc"><%= raw question_grid_with_total.label %></label>
   	<table class="grid">
 	  <% headers = question_grid_with_total.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
     	<tr>
-    	<%- headers.each do |header| %>
+    	<% headers.each do |header| %>
     		<th><%= header || '&nbsp;' %></th>
-    	<%- end %>
+    	<% end %>
     	</tr>
     <% end %>
   	<tr >
-  		<%- col_count = 0
+  		<% col_count = 0
   			question_grid_with_total.elements.each do |element| %>
   			<td id="element_<%= element.id %>">
   				<% grid_el = @elements.to_a.find {|el| el.id == element.id} %>
   				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} if grid_el %>
   			</td>
-  			<%- 	col_count += 1
-  					if col_count % question_grid_with_total.num_cols == 0  && element != question_grid_with_total.elements.last then col_count = 0 %></tr><tr><%- end %>
-  		<%-	end %>
-  		<%- while col_count < question_grid_with_total.num_cols do 
+  			<% 	col_count += 1
+  					if col_count % question_grid_with_total.num_cols == 0  && element != question_grid_with_total.elements.last then col_count = 0 %></tr><tr><% end %>
+  		<%	end %>
+  		<% while col_count < question_grid_with_total.num_cols do 
   				col_count += 1%>
   				<td>&nbsp;</td>
-  		<%- end unless col_count == 0%>
+  		<% end unless col_count == 0%>
   	</tr>
-  	<%- if question_grid_with_total.total_cols.present? %>
+  	<% if question_grid_with_total.total_cols.present? %>
     	<tr>
     		<td>Total</td>
-      	<%- total_cols = question_grid_with_total.total_cols.split(',').collect(&:to_i) 
+      	<% total_cols = question_grid_with_total.total_cols.split(',').collect(&:to_i) 
       	    (question_grid_with_total.num_cols - 1).times do |i| 
       	      if total_cols.include?(i + 2) %>
             	  <td>
@@ -49,9 +49,9 @@
             <% else %>
               <td>&nbsp;</td>
             <% end %>
-      	<%- end %>
+      	<% end %>
     	</tr>
-    	<%- end %>
+    	<% end %>
   	</table>
-<%- end %>
+<% end %>
 

@@ -17,7 +17,7 @@
         <% session_key_name = Rails.application.config.session_options[:key] %>
         $('#<%= dom_id(attachment_field) %>_file_uploader').uploadify({
             uploader        : '/uploadify/uploadify.swf',
-            script          : '<%= save_file_answer_sheet_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id) %>',
+            script          : '<%= qe.save_file_answer_sheet_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id) %>',
             fileDesc        : 'Pick a file',
             fileExt         : '*.*',
             auto            : true,
