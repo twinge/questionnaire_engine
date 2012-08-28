@@ -197,7 +197,7 @@ DEPENDENCIES
   mysql2
   paperclip
   questionnaire_engine!
-  rails (= 3.2.6)
+  rails (~> 3.2.6)
   rails-footnotes (>= 3.7.5.rc4)
   rb-fsevent
   rspec-rails
