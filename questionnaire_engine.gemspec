@@ -25,8 +25,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'aasm'
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
+  s.add_development_dependency 'rails',  '~>3.2.6'
   s.add_development_dependency 'ckeditor', '3.7.1'
-  s.add_development_dependency 'rails',  '3.2.6'
   s.add_development_dependency 'sass'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'dynamic_form'
