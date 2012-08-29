@@ -1,4 +1,4 @@
-<%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
+<% if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) %>
   <div class="droppable" data-url="<%= drop_admin_question_sheet_page_element_path(@page.question_sheet_id, @page.id, yes_no.id) %>">
     <%= render 'qe/questions/qe/yes_no_field', :yes_no => yes_no %>
   	<ul class="questions" id="questions_list_<%= yes_no.id %>" data-sortable="true" data-sortable-url="<%= qe.reorder_admin_question_sheet_page_elements_path(@page.question_sheet_id, @page.id) %>" data-sortable-handle=".handle">
