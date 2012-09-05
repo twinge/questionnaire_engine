@@ -1,5 +1,4 @@
 # require 'active_support/conern'
-require 'qe/concerns/controllers/application_controller'
 
 module Qe::Concerns::Controllers::AnswerSheetsController
   extend ActiveSupport::Concern
