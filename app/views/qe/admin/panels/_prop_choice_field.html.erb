@@ -1,13 +1,13 @@
-<%- options = [ OptionGroup.new('Choose One', [
-                    Option.new('drop-down', 'Drop Down'),
-                    Option.new('radio', 'Radio Buttons'),
-					          Option.new('rating', 'Rating'),
-					          Option.new('acceptance', 'Acceptance'),
-	                  Option.new('yes-no', 'Yes/No'),
-                    Option.new('country', 'Country')
+<%- options = [ Qe::OptionGroup.new('Choose One', [
+                    Qe::Option.new('drop-down', 'Drop Down'),
+                    Qe::Option.new('radio', 'Radio Buttons'),
+					          Qe::Option.new('rating', 'Rating'),
+					          Qe::Option.new('acceptance', 'Acceptance'),
+	                  Qe::Option.new('yes-no', 'Yes/No'),
+                    Qe::Option.new('country', 'Country')
                   ]),
-                OptionGroup.new('Choose Many', [
-                    Option.new('checkbox', 'Checkboxes')
+                Qe::OptionGroup.new('Choose Many', [
+                    Qe::Option.new('checkbox', 'Checkboxes')
                   ])
               ]
 %>
