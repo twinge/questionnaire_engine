@@ -1,3 +1,4 @@
+require 'qe/concerns/models/question'
 # DateField
 # - a question that provides a calendar/date picker
 

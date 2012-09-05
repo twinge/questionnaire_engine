@@ -1,3 +1,4 @@
+require 'qe/concerns/models/element'
 # Question
 # - An individual question element
 # - children: TextField, ChoiceField, DateField, FileField

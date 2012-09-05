@@ -1,3 +1,4 @@
+require 'qe/concerns/models/question'
 # TextField
 # - a question that prompts for one or more lines of text
 

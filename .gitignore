@@ -9,3 +9,4 @@ spec/dummy/db/vendor/ruby
 doc/*
 rdoc/*
 coverage
+spec/dummy/.sass-cache

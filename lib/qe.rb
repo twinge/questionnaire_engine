@@ -27,8 +27,6 @@ require 'qe/concerns/controllers/application_controller'
 require 'qe/concerns/controllers/reference_sheets_controller'
 
 ## models
-require 'qe/concerns/models/element'
-require 'qe/concerns/models/question'
 Dir[File.dirname(__FILE__) + '/qe/concerns/models/*.rb'].each {|file| require file }
 
 ## presenters

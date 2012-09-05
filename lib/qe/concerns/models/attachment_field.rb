@@ -1,3 +1,4 @@
+require 'qe/concerns/models/question'
 # AttachmentField
 # - a file upload question
 

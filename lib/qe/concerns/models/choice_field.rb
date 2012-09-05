@@ -1,4 +1,4 @@
-# require 'active_support/concern'
+require 'qe/concerns/models/question'
 require 'net/http'
 
 begin
