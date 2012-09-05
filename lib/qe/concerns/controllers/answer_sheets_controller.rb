@@ -3,7 +3,6 @@ require 'qe/concerns/controllers/application_controller'
 
 module Qe::Concerns::Controllers::AnswerSheetsController
   extend ActiveSupport::Concern
-  include Qe::Concerns::Controllers::ApplicationController
 
   included do
     unloadable
