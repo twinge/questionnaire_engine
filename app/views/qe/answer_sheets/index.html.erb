@@ -8,7 +8,7 @@
 <table cellspacing="0" class="list"> 
 	<% @answer_sheets.each do |answer_sheet| %>
 		<tr>
-	    <td><%= link_to qe.answer_sheet.question_sheet.label, qe.edit_answer_sheet_path(answer_sheet) %></td>
+	    <td><%= link_to answer_sheet.question_sheet.label, qe.edit_answer_sheet_path(answer_sheet.id) %></td>
 	    <td><%= link_to 'Review', qe.answer_sheet_path(answer_sheet.id), :method => :get %></td>
 	  </tr>
 	<% end %>
