@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823193931) do
+ActiveRecord::Schema.define(:version => 20120905143432) do
 
   create_table "pr_answer_sheet_question_sheets", :force => true do |t|
     t.integer  "answer_sheet_id"

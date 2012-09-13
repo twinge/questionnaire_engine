@@ -4,7 +4,7 @@ module Qe::Concerns::Models::AnswerSheet
   included do
     has_many :answer_sheet_question_sheets
     has_many :question_sheets, :through => :answer_sheet_question_sheets
-    has_many :answers, :foreign_key => 'answer_sheet_id', :class_name => 'Qe::AnswerSheet'
+    has_many :answers
     has_many :reference_sheets, :foreign_key => 'applicant_answer_sheet_id'
     
     attr_accessible :question_sheet_id, :label
@@ -40,17 +40,17 @@ module Qe::Concerns::Models::AnswerSheet
     return false
   end
    
-  # def count_answers
-  #   answers.where("value IS NOT NULL != ''").select("DISTINCT question_id").count
-  # end
+  def count_answers
+    answers.where("value IS NOT NULL != ''").select("DISTINCT question_id").count
+  end
 
-  # def count_questions
-  #   num_questions = 0
-  #   question_sheets.each do |qs|
-  #     num_questions = qs.elements.count + num_questions
-  #   end
-  #   num_questions
-  # end
+  def count_questions
+    num_questions = 0
+    question_sheets.each do |qs|
+      num_questions = qs.elements.count + num_questions
+    end
+    num_questions
+  end
 
   def percent_complete
     # num_questions = count_questions
