@@ -3,9 +3,9 @@ module Qe::Concerns::Models::AnswerSheet
 
   included do
     has_many :answer_sheet_question_sheets
-    has_many :question_sheets,   :through => :answer_sheet_question_sheets
-    has_many :answers,           :foreign_key => 'answer_sheet_id'
-    has_many :reference_sheets,  :foreign_key => 'applicant_answer_sheet_id'
+    has_many :question_sheets, :through => :answer_sheet_question_sheets
+    has_many :answers, :foreign_key => 'answer_sheet_id', :class_name => 'Qe::AnswerSheet'
+    has_many :reference_sheets, :foreign_key => 'applicant_answer_sheet_id'
     
     attr_accessible :question_sheet_id, :label
   end
@@ -40,27 +40,28 @@ module Qe::Concerns::Models::AnswerSheet
     return false
   end
    
-  def count_answers
-    answers.where("value IS NOT NULL != ''").select("DISTINCT question_id").count
-  end
+  # def count_answers
+  #   answers.where("value IS NOT NULL != ''").select("DISTINCT question_id").count
+  # end
 
-  def count_questions
-    num_questions = 0
-    question_sheets.each do |qs|
-      num_questions = qs.elements.count + num_questions
-    end
-    num_questions
-  end
+  # def count_questions
+  #   num_questions = 0
+  #   question_sheets.each do |qs|
+  #     num_questions = qs.elements.count + num_questions
+  #   end
+  #   num_questions
+  # end
 
   def percent_complete
-    num_questions = count_questions
-    return 0 if num_questions == 0
-    num_answers = count_answers
-    if [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max == 100 && !complete? 
-      return 99
-    else
-      return [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
-    end
+    # num_questions = count_questions
+    # return 0 if num_questions == 0
+    # num_answers = count_answers
+    # if [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max == 100 && !complete? 
+    #   return 99
+    # else
+    #   return [ [ (num_answers.to_f / num_questions.to_f * 100.0).to_i, 100 ].min, 0 ].max
+    # end
+    100
   end
 
   def collat_title
