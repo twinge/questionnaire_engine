@@ -58,6 +58,14 @@ class Element < ActiveRecord::Base
     position
   end
   
+  def page_id(page = nil)
+    if page
+      page.id
+    else
+      pages.first.id
+    end
+  end
+  
   def question?
     self.kind_of?(Question)
   end
