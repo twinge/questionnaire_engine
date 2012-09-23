@@ -4,7 +4,7 @@ require 'rails/all'
 require 'qe'
 
 Bundler.require 
-require "qe"
+require 'qe'
 
 module Dummy
   class Application < Rails::Application

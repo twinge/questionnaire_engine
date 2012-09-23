@@ -21,7 +21,7 @@ module Qe::Concerns::Models::AnswerSheet
   
   # Convenience method if there is only one question sheet in your system
   def question_sheet
-    qs = question_sheets.first
+    question_sheets.first
   end
   
   def pages
