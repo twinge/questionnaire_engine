@@ -67,8 +67,8 @@ module Qe::Concerns::Models::Page
     # sets id, the primary key, to nil. assigned on
     attributes = self.attributes
     attributes[:id] = nil
-    attributes[:updated_at] = nil
-    attributes[:created_at] = nil
+    attributes.delete(:updated_at)
+    attributes.delete(:created_at)
 
     # clear_unique_attributes = Hash.new(:updated_at => nil, :created_at => nil, :id => nil)      
     # cloned_attributes = self.attributes.merge(clear_unique_attributes)
