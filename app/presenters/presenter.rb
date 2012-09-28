@@ -16,4 +16,7 @@ class Presenter
     @controller.request
   end
 
+  def env
+    @controller.env
+  end
 end
