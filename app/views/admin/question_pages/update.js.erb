@@ -1,4 +1,4 @@
 page << <<-END
-  $("#page-name").html('#{escape_javascript(@page.label)}')
-  $("#panel").html('#{escape_javascript(render(:partial => 'admin/panels/prop_page', :locals => { :page => @page }))}')
+  $("#page-name").html('<%= escape_javascript(@page.label) %>')
+  $("#panel").html('<%= escape_javascript(render(:partial => 'admin/panels/prop_page', :locals => { :page => @page })) %>')
 END

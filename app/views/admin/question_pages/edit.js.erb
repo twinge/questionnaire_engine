@@ -1,5 +1,5 @@
 page << <<-END
-  $('#panel').html('#{escape_javascript(render('admin/panels/prop_page', :page => @page))}');
+  $('#panel').html('<%= escape_javascript(render('admin/panels/prop_page', :page => @page)) %>');
   switchTab('properties');
   selectPage();
 END

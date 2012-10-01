@@ -1,7 +1,7 @@
 page << <<-END
-  $('#errors').html('#{escape_javascript(render('errors', :page => @question_sheet))}');
+  $('#errors').html('<%= escape_javascript(render('errors', :page => @question_sheet)) %>');
 END
 
 @question_sheet.errors.each do |attr_name, message| 
-  page << "addError('question_sheet_#{attr_name}')"
+  page << "addError('question_sheet_<%= attr_name %>')"
 end
