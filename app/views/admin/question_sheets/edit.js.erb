@@ -1,5 +1,3 @@
-page << <<-END
-  $('#panel').html('<%= escape_javascript(render('admin/panels/prop_sheet', :question_sheet => @question_sheet)) %>');
-  clearPageName()
-  clearCurrentElement()
-END
+$('#panel').html('<%= escape_javascript(render('admin/panels/prop_sheet', :question_sheet => @question_sheet)) %>');
+clearPageName()
+clearCurrentElement()

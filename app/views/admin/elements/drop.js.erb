@@ -1,4 +1,2 @@
-page << <<-END
-  $('#page-preview').html('<%= escape_javascript(render('admin/question_pages/question_page', :page => @page)) %>')
-  $('#list-pages li').removeClass('active')
-END
+$('#page-preview').html('<%= escape_javascript(render('admin/question_pages/question_page', :page => @page)) %>')
+$('#list-pages li').removeClass('active')
