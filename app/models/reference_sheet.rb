@@ -56,22 +56,22 @@ class ReferenceSheet < AnswerSheet
     
     application = self.applicant_answer_sheet
     
-    Notifier.deliver_notification(self.email,
+    Notifier.notification(self.email,
                                   application.email, 
                                   "Reference Invite", 
                                   {'reference_full_name' => self.name, 
                                    'applicant_full_name' => application.name,
                                    'applicant_email' => application.email, 
                                    'applicant_home_phone' => application.phone, 
-                                   'reference_url' => edit_reference_sheet_url(self, :a => self.access_key, :host => ActionMailer::Base.default_url_options[:host])})
+                                   'reference_url' => edit_reference_sheet_url(self, :a => self.access_key, :host => ActionMailer::Base.default_url_options[:host])}).deliver
     # Send notification to applicant
-    Notifier.deliver_notification(applicant_answer_sheet.email, # RECIPIENTS
+    Notifier.notification(applicant_answer_sheet.email, # RECIPIENTS
                                   Questionnaire.from_email, # FROM
                                   "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
                                   {'applicant_full_name' => applicant_answer_sheet.name,
                                    'reference_full_name' => self.name,
                                    'reference_email' => self.email,
-                                   'application_url' => edit_answer_sheet_url(applicant_answer_sheet, :host => ActionMailer::Base.default_url_options[:host])})
+                                   'application_url' => edit_answer_sheet_url(applicant_answer_sheet, :host => ActionMailer::Base.default_url_options[:host])}).deliver
 
     self.email_sent_at = Time.now
     self.save(:validate => false)
@@ -117,11 +117,11 @@ class ReferenceSheet < AnswerSheet
     
     def notify_reference_of_deletion
       if email.present?
-        Notifier.deliver_notification(email,
+        Notifier.notification(email,
                               Questionnaire.from_email, 
                               "Reference Deleted", 
                               {'reference_full_name' => self.name, 
-                               'applicant_full_name' => applicant_answer_sheet.name})
+                               'applicant_full_name' => applicant_answer_sheet.name}).deliver
       end
     end
 end
