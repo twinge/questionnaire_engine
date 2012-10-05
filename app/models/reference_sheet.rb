@@ -17,7 +17,9 @@ class ReferenceSheet < AnswerSheet
   
   aasm :initial => :created, :column => :status do
 
-    state :started
+    state :started, :enter => Proc.new {|ref|
+                                ref.started_at = Time.now
+                              }
     state :created
     state :completed, :enter => Proc.new {|ref|
                                   ref.submitted_at = Time.now
