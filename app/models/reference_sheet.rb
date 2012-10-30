@@ -34,6 +34,7 @@ class ReferenceSheet < AnswerSheet
 
     event :submit do
       transitions :to => :completed, :from => :started
+      transitions :to => :completed, :from => :created
     end
 
     event :unsubmit do
