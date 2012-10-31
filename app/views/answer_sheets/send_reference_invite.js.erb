@@ -1,5 +1,5 @@
 <% unless @reference.valid? %>
-	alert('<%= escape_javascript(@reference.errors.full_messages.join("\n")) %>');
+	alert('<%= escape_javascript(@reference.errors.full_messages.join("\n").html_safe) %>');
 <% else %>
 	<% if @reference.email_sent_at.present? %>
 	  $('#ref_last_sent_<%= @reference.id %>').html('<%= @reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %>')

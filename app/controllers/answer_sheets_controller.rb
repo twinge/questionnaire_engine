@@ -46,7 +46,7 @@ class AnswerSheetsController < ApplicationController
   
   def send_reference_invite
     @reference = @answer_sheet.reference_sheets.find(params[:reference_id])
-    @reference.update_attributes!(params[:reference][@reference.id.to_s]) if params[:reference]
+    @reference.update_attributes(params[:reference][@reference.id.to_s]) if params[:reference]
     if @reference.valid?
       @reference.send_invite
     end
