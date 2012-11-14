@@ -7,6 +7,10 @@ class Notifier < ActionMailer::Base
     if email_template.nil?
       raise "Email Template #{template_name} could not be found"
     else
+      mail(:to => p_recipients,
+           :from => p_from,
+           :subject => Liquid::Template.parse(email_template.subject).render(template_params),
+           :body => Liquid::Template.parse(email_template.content).render(template_params))
       @recipients = p_recipients
       @from = p_from
       @subject = Liquid::Template.parse(email_template.subject).render(template_params)
