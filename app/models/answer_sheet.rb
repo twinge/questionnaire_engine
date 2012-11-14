@@ -1,5 +1,6 @@
 class AnswerSheet < ActiveRecord::Base
-  set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
+  self.abstract_class = true
+  #set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
 
   has_many :answer_sheet_question_sheets
   has_many :question_sheets, :through => :answer_sheet_question_sheets
