@@ -1,3 +1,4 @@
+require 'ostruct'
 class QuestionPagesController < ApplicationController
   unloadable
   before_filter :check_valid_user
@@ -10,6 +11,7 @@ class QuestionPagesController < ApplicationController
   def show
     @page = @question_sheet.pages.find(params[:id])
     @elements = @page.elements
+    @presenter = OpenStruct.new(:reference? => false)
 
     respond_to do |format|
       format.js
