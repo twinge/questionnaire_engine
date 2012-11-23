@@ -3,15 +3,15 @@ source "http://rubygems.org"
 gemspec
 
 gem 'jquery-rails' # jquery-rails is used by the dummy application
-gem 'mysql2'
+# gem 'mysql2'
 gem 'ckeditor', '3.7.1'
 gem 'dynamic_form'
 gem 'state_machine'
-gem 'aasm'
+# gem 'aasm'
 
 group :development, :test do
-	gem 'rspec-rails'
-	gem 'capybara'
+	# gem 'rspec-rails'
+	# gem 'capybara'
 	gem 'guard-rspec'
 	gem 'guard-rails'
 	gem 'rb-fsevent'

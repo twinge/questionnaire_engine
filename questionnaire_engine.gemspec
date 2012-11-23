@@ -17,18 +17,23 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '3.2.6'
   s.add_dependency 'ckeditor', '3.7.1'
-  s.add_dependency 'sass'
   s.add_dependency 'sass-rails'
   s.add_dependency 'dynamic_form'
   s.add_dependency 'state_machine'
   s.add_dependency 'aasm'
   s.add_dependency 'rake', '~>10.0.2'
+  s.add_dependency 'nokogiri'
+  s.add_dependency 'xpath'
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
-  s.add_development_dependency 'rails',  '~>3.2.6'
-  s.add_development_dependency 'ckeditor', '3.7.1'
-  s.add_development_dependency 'sass'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'dynamic_form'
-  s.add_development_dependency 'state_machine'
+  # s.add_development_dependency 'rails',  '~>3.2.6'
+  # s.add_development_dependency 'ckeditor', '3.7.1'
+  # s.add_development_dependency 'sass'
+  # s.add_development_dependency 'sass-rails'
+  # s.add_development_dependency 'dynamic_form'
+  # s.add_development_dependency 'state_machine'
+  
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'capybara'  
+
 end

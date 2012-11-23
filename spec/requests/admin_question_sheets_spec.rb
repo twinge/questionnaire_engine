@@ -8,24 +8,26 @@ describe Qe::Admin::QuestionSheetsController do
       click_link 'New Questionnaire'
     end
     
-    it 'confirm new sheet' do    
+    xit 'confirm new sheet' do    
       visit qe.admin_question_sheets_path
       within("#active") do
         page.should have_content 'Untitled form 1'
       end
     end
-    it 'delete' do
+    
+    xit 'delete' do
       visit qe.admin_question_sheets_path
       click_link 'Destroy'
       page.should_not have_content 'Untitled form 1'
     end
-    it 'archive' do
+    
+    xit 'archive' do
       visit qe.admin_question_sheets_path
       click_link 'Archive'
       within("#inactive") do
         page.should have_content 'Untitled form 1'
       end
     end
-  end
 
+  end
 end

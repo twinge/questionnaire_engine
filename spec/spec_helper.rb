@@ -1,5 +1,4 @@
 require 'simplecov'
-
 if ENV["COVERAGE"]
   SimpleCov.start 'rails' do
     add_filter 'vendor'
@@ -9,21 +8,17 @@ end
 ENV["RAILS_ENV"] ||= 'test'
 
 require File.expand_path("../dummy/config/environment.rb", __FILE__)
-
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
 
 ENGINE_RAILS_ROOT = File.join( File.dirname(__FILE__), '../' )
-
 Dir[File.join(ENGINE_RAILS_ROOT,"spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  # make terminal test results colorful
-  config.color_enabled = true
 
-  # Factory Girl settings
+  config.color_enabled = true
   config.include FactoryGirl::Syntax::Methods
 
   # Remove models from database before and after test suite is run

@@ -5,11 +5,12 @@ PATH
       aasm
       ckeditor (= 3.7.1)
       dynamic_form
+      nokogiri
       rails (= 3.2.6)
       rake (~> 10.0.2)
-      sass
       sass-rails
       state_machine
+      xpath
 
 GEM
   remote: http://rubygems.org/
@@ -89,6 +90,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.7)
     mysql2 (0.3.11)
+    nokogiri (1.5.5)
     orm_adapter (0.4.0)
     paperclip (3.3.1)
       activemodel (>= 3.0.0)
@@ -165,13 +167,14 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.35)
+    xpath (0.1.4)
+      nokogiri (~> 1.3)
     yard (0.8.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  aasm
   capybara
   ckeditor (= 3.7.1)
   database_cleaner
@@ -181,15 +184,12 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   launchy
-  mysql2
+  mysql2 (~> 0.3.11)
   paperclip
   questionnaire_engine!
-  rails (~> 3.2.6)
   rails-footnotes (>= 3.7.5.rc4)
   rb-fsevent
   rspec-rails
-  sass
-  sass-rails
   simplecov
   state_machine
   yard

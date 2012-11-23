@@ -8,12 +8,12 @@ describe Qe::Admin::QuestionPagesController do
 		visit qe.admin_question_sheets_path
 	end
 
-	it 'confirm page 1' do
+	xit 'confirm page 1' do
 		click_link 'Untitled form 1'
 		page.should have_content 'Page 1'
 	end
 
-	it 'add page 2' do
+	xit 'add page 2' do
 		click_link 'Untitled form 1'
 		click_link 'Add a page'
 
