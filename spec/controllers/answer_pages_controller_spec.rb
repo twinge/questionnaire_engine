@@ -12,13 +12,11 @@ describe Qe::AnswerPagesController do
     @text_field.kind.should == 'Qe::TextField'
   end
   
-
   it 'GET edit' do
-    get :edit,
-      use_route: 'qe',
+    get :edit, { use_route: 'qe',
       answer_sheet_id: @answer_sheet.id,
       a: 'test anchor',
-      id: @page.id
+      id: @page.id }
   end
 
   # TODO test controller for references
@@ -36,7 +34,7 @@ describe Qe::AnswerPagesController do
     # creates hash of answers attributes, which are posted
     answers_hash = @answer_sheet.answers.map{|a| a.attributes }.inject{|result, attributes| result.merge(attributes)}
 
-    put :update,
+    put :update, 
       use_route: 'qe',
       answer_sheet_id: @answer_sheet.id,
       a: 'anchor',

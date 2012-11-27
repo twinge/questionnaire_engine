@@ -21,7 +21,6 @@ require 'qe/concerns/controllers/admin/elements_controller'
 require 'qe/concerns/controllers/admin/email_templates_controller'
 require 'qe/concerns/controllers/admin/question_pages_controller'
 require 'qe/concerns/controllers/admin/question_sheets_controller'
-require 'qe/concerns/controllers/answer_pages_controller'
 
 
 ## models
