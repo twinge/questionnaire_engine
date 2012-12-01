@@ -1,13 +1,9 @@
 module Qe
-  class Admin::ElementsController < ::ApplicationController
-    extend ActiveSupport::Concern
+  class Admin::ElementsController < Qe::Admin::AdminBaseController
+    # extend ActiveSupport::Concern
 
-    unloadable
-    before_filter :check_valid_user
     before_filter :get_page
-    layout 'qe/qe.admin'
     
-
     # Edit the element.
     # GET /element/1/edit
     def edit

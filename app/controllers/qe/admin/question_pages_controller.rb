@@ -1,6 +1,3 @@
-# this should be taken care of in lib/qe.rb
-# require 'qe/model_extensions'
-
 module Qe
   class Admin::QuestionPagesController < Qe::Admin::AdminBaseController
     

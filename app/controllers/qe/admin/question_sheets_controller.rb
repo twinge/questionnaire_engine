@@ -1,5 +1,5 @@
 module Qe
-  class Admin::QuestionSheetsController < ApplicationController
+  class Admin::QuestionSheetsController < Qe::Admin::AdminBaseController
     
     before_filter :get_question_sheet, :only => [:show, :archive, :unarchive, :destroy, :edit, :update, :duplicate]
  
