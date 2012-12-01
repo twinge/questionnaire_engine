@@ -37,7 +37,7 @@ end
 desc "runs simplecov report"
 task :cov do
   # sh "COVERAGE=true rake"
-  sh 'bundle exec rake rspec COVERAGE=true'
+  sh 'bundle exec rake spec COVERAGE=true'
 end 
 
 # ==============================================================================
