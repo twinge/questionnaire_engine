@@ -2,8 +2,7 @@
 # require_dependency "qe/answer_sheets_controller"
 
 module Qe
-  class ReferenceSheetsController < AnswerSheetsController
-    extend ActiveSupport::Concern
+  class ReferenceSheetsController < Qe::AnswerSheetsController
 
     skip_before_filter :ssm_login_required, :login
     before_filter :edit_only, :except => [:edit]

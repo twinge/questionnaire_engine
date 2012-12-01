@@ -1,6 +1,5 @@
 module Qe
-  class AnswerSheetsController < ApplicationController
-		extend ActiveSupport::Concern
+  class AnswerSheetsController < ::ApplicationController
 
     unloadable
 	  layout 'qe/application'

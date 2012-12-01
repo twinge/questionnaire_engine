@@ -1,10 +1,8 @@
-# should be taken care of in because of requires in lib/qe.rb
-
 module Qe
-  class AnswerPagesController < ApplicationController
-  	extend ActiveSupport::Concern
+  class AnswerPagesController < ::ApplicationController
 
 	  before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
+	  
 	  unloadable
 
 	  def edit
