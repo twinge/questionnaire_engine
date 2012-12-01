@@ -1,9 +1,7 @@
 module Qe
-  class AnswerPagesController < ::ApplicationController
+  class AnswerPagesController < Qe::BaseController
 
 	  before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
-	  
-	  unloadable
 
 	  def edit
 	    @elements = @presenter.questions_for_page(params[:id]).elements

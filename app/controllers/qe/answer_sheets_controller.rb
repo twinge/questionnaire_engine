@@ -1,9 +1,6 @@
 module Qe
-  class AnswerSheetsController < ::ApplicationController
+  class AnswerSheetsController < Qe::BaseController
 
-    unloadable
-	  layout 'qe/application'
-	  helper 'qe/answer_pages'
 	  before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
 
 	  # List existing answer sheets.
