@@ -13,10 +13,10 @@ describe Qe::AnswerPagesController do
   end
   
   it 'GET edit' do
-    get :edit, { use_route: 'qe',
+    get :edit, use_route: 'qe',
       answer_sheet_id: @answer_sheet.id,
       a: 'test anchor',
-      id: @page.id }
+      id: @page.id
   end
 
   # TODO test controller for references
