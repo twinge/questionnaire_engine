@@ -23,31 +23,31 @@ describe Qe::AnswerSheetsController do
     get :index, use_route: 'qe'
   end
   
-  # it 'POST create' do
-  #   post :create, use_route: 'qe',
-  #     question_sheet_id: @question_sheet.id
+  it 'POST create' do
+    post :create, use_route: 'qe',
+      question_sheet_id: @question_sheet.id
 
-  #   @created = Qe::AnswerSheet.all.count.should == 2
-  # end
+    @created = Qe::AnswerSheet.all.count.should == 2
+  end
   
-  # it 'GET edit' do
-  #   get :edit, use_route: 'qe',
-  #     id: @answer_sheet.id,
-  #     a: 'test anchor'
-  # end
+  it 'GET edit' do
+    get :edit, use_route: 'qe',
+      id: @answer_sheet.id,
+      a: 'test anchor'
+  end
   
-  # it 'GET show' do
-  #   get :show,
-  #     use_route: 'qe',
-  #     question_sheet_id: @question_sheet.id,
-  #     id: @answer_sheet.id
+  it 'GET show' do
+    get :show,
+      use_route: 'qe',
+      question_sheet_id: @question_sheet.id,
+      id: @answer_sheet.id
 
-  # end
+  end
   
-  # it 'POST submit' do
-  #   post :submit,
-  #     use_route: 'qe',
-  #     id: @answer_sheet.id
-  # end
+  it 'POST submit' do
+    post :submit,
+      use_route: 'qe',
+      id: @answer_sheet.id
+  end
 
 end
