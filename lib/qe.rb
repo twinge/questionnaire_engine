@@ -17,8 +17,8 @@ require 'qe/model_extensions'
 # ACTIVE SUPPORT CONCERN FILES
 
 ## controllers
-require 'qe/concerns/controllers/admin/email_templates_controller'
-require 'qe/concerns/controllers/admin/question_pages_controller'
+# require 'controllers/qe/answer_sheets_controller'
+# require 'qe/concerns/controllers/admin/question_pages_controller'
 require 'qe/concerns/controllers/admin/question_sheets_controller'
 
 
