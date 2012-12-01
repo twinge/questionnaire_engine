@@ -16,12 +16,6 @@ require 'qe/model_extensions'
 
 # ACTIVE SUPPORT CONCERN FILES
 
-## controllers
-# require 'controllers/qe/answer_sheets_controller'
-# require 'qe/concerns/controllers/admin/question_pages_controller'
-require 'qe/concerns/controllers/admin/question_sheets_controller'
-
-
 ## models
 Dir[File.dirname(__FILE__) + '/qe/concerns/models/*.rb'].each {|file| require file }
 
