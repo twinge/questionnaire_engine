@@ -5,7 +5,7 @@ module Qe
 	  
 	  def edit
 	    @elements = @presenter.questions_for_page(params[:id]).elements
-	    @page = Qe::Page.find(params[:id]) || Page.find_by_number(1)
+	    @page = Qe::Page.find(params[:id]) || Qe::Page.find_by_number(1)
 	    
 	    render :partial => 'answer_page', :locals => { :show_first => nil }
 	  end
