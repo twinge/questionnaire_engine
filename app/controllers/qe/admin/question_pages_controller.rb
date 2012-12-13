@@ -1,5 +1,6 @@
 module Qe
   class Admin::QuestionPagesController < Qe::Admin::AdminBaseController
+    # extend ActiveSupport::Concern
     
 		before_filter :get_sheet
 

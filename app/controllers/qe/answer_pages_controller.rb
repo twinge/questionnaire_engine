@@ -1,8 +1,8 @@
 module Qe
-  class AnswerPagesController < Qe::BaseController
-
-	  before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
-
+  class AnswerPagesController < BaseController
+  	
+  	before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
+	  
 	  def edit
 	    @elements = @presenter.questions_for_page(params[:id]).elements
 	    @page = Qe::Page.find(params[:id]) || Page.find_by_number(1)

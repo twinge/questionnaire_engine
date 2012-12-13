@@ -1,8 +1,5 @@
-# should be taken care of in lib/qe.rb
-# require_dependency "qe/answer_sheets_controller"
-
 module Qe
-  class ReferenceSheetsController < Qe::AnswerSheetsController
+  class ReferenceSheetsController < AnswerSheetsController
 
     skip_before_filter :ssm_login_required, :login
     before_filter :edit_only, :except => [:edit]

@@ -1,6 +1,6 @@
 module Qe
-  class AnswerSheetsController < Qe::BaseController
-
+  class AnswerSheetsController < BaseController
+  	
 	  before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
 
 	  # List existing answer sheets.
