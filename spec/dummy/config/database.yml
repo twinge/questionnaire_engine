@@ -2,7 +2,7 @@ sqlite: &sqlite
   adapter: sqlite3
 
 mysql: &mysql
-  adapter: mysql2
+  adapter: mysql<%= "2" unless TRAVIS_RUBY_VERSION.includes?("j") %>
   username: root
   password:
 
