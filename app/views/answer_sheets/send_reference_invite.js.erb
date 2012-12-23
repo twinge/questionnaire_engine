@@ -1,8 +1,0 @@
-<% unless @reference.valid? %>
-	alert('<%= escape_javascript(@reference.errors.full_messages.join("\n")) %>');
-<% else %>
-	<% if @reference.email_sent_at.present? %>
-	  $('#ref_last_sent_<%= @reference.id %>').html('<%= @reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p") %>')
-	  $('#ref_last_sent_<%= @reference.id %>').effect("highlight", {}, 3000);
-	<% end %>
-<% end %>

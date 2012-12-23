@@ -1,8 +1,0 @@
-You still need to answer questions on the following pages:
-<ul>
-	<% @answer_sheet.pages.each do |page| %>
-		<% unless page.complete?(@answer_sheet) %>
-			<li><%= page.label %></li>
-		<% end %>
-	<% end %>
-</ul>

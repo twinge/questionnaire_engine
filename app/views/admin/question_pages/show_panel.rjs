@@ -1,5 +1,0 @@
-page << <<-END
-  $('#panel').html('#{escape_javascript(render('admin/panels/' + @panel_name))}')
-  switchTab('#{@tab_name}')
-  clearCurrentElement()
-END
