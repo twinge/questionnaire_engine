@@ -2,7 +2,7 @@ language: ruby
 
 rvm:
   - 1.9.3
-  - jruby-19mode # JRuby in 1.9 mode
+  - jruby-19mode
 
 env:
   - DB=sqlite
@@ -14,8 +14,8 @@ before_script:
   - rake app:db:migrate
   - rake app:db:test:prepare
 
-script:
-  - bundle exec rake spec
+# using default travis command
+# script: bundle exec rake spec
 
 after_script:
-  -rake db:rollback
+  -rake app:db:rollback
