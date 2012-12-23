@@ -18,4 +18,4 @@ before_script:
 # script: bundle exec rake spec
 
 after_script:
-  -rake app:db:rollback
+  - rake app:db:rollback
