@@ -1,7 +1,9 @@
 .bundle/
 log/*.log
 pkg/
-spec/dummy/db/*.sqlite3
+spec/dummy/qe_dev
+spec/dummy/qe_test
+spec/dummy/qe_prod
 spec/dummy/db/schema.rb
 spec/dummy/log/*.log
 spec/dummy/tmp/

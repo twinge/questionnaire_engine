@@ -1,8 +1,21 @@
 language: ruby
+
 rvm:
   - 1.9.3
-  - jruby1.9
+  - jruby-19mode # JRuby in 1.9 mode
 
-before_script: rake app:db:create app:db:test:prepare
-script: bundle exec rake spec
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 
+before_script:
+  - rake app:db:create
+  - rake app:db:migreate
+  - rake app:db:test:prepare
+
+script:
+  - bundle exec rake spec
+
+after_script:
+  -rake db:rollback
