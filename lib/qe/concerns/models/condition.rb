@@ -1,11 +1,12 @@
 module Qe
   module Concerns
     module Models
-      module Question
+      module Condition
 
         extend ActiveSupport::Concern
 
         included do
+          belongs_to :qe_question_sheet
         end
 
       end
