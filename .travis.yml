@@ -19,3 +19,7 @@ before_script:
 
 after_script:
   - rake app:db:rollback
+
+branches:
+  only:
+    - engine2
