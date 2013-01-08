@@ -102,6 +102,16 @@ class ReferenceSheet < AnswerSheet
     true  
   end
   
+  # Can't rely on answer_sheet's implementation for old reference's that might have id's that may match an application id
+  def question_sheet
+    QuestionSheet.find(question.related_question_sheet_id)
+  end
+  
+  # Can't rely on answer_sheet's implementation for old reference's that might have id's that may match an application id
+  def question_sheets
+    [question_sheet]
+  end
+
   def display_type
     question.label.split(/:| \(/).first
   end
