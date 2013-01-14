@@ -1,5 +1,5 @@
 module Qe
   class Condition < ActiveRecord::Base
-    include Qe::Concerns::Models::Condition
+    belongs_to :question_sheet
   end
 end

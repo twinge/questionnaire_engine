@@ -1,10 +1,6 @@
 require 'spec_helper'
 
-
 describe Qe::Element do
-  it { should have_many :qe_page_elements }
-  it { should have_many :qe_pages }
-
   it { should have_db_column(:kind).of_type(:string)              }
   it { should have_db_column(:style).of_type(:string)             }
   it { should have_db_column(:label).of_type(:string)             }
@@ -21,6 +17,8 @@ describe Qe::Element do
   it { should have_db_column(:total_cols).of_type(:string)        }
   it { should have_db_column(:css_id).of_type(:string)            }
   it { should have_db_column(:css_class).of_type(:string)         }
+  it { should have_db_index :slug                                 }
 
-  it { should have_db_index :slug }
+  it { should have_many :page_elements }
+  it { should have_many :pages }
 end

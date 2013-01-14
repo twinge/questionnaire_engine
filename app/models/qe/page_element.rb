@@ -1,5 +1,6 @@
 module Qe
   class PageElement < ActiveRecord::Base
-    include Qe::Concerns::Models::PageElement
+    belongs_to :page
+    belongs_to :element
   end
 end

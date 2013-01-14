@@ -9,7 +9,7 @@ class CreateQeCore < ActiveRecord::Migration
     end
 
     create_table Qe::Page.table_name do |t|
-      t.integer :qe_question_sheet_id,  :null => false
+      t.integer :question_sheet_id,  :null => false
 
       t.string  :label,     :limit => 60, :null => false    # page title
       t.integer :number                                     # page number (order)
@@ -20,7 +20,7 @@ class CreateQeCore < ActiveRecord::Migration
     end
 
     create_table Qe::Element.table_name do |t|
-      t.integer :qe_question_grid_id,  :null => true
+      t.integer :question_grid_id,  :null => true
 
       t.string :kind,               :limit => 40,   :null => false  # single table inheritance: class name
       t.string :style,              :limit => 40                    # render style
@@ -44,8 +44,8 @@ class CreateQeCore < ActiveRecord::Migration
     add_index Qe::Element.table_name, :slug
 
     create_table Qe::PageElement.table_name do |t|
-      t.integer :qe_page_id
-      t.integer :qe_element_id
+      t.integer :page_id
+      t.integer :element_id
       t.integer :position
     end
 
@@ -54,15 +54,15 @@ class CreateQeCore < ActiveRecord::Migration
 
 
     create_table Qe::AnswerSheet.table_name do |t|
-      t.integer   :qe_question_sheet_id,  :null => false
+      t.integer   :question_sheet_id,  :null => false
       t.datetime  :completed_at,          :null => true  # null if incomplete
 
       t.timestamps
     end
 
     create_table Qe::Answer.table_name do |t|
-      t.integer :qe_answer_sheet_id,  :null => false
-      t.integer :qe_question_id,      :null => false
+      t.integer :answer_sheet_id,  :null => false
+      t.integer :question_id,      :null => false
 
       t.text    :value
       t.string  :short_value,         :null => true, :limit => 255   # indexed copy of :response
@@ -79,7 +79,7 @@ class CreateQeCore < ActiveRecord::Migration
     add_index Qe::Answer.table_name, :short_value
 
     create_table Qe::Condition.table_name do |t|
-      t.integer :qe_question_sheet_id,  :null => false
+      t.integer :question_sheet_id,  :null => false
       t.integer :trigger_id,            :null => false
       t.string  :expression,            :null => false,  :limit  => 255
       t.integer :toggle_page_id,        :null => false

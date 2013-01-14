@@ -1,6 +1,7 @@
 module Qe
   class QuestionSheet < ActiveRecord::Base
-    include Qe::Concerns::Models::QuestionSheet
+    has_many :pages, :class_name => 'Qe::Page'
+    has_many :conditions
   end
 end
 

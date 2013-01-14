@@ -1,5 +1,5 @@
 module Qe
   class AnswerSheet < ActiveRecord::Base
-    include Qe::Concerns::Models::AnswerSheet
+    belongs_to :question_sheet
   end
 end
