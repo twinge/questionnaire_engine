@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     qe (0.0.1)
-      rails (~> 3.2.0)
+      rails (~> 3.2.11)
 
 GEM
   remote: http://rubygems.org/
