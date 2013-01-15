@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'shoulda'
 require 'database_cleaner'
+require 'factory_girl_rails'
 
 ENGINE_RAILS_ROOT = File.join( File.dirname(__FILE__), '../' )
 
