@@ -7,8 +7,8 @@ module Qe
       @question_sheets = Qe::QuestionSheet.all
 
       respond_to do |format|
-        format.html #nothing
-        format.js { render json: @question_sheets }
+        format.html # index.html.erb
+        format.json { render json: @question_sheets }
       end
     end
 
@@ -17,11 +17,9 @@ module Qe
     def show
       @question_sheet = Qe::QuestionSheet.find(params[:id])
 
-      # raise @question_sheet.to_json.inspect
-
       respond_to do |format|
         format.html # show.html.erb
-        format.json { render json: @question_sheet.to_json }
+        format.json { render json: @question_sheet }
       end
     end
 
@@ -37,57 +35,53 @@ module Qe
     end
 
     # GET /admin/question_sheets/1/edit
-    # GET /admin/question_sheets/1/edit.json
     def edit
       @question_sheet = Qe::QuestionSheet.find(params[:id])
-
-      respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @question_sheet }
-      end
     end
 
     # POST /admin/question_sheets
     # POST /admin/question_sheets.json
-    def create 
+    def create
       @question_sheet = Qe::QuestionSheet.new(params[:question_sheet])
 
       respond_to do |format|
         if @question_sheet.save
-          format.html { redirect_to @question_sheet, notice: 'QuestionSheet successfully created' }
-          format.js { render json: @question_sheet, stauts: :created, location: @question_sheet }
+          format.html { redirect_to qe.admin_question_sheet_url(@question_sheet), notice: 'Question sheet was successfully created.' }
+          format.json { render json: @question_sheet, status: :created, location: @admin_question_sheet }
         else
-          format.html { render action: :new }
-          format.js { render json: @question_sheet.errors, stauts: :unprocessable_entity }
+          format.html { render action: "new" }
+          format.json { render json: @question_sheet.errors, status: :unprocessable_entity }
         end
       end
     end
 
-    # PUT /question_sheets/1
-    # PUT /question_sheets/1.json
+
+    # PUT /admin/question_sheets/1
+    # PUT /admin/question_sheets/1.json
     def update
       @question_sheet = Qe::QuestionSheet.find(params[:id])
 
       respond_to do |format|
         if @question_sheet.update_attributes(params[:question_sheet])
-          format.html { redirect_to @question_sheet, notice: 'QuestionSheet successfully updated' }
-          format.js { head :no_content }
+          format.html { redirect_to qe.admin_question_sheet_url(@question_sheet), notice: 'Question sheet was successfully updated.' }
+          format.json { head :no_content }
         else
           format.html { render action: "edit" }
-        format.json { render json: @question_sheet.errors, status: :unprocessable_entity }
+          format.json { render json: @question_sheet.errors, status: :unprocessable_entity }
         end
       end
     end
 
-    # DELETE /question_sheet/1
-    # DELETE /question_sheet/1.json
+    
+    # DELETE /admin/question_sheets/1
+    # DELETE /admin/question_sheets/1.json
     def destroy
       @question_sheet = Qe::QuestionSheet.find(params[:id])
       @question_sheet.destroy
 
       respond_to do |format|
-        format.html { redirect_to admin_question_sheets_url }
-        format.js { head :no_content }
+        format.html { redirect_to qe.admin_question_sheets_url }
+        format.json { head :no_content }
       end
     end
 
