@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gemspec
 
 gem 'jquery-rails'
+gem 'haml-rails'
 
 group :development, :test do
   platforms :jruby do

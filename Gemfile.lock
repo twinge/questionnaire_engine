@@ -46,6 +46,12 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
+    haml (3.1.7)
+    haml-rails (0.3.5)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (~> 3.1)
+      railties (>= 3.1, < 4.1)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -130,6 +136,7 @@ DEPENDENCIES
   activerecord-jdbcsqlite3-adapter
   database_cleaner
   factory_girl_rails
+  haml-rails
   jquery-rails
   jruby-openssl
   mysql2
