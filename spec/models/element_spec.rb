@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe Qe::Element do
-  it { should have_db_column(:kind).of_type(:string)              }
-  it { should have_db_column(:style).of_type(:string)             }
-  it { should have_db_column(:label).of_type(:string)             }
-  it { should have_db_column(:content).of_type(:text)             }
-  it { should have_db_column(:required).of_type(:boolean)         }
-  it { should have_db_column(:slug).of_type(:string)              }
-  it { should have_db_column(:position).of_type(:integer)         }
-  it { should have_db_column(:object_name).of_type(:string)       }
-  it { should have_db_column(:source).of_type(:string)            }
-  it { should have_db_column(:value_xpath).of_type(:string)       }
-  it { should have_db_column(:text_path).of_type(:string)         }
-  it { should have_db_column(:cols).of_type(:string)              }
-  it { should have_db_column(:is_confidential).of_type(:boolean)  }
-  it { should have_db_column(:total_cols).of_type(:string)        }
-  it { should have_db_column(:css_id).of_type(:string)            }
-  it { should have_db_column(:css_class).of_type(:string)         }
+  it { should have_db_column(:kind) }
+  it { should have_db_column(:style) }
+  it { should have_db_column(:label) }
+  it { should have_db_column(:content) }
+  it { should have_db_column(:required) }
+  it { should have_db_column(:slug) }
+  it { should have_db_column(:position) }
+  it { should have_db_column(:object_name) }
+  it { should have_db_column(:source) }
+  it { should have_db_column(:value_xpath) }
+  it { should have_db_column(:text_path) }
+  it { should have_db_column(:cols) }
+  it { should have_db_column(:is_confidential) }
+  it { should have_db_column(:total_cols) }
+  it { should have_db_column(:css_id) }
+  it { should have_db_column(:css_class) }
   it { should have_db_index :slug                                 }
 
   it { should have_many :page_elements }
