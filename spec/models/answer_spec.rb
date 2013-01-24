@@ -14,4 +14,5 @@ describe Qe::Answer do
   it { should have_db_index :short_value }
   
   it { should belong_to :answer_sheet }
+  it { should belong_to :question }
 end

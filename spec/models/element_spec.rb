@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Qe::Element do
+  
+  it { Qe::Element.inheritance_column.should == 'kind' }
+
   it { should have_db_column(:kind) }
   it { should have_db_column(:style) }
   it { should have_db_column(:label) }
@@ -21,4 +24,9 @@ describe Qe::Element do
 
   it { should have_many :page_elements }
   it { should have_many :pages }
+
+  it { should validate_presence_of(:label) }
+  it { should validate_presence_of(:style) }
+
+  it { should ensure_inclusion_of(:kind).in_array(Qe::Element::KINDS) }
 end
