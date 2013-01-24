@@ -5,4 +5,5 @@ describe Qe::AnswerSheet do
   it { should have_db_column(:completed_at).of_type(:datetime) }
 
   it { should belong_to :question_sheet }
+  it { should have_many :reference_sheets }
 end
