@@ -45,7 +45,7 @@ module Qe
     validates_presence_of :label #, on: :update
     validates_presence_of :style #, on: :update
 
-    KINDS = %w(Qe::Question Qe)
+    KINDS = %w(Qe::Question)
     
     validates_inclusion_of :kind, 
       :in => KINDS
