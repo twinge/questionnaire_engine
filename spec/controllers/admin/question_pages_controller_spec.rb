@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Qe::Admin::QuestionSheetsController do 
 
-  before(:all)
+  before(:all) do 
     @qs = Qe::QuestionSheet.create_with_page
     @page = @qs.pages.first
   end
@@ -47,8 +47,8 @@ describe Qe::Admin::QuestionSheetsController do
         use_route: :qe, 
         id: @page.id, 
         question_sheet_id: @qs.id
-
     end
+
   end
 
 
