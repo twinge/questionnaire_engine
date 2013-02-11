@@ -54,7 +54,7 @@ module Qe
         respond_to do |format|
           if @question_sheet.save
             format.html { redirect_to qe.admin_question_sheet_url(@question_sheet), notice: 'Question sheet was successfully created.' }
-            format.json { render json: @question_sheet, status: :created, location: @admin_question_sheet }
+            format.json { render json: @question_sheet, status: :created, location: @question_sheet }
           else
             format.html { render action: "new" }
             format.json { render json: @question_sheet.errors, status: :unprocessable_entity }
