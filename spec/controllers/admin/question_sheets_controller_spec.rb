@@ -29,7 +29,7 @@ describe Qe::Admin::QuestionSheetsController do
 
   describe 'GET edit' do 
     it 'should fetch appropriate record' do 
-      get :edit, use_route: :qe, id: @qs.id
+      xhr :get, :edit, use_route: :qe, id: @qs.id
       response.should be_success
     end
   end
@@ -58,11 +58,5 @@ describe Qe::Admin::QuestionSheetsController do
       delete :destroy, use_route: :qe, id: @qs.id
       Qe::QuestionSheet.count.should == 0 
     end
-  end
-
-  def json_to_ruby(json, opts={})
-    options = {symbolize_names:true}
-    options.merge(opts)
-    JSON.parse(json, options)
   end
 end

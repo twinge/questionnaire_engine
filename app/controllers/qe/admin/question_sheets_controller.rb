@@ -40,6 +40,10 @@ module Qe
       # GET /admin/question_sheets/1/edit
       def edit
         @question_sheet = Qe::QuestionSheet.find(params[:id])
+
+        respond_to do |format|
+          format.js
+        end
       end
 
       # POST /admin/question_sheets

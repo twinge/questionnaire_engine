@@ -18,6 +18,14 @@ module Qe
 
 
     attr_accessible :label
+
+    def self.create_with_page
+      question_sheet = self.create(:label => 'My New Question Sheet')
+      question_sheet.pages.build(:label => 'Page 1', :number => 1)
+      question_sheet.save
+      question_sheet
+    end
+
   end
 end
 

@@ -48,3 +48,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+
+def json_to_ruby(json, opts={})
+  options = {symbolize_names:true}
+  options.merge(opts)
+  JSON.parse(json, options)
+end
