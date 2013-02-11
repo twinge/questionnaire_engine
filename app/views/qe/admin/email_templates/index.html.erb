@@ -1,0 +1,17 @@
+<div id="content">
+  <h1>Email Templates</h1>
+  <table cellspacing="0" class="list"> 
+    <tr>
+        <th>Template Name</th>
+        <th>&nbsp;</th>
+    </tr>
+  <% for email_template in @email_templates %>
+    <tr class="<%= cycle("","alt") %>">
+      <td><%= link_to email_template.name, qe.edit_admin_email_template_path(email_template), :class => "email-template" %></td>
+      <td class="actions"><%= link_to 'Destroy', qe.admin_email_template_path(email_template), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br/>
+  <%= link_to 'New Template', qe.new_admin_email_template_path, :method => :GET, :class => "add-link" %>
+</div>

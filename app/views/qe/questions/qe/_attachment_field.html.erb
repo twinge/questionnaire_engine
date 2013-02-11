@@ -1,0 +1,40 @@
+<% if @presenter %>
+  <% if @answer_sheet.frozen? && !@answer_sheet.reference? %>
+    Current File: <%= link_to(answer.attachment_file_name, answer.attachment.url) %>
+  <% else %>
+      <div class="uploader">
+        <input id="<%= dom_id(attachment_field) %>_file_uploader" name="image_uploader" type="file" />
+        <!-- width: 350px -->
+        <span id="<%= dom_id(attachment_field) %>_filename">
+        <% answer = attachment_field.responses(@answer_sheet).first
+          if answer.present? %>
+            Current File: <%= link_to(answer.attachment_file_name, answer.attachment.url) %>
+          <% end %>
+        </span>
+      </div>
+      
+      <script type="text/javascript" charset="utf-8">
+        <% session_key_name = Rails.application.config.session_options[:key] %>
+        $('#<%= dom_id(attachment_field) %>_file_uploader').uploadify({
+            uploader        : '/uploadify/uploadify.swf',
+            script          : '<%= qe.save_file_answer_sheet_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id) %>',
+            fileDesc        : 'Pick a file',
+            fileExt         : '*.*',
+            auto            : true,
+            sizeLimit       : <%= 100.megabytes %>,
+            width           : 350,
+            height          : 30,
+            multi           : true,
+            simUploadLimit  : 2,
+            cancelImg       : '',
+            onComplete      : function(a, b, c, response){ eval(response); },
+            buttonText      : 'Attach a file',
+            scriptData      : {
+              '_http_accept': 'application/javascript',
+              '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+              'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+            }
+        });
+      </script>
+  <% end %>
+<% end %>

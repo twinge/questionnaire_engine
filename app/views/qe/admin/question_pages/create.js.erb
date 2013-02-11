@@ -1,0 +1,10 @@
+$('#page-preview').html('<%= escape_javascript(render('qe/admin/question_pages/question_page')) %>')
+$('#panel').html('<%= escape_javascript(render('qe/admin/panels/prop_page', :page => @page)) %>')
+$('#nav-controls').html('<%= escape_javascript(render('qe/admin/panels/nav_controls')) %>')
+switchTab('properties');
+selectPage();
+$('#list-pages li').removeClass('active')
+$('#link-<%= dom_id(@page) %>').addClass('active')
+clearCurrentElement()
+activeElement = ''
+$(".tip[title]").tooltip();
