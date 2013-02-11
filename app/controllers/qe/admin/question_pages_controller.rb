@@ -26,51 +26,56 @@ module Qe
       end
     end
 
-    # # Creates @page.
-    # # POST /pages
-    # def create
-    #   @page = @question_sheet.pages.build(:label => next_label, :number => @question_sheet.pages.length + 1)
-    #   @all_pages = @question_sheet.pages.find(:all)
+    
+    # POST /admin/question_pages
+    def create
+      @page = @question_sheet.pages.build(:label => next_label, :number => @question_sheet.pages.length + 1)
+      @all_pages = @question_sheet.pages.find(:all)
 
-    #   respond_to do |format|
-    #     if @page.save
-    #       format.js
-    #     else
-    #       format.js { render :action => "error.rjs"}
-    #     end
-    #   end
-    # end
+      respond_to do |format|
+        if @page.save
+          format.js
+          format.json { render json: 'success' }
+        else
+          format.js { render :action => "error.rjs"}
+          format.json { render json: 'failture' }
+        end
+      end
+    end
 
-    # # Updates @page with params[:page] attributes.
-    # # PUT /pages/1
-    # def update
-    #   @page = @question_sheet.pages.find(params[:id])
+    
+    # PUT /admin/quesiton_pages/1
+    # PUT /admin/quesiton_pages/1.json
+    def update
+      @page = @question_sheet.pages.find(params[:id])
 
-    #   respond_to do |format|
-    #     # TODO engineer attribute protection
-    #     if @page.update_attributes(params[:page], :without_protection => true)
-    #       format.js
-    #     else
-    #       format.js { render :action => "error.rjs"}
-    #     end
-    #   end
-    # end
+      respond_to do |format|
+        if @page.update_attributes(params[:page], :without_protection => true)
+          format.js
+          format.json { render json: 'success' } 
+        else
+          format.js { render :action => "error.rjs"}
+          format.json { render json: 'failture' }
+        end
+      end
+    end
 
-    # # Deletes page if the question sheet has more than 1 page.
-    # # DELETE /pages/1
-    # def destroy
-    #   unless @question_sheet.pages.length <= 1
-    #     @page = @question_sheet.pages.find(params[:id])
-    #     @page.destroy
+    
+    # DELETE /admin/question_pages/1
+    # DELETE /admin/question_pages/1.json
+    def destroy
+      unless @question_sheet.pages.length <= 1
+        @page = @question_sheet.pages.find(params[:id])
+        @page.destroy
 
-    #     @all_pages = @question_sheet.pages.find(:all)
-    #     @page = @all_pages[0]
+        @all_pages = @question_sheet.pages.find(:all)
+        @page = @all_pages[0]
 
-    #     respond_to do |format|
-    #       format.js
-    #     end
-    #   end
-    # end
+        respond_to do |format|
+          format.js
+        end
+      end
+    end
 
     # # Load panel using AJAX functionality.
     # # GET /pages/:id/show_panel
@@ -99,7 +104,7 @@ module Qe
     # end
 
     private
-    def detect_sheet
+    def detect_question_sheet
       @question_sheet = Qe::QuestionSheet.find(params[:question_sheet_id])
     end
 
