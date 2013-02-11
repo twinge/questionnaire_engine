@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Qe::Admin::QuestionSheetsController do 
 
-  before :all do 
+  before :each do 
     @qs = FactoryGirl.create(:question_sheet)  
   end
 
@@ -39,7 +39,6 @@ describe Qe::Admin::QuestionSheetsController do
       new_qs = { label: 'new_qs label'}
       post :create, use_route: :qe, question_sheet: new_qs
       Qe::QuestionSheet.count.should == 2
-      Qe::QuestionSheet.last.destroy
     end
   end
 

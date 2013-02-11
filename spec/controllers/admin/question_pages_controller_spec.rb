@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Qe::Admin::QuestionSheetsController do 
 
-  before(:all) do 
+  before(:each) do 
     @qs = Qe::QuestionSheet.create_with_page
     @page = @qs.pages.first
   end
