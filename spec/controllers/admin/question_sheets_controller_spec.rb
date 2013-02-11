@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Qe::Admin::QuestionSheetsController do 
 
-  before :each do 
+  before(:each) do 
     @qs = FactoryGirl.create(:question_sheet)  
   end
 
