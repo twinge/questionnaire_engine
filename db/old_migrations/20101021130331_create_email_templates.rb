@@ -1,3 +1,5 @@
+# added to engine
+
 class CreateEmailTemplates < ActiveRecord::Migration
   def self.up
     create_table EmailTemplate.table_name, :force => true do |t|
