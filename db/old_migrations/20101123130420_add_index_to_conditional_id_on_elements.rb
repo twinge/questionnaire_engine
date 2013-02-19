@@ -1,3 +1,5 @@
+# added to engine
+
 class AddIndexToConditionalIdOnSpElements < ActiveRecord::Migration
   def self.up
     add_index Element.table_name, :conditional_id

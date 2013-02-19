@@ -1,3 +1,5 @@
+# added to engine
+
 class AddMaxLengthToElement < ActiveRecord::Migration
   def self.up
     add_column Element.table_name, :max_length, :integer
