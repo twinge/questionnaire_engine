@@ -1,3 +1,5 @@
+# added to engine
+
 class AddHiddenToPage < ActiveRecord::Migration
   def self.up
     add_column :pages, :hidden, :boolean, :default => false

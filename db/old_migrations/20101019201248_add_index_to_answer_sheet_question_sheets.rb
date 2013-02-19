@@ -1,3 +1,6 @@
+# Not added to engine. Not planning to support many to many relationship
+#   between QuestionSheet and AnswerSheet.
+
 class AddIndexToAnswerSheetQuestionSheets < ActiveRecord::Migration
   def self.up
     add_index AnswerSheetQuestionSheet.table_name, :answer_sheet_id

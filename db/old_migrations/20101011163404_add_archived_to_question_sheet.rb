@@ -1,3 +1,5 @@
+# added to engine
+
 class AddArchivedToQuestionSheet < ActiveRecord::Migration
   def self.up
     add_column :question_sheets, :archived, :boolean, :default => false, :nil => false

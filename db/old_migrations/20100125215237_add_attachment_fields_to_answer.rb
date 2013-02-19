@@ -1,3 +1,5 @@
+# added to engine
+
 class AddAttachmentFieldsToAnswer < ActiveRecord::Migration
   def self.up
     add_column :answers, :size, :integer

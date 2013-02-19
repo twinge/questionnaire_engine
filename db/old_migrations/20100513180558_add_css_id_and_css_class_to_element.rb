@@ -1,3 +1,5 @@
+# added to engine
+
 class AddCssIdAndCssClassToElement < ActiveRecord::Migration
   def self.up
     add_column Element.table_name, :css_id, :string

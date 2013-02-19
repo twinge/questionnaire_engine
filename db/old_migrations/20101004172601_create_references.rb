@@ -1,3 +1,5 @@
+# added to engine
+
 class CreateReferences < ActiveRecord::Migration
   def self.up
     create_table ReferenceSheet.table_name do |t|

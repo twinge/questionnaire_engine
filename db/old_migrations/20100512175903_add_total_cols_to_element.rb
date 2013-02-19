@@ -1,3 +1,5 @@
+# added to engine
+
 class AddTotalColsToElement < ActiveRecord::Migration
   def self.up
     add_column Element.table_name, :total_cols, :string

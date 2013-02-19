@@ -1,3 +1,5 @@
+# added to engine
+
 class CreatePageElements < ActiveRecord::Migration
   def self.up
     create_table PageElement.table_name do |t|

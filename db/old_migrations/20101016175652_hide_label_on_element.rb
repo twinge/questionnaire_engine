@@ -1,3 +1,5 @@
+# added to engine
+
 class HideLabelOnElement < ActiveRecord::Migration
   def self.up
     add_column Element.table_name, :hide_label, :boolean, :default => false, :nil => false

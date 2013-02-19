@@ -1,3 +1,5 @@
+# added to engine
+
 class AddIsConfidentialToElement < ActiveRecord::Migration
   def self.up
     add_column Element.table_name, :is_confidential, :boolean

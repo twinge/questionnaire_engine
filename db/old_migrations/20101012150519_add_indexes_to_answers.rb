@@ -1,3 +1,5 @@
+# added to engine
+
 class AddIndexesToAnswers < ActiveRecord::Migration
   def self.up
     add_index Answer.table_name, :answer_sheet_id
