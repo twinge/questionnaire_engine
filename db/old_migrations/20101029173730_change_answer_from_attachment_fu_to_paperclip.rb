@@ -1,8 +1,10 @@
+# added to engine
+
 class ChangeAnswerFromAttachmentFuToPaperclip < ActiveRecord::Migration
   def self.up
-    rename_column Answer.table_name, :size, :attachment_file_size
-    rename_column Answer.table_name, :filename, :attachment_file_name
-    rename_column Answer.table_name, :content_type, :attachment_content_type
+    rename_column Answer.table_name, :size,               :attachment_file_size
+    rename_column Answer.table_name, :filename,           :attachment_file_name
+    rename_column Answer.table_name, :content_type,       :attachment_content_type
     add_column Answer.table_name, :attachment_updated_at, :datetime
     remove_column Answer.table_name, :height
     remove_column Answer.table_name, :width

@@ -5,8 +5,8 @@ class CreateQeCore < ActiveRecord::Migration
       rename_table(:question_sheet, Qe::QuestionSheet.table_name)
     else
       create_table Qe::QuestionSheet.table_name do |t|
-        t.string :label,     :limit => 100,       :null => false   # name used internally in admin
-        t.boolean :archived, :default => false,  :nil => false
+        t.string  :label,    :limit => 100,       :null => false   # name used internally in admin
+        t.boolean :archived, :default => false,   :nil => false
 
         t.timestamps
       end
@@ -92,16 +92,15 @@ class CreateQeCore < ActiveRecord::Migration
       create_table Qe::Answer.table_name do |t|
         t.integer :answer_sheet_id,  :null => false
         t.integer :question_id,      :null => false
-
+        
         t.text    :value
         t.string  :short_value,         :null => true, :limit => 255   # indexed copy of :response
-        t.integer :size
-        t.string  :content_type
-        t.string  :filename
-        t.integer :height
-        t.integer :width
-        t.integer :parent_id
-        t.string  :thumbnail
+        
+        # paperclip columns
+        t.integer :attachment_file_size
+        t.string  :attachment_content_type
+        t.string  :attachment_file_name
+        t.datetime :attachment_updated_at
 
         t.timestamps
       end
