@@ -1,0 +1,2 @@
+module Qe::AnswerPagesHelper
+end

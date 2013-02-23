@@ -1,4 +1,19 @@
 Qe::Engine.routes.draw do
+  
+  resources :reference_sheets
+  
+  resources :answer_sheets, :except => :new do
+    member do
+      post :send_reference_invite
+      post :submit
+    end
+    resources  :page, :controller => :answer_pages do
+                member do
+                  post :save_file
+                end
+    end
+  end                 
+  
 
   namespace :admin do
     resources :email_templates
