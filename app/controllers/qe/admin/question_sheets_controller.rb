@@ -2,18 +2,25 @@
 
 module Qe
   module Admin
-    class QuestionSheetsController < ::ApplicationController
+    class QuestionSheetsController < Qe::Admin::AdminControllers
       
+
       # GET /admin/question_sheets
       # GET /admin/question_sheets.json
       def index
-        @question_sheets = Qe::QuestionSheet.all
+        @active_question_sheets = Qe::QuestionSheet.active.order('label')
+        @archived_question_sheets = Qe::QuestionSheet.archived.order('label')
 
         respond_to do |format|
           format.html # index.html.erb
-          format.json { render json: @question_sheets }
+          format.json { render json: 
+            { active_question_sheets: @active_question_sheets, 
+              archived_question_sheets: @archived_question_sheets 
+            }
+          }
         end
       end
+
 
       # GET /admin/question_sheets/1
       # GET /admin/question_sheets/1.json
@@ -26,6 +33,7 @@ module Qe
         end
       end
 
+
       # GET /admin/question_sheets/new
       # GET /admin/question_sheets/new.json
       def new
@@ -37,14 +45,18 @@ module Qe
         end
       end
 
+
       # GET /admin/question_sheets/1/edit
+      # GET /admin/question_sheets/1/edit.json
       def edit
         @question_sheet = Qe::QuestionSheet.find(params[:id])
 
         respond_to do |format|
           format.js
+          format.json { render json: @question_sheet }
         end
       end
+
 
       # POST /admin/question_sheets
       # POST /admin/question_sheets.json

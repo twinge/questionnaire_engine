@@ -17,6 +17,9 @@ module Qe
       foreign_key: 'related_question_sheet_id'
 
 
+    scope :active, where(:archived => false)
+    scope :archived, where(:archived => true)
+
     attr_accessible :label
 
     def self.create_with_page
