@@ -1,11 +1,7 @@
 Qe::Engine.routes.draw do
-  
-  # namespace :admin do 
-  #   resources :question_sheets
-  # end
 
   namespace :admin do
-    # resources :email_templates
+    resources :email_templates
     
     resources :question_sheets do 
       member do
