@@ -16,6 +16,6 @@ class CreateQeReferenceSheets < ActiveRecord::Migration
     
       t.timestamps
     end
-    add_column Qe::Element.table_name, :related_question_sheet_id, :integer
+    add_column Qe::Element.table_name, :question_sheet_id, :integer
   end
 end
