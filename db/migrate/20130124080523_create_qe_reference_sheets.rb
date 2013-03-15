@@ -1,5 +1,9 @@
 class CreateQeReferenceSheets < ActiveRecord::Migration
   def change
+
+    if table_exists?(:reference_sheets)
+      rename_table(:reference_sheets, Qe::QuestionSheet.table_name)
+    else
     create_table Qe::ReferenceSheet.table_name do |t|
       t.integer :question_id
       t.integer :applicant_answer_sheet_id

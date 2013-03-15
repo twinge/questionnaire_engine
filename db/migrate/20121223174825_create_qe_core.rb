@@ -2,7 +2,7 @@ class CreateQeCore < ActiveRecord::Migration
   def change
 
     if table_exists?(:question_sheets)
-      rename_table(:question_sheet, Qe::QuestionSheet.table_name)
+      rename_table(:question_sheets, Qe::QuestionSheet.table_name)
     else
       create_table Qe::QuestionSheet.table_name do |t|
         t.string  :label,    :limit => 100,       :null => false   # name used internally in admin
