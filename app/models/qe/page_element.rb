@@ -12,11 +12,19 @@
 
 module Qe
   class PageElement < ActiveRecord::Base
-    belongs_to :page
-    belongs_to :element
 
-    attr_accessible :page_id, :element_id, :position
+    module PageElementModule
+      extend ActiveSupport::Concern
+      included do 
+        belongs_to :page
+        belongs_to :element
 
-    # acts_as_list :scope => :page
+        attr_accessible :page_id, :element_id, :position
+
+        # acts_as_list :scope => :page
+      end
+    end # PageElementModule
+
+    include PageElementModule
   end
 end

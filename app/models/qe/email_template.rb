@@ -13,8 +13,15 @@
 
 module Qe
   class EmailTemplate < ActiveRecord::Base
-    validates_presence_of :name
 
-    attr_accessible :name, :content, :enabled, :subject
+    module EmailTemplateModule
+      extend ActiveSupport::Concern
+      included do 
+        validates_presence_of :name
+        attr_accessible :name, :content, :enabled, :subject
+      end
+    end # EmailTemplateModule
+
+    include EmailTemplateModule
   end
 end  

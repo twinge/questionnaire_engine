@@ -33,6 +33,12 @@
 
 module Qe
   class Section < Element
-    
+    module SectionModule
+      extend ActiveSupport::Concern
+      included do 
+      end
+    end
+
+    include SectionModule
   end
 end
