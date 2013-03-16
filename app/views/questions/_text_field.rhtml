@@ -1,7 +1,8 @@
-<%= text_field_tag "answers[#{text_field.id}]", text_field.response(@application), 
+<%= text_field_tag "answers[#{text_field.id}]", text_field.response(@application),
       :class => "text #{text_field.question_grid_id.present? ? "col_#{text_field.question_grid_id}_#{col}" : ''}" + text_field.validation_class,
       :id => dom_id(text_field),
       :disabled => @application.frozen?&&!@presenter.reference?,
       :readonly => @application.frozen?&&!@presenter.reference?,
+      :placeholder => placeholder,
       :maxlength => 255 %>
 
