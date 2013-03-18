@@ -27,6 +27,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'capybara'  
+  s.add_development_dependency 'shoulda'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'factory_girl_rails'
 
 end
