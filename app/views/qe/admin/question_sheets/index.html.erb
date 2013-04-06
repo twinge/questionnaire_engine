@@ -12,7 +12,7 @@
       <th>Active Question Sheets</th>
       <th colspan="3">&nbsp;</th>
     </tr>
-    <% @active_question_sheets.each do |question_sheet| %>
+    <% for question_sheet in @active_question_sheets %>
       <tr class="<%= cycle("","alt") %>">
         <td class="title"><%= link_to question_sheet.label, qe.admin_question_sheet_path(question_sheet), :class => "questionnaire" %></td>
         <td class="actions"><%= link_to 'Duplicate', qe.duplicate_admin_question_sheet_path(question_sheet), :confirm => 'This will take some time depending on the number of questions. Please be patient.', :method => :post, :class => 'duplicate' %></td>
