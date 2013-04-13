@@ -17,8 +17,13 @@ Qe::Engine.routes.draw do
 
   namespace :admin do
     resources :email_templates
-    
+  
     resources :question_sheets do 
+      
+      collection do 
+        get :index_all
+      end
+
       member do
         post :archive
         post :unarchive

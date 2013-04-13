@@ -7,9 +7,21 @@ describe Qe::Admin::QuestionSheetsController do
   end
 
   describe 'GET index' do 
-    it 'with no question sheets' do 
+    it 'no question sheets' do 
       get :index, use_route: 'qe'
-      response.status.should == 200
+      response.status.should be(200)
+    end
+    
+    it 'JS no question sheets' do 
+      xhr :get, :index, use_route: :qe
+      response.status.should be(200)
+    end
+  end
+
+  describe 'GET index_all' do 
+    it 'JS simple request' do 
+      xhr :get, :index_all, use_route: :qe
+      response.status.should be(200)
     end
   end
   

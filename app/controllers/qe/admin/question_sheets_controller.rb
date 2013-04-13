@@ -5,11 +5,9 @@ module Qe
     class QuestionSheetsController < Qe::Admin::AdminControllers
       
       module M
-
         extend ActiveSupport::Concern
-        included do 
+        included do
         end
-
 
         # GET /admin/question_sheets
         # GET /admin/question_sheets.json
@@ -24,6 +22,16 @@ module Qe
                 archived_question_sheets: @archived_question_sheets 
               }
             }
+          end
+        end
+
+
+        # GET /admin/question_sheets/index_all.json
+        def index_all
+          @all_question_sheets = Qe::Question.order('label')
+
+          respond_to do |format|
+            format.json { render json: @all_question_sheets }
           end
         end
 
