@@ -1,5 +1,5 @@
 sqlite: &sqlite
-  adapter: sqlite3
+  adapter: jdbcsqlite3
 
 mysql: &mysql
   adapter: mysql<%= "2" unless ( ENV["TRAVIS_RUBY_VERSION"].include? "j" if ENV["TRAVIS_RUBY_VERSION"] ) %>
