@@ -2,7 +2,7 @@ module Qe
   module Admin 
     class ElementsController < Qe::Admin::AdminControllers
       
-      module ElementsControllerModule
+      module M
         extend ActiveSupport::Concern
         included do 
           before_filter :detect_page
@@ -195,9 +195,9 @@ module Qe
           def detect_page
             @page = Qe::Page.find(params[:page_id])
           end
-      end # ElementsControllerModule
+      end
 
-      include ElementsControllerModule
+      include M
     end
   end
 end

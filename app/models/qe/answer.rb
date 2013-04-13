@@ -18,7 +18,7 @@
 module Qe
   class Answer < ActiveRecord::Base
 
-    module AnswerModule
+    module M
       extend ActiveSupport::Concern
       included do 
         belongs_to :answer_sheet
@@ -44,8 +44,8 @@ module Qe
       def set_value_from_filename
         value = short_value = attachment_file_name if attachment_file_name.present?
       end
-    end # include AnswerModule
+    end
 
-    include AnswerModule
+    include M
   end
 end

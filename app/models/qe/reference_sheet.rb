@@ -22,7 +22,7 @@
 module Qe
   class ReferenceSheet < ActiveRecord::Base
     
-    module ReferenceSheetModule
+    module M
       extend ActiveSupport::Concern
       included do 
 
@@ -64,8 +64,8 @@ module Qe
       def ptemplate
         style 
       end
-    end # ReferenceSheetModule
+    end
 
-    include ReferenceSheetModule
+    include M
   end
 end

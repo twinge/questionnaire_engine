@@ -13,7 +13,7 @@
 module Qe
   class PageElement < ActiveRecord::Base
 
-    module PageElementModule
+    module M
       extend ActiveSupport::Concern
       included do 
         belongs_to :page
@@ -23,8 +23,8 @@ module Qe
 
         # acts_as_list :scope => :page
       end
-    end # PageElementModule
+    end
 
-    include PageElementModule
+    include M
   end
 end

@@ -34,7 +34,7 @@
 module Qe
   class Question < Element
 
-    module QuestionModule
+    module M
       extend ActiveSupport::Concern
       included do 
 
@@ -239,7 +239,7 @@ module Qe
       end
     end # QuestionModule
 
-    include QuestionModule
+    include M
   end
 end
 

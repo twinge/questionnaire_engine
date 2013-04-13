@@ -12,7 +12,7 @@
 module Qe
   class AnswerSheet < ActiveRecord::Base
     
-    module AnswerSheetModule
+    module M
       extend ActiveSupport::Concern
       included do 
         belongs_to :question_sheet
@@ -80,8 +80,8 @@ module Qe
       def collat_title
         "" 
       end
-    end # AnswerSheetModule
+    end
 
-    include AnswerSheetModule
+    include M
   end
 end

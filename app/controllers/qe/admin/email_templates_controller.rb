@@ -2,8 +2,7 @@ module Qe
   module Admin
     class EmailTemplatesController < Qe::Admin::AdminControllers
       
-      module EmailTemplatesControllerModule
-
+      module M
         # GET /admin/email_templates
         # GET /admin/email_templates.json
         def index 
@@ -83,9 +82,9 @@ module Qe
             format.json { head :no_content }
           end
         end
-      end # EmailTempaltesControllerModule
+      end
 
-      include EmailTemplatesControllerModule
-    end # EmailTemplatesController
-  end # Admin
-end # Qe
+      include M
+    end
+  end
+end

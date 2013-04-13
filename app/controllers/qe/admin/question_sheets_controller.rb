@@ -4,7 +4,7 @@ module Qe
   module Admin
     class QuestionSheetsController < Qe::Admin::AdminControllers
       
-      module QuestionSheetsControllerModule
+      module M
 
         extend ActiveSupport::Concern
         included do 
@@ -109,9 +109,9 @@ module Qe
             format.json { head :no_content }
           end
         end
-      end # QuestionSheetsControllerModule
+      end
 
-      include QuestionSheetsControllerModule
-    end # QuestionSheetsController
-  end # Admin
-end # Qe
+      include M
+    end
+  end
+end

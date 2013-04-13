@@ -1,7 +1,7 @@
 module Qe
   class AnswerPagesController < BaseController
     
-    module AnswerPagesControllerModule
+    module M
       extend ActiveSupport::Concern
       included do 
         before_filter :get_answer_sheet, :only => [:edit, :update, :save_file, :index]
@@ -76,8 +76,8 @@ module Qe
       def answer_sheet_type
         (params[:answer_sheet_type] || Qe.answer_sheet_class || 'Qe::AnswerSheet').constantize
       end
-    end # AnswerPagesControllerModule
+    end
 
-    include AnswerPagesControllerModule
+    include M
   end
 end

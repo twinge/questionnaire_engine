@@ -2,7 +2,7 @@ module Qe
   module Admin
     class QuestionPagesController < Qe::Admin::AdminControllers
       
-      module QuestionPagesControllerModule
+      module M
         extend ActiveSupport::Concern
         included do 
           before_filter :detect_question_sheet
@@ -123,9 +123,9 @@ module Qe
         def untitled_labels
           Qe::Page.find(:all, :conditions => %{label like 'Page%'}).map {|s| s.label}
         end
-      end # QuestionPagesControllerModule
+      end
 
-      include QuestionPagesControllerModule
+      include M
     end
   end
 end

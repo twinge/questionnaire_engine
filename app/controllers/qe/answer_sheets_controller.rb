@@ -1,7 +1,7 @@
 module Qe
   class AnswerSheetsController < BaseController
 
-    module AnswerSheetsControllerModule
+    module M
       extend ActiveSupport::Concern
       included do 
         before_filter :get_answer_sheet, :only => [:edit, :show, :send_reference_invite, :submit]
@@ -92,8 +92,8 @@ module Qe
         end
         return true
       end
-    end # AnswerSheetsControllerModule
+    end
 
-    include AnswerSheetsControllerModule
+    include M
   end
 end

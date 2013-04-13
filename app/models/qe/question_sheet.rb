@@ -12,7 +12,7 @@
 module Qe
   class QuestionSheet < ActiveRecord::Base
 
-    module QuestionSheetModule
+    module M
       extend ActiveSupport::Concern
       included do 
         has_many :answer_sheets
@@ -85,9 +85,9 @@ module Qe
 
       def check_for_answers
       end
-    end # QuestionSheetModule
+    end
 
-    include QuestionSheetModule
+    include M
   end
 end
 

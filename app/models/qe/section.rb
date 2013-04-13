@@ -33,12 +33,13 @@
 
 module Qe
   class Section < Element
-    module SectionModule
+    
+    module M
       extend ActiveSupport::Concern
       included do 
       end
     end
 
-    include SectionModule
+    include M
   end
 end

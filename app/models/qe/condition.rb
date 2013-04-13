@@ -15,7 +15,7 @@
 module Qe
   class Condition < ActiveRecord::Base
     
-    module ConditionModule
+    module M
       extend ActiveSupport::Concern
       included do 
         belongs_to :question_sheet
@@ -58,9 +58,8 @@ module Qe
         
         js
       end
-    end # ConditionModule
+    end
     
-    include ConditionModule
-    
+    include M
   end
 end

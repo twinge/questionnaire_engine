@@ -1,7 +1,7 @@
 module Qe
   class ReferenceSheetsController < AnswerSheetsController
 
-    module ReferenceSheetsControllerModule
+    module M
       extend ActiveSupport::Concern
       included do 
         skip_before_filter :ssm_login_required, :login
@@ -38,8 +38,8 @@ module Qe
       def edit_only
         return false
       end  
-    end # ReferenceSheetsControllerModule
+    end
 
-    include ReferenceSheetsControllerModule
+    include M
   end
 end
