@@ -19,7 +19,7 @@
       </label>
     <% end -%>
     
-    <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil} %>
+    <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil, :placeholder => ''} %>
 </div>
 </li>
 <%- end -%>
