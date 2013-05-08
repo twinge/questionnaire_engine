@@ -2,9 +2,9 @@ class ElementsController < ApplicationController
   unloadable
   before_filter :check_valid_user
   layout 'admin'
-  
+
   before_filter :get_page
-  
+
   # GET /elements/1
   def show
     @element = Element.find(params[:id])
@@ -17,13 +17,13 @@ class ElementsController < ApplicationController
   # GET /element/1/edit
   def edit
     @element = @page.elements.find(params[:id])
-    
+
     # for dependencies
     if @element.question?
       (3 - @element.conditions.length).times { @element.conditions.build }
-      @questions_before_this = @page.questions_before_position(@element.position) 
+      @questions_before_this = @page.questions_before_position(@element.position)
     end
-    
+
     respond_to do |format|
       format.js
     end
@@ -64,29 +64,29 @@ class ElementsController < ApplicationController
     @element.destroy
 
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
-  
-  def reorder 
+
+  def reorder
     # since we don't know the name of the list, just find the first param that is an array
-    params.each_key do |key| 
+    params.each_key do |key|
       if key.include?('questions_list')
         @page.elements.each do |element|
           if params[key].index(element.id.to_s)
-            element.position = params[key].index(element.id.to_s) + 1 
+            element.position = params[key].index(element.id.to_s) + 1
             element.save
             @element = element
           end
         end
       end
     end
-    
+
     respond_to do |format|
       format.js
     end
   end
-  
+
   def drop
     element = Element.find(params[:draggable_element].split('_')[1])  # element being dropped
     # abort if the element is already in this box
@@ -97,7 +97,7 @@ class ElementsController < ApplicationController
       element.save
     end
   end
-  
+
   def remove_from_grid
     element = Element.find(params[:id])
     element.position = element.question_grid.position
@@ -105,7 +105,7 @@ class ElementsController < ApplicationController
     element.save
     render :action => :drop
   end
-  
+
   def duplicate
     element = Element.find(params[:id])
     @element = element.duplicate
@@ -113,10 +113,10 @@ class ElementsController < ApplicationController
       format.js {render :action => :create}
     end
   end
-  
+
   private
   def get_page
     @page = Page.find(params[:page_id])
   end
-  
+
 end
