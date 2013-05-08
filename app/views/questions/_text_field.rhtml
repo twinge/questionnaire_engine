@@ -3,5 +3,6 @@
       :id => dom_id(text_field),
       :disabled => @application.frozen?&&!@presenter.reference?,
       :readonly => @application.frozen?&&!@presenter.reference?,
+      :placeholder => placeholder,
       :maxlength => 255 %>
 
