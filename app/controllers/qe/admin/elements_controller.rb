@@ -200,7 +200,7 @@ module Qe
       end
 
       include Qe::Admin::BaseControllerConfigs
-      include Qe::Admin::ElementsController::M
+      include M
     end
   end
 end

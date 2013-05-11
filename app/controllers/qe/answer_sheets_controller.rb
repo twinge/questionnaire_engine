@@ -90,6 +90,6 @@ module Qe
 		end
 
 		include Qe::BaseControllerConfigs
-	  include Qe::AnswerSheetsController::M
+	  include M
 	end
 end

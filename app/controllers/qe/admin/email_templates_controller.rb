@@ -69,7 +69,7 @@ module Qe
     	end
 
       include Qe::Admin::BaseControllerConfigs
-      include Qe::Admin::EmailTemplatesController::M
+      include M
     end
   end
 end

@@ -79,6 +79,6 @@ module Qe
 		end
 		
 		include Qe::BaseControllerConfigs
-		include Qe::AnswerPagesController::M
+		include M
 	end
 end

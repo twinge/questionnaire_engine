@@ -106,7 +106,7 @@ module Qe
       end
 
       include Qe::Admin::BaseControllerConfigs
-      include Qe::Admin::QuestionSheetsController::M   
+      include M
     end
   end
 end
