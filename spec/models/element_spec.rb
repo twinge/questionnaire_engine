@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe Qe::Element do 
-	before(:each) do
-		@element = create(:element)
-		@element.save!
-	end
-	it "check label" do
-		@element.label.should_not be_empty
-	end
+  it { should belong_to :question_sheet }
+  it { should belong_to :question_grids }
+  it { should belong_to :choice_fields }
+  it { should have_many :page_elements }
+  it { should have_many :pages }
+  it { should ensure_inclusion_of(:kind).in_array(Qe::Element::KINDS)}
+  
+  xit { should validate_presence_of :label }
+  xit 'validate max label length = 255'
 end
