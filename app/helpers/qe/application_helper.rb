@@ -1,6 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module Qe
   module ApplicationHelper
+    
     def pretty_tag(txt)
       txt.to_s.gsub(/\s/, "_").gsub(/(?!-)\W/, "").downcase
     end
