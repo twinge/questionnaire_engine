@@ -1,16 +1,13 @@
 require 'spec_helper'
 
 describe Qe::Admin::ElementsController do
+	
 	before(:each) do
-		@question_sheet = create(:qs_with_page)
+		@question_sheet = FactoryGirl.create(:qs_with_page)
 		@page = @question_sheet.pages.first
 
 		@text_field = @page.elements.first
 		@text_field.kind.should == 'Qe::TextField'
-	end
-
-	it 'object check' do
-		@page.elements.count.should == 1
 	end
 
 	it "GET new" do
@@ -88,6 +85,7 @@ describe Qe::Admin::ElementsController do
 			@page.elements.count.should == 2
 		end
 	end
+
 	it "PUT destroy" do
 		xhr :delete, :destroy,
 			use_route: 'qe',
@@ -97,4 +95,5 @@ describe Qe::Admin::ElementsController do
 
 		@page.elements.count.should == 0
 	end
+
 end

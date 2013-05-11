@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Qe::AnswerPagesController do
+  
   before(:each) do
-    @question_sheet = create(:qs_with_page)
+    @question_sheet = FactoryGirl.create(:qs_with_page)
     @page = @question_sheet.pages.first
 
     # create answer_sheet_question_sheets object
@@ -41,4 +42,5 @@ describe Qe::AnswerPagesController do
       id: @page.id,
       answers: answers_hash
   end
+  
 end

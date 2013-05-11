@@ -5,7 +5,7 @@ describe Qe::Admin::QuestionSheetsController do
   before(:each) do
     request.env["HTTP_REFERER"] = "something"
 
-    @question_sheet = create(:qs_with_page)
+    @question_sheet = FactoryGirl.create(:qs_with_page)
     @page = @question_sheet.pages.first
 
     # create answer_sheet_question_sheets object
@@ -14,6 +14,7 @@ describe Qe::Admin::QuestionSheetsController do
     @text_field = @page.elements.first
     @text_field.kind.should == 'Qe::TextField'
   end
+
   it 'GET index' do
     get :index,
       use_route: 'qe'

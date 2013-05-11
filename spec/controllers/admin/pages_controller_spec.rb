@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Qe::Admin::QuestionPagesController do
 
 	before(:each) do
-		@question_sheet = create(:qs_with_page)
+		@question_sheet = FactoryGirl.create(:qs_with_page)
 		@page = @question_sheet.pages.first
 
 		@text_field = @page.elements.first
