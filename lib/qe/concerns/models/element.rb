@@ -72,7 +72,9 @@ module Qe
                           :total_cols, 
                           :updated_at, 
                           :value_xpath,
-                          :element
+                          :element, 
+                          :text_path, 
+                          :question_sheet_id
         
 
           # HUMANIZED_ATTRIBUTES = {
