@@ -19,6 +19,9 @@ require 'qe/model_extensions'
 ## models
 Dir[File.dirname(__FILE__) + '/qe/concerns/models/*.rb'].each {|file| require file }
 
+require 'qe/option'
+require 'qe/option_group'
+
 ## presenters
 require 'qe/concerns/presenters/presenter'
 require 'qe/concerns/presenters/answer_pages_presenter'
