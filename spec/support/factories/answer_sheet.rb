@@ -1,5 +1,7 @@
 FactoryGirl.define do
-	factory :answer_sheet do
-		association :question_sheet
+	
+  factory :answer_sheet, class: Qe::AnswerSheet do
+		# association :question_sheet
 	end
+
 end
