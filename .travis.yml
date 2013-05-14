@@ -1,0 +1,27 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - jruby-19mode
+  
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
+
+before_script:
+  - rake app:db:create
+  - rake app:db:migrate
+  - rake app:db:test:prepare
+
+# using default travis command
+# script: bundle exec rake spec
+
+after_script:
+  - rake app:db:rollback
+
+branches:
+  only:
+    - engine
+    - engine2
