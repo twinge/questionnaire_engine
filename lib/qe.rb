@@ -13,12 +13,6 @@ module Qe
 end
 
 require 'qe/model_extensions'
-
-# ACTIVE SUPPORT CONCERN FILES
-
-## models
-Dir[File.dirname(__FILE__) + '/qe/concerns/models/*.rb'].each {|file| require file }
-
 require 'qe/option'
 require 'qe/option_group'
 require 'qe/page_link'
