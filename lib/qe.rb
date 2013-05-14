@@ -21,6 +21,7 @@ Dir[File.dirname(__FILE__) + '/qe/concerns/models/*.rb'].each {|file| require fi
 
 require 'qe/option'
 require 'qe/option_group'
+require 'qe/page_link'
 
 ## presenters
 require 'qe/concerns/presenters/presenter'
