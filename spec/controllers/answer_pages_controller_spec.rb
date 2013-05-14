@@ -2,18 +2,18 @@ require 'spec_helper'
 
 describe Qe::AnswerPagesController do
   
-  before(:each) do
-    @question_sheet = FactoryGirl.create(:qs_with_page)
-    @page = @question_sheet.pages.first
+  # before(:each) do
+  #   @question_sheet = FactoryGirl.create(:qs_with_page)
+  #   @page = @question_sheet.pages.first
 
-    # create answer_sheet_question_sheets object
-    @answer_sheet = @question_sheet.answer_sheets.create!
+  #   # create answer_sheet_question_sheets object
+  #   @answer_sheet = @question_sheet.answer_sheets.create!
 
-    @text_field = @page.elements.first
-    @text_field.kind.should == 'Qe::TextField'
-  end
+  #   @text_field = @page.elements.first
+  #   @text_field.kind.should == 'Qe::TextField'
+  # end
   
-  it 'GET edit' do
+  xit 'GET edit' do
     get :edit, use_route: 'qe',
       answer_sheet_id: @answer_sheet.id,
       a: 'test anchor',
@@ -21,7 +21,7 @@ describe Qe::AnswerPagesController do
   end
 
   # TODO test controller for references
-  it 'PUT update' do
+  xit 'PUT update' do
     questions = Qe::Page.find(@page.id).questions
     question2 = @page.questions.build(:kind => 'Qe::TextField', :style => 'qe/text_field')
     question2.save!

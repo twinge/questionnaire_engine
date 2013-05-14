@@ -104,10 +104,10 @@ module Qe
       def duplicate(page, parent = nil)
 
         # remove the id, so db table has only 1 primary key
-        attributes = self.attributes
-        attributes[:id] = nil
-
-        new_element = self.class.new(attributes)
+        attrs = self.attributes.
+          delete_if{|k,v| ['id', 'created_at', 'updated_at'].include?(k) }
+        
+        new_element = self.class.new(attrs)
 
         case parent.class.to_s
                               when Qe::ChoiceField

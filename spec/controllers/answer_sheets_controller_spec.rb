@@ -14,29 +14,24 @@ describe Qe::AnswerSheetsController do
     @text_field.kind.should == 'Qe::TextField'
   end
   
-  it 'object check' do
-    @page.elements.count.should == 1
-    Qe::AnswerSheet.all.count.should == 1
-  end
-
-  it 'GET index' do
+  xit 'GET index' do
     get :index, use_route: 'qe'
   end
   
-  it 'POST create' do
+  xit 'POST create' do
     post :create, use_route: 'qe',
       question_sheet_id: @question_sheet.id
 
     @created = Qe::AnswerSheet.all.count.should == 2
   end
   
-  it 'GET edit' do
+  xit 'GET edit' do
     get :edit, use_route: 'qe',
       id: @answer_sheet.id,
       a: 'test anchor'
   end
   
-  it 'GET show' do
+  xit 'GET show' do
     get :show,
       use_route: 'qe',
       question_sheet_id: @question_sheet.id,
@@ -44,7 +39,7 @@ describe Qe::AnswerSheetsController do
 
   end
   
-  it 'POST submit' do
+  xit 'POST submit' do
     post :submit,
       use_route: 'qe',
       id: @answer_sheet.id
