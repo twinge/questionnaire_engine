@@ -3,6 +3,15 @@
 
 module Qe
 	class StateChooser < Question
-    include Qe::Concerns::Models::StateChooser
+    
+    module M
+      extend ActiveSupport::Concern
+    
+      def choices(country = 'US')
+        @states = Carmen::states(country)
+      end
+    end
+
+    include M
   end
 end

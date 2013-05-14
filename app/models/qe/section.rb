@@ -1,5 +1,4 @@
-# Section
-# - Represents a subheading
+# Section represents a subheading
 
 # :kind         - 'Section' for single table inheritance (STI)
 # :label        - title for this section such as "Contact information"
@@ -7,7 +6,6 @@
 # :content      - ? instructions, agreements, etc. to display
 
 module Qe
-	class Section < Element  
-    include Qe::Concerns::Models::Section
+	class Section < Element      
   end
 end
