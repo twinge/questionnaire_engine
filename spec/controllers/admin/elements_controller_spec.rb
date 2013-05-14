@@ -38,17 +38,15 @@ describe Qe::Admin::ElementsController do
       id: @page.elements.first.id
   end
 
-  it "PUT update" do
-    # set label to different value
+  it 'PUT update' do
     new_label = 'new and revised label'
-    @text_field.label = new_label
 
     # update the text field
     xhr :put, :update,
       use_route: 'qe',
       page_id: @page.id,
       id: @text_field.id,
-      element: @text_field.attributes
+      element: {label: new_label}
 
     # retreave and confirm the same object by id
     @updated_text_field = Qe::Element.all.first
