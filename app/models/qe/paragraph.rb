@@ -1,5 +1,14 @@
 module Qe
 	class Paragraph < Element
-    include Qe::Concerns::Models::Paragraph
+    
+    module M
+      extend ActiveSupport::Concern
+
+      included do
+        validates_presence_of :content, :on => :update 
+      end
+    end
+
+    include M
   end
 end
