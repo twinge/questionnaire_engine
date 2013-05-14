@@ -19,5 +19,5 @@ require 'qe/page_link'
 require 'qe/question_set'
 
 ## presenters
-require 'qe/concerns/presenters/presenter'
-require 'qe/concerns/presenters/answer_pages_presenter'
+# require 'qe/concerns/presenters/presenter'
+# require 'qe/concerns/presenters/answer_pages_presenter'
