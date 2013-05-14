@@ -1,8 +1,0 @@
-notes.txt
-
-1. 
-Currently, QuestionSheet has_many AnswerSheets and AnswerSheet has_many 
-QuestionSheets. Is this a good relationship? Shouldn't it be that
-AnswerSheet belongs_to QuestionSheet, and QuestionSheet has_many
-AnswerSheets?
-
