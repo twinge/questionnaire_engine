@@ -1,4 +1,4 @@
-{<img src="https://secure.travis-ci.org/westonplatter/questionnaire_engine.png?branch=engine" alt="Build Status" />}[https://secure.travis-ci.org/westonplatter/questionnaire_engine]
+{<img src="https://secure.travis-ci.org/twinge/questionnaire_engine.png?branch=engine" alt="Build Status" />}[https://secure.travis-ci.org/twinge/questionnaire_engine]
 
 
 = Questionnaire Engine  
