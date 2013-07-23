@@ -4,6 +4,10 @@
   <%= hidden_field_tag 'element[style]', 'file' %>
 </p>
 <p>
+  <label for="element_tip" class="desc">Tip</label>
+  <%= f.text_area :tip, :cols => 30, :rows => 5 %>
+</p>s
+<p>
   <label for="element_slug" class="desc">Variable (Slug)</label>
   <%= f.text_field :slug %>
 <p>

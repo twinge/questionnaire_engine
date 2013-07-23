@@ -15,8 +15,10 @@
     
       <label for="<%= dom_id(element) %>" class="desc">
         <%= element.label %>
+        <%= tip(element.tip) if element.tip.present? %>
         <% if element.required? -%><span class="required">required</span><% end -%>
       </label>
+
     <% end -%>
     
     <%= render :partial => 'questions/' + element.template, :object => element, :locals => {:col => nil, :placeholder => ''} %>
