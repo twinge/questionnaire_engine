@@ -1,15 +1,15 @@
 <div id="<%= dom_id(yes_no) %>" style="white-space: nowrap;">
 <% css_class = ' ' -%>
 <% yes_no.choices.each_with_index do |choice, num| -%>
-  <% dom_id = dom_id(yes_no) + "_" + pretty_tag(choice[1]) 
+  <% dom_id = dom_id(yes_no) + "_" + pretty_tag(choice[1])
      last_choice =  (num == yes_no.choices.length - 1)
      css_class += yes_no.validation_class if last_choice
      checked = yes_no.has_answer?(choice[1],@application) -%>
-  <%= radio_button_tag "answers[#{yes_no.id}]", choice[1], checked, 
-        :id => dom_id, 
+  <%= radio_button_tag "answers[#{yes_no.id}]", choice[1], checked,
+        :id => dom_id,
         :class => css_class,
-        :disabled => @application.frozen?&&!@presenter.reference?,
-        :readonly => @application.frozen?&&!@presenter.reference? %>
+        :disabled => @application.frozen?&&!@presenter.reference? || yes_no.frozen?,
+        :readonly => @application.frozen?&&!@presenter.reference? || yes_no.frozen? %>
   <label class="choice horiz" for="<%= dom_id %>"><%= choice[0] %></label>
 <% end -%>
 </div>

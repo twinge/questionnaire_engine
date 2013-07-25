@@ -1,6 +1,6 @@
-<%= select_tag "answers[#{drop_down_field.id}]", 
-      options_for_select([""] + drop_down_field.choices, drop_down_field.response(@application).to_s), 
-      :class => 'select ' + drop_down_field.validation_class, 
+<%= select_tag "answers[#{drop_down_field.id}]",
+      options_for_select([""] + drop_down_field.choices, drop_down_field.response(@application).to_s),
+      :class => 'select ' + drop_down_field.validation_class,
       :id => dom_id(drop_down_field),
-      :disabled => @application.frozen?&&!@presenter.reference?,
-      :readonly => @application.frozen?&&!@presenter.reference? %>
+      :disabled => @application.frozen?&&!@presenter.reference? || drop_down_field.frozen?,
+      :readonly => @application.frozen?&&!@presenter.reference? || drop_down_field.frozen? %>

@@ -2,8 +2,8 @@
       :buttons => false,
       :class => 'text ' + date_field.validation_class,
       :id => dom_id(date_field),
-      :year_range => 35.years.ago..7.years.from_now, 
-      :disabled => @application.frozen?&&!@presenter.reference?,
-      :readonly => @application.frozen?&&!@presenter.reference? %>
+      :year_range => 35.years.ago..7.years.from_now,
+      :disabled => @application.frozen?&&!@presenter.reference? || date_field.frozen?,
+      :readonly => @application.frozen?&&!@presenter.reference? || date_field.frozen? %>
 <div id="advice-validate-date-<%= dom_id(date_field) %>" class="validation-advice" style="display: none;">Please enter a valid date (MM/DD/YYYY).</div>
 <div id="advice-required-<%= dom_id(date_field) %>" class="validation-advice" style="display: none;">This is a required field.</div>

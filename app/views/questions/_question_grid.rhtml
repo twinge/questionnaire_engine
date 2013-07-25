@@ -28,10 +28,10 @@
     <% end %>
   	<tr >
   		<%- col_count = 0
-  			question_grid.elements.each do |element| -%>
+        question_grid.elements.each do |element|
+        element.freeze if question_grid.frozen? -%>
   			<td id="element_<%= element.id %>">
-  				<% grid_el = @elements.to_a.find {|el| el.id == element.id} %>
-  				<%= render :partial => 'answer_pages/element', :object => grid_el, :locals => {:in_grid => true, :col => col_count} %>
+  				<%= render :partial => 'answer_pages/element', :object => element, :locals => {:in_grid => true, :col => col_count} %>
   			</td>
   			<%- 	col_count += 1
   					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 -%></tr><tr><%- end -%>

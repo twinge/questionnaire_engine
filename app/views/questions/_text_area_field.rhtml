@@ -1,6 +1,6 @@
-<%= text_area_tag "answers[#{text_area_field.id}]", text_area_field.response(@application), 
+<%= text_area_tag "answers[#{text_area_field.id}]", text_area_field.response(@application),
       :class => "text #{text_area_field.style} " + text_area_field.validation_class,
       :id => dom_id(text_area_field),
       :rows => 8,
-      :disabled => @application.frozen?&&!@presenter.reference?,
-      :readonly => @application.frozen?&&!@presenter.reference? %>
+      :disabled => @application.frozen?&&!@presenter.reference? || text_area_field.frozen?,
+      :readonly => @application.frozen?&&!@presenter.reference? || text_area_field.frozen? %>
