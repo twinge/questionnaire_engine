@@ -1,7 +1,7 @@
 <div id="<%= dom_id(radio_button_field) %>">
 <% css_class = 'radio ' -%>
 <% radio_button_field.choices.each_with_index do |choice, num| -%>
-  <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1])
+  <% dom_id = dom_id(radio_button_field) + "_" + pretty_tag(choice[1]) + (radio_button_field.frozen? ? '_frozen' : '')
      last_choice =  (num == radio_button_field.choices.length - 1)
      css_class += radio_button_field.validation_class if last_choice
      checked = radio_button_field.has_answer?(choice[1]) -%>

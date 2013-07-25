@@ -1,11 +1,11 @@
 <%= file_field_tag "answers[#{attachment_field.id}]",
       :class => 'text ' + attachment_field.validation_class,
-      :id => dom_id(attachment_field),
+      :id => dom_id(attachment_field) + (attachment_field.frozen? ? '_frozen' : ''),
       :disabled => @application.frozen?&&!@presenter.reference? || attachment_field.frozen?,
       :readonly => @application.frozen?&&!@presenter.reference? || attachment_field.frozen?,
       :maxlength => 255 %>
 <% if @presenter %>
-  <% dom_id = @presenter.active_page.dom_id %>
+  <% dom_id = @presenter.active_page.dom_id + (attachment_field.frozen? ? '_frozen' : '') %>
   <%= image_tag 'questionnaire_engine/ajax-loader.gif',
       :id => "#{dom_id}-spinner", :style => "display:none;" %>
   <%= button_to_function("Attach File", "submitToFrame('#{dom_id}', '#{save_file_answer_page_path(@presenter.active_answer_sheet, @page, :question_id => attachment_field.id)}')") %><br/>

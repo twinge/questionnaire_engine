@@ -8,7 +8,7 @@
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
 
   <div style="border: solid 1px #dadada; padding: 9px;">
-  	<ul class="questions" id="questions_list_<%= question_grid.id %>">
+  	<ul class="questions" id="questions_list_<%= question_grid.id.to_s + (question_grid.frozen? ? '_frozen' : '') %>">
   	<%- if question_grid.elements.length > 0 -%>
       <%= render :partial => 'question_pages/element', :collection => question_grid.elements, :locals => {:in_grid => true} %>
   	<%- else -%>
@@ -17,7 +17,7 @@
      </ul>
   </div>
   <%- else -%>
-  	<table class="grid <%= question_grid.css_class %>" id="<%= question_grid.css_id %>">
+  	<table class="grid <%= question_grid.css_class %>" id="<%= question_grid.css_id.to_s + (question_grid.frozen? ? '_frozen' : '') %>">
 	  <% headers = question_grid.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
     	<tr>
@@ -30,7 +30,7 @@
   		<%- col_count = 0
         question_grid.elements.each do |element|
         element.freeze if question_grid.frozen? -%>
-  			<td id="element_<%= element.id %>">
+  			<td id="element_<%= element.id.to_s + (element.frozen? ? '_frozen' : '') %>">
   				<%= render :partial => 'answer_pages/element', :object => element, :locals => {:in_grid => true, :col => col_count} %>
   			</td>
   			<%- 	col_count += 1

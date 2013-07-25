@@ -3,7 +3,7 @@
 -%>
 <%= check_box_tag "answers[#{acceptance.id}]", '1',
        checked,
-      :id => dom_id(acceptance),
+      :id => dom_id(acceptance) + (acceptance.frozen? ? '_frozen' : ''),
       :class => css_class,
       :disabled => @application.frozen?&&!@presenter.reference? || acceptance.frozen?,
       :readonly => @application.frozen?&&!@presenter.reference? || acceptance.frozen? %>
