@@ -1,9 +1,12 @@
-<%= drop_receiving_element("element_#{question_grid.id}", 
+<%= drop_receiving_element("element_#{question_grid.id}",
       :url => drop_question_page_element_path(question_grid.question_sheet_id, question_grid.page_id, question_grid.id),
       :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
-
+  <label class="desc">
+    <%= question_grid.label %>
+    <%= tip(question_grid.tip) if question_grid.tip.present? %>
+  </label>
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
-  <label class="desc"><%= question_grid.label %></label>
+
   <div style="border: solid 1px #dadada; padding: 9px;">
   	<ul class="questions" id="questions_list_<%= question_grid.id %>">
   	<%- if question_grid.elements.length > 0 -%>
@@ -14,7 +17,6 @@
      </ul>
   </div>
   <%- else -%>
-  <label class="desc"><%= question_grid.label %></label>
   	<table class="grid <%= question_grid.css_class %>" id="<%= question_grid.css_id %>">
 	  <% headers = question_grid.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
@@ -34,7 +36,7 @@
   			<%- 	col_count += 1
   					if col_count % question_grid.num_cols == 0  && element != question_grid.elements.last then col_count = 0 -%></tr><tr><%- end -%>
   		<%-	end -%>
-  		<%- while col_count < question_grid.num_cols do 
+  		<%- while col_count < question_grid.num_cols do
   				col_count += 1-%>
   				<td>&nbsp;</td>
   		<%- end unless col_count == 0-%>

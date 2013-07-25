@@ -1,5 +1,8 @@
+<label class="desc">
+  <%= question_grid_with_total.label %>
+  <%= tip(question_grid_with_total.tip) if question_grid_with_total.tip.present? %>
+</label>
 <%- if ['question_pages', 'question_sheets', 'elements'].include?(controller.controller_name) -%>
-  <label class="desc"><%= question_grid_with_total.label %></label>
   <div style="border: solid 1px #dadada; padding: 9px;">
   	<ul class="questions" id="questions_list_<%= question_grid_with_total.id %>">
   	<%- if question_grid_with_total.elements.length > 0 -%>
@@ -14,7 +17,6 @@
       :with => "'draggable_element=' + encodeURIComponent(element.id)") %>
       
 <%- else -%>
-  <label class="desc"><%= question_grid_with_total.label %></label>
   	<table class="grid">
 	  <% headers = question_grid_with_total.cols.to_s.split(';') %>
 	  <% if headers.detect {|h| h.strip.present?} %>
