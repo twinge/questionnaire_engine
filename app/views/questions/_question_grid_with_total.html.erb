@@ -48,7 +48,7 @@
       	    (question_grid_with_total.num_cols - 1).times do |i|
       	      if total_cols.include?(i + 2) -%>
             	  <td>
-            	    <%= text_field_tag "total_#{question_grid_with_total.id}_#{i + 1}", '', :class => 'text validate-number', :readonly => true %>
+                  <%= text_field_tag "total_#{question_grid_with_total.id}_#{i + 1}#{'_frozen' if question_grid_with_total.frozen?}", '', :class => 'text validate-number', :readonly => true %>
             	  </td>
             <% else %>
               <td>&nbsp;</td>
