@@ -124,7 +124,11 @@ class Question < Element
           [eval("app." + object_name + "." + attribute_name)]
         end
       else
-        ""
+        if app
+          Answer.find(:all, :conditions => {:question_id => id, :answer_sheet_id => app.id}).collect(&:value)
+        else
+          [""]
+        end
       end
     else
       @answers
