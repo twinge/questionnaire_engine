@@ -6,21 +6,27 @@
     </div>
 
   <%= form_for page, :url => admin_question_sheet_page_path(page.question_sheet_id, page.id), :remote => true, :html => {:method => :put} do |f| %>
-
-    <p><label for="" class="desc">Label <span class="required">required</span></label>
-        <%= f.text_field :label, :maxlength => 100 %></p>
-
-    <p><label for="" class="desc">Hidden</label>
-        <%= f.check_box :hidden %></p>
+    <p>
+      <label for="" class="desc">Label <span class="required">required</span></label>
+      <%= f.text_field :label, :class => "width-panel", :maxlength => 100 %>
+    </p>
+    
+    <p>
+      <label for="" class="desc">Hidden</label>
+      <%= f.check_box :hidden %>
+    </p>
 
     <p class="buttons">
-        <%= submit_tag "Update &raquo;".html_safe %></p>
-          <p class="buttons">
-            <%= link_to "Delete", admin_question_sheet_page_path(page.question_sheet_id, page.id), 
-            :remote => true, 
-            :method => :delete, 
-            :data => { :confirm => "Are you sure you want to delete this page?" } %>
-          </p>
+      <%= submit_tag "Update &raquo;".html_safe %>
+    </p>
+    
+    <p class="buttons">
+      <%= link_to "Delete", admin_question_sheet_page_path(page.question_sheet_id, page.id), 
+        :remote => true, 
+        :method => :delete, 
+        :data => { :confirm => "Are you sure you want to delete this page?" } %>
+    </p>
+    
   <% end %>
 
 </div>
