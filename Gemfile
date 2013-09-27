@@ -1,8 +1,8 @@
 source "http://rubygems.org"
 
 gemspec
-
-gem 'jquery-rails' # jquery-rails is used by the dummy application
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'ckeditor', '3.7.1'
 gem 'dynamic_form'
 gem 'state_machine'

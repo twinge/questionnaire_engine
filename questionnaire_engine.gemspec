@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.version     = Qe::VERSION
   s.authors     = ["Josh Starcher"]
   s.homepage    = "http://www.github.com/twinge/questionnaire_engine"
-  s.summary     = "Questionnaire Engine in Rails Engine Gem form"
-  s.description = "A Rails 3.2+ solution for adding user customized question/answer functionality"
+  s.summary     = "Rails engine that includes the logic to create surveys/questionnaires in your apps"
+  s.description = "Rails engine that includes the logic to create surveys/questionnaires in your apps"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*", "spec/**/*"]
@@ -21,9 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'dynamic_form'
   s.add_dependency 'state_machine'
   s.add_dependency 'aasm'
-  s.add_dependency 'rake', '~>10.0.2'
-  s.add_dependency 'nokogiri'
-  s.add_dependency 'xpath'
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'jquery-ui-rails'
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
   s.add_development_dependency 'rspec-rails'
