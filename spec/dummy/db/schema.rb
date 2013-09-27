@@ -11,23 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513151558) do
+ActiveRecord::Schema.define(:version => 20130927205655) do
 
-  create_table "pr_answer_sheet_question_sheets", :force => true do |t|
+  create_table "qe_answer_sheet_question_sheets", :force => true do |t|
     t.integer  "answer_sheet_id"
     t.integer  "question_sheet_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "pr_answer_sheets", :force => true do |t|
+  create_table "qe_answer_sheets", :force => true do |t|
     t.integer  "question_sheet_id", :null => false
     t.datetime "completed_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "pr_answers", :force => true do |t|
+  create_table "qe_answers", :force => true do |t|
     t.integer  "answer_sheet_id",         :null => false
     t.integer  "question_id",             :null => false
     t.text     "value"
@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(:version => 20130513151558) do
     t.datetime "updated_at",              :null => false
   end
 
-  add_index "pr_answers", ["answer_sheet_id"], :name => "index_pr_answers_on_answer_sheet_id"
-  add_index "pr_answers", ["question_id"], :name => "index_pr_answers_on_question_id"
-  add_index "pr_answers", ["short_value"], :name => "index_pr_answers_on_short_value"
+  add_index "qe_answers", ["answer_sheet_id"], :name => "index_qe_answers_on_answer_sheet_id"
+  add_index "qe_answers", ["question_id"], :name => "index_qe_answers_on_question_id"
+  add_index "qe_answers", ["short_value"], :name => "index_qe_answers_on_short_value"
 
-  create_table "pr_conditions", :force => true do |t|
+  create_table "qe_conditions", :force => true do |t|
     t.integer  "question_sheet_id", :null => false
     t.integer  "trigger_id",        :null => false
     t.string   "expression",        :null => false
@@ -54,40 +54,41 @@ ActiveRecord::Schema.define(:version => 20130513151558) do
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "pr_elements", :force => true do |t|
+  create_table "qe_elements", :force => true do |t|
     t.integer  "question_grid_id"
-    t.string   "kind",               :limit => 40,                    :null => false
-    t.string   "style",              :limit => 40
+    t.string   "kind",                      :limit => 40,                    :null => false
+    t.string   "style",                     :limit => 40
     t.string   "label"
     t.text     "content"
     t.boolean  "required"
-    t.string   "slug",               :limit => 36
+    t.string   "slug",                      :limit => 36
     t.integer  "position"
     t.string   "object_name"
     t.string   "attribute_name"
     t.string   "source"
     t.string   "value_xpath"
-    t.string   "text_path"
+    t.string   "text_xpath"
     t.string   "cols"
-    t.boolean  "is_confidential",                  :default => false
+    t.boolean  "is_confidential",                         :default => false
     t.string   "total_cols"
     t.string   "css_id"
     t.string   "css_class"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
-    t.integer  "question_sheet_id"
+    t.integer  "question_sheet_id",                                          :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.integer  "related_question_sheet_id"
     t.integer  "conditional_id"
     t.text     "tooltip"
-    t.boolean  "hide_label",                       :default => false
-    t.boolean  "hide_option_labels",               :default => false
+    t.boolean  "hide_label",                              :default => false
+    t.boolean  "hide_option_labels",                      :default => false
     t.integer  "max_length"
   end
 
-  add_index "pr_elements", ["conditional_id"], :name => "index_pr_elements_on_conditional_id"
-  add_index "pr_elements", ["question_grid_id"], :name => "index_pr_elements_on_question_grid_id"
-  add_index "pr_elements", ["slug"], :name => "index_pr_elements_on_slug"
+  add_index "qe_elements", ["conditional_id"], :name => "index_qe_elements_on_conditional_id"
+  add_index "qe_elements", ["question_grid_id"], :name => "index_qe_elements_on_question_grid_id"
+  add_index "qe_elements", ["slug"], :name => "index_qe_elements_on_slug"
 
-  create_table "pr_email_templates", :force => true do |t|
+  create_table "qe_email_templates", :force => true do |t|
     t.string   "name",       :limit => 1000, :null => false
     t.text     "content"
     t.boolean  "enabled"
@@ -96,9 +97,9 @@ ActiveRecord::Schema.define(:version => 20130513151558) do
     t.datetime "updated_at",                 :null => false
   end
 
-  add_index "pr_email_templates", ["name"], :name => "index_pr_email_templates_on_name"
+  add_index "qe_email_templates", ["name"], :name => "index_qe_email_templates_on_name"
 
-  create_table "pr_page_elements", :force => true do |t|
+  create_table "qe_page_elements", :force => true do |t|
     t.integer  "page_id"
     t.integer  "element_id"
     t.integer  "position"
@@ -106,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20130513151558) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "pr_pages", :force => true do |t|
+  create_table "qe_pages", :force => true do |t|
     t.integer  "question_sheet_id",                                  :null => false
     t.string   "label",             :limit => 60,                    :null => false
     t.integer  "number"
@@ -116,14 +117,14 @@ ActiveRecord::Schema.define(:version => 20130513151558) do
     t.datetime "updated_at",                                         :null => false
   end
 
-  create_table "pr_question_sheets", :force => true do |t|
+  create_table "qe_question_sheets", :force => true do |t|
     t.string   "label",      :limit => 100,                    :null => false
     t.boolean  "archived",                  :default => false
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
   end
 
-  create_table "pr_reference_sheets", :force => true do |t|
+  create_table "qe_reference_sheets", :force => true do |t|
     t.integer  "question_id"
     t.integer  "applicant_answer_sheet_id"
     t.datetime "email_sent_at"

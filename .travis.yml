@@ -11,17 +11,12 @@ env:
   - DB=postgresql
 
 before_script:
-  - rake app:db:create
-  - rake app:db:migrate
-  - rake app:db:test:prepare
+  - "rake dummy:app"
+  - "cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../.."
 
 # using default travis command
 # script: bundle exec rake spec
 
-after_script:
-  - rake app:db:rollback
-
 branches:
   only:
     - engine
-    - engine2

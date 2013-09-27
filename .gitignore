@@ -4,11 +4,8 @@ log/*.log
 pkg/
 
 vendor/ruby
-spec/dummy/db/vendor/ruby
+spec/dummy/*
 
 doc/*
 rdoc/*
 coverage
-spec/dummy/.sass-cache
-spec/dummy/qe_dev
-spec/dummy/qe_test
