@@ -45,7 +45,7 @@ class CreateQeCore < ActiveRecord::Migration
         t.string :object_name,        :attribute_name
         t.string :source
         t.string :value_xpath
-        t.string :text_path
+        t.string  :text_xpath
         t.string :cols
         t.boolean :is_confidential, :default => false
         t.string :total_cols
