@@ -23,7 +23,8 @@ describe Qe::Admin::ElementsController do
       use_route: 'qe', 
       page_id: @page.id,
       element_type: 'Section',
-      :element => {kind: 'Qe::Section', style: 'qe/section'}
+      :element => {kind: 'Qe::Section', style: 'qe/section'}, 
+      question_sheet_id: 1
     
     @section = Qe::Element.find_by_kind('Qe::Section')
     @section.should_not == nil
@@ -74,7 +75,8 @@ describe Qe::Admin::ElementsController do
       @page.elements.count.should == 1
     end
     it 'add different element, succeed' do
-      @new_element = @page.elements.create!(kind: 'Qe::Section', style: 'qe/section', label: 'some string here')
+      @new_element = @page.elements.create!(kind: 'Qe::Section', 
+          style: 'qe/section', label: 'some string here', question_sheet_id: 1)
 
       xhr :post, :use_existing,
         use_route: 'qe',
