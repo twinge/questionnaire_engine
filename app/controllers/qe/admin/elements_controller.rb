@@ -49,8 +49,10 @@ module Qe
         # POST /elements
         def create
           @element = "Qe::#{params[:element_type]}".constantize.new(params[:element])
-          @element.required = true if @element.question?
           @question_sheet = @page.question_sheet
+          @element.required = true if @element.question?
+          @element.question_sheet = @question_sheet
+          
           respond_to do |format|
             # TODO engineer the mass assignment flow of the engine
             if @element.save!(:without_protection => true)
