@@ -1,20 +1,18 @@
-<% options = [ OptionGroup.new('Short Answer', [
-                    Option.new('short', 'Simple'),
-                    Option.new('number', 'Number'),
-                    Option.new('currency-dollar', 'Currency'),
-                    Option.new('email', 'E-mail address'),
-                    Option.new('url', 'Web address'),
-                    Option.new('phone', 'Telephone number')
-                  ]),
-                OptionGroup.new('Long Answer', [
-                    Option.new('essay', 'Essay')
-                  ])
+<% options = 
+  [ Qe::OptionGroup.new('Short Answer',
+    [ Qe::Option.new('short', 'Simple'),
+      Qe::Option.new('number', 'Number'),
+      Qe::Option.new('currency-dollar', 'Currency'),
+      Qe::Option.new('email', 'E-mail address'),
+      Qe::Option.new('url', 'Web address'),
+      Qe::Option.new('phone', 'Telephone number')
+    ]), Qe::OptionGroup.new('Long Answer', [Qe::Option.new('essay', 'Essay')] )
               ]
 %>
+
 <div class="field">
   <label for="element_style" class="desc">Style</label>
-  <%= select_tag 'element[style]', 
-        option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style) %>
+  <%= select_tag 'element[style]', option_groups_from_collection_for_select(options, 'group', 'label', 'key', 'value', @element.style) %>
 </div>
 
 <%= render 'qe/admin/panels/common_fields', :f => f %>
