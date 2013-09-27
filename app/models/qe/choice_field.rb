@@ -18,7 +18,9 @@ module Qe
       extend ActiveSupport::Concern
 
       included do
-        has_many :elements, :foreign_key => "conditional_id", :dependent => :nullify#, :order => :position
+        has_many :elements, 
+          :foreign_key => "conditional_id", 
+          :dependent => :nullify#, :order => :position
       end
         
       # Returns choices stored one per line in content field

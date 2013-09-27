@@ -9,22 +9,37 @@ module Qe
 
       included do
         include ActionController::RecordIdentifier # dom_id
-        has_many :conditions, :foreign_key => "toggle_id", :dependent => :nullify
+        
+        has_many :conditions, 
+          :foreign_key => "toggle_id", 
+          :dependent => :nullify
         # TODO uncomment this
         # has_many :dependents, :foreign_key => "trigger_id", :dependent => :nullify
-        has_many :sheet_answers, :class_name => Qe::Answer, :foreign_key => "question_id", :dependent => :destroy
+        
+        has_many :sheet_answers, 
+          :class_name => Qe::Answer, 
+          :foreign_key => "question_id", 
+          :dependent => :destroy
 
-        belongs_to :related_question_sheet, :class_name => "Qe::QuestionSheet", :foreign_key => "related_question_sheet_id"
+        belongs_to :related_question_sheet, 
+          :class_name => "Qe::QuestionSheet", 
+          :foreign_key => "related_question_sheet_id"
         
         validates_inclusion_of :required, :in => [false, true]
         
-        validates_format_of :slug, :with => /^[a-z_][a-z0-9_]*$/, 
-          :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? },
+        validates_format_of :slug, 
+          :with => /^[a-z_][a-z0-9_]*$/, 
+          :allow_nil => true, 
+          :if => Proc.new { |q| !q.slug.blank? },
           :message => 'may only contain lowercase letters, digits and underscores; and cannot begin with a digit.' # enforcing lowercase because javascript is case-sensitive
+        
         validates_length_of :slug, :in => 4..36,
-          :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? }
+          :allow_nil => true, 
+          :if => Proc.new { |q| !q.slug.blank? }
+          
         validates_uniqueness_of :slug,
-          :allow_nil => true, :if => Proc.new { |q| !q.slug.blank? },
+          :allow_nil => true, 
+          :if => Proc.new { |q| !q.slug.blank? },
           :message => 'must be unique.'
           
         # a question has one response per AnswerSheet (that is, an instance of a user filling out the question)
@@ -227,7 +242,7 @@ module Qe
         # self.super() || (!answer_sheet.nil? && !choice_field.nil? && choice_field.has_answer?('1', answer_sheet))
       end
     end
-
+    
     include M
   end
 end
