@@ -35,22 +35,23 @@ class CreateQeCore < ActiveRecord::Migration
       create_table Qe::Element.table_name do |t|
         t.integer :question_grid_id,  :null => true
 
-        t.string :kind,               :limit => 40,   :null => false  # single table inheritance: class name
-        t.string :style,              :limit => 40                    # render style
-        t.string :label,              :limit => 255                   # question label, section heading
-        t.text :content,              :null => true                   # for content/instructions, and for choices (one per line)
+        t.string  :kind,               :limit => 40,   :null => false  # single table inheritance: class name
+        t.string  :style,              :limit => 40                    # render style
+        t.string  :label,              :limit => 255                   # question label, section heading
+        t.text    :content,              :null => true                   # for content/instructions, and for choices (one per line)
         t.boolean :required                                           # question is required?
-        t.string :slug,               :limit => 36                    # variable reference
+        t.string  :slug,               :limit => 36                    # variable reference
         t.integer :position
-        t.string :object_name,        :attribute_name
-        t.string :source
-        t.string :value_xpath
+        t.string  :object_name,        :attribute_name
+        t.string  :source
+        t.string  :value_xpath
         t.string  :text_xpath
-        t.string :cols
+        t.string  :cols
         t.boolean :is_confidential, :default => false
-        t.string :total_cols
-        t.string :css_id
-        t.string :css_class
+        t.string  :total_cols
+        t.string  :css_id
+        t.string  :css_class
+        t.integer :question_sheet_id, :null => false
 
         t.timestamps
       end
