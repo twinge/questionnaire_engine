@@ -255,6 +255,14 @@ label.desc {
   margin-bottom: 10px;
 }
 
+.width-panel {
+  width: 275px;
+}
+
+.width-editor {
+  width: 662px;
+}
+
 ul.questions ul.questions label.desc {
   margin-bottom: 0;
   font-weight: normal;
