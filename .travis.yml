@@ -16,6 +16,7 @@ before_script:
   - rm spec/dummy/config/database.yml
   - cp spec/support/application.txt spec/dummy/config/application.rb
   - cp spec/support/database.txt spec/dummy/config/database.yml
+  - cd spec/dummy && rake db:create && cd ../..
   - cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../..
 
 # using default travis command
