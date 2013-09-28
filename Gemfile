@@ -28,3 +28,4 @@ group :development, :test do
   end
 end
 
+gem 'rails-dummy', :github => 'westonplatter/rails-dummy'

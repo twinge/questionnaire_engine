@@ -11,7 +11,7 @@ env:
   - DB=postgresql
 
 before_script:
-  - "rake dummy:app"
+  - "DISABLE_MIGRATE=true rake dummy:app"
   - "cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../.."
 
 # using default travis command
