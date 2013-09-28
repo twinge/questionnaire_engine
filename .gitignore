@@ -2,6 +2,7 @@
 .bundle/
 log/*.log
 pkg/
+Gemfile.lock
 
 vendor/ruby
 spec/dummy
