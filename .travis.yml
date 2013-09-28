@@ -12,7 +12,7 @@ env:
 
 before_script:
   - DISABLE_MIGRATE=true DISABLE_CREATE=true rake dummy:app
-  - rm spec/dummy/config/application.ruby
+  - rm spec/dummy/config/application.rb
   - rm spec/dummy/config/database.yml
   - cp spec/support/application.txt spec/dummy/config/application.rb
   - cp spec/support/database.txt spec/dummy/config/database.yml
