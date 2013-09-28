@@ -12,6 +12,7 @@ env:
 
 before_script:
   - "DISABLE_MIGRATE=true rake dummy:app"
+  - "sed -i vi 's/questionnaire_engine/qe/' spec/dummy/config/application.rb"  # hack to get around: https://travis-ci.org/twinge/questionnaire_engine/jobs/11889581
   - "cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../.."
 
 # using default travis command
