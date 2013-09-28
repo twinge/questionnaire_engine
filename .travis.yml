@@ -19,7 +19,7 @@ before_script:
   - "cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../.."
 
 # using default travis command
-# script: bundle exec rake spec
+# script: bundle exec rake
 
 branches:
   only:
