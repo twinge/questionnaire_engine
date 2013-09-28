@@ -5,13 +5,10 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ckeditor', '3.7.1'
 gem 'dynamic_form'
-gem 'state_machine'
 
-# gems needed for common_engine
-# see gitmodules, IE
-##   git submodule init
-##   git submodule update
-gem 'paperclip'
+# for cru specific dev, pull in common_engine by:
+#   git submodule init
+#   git submodule update
 
 group :development, :test do
   platforms :jruby do
@@ -29,3 +26,5 @@ group :development, :test do
 end
 
 gem 'rails-dummy', :github => 'westonplatter/rails-dummy'
+
+gem 'database_cleaner', "~> 1.1.1", :git => 'https://github.com/tommeier/database_cleaner', ref: 'b0c666e'

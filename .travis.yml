@@ -11,12 +11,9 @@ env:
   - DB=postgresql
 
 before_script:
-  - "DISABLE_MIGRATE=true DISABLE_CREATE=true rake dummy:app"
-  - "rm spec/dummy/config/application.rb"
-  - "cp spec/support/application.txt spec/dummy/config/application.rb"  # hack to get around: https://travis-ci.org/twinge/questionnaire_engine/jobs/11889581
-  - "rm spec/dummy/config/database.yml"
-  - "cp spec/support/database.txt spec/dummy/config/database.yml"
-  - "cd spec/dummy && rails g qe:install && rake db:test:prepare && cd ../.."
+  - DISABLE_MIGRATE=true DISABLE_CREATE=true rake dummy:app
+  - ./spec/support/copy_files.sh
+  - cd spec/dummy && rails g qe:install && rake db:migrate db:test:prepare && cd ../..
 
 # using default travis command
 # script: bundle exec rake

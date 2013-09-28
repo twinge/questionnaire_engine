@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'aasm'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'paperclip'
 
   s.add_development_dependency 'mysql2', '~> 0.3.11'
   s.add_development_dependency 'rspec-rails'
@@ -30,7 +31,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails'
   
   # https://github.com/bmabey/database_cleaner/issues/224
-  s.add_development_dependency 'database_cleaner', '1.0.1'
+  # https://github.com/bmabey/database_cleaner/pull/241
+  # s.add_development_dependency 'database_cleaner', '1.0.1'
   
   # s.add_development_dependency 'rails-dummy'
 end
