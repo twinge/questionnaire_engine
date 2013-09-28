@@ -4,7 +4,7 @@ log/*.log
 pkg/
 
 vendor/ruby
-spec/dummy/*
+spec/dummy
 
 doc/*
 rdoc/*
