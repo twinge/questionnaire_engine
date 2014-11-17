@@ -19,17 +19,19 @@
       <%# el = elements.detect {|el| el.id == grid_element.id } -%>
       <% if grid_element.question? -%>
         <label class="desc"><%= raw grid_element.label %></label>
-      <% end %>
-      <%- if @collating -%>
-        <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
-          <div class="answer collate">
-          <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
-          <span class="reviewer_answer"><%= simple_format grid_element.display_response(answer_sheet) %></span>
-          </div>
+        <%- if @collating -%>
+          <%- for answer_sheet in @collated_answer_sheets[@answer_sheet] -%>
+            <div class="answer collate">
+            <span class="reviewer_name"><%= answer_sheet.collat_title %>:</span>
+            <span class="reviewer_answer"><%= simple_format grid_element.display_response(answer_sheet) %></span>
+            </div>
+          <%- end -%>
+        <%- else -%>
+          <span class="answer"><%= simple_format grid_element.display_response(@answer_sheet) %></span>
         <%- end -%>
-      <%- else -%>
-        <span class="answer"><%= simple_format grid_element.display_response(@answer_sheet) %></span>
-      <%- end -%>
+      <% else %>
+        <%= render :partial => 'questions/' + element.ptemplate, :object => element %>
+      <% end %>
     <% end -%>
     </td>
     <%- col_count += 1
