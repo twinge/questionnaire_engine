@@ -51,11 +51,7 @@ class Page < ActiveRecord::Base
     new_page.question_sheet_id = question_sheet.id
     new_page.save(:validate => false)
     self.elements.each do |element|
-      if !question_sheet.archived? && element.reuseable?
-        PageElement.create(:element => element, :page => new_page)
-      else
-        element.duplicate(new_page)
-      end
+      element.duplicate(new_page)
     end
   end
   
