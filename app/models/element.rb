@@ -84,9 +84,9 @@ class Element < ActiveRecord::Base
   def duplicate(page, parent = nil)
     new_element = self.class.new(self.attributes)
     case parent.class.to_s
-    when ChoiceField
+    when "ChoiceField"
       new_element.conditional_id = parent.id
-    when QuestionGrid, QuestionGridWithTotal
+    when "QuestionGrid", "QuestionGridWithTotal"
       new_element.question_grid_id = parent.id
     end
     new_element.save(:validate => false)
