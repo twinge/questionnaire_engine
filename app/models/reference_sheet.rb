@@ -60,7 +60,7 @@ class ReferenceSheet < AnswerSheet
     application = self.applicant_answer_sheet
     
     Notifier.notification(self.email,
-                                  application.email, 
+                                  Questionnaire.from_email,
                                   "Reference Invite", 
                                   {'reference_full_name' => self.name, 
                                    'applicant_full_name' => application.name,
